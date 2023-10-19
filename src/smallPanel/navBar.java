@@ -4,18 +4,52 @@
  */
 package smallPanel;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author Admin
  */
-public class navBar extends javax.swing.JPanel {
+public class navBar extends javax.swing.JPanel implements Runnable{
 
     /**
      * Creates new form navBar
      */
     public navBar() {
+        
+        //Tạo Luồng Để run()
+        thread = new Thread(this);
+        thread.start();
+        
         initComponents();
     }
+    public  void run(){
+        try {
+			Date thoiGianHienTai = new Date();
+			SimpleDateFormat sdf_Gio = new SimpleDateFormat("HH:mm:ss");
+			SimpleDateFormat sdf_Ngay = new SimpleDateFormat("dd/MM/yyyy");
+			while (true) {
+				thoiGianHienTai = new Date(); // lấy thời gian hiện tại
+				String ngayTrongTuan = "";
+				if (thoiGianHienTai.getDay() == 0)
+					ngayTrongTuan = "Chủ nhật, ";
+				else
+					ngayTrongTuan = "Thứ " + (thoiGianHienTai.getDay() + 1) + ", ";// do getDay() tính từ 1.
+				thread.sleep(1000); // cho phép ngủ trong khoảng 1000 mns =1s
+				// lấy thời gian hiện tại vào giờ vào
+                                System.out.println("mainFrame.mainFrame.run()");
+                                name_Account1.setText(
+                                        sdf_Gio.format(thoiGianHienTai) + " " + ngayTrongTuan +
+                                        sdf_Ngay.format(thoiGianHienTai)
+                                        );
+                                
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -153,9 +187,10 @@ public class navBar extends javax.swing.JPanel {
     private javax.swing.JLabel icon_Account;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JLabel name_Account;
-    private javax.swing.JLabel name_Account1;
+    public javax.swing.JLabel name_Account1;
     private javax.swing.JPanel rightPanel;
     private javax.swing.JPanel room;
     private javax.swing.JLabel roomTextIcon;
     // End of variables declaration//GEN-END:variables
+    private Thread thread = null;
 }
