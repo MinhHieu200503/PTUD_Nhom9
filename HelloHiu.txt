@@ -1,5 +1,3 @@
-<<<<<<< HEAD
+Main
 adasd
-=======
 Hius Branch
->>>>>>> Hiu
