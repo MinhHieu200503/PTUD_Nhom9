@@ -5,9 +5,12 @@
 package smallPanel;
 
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Panel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JFrame;
 
 /**
  *
@@ -40,7 +43,6 @@ public class navBar extends javax.swing.JPanel implements Runnable{
 					ngayTrongTuan = "Thứ " + (thoiGianHienTai.getDay() + 1) + ", ";// do getDay() tính từ 1.
 				thread.sleep(1000); // cho phép ngủ trong khoảng 1000 mns =1s
 				// lấy thời gian hiện tại vào giờ vào
-                                System.out.println("mainFrame.mainFrame.run()");
                                 time_Account.setText(
                                         sdf_Gio.format(thoiGianHienTai) + " " + ngayTrongTuan +
                                         sdf_Ngay.format(thoiGianHienTai)
@@ -167,6 +169,9 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         home.setMinimumSize(new java.awt.Dimension(191, 66));
         home.setPreferredSize(new java.awt.Dimension(191, 66));
         home.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickedMenu(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
@@ -210,6 +215,9 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         room.setMinimumSize(new java.awt.Dimension(191, 66));
         room.setPreferredSize(new java.awt.Dimension(191, 66));
         room.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickedMenu(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
@@ -222,23 +230,27 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         roomTextIcon.setForeground(new java.awt.Color(255, 255, 255));
         roomTextIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-micro-40.png"))); // NOI18N
         roomTextIcon.setText("Xử lý");
-        roomTextIcon.setVerifyInputWhenFocusTarget(false);
+        roomTextIcon.setAlignmentY(0.0F);
+        roomTextIcon.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        roomTextIcon.setMaximumSize(null);
+        roomTextIcon.setMinimumSize(null);
+        roomTextIcon.setPreferredSize(new java.awt.Dimension(191, 66));
 
         javax.swing.GroupLayout roomLayout = new javax.swing.GroupLayout(room);
         room.setLayout(roomLayout);
         roomLayout.setHorizontalGroup(
             roomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roomLayout.createSequentialGroup()
-                .addGap(0, 50, Short.MAX_VALUE)
-                .addComponent(roomTextIcon)
-                .addGap(0, 50, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE)
+                .addComponent(roomTextIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         roomLayout.setVerticalGroup(
             roomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roomLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(roomTextIcon)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(roomTextIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         rightPanel.add(room, new java.awt.GridBagConstraints());
@@ -248,6 +260,9 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         search.setMinimumSize(new java.awt.Dimension(191, 66));
         search.setPreferredSize(new java.awt.Dimension(191, 66));
         search.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickedMenu(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
@@ -277,9 +292,9 @@ public class navBar extends javax.swing.JPanel implements Runnable{
             .addGap(0, 66, Short.MAX_VALUE)
             .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(searchLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 13, Short.MAX_VALUE)
                     .addComponent(searchTextIcon)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 13, Short.MAX_VALUE)))
         );
 
         rightPanel.add(search, new java.awt.GridBagConstraints());
@@ -289,6 +304,9 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         statistical.setMinimumSize(new java.awt.Dimension(191, 66));
         statistical.setPreferredSize(new java.awt.Dimension(191, 66));
         statistical.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickedMenu(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
@@ -318,9 +336,9 @@ public class navBar extends javax.swing.JPanel implements Runnable{
             .addGap(0, 66, Short.MAX_VALUE)
             .addGroup(statisticalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(statisticalLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 13, Short.MAX_VALUE)
                     .addComponent(statisticalTextIcon)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 13, Short.MAX_VALUE)))
         );
 
         rightPanel.add(statistical, new java.awt.GridBagConstraints());
@@ -330,6 +348,9 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         manage.setMinimumSize(new java.awt.Dimension(191, 66));
         manage.setPreferredSize(new java.awt.Dimension(191, 66));
         manage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickedMenu(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
@@ -359,9 +380,9 @@ public class navBar extends javax.swing.JPanel implements Runnable{
             .addGap(0, 66, Short.MAX_VALUE)
             .addGroup(manageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(manageLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 13, Short.MAX_VALUE)
                     .addComponent(manageTextIcon)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 13, Short.MAX_VALUE)))
         );
 
         rightPanel.add(manage, new java.awt.GridBagConstraints());
@@ -394,10 +415,9 @@ public class navBar extends javax.swing.JPanel implements Runnable{
     }//GEN-LAST:event_enteredMenu
 
     public void enterMenu(javax.swing.JPanel panel){
+        underline.setBackground(new Color(0, 204, 255));
         panel.setBackground(new Color(40,94,178));
-        underline.setBackground(new Color(0,204,255));
-        underline.setVisible(false);
-        underline.setVisible(true);
+        
     }
     
     
@@ -418,13 +438,47 @@ public class navBar extends javax.swing.JPanel implements Runnable{
             exitMenu(manage);
         }
     }//GEN-LAST:event_exitedMenu
-
+    
     public void exitMenu(javax.swing.JPanel panel){
         panel.setBackground(new Color(40,77,133));
-        underline.setBackground(new Color(0,204,255));
-        underline.setVisible(false);
-        underline.setVisible(true);
+         underline.setBackground(new Color(0, 204, 255));
+        repaint();
     }
+    
+    private void clickedMenu(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickedMenu
+        if (evt.getSource().equals(home)){
+            clickMenuUnderline(0);
+        }
+        else if (evt.getSource().equals(room)){
+            clickMenuUnderline(1);
+        }
+        else if (evt.getSource().equals(search)){
+            clickMenuUnderline(2);
+        }
+        else if (evt.getSource().equals(statistical)){
+            clickMenuUnderline(3);
+        }
+        else if (evt.getSource().equals(manage)){
+            clickMenuUnderline(4);
+        }
+    }//GEN-LAST:event_clickedMenu
+    
+    public void clickMenuUnderline(int index){
+            GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = index;
+            gridBagConstraints.gridy = 0;
+            gridBagConstraints.gridheight = 2;
+            gridBagConstraints.ipady = 4;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
+            rightPanel.remove(underline);
+            rightPanel.add(underline, gridBagConstraints,0);
+            repaint();
+    }
+    
+    
+ 
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel home;
