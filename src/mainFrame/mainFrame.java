@@ -37,7 +37,6 @@ public class mainFrame extends javax.swing.JFrame{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1920, 1030));
         setMinimumSize(new java.awt.Dimension(1920, 1030));
-        setPreferredSize(new java.awt.Dimension(1920, 1030));
         setResizable(false);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
