@@ -65,6 +65,7 @@ public class navBar extends javax.swing.JPanel implements Runnable{
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jPanel1 = new javax.swing.JPanel();
         leftPanel = new javax.swing.JPanel();
         icon_Account = new javax.swing.JLabel();
         userPanel = new javax.swing.JPanel();
@@ -82,17 +83,24 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         statisticalTextIcon = new javax.swing.JLabel();
         manage = new javax.swing.JPanel();
         manageTextIcon = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
 
-        setBackground(new java.awt.Color(40, 77, 133));
-        setMaximumSize(new java.awt.Dimension(1536, 66));
-        setMinimumSize(new java.awt.Dimension(1536, 66));
-        setPreferredSize(new java.awt.Dimension(1536, 66));
-        setLayout(new java.awt.GridBagLayout());
+        setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(1920, 1030));
+        setMinimumSize(new java.awt.Dimension(1920, 1030));
+        setPreferredSize(new java.awt.Dimension(1920, 1030));
+        setLayout(new java.awt.BorderLayout());
+
+        jPanel1.setBackground(new java.awt.Color(40, 77, 133));
+        jPanel1.setMaximumSize(new java.awt.Dimension(1920, 66));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1920, 66));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1920, 66));
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
         leftPanel.setBackground(new java.awt.Color(40, 77, 133));
-        leftPanel.setMaximumSize(new java.awt.Dimension(323, 60));
-        leftPanel.setMinimumSize(new java.awt.Dimension(323, 60));
-        leftPanel.setPreferredSize(new java.awt.Dimension(423, 60));
+        leftPanel.setMaximumSize(new java.awt.Dimension(423, 66));
+        leftPanel.setMinimumSize(new java.awt.Dimension(423, 66));
+        leftPanel.setPreferredSize(new java.awt.Dimension(423, 66));
         leftPanel.setLayout(new java.awt.GridBagLayout());
 
         icon_Account.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-account-60.png"))); // NOI18N
@@ -120,16 +128,13 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         userPanel.add(time_Account);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 2.1;
-        leftPanel.add(userPanel, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 0.1;
-        add(leftPanel, gridBagConstraints);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 84, 0, 0);
+        leftPanel.add(userPanel, gridBagConstraints);
+
+        jPanel1.add(leftPanel, java.awt.BorderLayout.LINE_START);
 
         rightPanel.setBackground(new java.awt.Color(40, 77, 133));
         rightPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -157,7 +162,7 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipady = 4;
@@ -387,12 +392,25 @@ public class navBar extends javax.swing.JPanel implements Runnable{
 
         rightPanel.add(manage, new java.awt.GridBagConstraints());
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        add(rightPanel, gridBagConstraints);
+        jPanel1.add(rightPanel, java.awt.BorderLayout.LINE_END);
+
+        add(jPanel1, java.awt.BorderLayout.NORTH);
+
+        jPanel2.setMaximumSize(new java.awt.Dimension(1920, 964));
+        jPanel2.setMinimumSize(new java.awt.Dimension(1920, 964));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1920, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 964, Short.MAX_VALUE)
+        );
+
+        add(jPanel2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void enteredMenu(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enteredMenu
@@ -463,7 +481,7 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         }
     }//GEN-LAST:event_clickedMenu
     
-    public void clickMenuUnderline(int index){
+    public int clickMenuUnderline(int index){
             GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = index;
             gridBagConstraints.gridy = 0;
@@ -473,6 +491,7 @@ public class navBar extends javax.swing.JPanel implements Runnable{
             rightPanel.remove(underline);
             rightPanel.add(underline, gridBagConstraints,0);
             repaint();
+            return index;
     }
     
     
@@ -484,6 +503,8 @@ public class navBar extends javax.swing.JPanel implements Runnable{
     private javax.swing.JPanel home;
     private javax.swing.JLabel homePageTextIcon;
     private javax.swing.JLabel icon_Account;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel manage;
     private javax.swing.JLabel manageTextIcon;

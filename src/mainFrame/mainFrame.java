@@ -35,20 +35,21 @@ public class mainFrame extends javax.swing.JFrame{
         navBar1 = new smallPanel.navBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1536, 800));
-        setMinimumSize(new java.awt.Dimension(1536, 800));
-
-        navBar1.addMouseListener(new java.awt.event.MouseAdapter() {
+        setMaximumSize(new java.awt.Dimension(1920, 1030));
+        setMinimumSize(new java.awt.Dimension(1920, 1030));
+        setPreferredSize(new java.awt.Dimension(1920, 1030));
+        setResizable(false);
+        addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clickMenu(evt);
+                mouse(evt);
             }
         });
-        getContentPane().add(navBar1, java.awt.BorderLayout.NORTH);
+        getContentPane().add(navBar1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void clickMenu(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickMenu
+    private void mouse(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouse
 
-    }//GEN-LAST:event_clickMenu
+    }//GEN-LAST:event_mouse
 
     /**
      * @param args the command line arguments
