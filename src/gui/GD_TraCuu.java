@@ -18,7 +18,7 @@ import javax.swing.JPanel;
  *
  * @author quang
  */
-public class GD_TraCuuFrame extends javax.swing.JFrame {
+public class GD_TraCuu extends javax.swing.JFrame {
 
     /**
      * Creates new form GD_TraCuu
@@ -30,7 +30,7 @@ public class GD_TraCuuFrame extends javax.swing.JFrame {
     GD_TraCuu_PhieuDatPhong gdpdp = new GD_TraCuu_PhieuDatPhong();
     GD_TraCuu_NhanVien gdnv = new GD_TraCuu_NhanVien();
     
-    public GD_TraCuuFrame() {
+    public GD_TraCuu() {
         initComponents();
 //        setExtendedState(6);
         
@@ -354,21 +354,23 @@ public class GD_TraCuuFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GD_TraCuuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GD_TraCuu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GD_TraCuuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GD_TraCuu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GD_TraCuuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GD_TraCuu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GD_TraCuuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GD_TraCuu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GD_TraCuuFrame().setVisible(true);
+                new GD_TraCuu().setVisible(true);
             }
         });
     }
