@@ -28,10 +28,18 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        pnlMain = new javax.swing.JPanel();
+        pnlTop = new javax.swing.JPanel();
+        pnlTop_title = new javax.swing.JLabel();
+        pnlCenter = new javax.swing.JPanel();
+        pnlThongTinTraCuu = new javax.swing.JPanel();
+        lbl_TraCuu = new javax.swing.JLabel();
+        tf_TraCuu = new javax.swing.JTextField();
+        pnlData = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        table_TraCuu = new javax.swing.JTable();
+        pnlBottom = new javax.swing.JPanel();
+        btn_edit = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -48,43 +56,165 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
-        jPanel1.add(jButton1);
+        pnlMain.setPreferredSize(new java.awt.Dimension(1650, 964));
+        pnlMain.setLayout(new java.awt.BorderLayout());
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        pnlTop.setBackground(new java.awt.Color(255, 255, 255));
+        pnlTop.setPreferredSize(new java.awt.Dimension(828, 100));
+        pnlTop.setLayout(new java.awt.BorderLayout());
+
+        pnlTop_title.setBackground(new java.awt.Color(255, 255, 255));
+        pnlTop_title.setFont(new java.awt.Font("Segoe UI Black", 1, 30)); // NOI18N
+        pnlTop_title.setForeground(new java.awt.Color(40, 77, 133));
+        pnlTop_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pnlTop_title.setText("TRA CỨU DỊCH VỤ");
+        pnlTop.add(pnlTop_title, java.awt.BorderLayout.CENTER);
+
+        pnlMain.add(pnlTop, java.awt.BorderLayout.NORTH);
+
+        pnlCenter.setBackground(new java.awt.Color(255, 255, 255));
+
+        pnlThongTinTraCuu.setBackground(new java.awt.Color(255, 255, 255));
+
+        lbl_TraCuu.setFont(new java.awt.Font("Segoe UI Light", 0, 27)); // NOI18N
+        lbl_TraCuu.setForeground(new java.awt.Color(40, 77, 133));
+        lbl_TraCuu.setText("Nhập thông tin tra cứu:");
+
+        tf_TraCuu.setBackground(new java.awt.Color(142, 172, 207));
+        tf_TraCuu.setFont(new java.awt.Font("Segoe UI", 0, 27)); // NOI18N
+        tf_TraCuu.setToolTipText("");
+        tf_TraCuu.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153), 2, true));
+        tf_TraCuu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_TraCuuActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlThongTinTraCuuLayout = new javax.swing.GroupLayout(pnlThongTinTraCuu);
+        pnlThongTinTraCuu.setLayout(pnlThongTinTraCuuLayout);
+        pnlThongTinTraCuuLayout.setHorizontalGroup(
+            pnlThongTinTraCuuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlThongTinTraCuuLayout.createSequentialGroup()
+                .addGap(253, 253, 253)
+                .addComponent(lbl_TraCuu)
+                .addGap(18, 18, 18)
+                .addComponent(tf_TraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlThongTinTraCuuLayout.setVerticalGroup(
+            pnlThongTinTraCuuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlThongTinTraCuuLayout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addGroup(pnlThongTinTraCuuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbl_TraCuu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tf_TraCuu))
+                .addGap(20, 20, 20))
+        );
+
+        pnlData.setBackground(new java.awt.Color(255, 255, 255));
+
+        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane2.setColumnHeaderView(null);
+
+        table_TraCuu.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        table_TraCuu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        table_TraCuu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {"", "", null, null, null, null},
+                {"", null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mã dịch vụ", "Tên dịch vụ", "Giá", "Số lượng", "Trang thái", "Mô tả"
             }
-        ));
-        jScrollPane2.setViewportView(jTable2);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
 
-        jPanel1.add(jScrollPane2);
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        table_TraCuu.setGridColor(new java.awt.Color(153, 153, 153));
+        table_TraCuu.setRowHeight(30);
+        table_TraCuu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        table_TraCuu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        table_TraCuu.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(table_TraCuu);
+
+        javax.swing.GroupLayout pnlDataLayout = new javax.swing.GroupLayout(pnlData);
+        pnlData.setLayout(pnlDataLayout);
+        pnlDataLayout.setHorizontalGroup(
+            pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDataLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1860, Short.MAX_VALUE)
+                .addGap(30, 30, 30))
+        );
+        pnlDataLayout.setVerticalGroup(
+            pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
+        pnlCenter.setLayout(pnlCenterLayout);
+        pnlCenterLayout.setHorizontalGroup(
+            pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlThongTinTraCuu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        pnlCenterLayout.setVerticalGroup(
+            pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCenterLayout.createSequentialGroup()
+                .addComponent(pnlThongTinTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pnlMain.add(pnlCenter, java.awt.BorderLayout.CENTER);
+
+        pnlBottom.setBackground(new java.awt.Color(255, 255, 255));
+        pnlBottom.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 25, 10, 25));
+        pnlBottom.setName(""); // NOI18N
+        pnlBottom.setPreferredSize(new java.awt.Dimension(1650, 79));
+
+        btn_edit.setBackground(new java.awt.Color(40, 77, 133));
+        btn_edit.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btn_edit.setForeground(new java.awt.Color(255, 255, 255));
+        btn_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_edit30.png"))); // NOI18N
+        btn_edit.setText("Cập nhật");
+        btn_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editActionPerformed(evt);
+            }
+        });
+        pnlBottom.add(btn_edit);
+
+        pnlMain.add(pnlBottom, java.awt.BorderLayout.SOUTH);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(148, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64))
+            .addComponent(pnlMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(111, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
+            .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tf_TraCuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_TraCuuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_TraCuuActionPerformed
+
+    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_editActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,11 +252,19 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton btn_edit;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JLabel lbl_TraCuu;
+    private javax.swing.JPanel pnlBottom;
+    private javax.swing.JPanel pnlCenter;
+    private javax.swing.JPanel pnlData;
+    private javax.swing.JPanel pnlMain;
+    private javax.swing.JPanel pnlThongTinTraCuu;
+    private javax.swing.JPanel pnlTop;
+    private javax.swing.JLabel pnlTop_title;
+    private javax.swing.JTable table_TraCuu;
+    private javax.swing.JTextField tf_TraCuu;
     // End of variables declaration//GEN-END:variables
 }
