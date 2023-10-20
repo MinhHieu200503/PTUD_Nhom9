@@ -4,9 +4,16 @@
  */
 package gui;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -38,6 +45,7 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         ComboFilterOption1 = new javax.swing.JComboBox<>();
         ComboFilterOption2 = new javax.swing.JComboBox<>();
         ComboFilterOption3 = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
         panel_Container_ListPhong = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,11 +56,14 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         Panel_Container_Fram.setBackground(new java.awt.Color(204, 204, 255));
         Panel_Container_Fram.setMaximumSize(new java.awt.Dimension(108, 108));
 
-        lableFilterOption1.setText("Sắp xếp loại phòng");
+        lableFilterOption1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lableFilterOption1.setText("Lọc theo loại phòng");
 
-        lableFilterOption2.setText("Sắp xếp trạng thái:");
+        lableFilterOption2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lableFilterOption2.setText("Lọc theo trạng thái:");
 
-        lableFilterOption3.setText("Sắp xếp sức chứa:");
+        lableFilterOption3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lableFilterOption3.setText("Lọc theo sức chứa:");
 
         ComboFilterOption1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         ComboFilterOption1.addActionListener(new java.awt.event.ActionListener() {
@@ -62,50 +73,60 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         });
 
         ComboFilterOption2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboFilterOption2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ComboFilterOption2MouseClicked(evt);
+            }
+        });
 
         ComboFilterOption3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
         panel_Container_ListPhong.setBackground(new java.awt.Color(204, 204, 204));
-        panel_Container_ListPhong.setLayout(new java.awt.GridLayout());
+        panel_Container_ListPhong.setMaximumSize(new java.awt.Dimension(500, 500));
+        panel_Container_ListPhong.setLayout(new java.awt.GridLayout(1, 0));
+        jScrollPane1.setViewportView(panel_Container_ListPhong);
 
         javax.swing.GroupLayout Panel_Container_FramLayout = new javax.swing.GroupLayout(Panel_Container_Fram);
         Panel_Container_Fram.setLayout(Panel_Container_FramLayout);
         Panel_Container_FramLayout.setHorizontalGroup(
             Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_Container_FramLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addGap(51, 51, 51)
                 .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panel_Container_ListPhong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(Panel_Container_FramLayout.createSequentialGroup()
                         .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lableFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ComboFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(48, 48, 48)
+                            .addComponent(lableFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(179, 179, 179)
                         .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lableFilterOption3)
-                            .addComponent(ComboFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                            .addComponent(lableFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
                         .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lableFilterOption2)
-                            .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(230, 230, 230))
+                            .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lableFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(29, 29, 29))
         );
         Panel_Container_FramLayout.setVerticalGroup(
             Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_Container_FramLayout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(39, 39, 39)
                 .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lableFilterOption1)
-                    .addComponent(lableFilterOption2)
-                    .addComponent(lableFilterOption3))
-                .addGap(18, 18, 18)
-                .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ComboFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ComboFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lableFilterOption3)
+                    .addComponent(lableFilterOption2))
+                .addGap(15, 15, 15)
+                .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ComboFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ComboFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panel_Container_ListPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(847, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -114,11 +135,11 @@ public class Frame_ListPhong extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Panel_Container_Fram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 840, Short.MAX_VALUE))
+                .addGap(0, 822, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Panel_Container_Fram, javax.swing.GroupLayout.DEFAULT_SIZE, 987, Short.MAX_VALUE)
+            .addComponent(Panel_Container_Fram, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -128,11 +149,19 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboFilterOption1ActionPerformed
 
+    private void ComboFilterOption2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComboFilterOption2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboFilterOption2MouseClicked
+
+    private void A_Phong_Mouse_Entered(java.awt.event.MouseEvent evt) {                                                
+       
+    }    
+    
     private String[] dataTmp(){
         return new String[] {"Phong 1","Phong 2","Phong 3"};
     }
     
-    private JPanel CreateGUI_A_Phong(){
+    private JPanel CreateGUI_A_Phong(String Status_Phong,String SucChua,String CodePhong){
         GUI_A_Phong = new javax.swing.JPanel();
         icon_Status = new javax.swing.JLabel();
         label_PhongCode = new javax.swing.JLabel();
@@ -140,17 +169,27 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         txt_SucChua = new javax.swing.JLabel();
         label_Nguoi = new javax.swing.JLabel();
         txt_PhongCode = new javax.swing.JLabel();
-        icon_Status.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Available.png"))); // NOI18N
-
+        
+        if(Status_Phong.equalsIgnoreCase("Empty")){
+            icon_Status.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Available.png"))); // NOI18N
+        }
+        else if(Status_Phong.equalsIgnoreCase("Waiting")){
+            icon_Status.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Wating.png"))); // NOI18N
+        }
+        else{
+           icon_Status.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Unvailable123.png"))); // NOI18N 
+        }
+         
+        
         label_PhongCode.setText("Phòng:");
 
         label_SucChua.setText("Sức chứa: ");
 
-        txt_SucChua.setText("15");
+        txt_SucChua.setText(SucChua);
 
         label_Nguoi.setText("Người");
 
-        txt_PhongCode.setText("A001");
+        txt_PhongCode.setText(CodePhong);
 
         javax.swing.GroupLayout GUI_A_PhongLayout = new javax.swing.GroupLayout(GUI_A_Phong);
         GUI_A_Phong.setLayout(GUI_A_PhongLayout);
@@ -171,7 +210,7 @@ public class Frame_ListPhong extends javax.swing.JFrame {
                         .addComponent(label_PhongCode, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txt_PhongCode)))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         GUI_A_PhongLayout.setVerticalGroup(
             GUI_A_PhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,22 +231,34 @@ public class Frame_ListPhong extends javax.swing.JFrame {
                             .addComponent(label_Nguoi))))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
-        
+        GUI_A_Phong.setBackground(Color.WHITE);
+        GUI_A_Phong.setBorder(new RoundedBorder(50));
         return GUI_A_Phong;
     }
     
     private void addPhongToList(String[] list){
          
-         panel_Container_ListPhong.setLayout(new GridLayout(0,3));
+         panel_Container_ListPhong.setLayout(new GridLayout(0,3,20,20));
+         panel_Container_ListPhong.setBorder(new EmptyBorder(30,30,30,30));
+         jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
          
          for (String list1 : list){
-             JPanel phongTmp = new JPanel();
-             JTextField textTmp = new JTextField("ád");
-             phongTmp.add(textTmp);
-             panel_Container_ListPhong.add(phongTmp);
+              
+              panel_Container_ListPhong.add(CreateGUI_A_Phong("Empty","12","123"));
          }
          
-         panel_Container_ListPhong.add(CreateGUI_A_Phong());
+         for (String list1 : list){
+              panel_Container_ListPhong.add( CreateGUI_A_Phong("Waiting","12","123"));
+         }
+         
+         for (String list1 : list){
+              panel_Container_ListPhong.add( CreateGUI_A_Phong("full","12","123"));
+         }
+         for (String list1 : list){
+              panel_Container_ListPhong.add( CreateGUI_A_Phong("full","12","123"));
+         }
+         
+        
     }
     
     /**
@@ -260,9 +311,37 @@ public class Frame_ListPhong extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> ComboFilterOption2;
     private javax.swing.JComboBox<String> ComboFilterOption3;
     private javax.swing.JPanel Panel_Container_Fram;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lableFilterOption1;
     private javax.swing.JLabel lableFilterOption2;
     private javax.swing.JLabel lableFilterOption3;
     private javax.swing.JPanel panel_Container_ListPhong;
     // End of variables declaration//GEN-END:variables
+
+   private Dimension Dimension(int i, int i0) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private static class RoundedBorder implements Border {
+        
+        private int radius;
+        
+        RoundedBorder(int radius) {
+            this.radius = radius;
+        }
+        @Override
+        public Insets getBorderInsets(Component c) {
+            return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
+        }
+
+        @Override
+        public boolean isBorderOpaque() {
+            return true;
+        }
+
+        @Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+            g.drawRoundRect(x,y,width-1,height-1,radius,radius);
+        }
+    }
 }
