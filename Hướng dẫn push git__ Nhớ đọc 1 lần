@@ -5,10 +5,10 @@ B1. Nếu không xài hoặc chỉnh sửa file của người khác thì cứ c
         + Nếu log ra mà thấy mấy commit trước bị trùng thì tốt nhất là "git reset <code commit ở git log> --hard"  về cái commit mới nhất theo như commit của main trên git. Nếu không thì kệ nó, xấu cái commit trên main chứ không ảnh hưởng code
         + Nếu pull rebase từ main thành công thì code như bth
 B2. Code xog tại 1 cái pull rebase
-  - Nếu khoog đúng code của người khác thì sẽ không có conflic
+  - Nếu không dùng code của người khác thì sẽ không có conflic
   - Nếu đụng code người khác thì sẽ conflic => xóa cái cũ để xài cái mới. Nếu có lỗi gì thì nhắn tui reset lại cái main
 
 NOTE: ĐỌC ĐỂ TRÁNH TRẢ GIÁ VÌ SAI LẦM
 - Khi đổi nhánh NHỚ COMMIT lại code của mình trên nhánh của mình, Thường thì git sẽ nhắc nhưng nếu ở tab khác thì hên xui nó méo nhắc. NHỚ COMMIT NẾU KHÔNG MẤT SẠCH CODE ĐÁY NHÁ
-- Quý zị không pull lên main 
-- Đặt biệt không xài push --force
+- Quý zị không push lên main 
+- Đặt biệt không xài push --force ở nhánh main, còn lại làm gì ở main cx được, đừng push là được
