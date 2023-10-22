@@ -68,12 +68,12 @@ public class SideBarXuLy extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        itemDanhSachPhong7.setBackground(new java.awt.Color(174, 210, 255));
-        itemDanhSachPhong7.setForeground(new java.awt.Color(51, 0, 102));
+        itemDanhSachPhong7.setBackground(new java.awt.Color(148, 0, 255));
+        itemDanhSachPhong7.setForeground(new java.awt.Color(204, 204, 255));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(51, 0, 102));
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-list-40.png"))); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-reception-40.png"))); // NOI18N
         jLabel8.setText("Đặt phòng ngay");
 
         javax.swing.GroupLayout itemDanhSachPhong7Layout = new javax.swing.GroupLayout(itemDanhSachPhong7);
@@ -98,7 +98,7 @@ public class SideBarXuLy extends javax.swing.JPanel {
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(51, 0, 102));
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-list-40.png"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-calendar-40.png"))); // NOI18N
         jLabel9.setText("Đặt phòng trước");
 
         javax.swing.GroupLayout itemDanhSachPhong8Layout = new javax.swing.GroupLayout(itemDanhSachPhong8);
@@ -123,7 +123,7 @@ public class SideBarXuLy extends javax.swing.JPanel {
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(51, 0, 102));
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-list-40.png"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-check-in-40.png"))); // NOI18N
         jLabel10.setText("Nhận phòng");
 
         javax.swing.GroupLayout itemDanhSachPhong9Layout = new javax.swing.GroupLayout(itemDanhSachPhong9);
@@ -148,7 +148,7 @@ public class SideBarXuLy extends javax.swing.JPanel {
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(51, 0, 102));
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-list-40.png"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-wine-40.png"))); // NOI18N
         jLabel11.setText("Gọi dịch vụ");
 
         javax.swing.GroupLayout itemDanhSachPhong10Layout = new javax.swing.GroupLayout(itemDanhSachPhong10);
@@ -173,7 +173,7 @@ public class SideBarXuLy extends javax.swing.JPanel {
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(51, 0, 102));
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-list-40.png"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-check-out-40.png"))); // NOI18N
         jLabel12.setText("Trả phòng");
 
         javax.swing.GroupLayout itemDanhSachPhong11Layout = new javax.swing.GroupLayout(itemDanhSachPhong11);

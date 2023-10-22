@@ -84,7 +84,6 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         manage = new javax.swing.JPanel();
         manageTextIcon = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        sideBarXuLy1 = new smallPanel.SideBarXuLy();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(1920, 1030));
@@ -404,15 +403,11 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(sideBarXuLy1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1620, Short.MAX_VALUE))
+            .addGap(0, 1920, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(sideBarXuLy1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 652, Short.MAX_VALUE))
+            .addGap(0, 964, Short.MAX_VALUE)
         );
 
         add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -519,7 +514,6 @@ public class navBar extends javax.swing.JPanel implements Runnable{
     private javax.swing.JLabel roomTextIcon;
     private javax.swing.JPanel search;
     private javax.swing.JLabel searchTextIcon;
-    private smallPanel.SideBarXuLy sideBarXuLy1;
     private javax.swing.JPanel statistical;
     private javax.swing.JLabel statisticalTextIcon;
     private javax.swing.JLabel time_Account;
