@@ -144,6 +144,7 @@
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ComboFilterOption1MouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboFilterOption1ActionPerformed"/>
           </Events>
           <AuxValues>

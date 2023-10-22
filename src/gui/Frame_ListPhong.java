@@ -4,12 +4,19 @@
  */
 package gui;
 
+import static com.sun.java.accessibility.util.AWTEventMonitor.addActionListener;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -21,12 +28,10 @@ import javax.swing.border.EmptyBorder;
  */
 public class Frame_ListPhong extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Frame
-     */
+    // tạo frame
     public Frame_ListPhong() {
         initComponents();
-        addPhongToList(dataTmp());
+         listPhong = addPhongToList(dataTmp());
     }
 
     /**
@@ -66,6 +71,11 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         lableFilterOption3.setText("Lọc theo sức chứa:");
 
         ComboFilterOption1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboFilterOption1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ComboFilterOption1MouseExited(evt);
+            }
+        });
         ComboFilterOption1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboFilterOption1ActionPerformed(evt);
@@ -153,14 +163,18 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboFilterOption2MouseClicked
 
+    private void ComboFilterOption1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComboFilterOption1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboFilterOption1MouseExited
+
     private void A_Phong_Mouse_Entered(java.awt.event.MouseEvent evt) {                                                
        
     }    
-    
+    // du liệu test
     private String[] dataTmp(){
-        return new String[] {"Phong 1","Phong 2","Phong 3"};
+        return new String[] {" 1","2","3"," 4","5","6","7","8","9","10","11","12"};
     }
-    
+    // tạo 1 phòng trong ds phòng
     private JPanel CreateGUI_A_Phong(String Status_Phong,String SucChua,String CodePhong){
         GUI_A_Phong = new javax.swing.JPanel();
         icon_Status = new javax.swing.JLabel();
@@ -170,6 +184,8 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         label_Nguoi = new javax.swing.JLabel();
         txt_PhongCode = new javax.swing.JLabel();
         
+        txt_PhongCode.setName("PhongCode");
+        txt_SucChua.setName("SucChua");
         if(Status_Phong.equalsIgnoreCase("Empty")){
             icon_Status.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Available.png"))); // NOI18N
         }
@@ -231,39 +247,35 @@ public class Frame_ListPhong extends javax.swing.JFrame {
                             .addComponent(label_Nguoi))))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
+        
+        // set background của 1 phòng và cái viền border
         GUI_A_Phong.setBackground(Color.WHITE);
         GUI_A_Phong.setBorder(new RoundedBorder(50));
+        
         return GUI_A_Phong;
     }
-    
-    private void addPhongToList(String[] list){
+    // thêm phòng vào danh sách phòng
+    private JPanel addPhongToList(String[] list){
          
          panel_Container_ListPhong.setLayout(new GridLayout(0,3,20,20));
          panel_Container_ListPhong.setBorder(new EmptyBorder(30,30,30,30));
          jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
-         
+         // dữ liệu test thao tác thêm phòng vào danh sách
          for (String list1 : list){
+              JPanel tmpPhong =  CreateGUI_A_Phong("Empty","12",list1);
+              tmpPhong.addMouseListener(new CustomMouseListener_A_Phong());
+//              tmpPhong.addMouseListener( new CustomMouseListener_A_Phong());
+              panel_Container_ListPhong.add(tmpPhong);
               
-              panel_Container_ListPhong.add(CreateGUI_A_Phong("Empty","12","123"));
          }
          
-         for (String list1 : list){
-              panel_Container_ListPhong.add( CreateGUI_A_Phong("Waiting","12","123"));
-         }
+         return  panel_Container_ListPhong;
          
-         for (String list1 : list){
-              panel_Container_ListPhong.add( CreateGUI_A_Phong("full","12","123"));
-         }
-         for (String list1 : list){
-              panel_Container_ListPhong.add( CreateGUI_A_Phong("full","12","123"));
-         }
          
         
     }
     
-    /**
-     * @param args the command line arguments
-     */
+    // hàm main
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -296,7 +308,7 @@ public class Frame_ListPhong extends javax.swing.JFrame {
             }
         });
     }
-
+    // Khởi tạo các biến 
     private javax.swing.JPanel GUI_A_Phong;
     private javax.swing.JLabel icon_Status;
     private javax.swing.JLabel label_Nguoi;
@@ -305,7 +317,7 @@ public class Frame_ListPhong extends javax.swing.JFrame {
     
     private javax.swing.JLabel txt_PhongCode;
     private javax.swing.JLabel txt_SucChua;
-    
+    public JPanel listPhong;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboFilterOption1;
     private javax.swing.JComboBox<String> ComboFilterOption2;
@@ -318,10 +330,12 @@ public class Frame_ListPhong extends javax.swing.JFrame {
     private javax.swing.JPanel panel_Container_ListPhong;
     // End of variables declaration//GEN-END:variables
 
+    
+ 
    private Dimension Dimension(int i, int i0) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+   // class config bo góc ở mỗi phòng
     private static class RoundedBorder implements Border {
         
         private int radius;
@@ -344,4 +358,51 @@ public class Frame_ListPhong extends javax.swing.JFrame {
             g.drawRoundRect(x,y,width-1,height-1,radius,radius);
         }
     }
+    
+    // EVENT 
+    
+    class CustomMouseListener_A_Phong implements MouseListener {
+        public void mouseClicked(MouseEvent e) {
+            JPanel Phong = (JPanel) e.getComponent();
+            Component[] components = Phong.getComponents();
+            String tmp = "";
+            for (Component component : components) {
+//                   txt_PhongCode = name ("PhongCode");
+//                   txt_SucChua =   name ("SucChua");
+                    
+                    if(component instanceof JLabel){
+                        
+                        if(component.getName()!= null && ((JLabel) component).getName().equalsIgnoreCase("PhongCode")){
+                            tmp += "Phòng: "+ ((JLabel) component).getText() +"\n         ";
+                        }
+                        if(component.getName()!= null && ((JLabel) component).getName().equalsIgnoreCase("SucChua")){
+                            tmp += "\n"+" Sức Chứa: "+((JLabel) component).getText()+"\n\n";  
+                        }
+                    }
+                }
+                    if(tmp!= ""){
+                        JOptionPane.showConfirmDialog(panel_Container_ListPhong,tmp);
+                    }
+            
+           
+        }
+ 
+        public void mousePressed(MouseEvent e) {
+        }
+ 
+        public void mouseReleased(MouseEvent e) {
+        }
+ 
+        public void mouseEntered(MouseEvent e) {
+             e.getComponent().setBackground(Color.red);
+            
+        }
+ 
+        public void mouseExited(MouseEvent e) {
+             e.getComponent().setBackground(Color.white);
+        }
+    }
+    
+    
+    
 }
