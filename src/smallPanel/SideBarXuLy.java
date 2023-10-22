@@ -40,8 +40,9 @@ public class SideBarXuLy extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(174, 210, 255));
-        setMaximumSize(new java.awt.Dimension(300, 620));
-        setMinimumSize(new java.awt.Dimension(300, 620));
+        setMaximumSize(new java.awt.Dimension(300, 312));
+        setMinimumSize(new java.awt.Dimension(300, 312));
+        setPreferredSize(new java.awt.Dimension(300, 312));
 
         itemDanhSachPhong.setBackground(new java.awt.Color(174, 210, 255));
         itemDanhSachPhong.setForeground(new java.awt.Color(51, 0, 102));
@@ -64,12 +65,13 @@ public class SideBarXuLy extends javax.swing.JPanel {
             itemDanhSachPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemDanhSachPhongLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         itemDanhSachPhong7.setBackground(new java.awt.Color(148, 0, 255));
         itemDanhSachPhong7.setForeground(new java.awt.Color(204, 204, 255));
+        itemDanhSachPhong7.setPreferredSize(new java.awt.Dimension(300, 76));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -89,12 +91,13 @@ public class SideBarXuLy extends javax.swing.JPanel {
             itemDanhSachPhong7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemDanhSachPhong7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         itemDanhSachPhong8.setBackground(new java.awt.Color(174, 210, 255));
         itemDanhSachPhong8.setForeground(new java.awt.Color(51, 0, 102));
+        itemDanhSachPhong8.setPreferredSize(new java.awt.Dimension(300, 76));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(51, 0, 102));
@@ -114,12 +117,13 @@ public class SideBarXuLy extends javax.swing.JPanel {
             itemDanhSachPhong8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemDanhSachPhong8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         itemDanhSachPhong9.setBackground(new java.awt.Color(174, 210, 255));
         itemDanhSachPhong9.setForeground(new java.awt.Color(51, 0, 102));
+        itemDanhSachPhong9.setPreferredSize(new java.awt.Dimension(300, 76));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(51, 0, 102));
@@ -139,12 +143,13 @@ public class SideBarXuLy extends javax.swing.JPanel {
             itemDanhSachPhong9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemDanhSachPhong9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         itemDanhSachPhong10.setBackground(new java.awt.Color(174, 210, 255));
         itemDanhSachPhong10.setForeground(new java.awt.Color(51, 0, 102));
+        itemDanhSachPhong10.setPreferredSize(new java.awt.Dimension(300, 76));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(51, 0, 102));
@@ -164,12 +169,13 @@ public class SideBarXuLy extends javax.swing.JPanel {
             itemDanhSachPhong10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemDanhSachPhong10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         itemDanhSachPhong11.setBackground(new java.awt.Color(174, 210, 255));
         itemDanhSachPhong11.setForeground(new java.awt.Color(51, 0, 102));
+        itemDanhSachPhong11.setPreferredSize(new java.awt.Dimension(300, 76));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(51, 0, 102));
@@ -189,7 +195,7 @@ public class SideBarXuLy extends javax.swing.JPanel {
             itemDanhSachPhong11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemDanhSachPhong11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -208,7 +214,7 @@ public class SideBarXuLy extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(itemDanhSachPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(itemDanhSachPhong7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(itemDanhSachPhong8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
