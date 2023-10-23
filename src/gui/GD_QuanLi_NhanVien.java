@@ -55,14 +55,11 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
         cb_trangThai = new javax.swing.JComboBox<>();
         jPanel14 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        cb_trangThai1 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jPanel15 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         cb_ca = new javax.swing.JComboBox<>();
         jSeparator1 = new javax.swing.JSeparator();
-        jPanel16 = new javax.swing.JPanel();
-        tf_taiKhoan = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         pf_matKhau = new javax.swing.JPasswordField();
@@ -129,22 +126,22 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
         jPanel7.add(jLabel3, java.awt.BorderLayout.NORTH);
 
         datechooser_ngaySinh.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        datechooser_ngaySinh.setPreferredSize(new java.awt.Dimension(88, 38));
+        datechooser_ngaySinh.setPreferredSize(new java.awt.Dimension(160, 38));
         jPanel7.add(datechooser_ngaySinh, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(jPanel7);
 
-        jPanel8.setPreferredSize(new java.awt.Dimension(281, 75));
+        jPanel8.setPreferredSize(new java.awt.Dimension(281, 38));
         jPanel8.setLayout(new java.awt.BorderLayout(0, 5));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setText("Giới tính");
-        jPanel8.add(jLabel4, java.awt.BorderLayout.NORTH);
+        jPanel8.add(jLabel4, java.awt.BorderLayout.WEST);
 
         cb_gioiTinh.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         cb_gioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ", " " }));
-        cb_gioiTinh.setPreferredSize(new java.awt.Dimension(72, 38));
-        jPanel8.add(cb_gioiTinh, java.awt.BorderLayout.CENTER);
+        cb_gioiTinh.setPreferredSize(new java.awt.Dimension(160, 38));
+        jPanel8.add(cb_gioiTinh, java.awt.BorderLayout.EAST);
 
         jPanel2.add(jPanel8);
 
@@ -223,14 +220,10 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
         jLabel10.setText("Chức vụ:");
         jPanel14.add(jLabel10, java.awt.BorderLayout.WEST);
 
-        cb_trangThai1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        cb_trangThai1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân viên", "Quản lí", " " }));
-        cb_trangThai1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_trangThai1ActionPerformed(evt);
-            }
-        });
-        jPanel14.add(cb_trangThai1, java.awt.BorderLayout.EAST);
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân viên", "Quản lí", " " }));
+        jComboBox1.setPreferredSize(new java.awt.Dimension(160, 38));
+        jPanel14.add(jComboBox1, java.awt.BorderLayout.EAST);
 
         jPanel2.add(jPanel14);
 
@@ -252,25 +245,6 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(0, 0, 204));
         jSeparator1.setPreferredSize(new java.awt.Dimension(281, 5));
         jPanel2.add(jSeparator1);
-
-        jPanel16.setPreferredSize(new java.awt.Dimension(281, 75));
-        jPanel16.setLayout(new java.awt.BorderLayout(0, 5));
-
-        tf_taiKhoan.setBackground(new java.awt.Color(142, 172, 207));
-        tf_taiKhoan.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        tf_taiKhoan.setText("1111");
-        tf_taiKhoan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_taiKhoanActionPerformed(evt);
-            }
-        });
-        jPanel16.add(tf_taiKhoan, java.awt.BorderLayout.CENTER);
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel12.setText("Tài khoản:");
-        jPanel16.add(jLabel12, java.awt.BorderLayout.PAGE_START);
-
-        jPanel2.add(jPanel16);
 
         jPanel17.setPreferredSize(new java.awt.Dimension(281, 75));
         jPanel17.setLayout(new java.awt.BorderLayout(0, 5));
@@ -430,10 +404,6 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cb_trangThaiActionPerformed
 
-    private void tf_taiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_taiKhoanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_taiKhoanActionPerformed
-
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_themActionPerformed
@@ -449,10 +419,6 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
     private void btn_xoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaTrangActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_xoaTrangActionPerformed
-
-    private void cb_trangThai1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_trangThai1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb_trangThai1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -498,12 +464,11 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_ca;
     private javax.swing.JComboBox<String> cb_gioiTinh;
     private javax.swing.JComboBox<String> cb_trangThai;
-    private javax.swing.JComboBox<String> cb_trangThai1;
     private com.toedter.calendar.JDateChooser datechooser_ngaySinh;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
@@ -519,7 +484,6 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
@@ -540,7 +504,6 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
     private javax.swing.JTextField tf_diaChi;
     private javax.swing.JTextField tf_id;
     private javax.swing.JTextField tf_phone;
-    private javax.swing.JTextField tf_taiKhoan;
     private javax.swing.JTextField tf_ten;
     // End of variables declaration//GEN-END:variables
 }
