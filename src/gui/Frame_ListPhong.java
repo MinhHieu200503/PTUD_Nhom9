@@ -54,6 +54,7 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         ComboFilterOption3 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         panel_Container_ListPhong = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1920, 964));
@@ -102,6 +103,8 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         panel_Container_ListPhong.setLayout(new java.awt.GridLayout(0, 3, 10, 10));
         jScrollPane1.setViewportView(panel_Container_ListPhong);
 
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+
         javax.swing.GroupLayout Panel_Container_FramLayout = new javax.swing.GroupLayout(Panel_Container_Fram);
         Panel_Container_Fram.setLayout(Panel_Container_FramLayout);
         Panel_Container_FramLayout.setHorizontalGroup(
@@ -109,6 +112,7 @@ public class Frame_ListPhong extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_Container_FramLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(Panel_Container_FramLayout.createSequentialGroup()
                         .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,7 +144,9 @@ public class Frame_ListPhong extends javax.swing.JFrame {
                     .addComponent(ComboFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -323,6 +329,7 @@ public class Frame_ListPhong extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> ComboFilterOption2;
     private javax.swing.JComboBox<String> ComboFilterOption3;
     private javax.swing.JPanel Panel_Container_Fram;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lableFilterOption1;
     private javax.swing.JLabel lableFilterOption2;
