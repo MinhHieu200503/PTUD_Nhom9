@@ -4,10 +4,22 @@
  */
 package gui;
 
+import static com.sun.java.accessibility.util.AWTEventMonitor.addActionListener;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 /**
@@ -16,12 +28,10 @@ import javax.swing.border.EmptyBorder;
  */
 public class Frame_ListPhong extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Frame
-     */
+    // tạo frame
     public Frame_ListPhong() {
         initComponents();
-        addPhongToList(dataTmp());
+         listPhong = addPhongToList(dataTmp());
     }
 
     /**
@@ -40,6 +50,7 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         ComboFilterOption1 = new javax.swing.JComboBox<>();
         ComboFilterOption2 = new javax.swing.JComboBox<>();
         ComboFilterOption3 = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
         panel_Container_ListPhong = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -50,13 +61,21 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         Panel_Container_Fram.setBackground(new java.awt.Color(204, 204, 255));
         Panel_Container_Fram.setMaximumSize(new java.awt.Dimension(108, 108));
 
-        lableFilterOption1.setText("Sắp xếp loại phòng");
+        lableFilterOption1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lableFilterOption1.setText("Lọc theo loại phòng");
 
-        lableFilterOption2.setText("Sắp xếp trạng thái:");
+        lableFilterOption2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lableFilterOption2.setText("Lọc theo trạng thái:");
 
-        lableFilterOption3.setText("Sắp xếp sức chứa:");
+        lableFilterOption3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lableFilterOption3.setText("Lọc theo sức chứa:");
 
         ComboFilterOption1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboFilterOption1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ComboFilterOption1MouseExited(evt);
+            }
+        });
         ComboFilterOption1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboFilterOption1ActionPerformed(evt);
@@ -72,52 +91,52 @@ public class Frame_ListPhong extends javax.swing.JFrame {
 
         ComboFilterOption3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
         panel_Container_ListPhong.setBackground(new java.awt.Color(204, 204, 204));
-        panel_Container_ListPhong.setLayout(new java.awt.GridLayout());
+        panel_Container_ListPhong.setMaximumSize(new java.awt.Dimension(500, 500));
+        panel_Container_ListPhong.setLayout(new java.awt.GridLayout(1, 0));
+        jScrollPane1.setViewportView(panel_Container_ListPhong);
 
         javax.swing.GroupLayout Panel_Container_FramLayout = new javax.swing.GroupLayout(Panel_Container_Fram);
         Panel_Container_Fram.setLayout(Panel_Container_FramLayout);
         Panel_Container_FramLayout.setHorizontalGroup(
             Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_Container_FramLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addGap(51, 51, 51)
                 .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panel_Container_ListPhong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(Panel_Container_FramLayout.createSequentialGroup()
                         .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lableFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ComboFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+                            .addComponent(lableFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(179, 179, 179)
                         .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ComboFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lableFilterOption3))
-                        .addGap(157, 157, 157)
+                            .addComponent(lableFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
                         .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lableFilterOption2))))
-                .addGap(102, 102, 102))
+                            .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lableFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(29, 29, 29))
         );
         Panel_Container_FramLayout.setVerticalGroup(
             Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_Container_FramLayout.createSequentialGroup()
-                .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Panel_Container_FramLayout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(lableFilterOption1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_Container_FramLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lableFilterOption3)
-                            .addComponent(lableFilterOption2))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(39, 39, 39)
+                .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lableFilterOption1)
+                    .addComponent(lableFilterOption3)
+                    .addComponent(lableFilterOption2))
+                .addGap(15, 15, 15)
                 .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(ComboFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ComboFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ComboFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ComboFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panel_Container_ListPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(836, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -144,14 +163,18 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboFilterOption2MouseClicked
 
+    private void ComboFilterOption1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComboFilterOption1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboFilterOption1MouseExited
+
     private void A_Phong_Mouse_Entered(java.awt.event.MouseEvent evt) {                                                
        
     }    
-    
+    // du liệu test
     private String[] dataTmp(){
-        return new String[] {"Phong 1","Phong 2","Phong 3"};
+        return new String[] {" 1","2","3"," 4","5","6","7","8","9","10","11","12"};
     }
-    
+    // tạo 1 phòng trong ds phòng
     private JPanel CreateGUI_A_Phong(String Status_Phong,String SucChua,String CodePhong){
         GUI_A_Phong = new javax.swing.JPanel();
         icon_Status = new javax.swing.JLabel();
@@ -161,6 +184,8 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         label_Nguoi = new javax.swing.JLabel();
         txt_PhongCode = new javax.swing.JLabel();
         
+        txt_PhongCode.setName("PhongCode");
+        txt_SucChua.setName("SucChua");
         if(Status_Phong.equalsIgnoreCase("Empty")){
             icon_Status.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Available.png"))); // NOI18N
         }
@@ -223,34 +248,34 @@ public class Frame_ListPhong extends javax.swing.JFrame {
                 .addContainerGap(42, Short.MAX_VALUE))
         );
         
+        // set background của 1 phòng và cái viền border
+        GUI_A_Phong.setBackground(Color.WHITE);
+        GUI_A_Phong.setBorder(new RoundedBorder(50));
+        
         return GUI_A_Phong;
     }
-    
-    private void addPhongToList(String[] list){
+    // thêm phòng vào danh sách phòng
+    private JPanel addPhongToList(String[] list){
          
          panel_Container_ListPhong.setLayout(new GridLayout(0,3,20,20));
-         panel_Container_ListPhong.setBorder(new EmptyBorder(10,10,10,10));
-         
-         
+         panel_Container_ListPhong.setBorder(new EmptyBorder(30,30,30,30));
+         jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
+         // dữ liệu test thao tác thêm phòng vào danh sách
          for (String list1 : list){
+              JPanel tmpPhong =  CreateGUI_A_Phong("Empty","12",list1);
+              tmpPhong.addMouseListener(new CustomMouseListener_A_Phong());
+//              tmpPhong.addMouseListener( new CustomMouseListener_A_Phong());
+              panel_Container_ListPhong.add(tmpPhong);
               
-              panel_Container_ListPhong.add(CreateGUI_A_Phong("Empty","12","123"));
          }
          
-         for (String list1 : list){
-              panel_Container_ListPhong.add( CreateGUI_A_Phong("Waiting","12","123"));
-         }
+         return  panel_Container_ListPhong;
          
-         for (String list1 : list){
-              panel_Container_ListPhong.add( CreateGUI_A_Phong("full","12","123"));
-         }
          
         
     }
     
-    /**
-     * @param args the command line arguments
-     */
+    // hàm main
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -283,7 +308,7 @@ public class Frame_ListPhong extends javax.swing.JFrame {
             }
         });
     }
-
+    // Khởi tạo các biến 
     private javax.swing.JPanel GUI_A_Phong;
     private javax.swing.JLabel icon_Status;
     private javax.swing.JLabel label_Nguoi;
@@ -292,19 +317,92 @@ public class Frame_ListPhong extends javax.swing.JFrame {
     
     private javax.swing.JLabel txt_PhongCode;
     private javax.swing.JLabel txt_SucChua;
-    
+    public JPanel listPhong;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboFilterOption1;
     private javax.swing.JComboBox<String> ComboFilterOption2;
     private javax.swing.JComboBox<String> ComboFilterOption3;
     private javax.swing.JPanel Panel_Container_Fram;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lableFilterOption1;
     private javax.swing.JLabel lableFilterOption2;
     private javax.swing.JLabel lableFilterOption3;
     private javax.swing.JPanel panel_Container_ListPhong;
     // End of variables declaration//GEN-END:variables
 
-    private Dimension Dimension(int i, int i0) {
+    
+ 
+   private Dimension Dimension(int i, int i0) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+   // class config bo góc ở mỗi phòng
+    private static class RoundedBorder implements Border {
+        
+        private int radius;
+        
+        RoundedBorder(int radius) {
+            this.radius = radius;
+        }
+        @Override
+        public Insets getBorderInsets(Component c) {
+            return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
+        }
+
+        @Override
+        public boolean isBorderOpaque() {
+            return true;
+        }
+
+        @Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+            g.drawRoundRect(x,y,width-1,height-1,radius,radius);
+        }
+    }
+    
+    // EVENT 
+    
+    class CustomMouseListener_A_Phong implements MouseListener {
+        public void mouseClicked(MouseEvent e) {
+            JPanel Phong = (JPanel) e.getComponent();
+            Component[] components = Phong.getComponents();
+            String tmp = "";
+            for (Component component : components) {
+//                   txt_PhongCode = name ("PhongCode");
+//                   txt_SucChua =   name ("SucChua");
+                    
+                    if(component instanceof JLabel){
+                        
+                        if(component.getName()!= null && ((JLabel) component).getName().equalsIgnoreCase("PhongCode")){
+                            tmp += "Phòng: "+ ((JLabel) component).getText() +"\n         ";
+                        }
+                        if(component.getName()!= null && ((JLabel) component).getName().equalsIgnoreCase("SucChua")){
+                            tmp += "\n"+" Sức Chứa: "+((JLabel) component).getText()+"\n\n";  
+                        }
+                    }
+                }
+                    if(tmp!= ""){
+                        JOptionPane.showConfirmDialog(panel_Container_ListPhong,tmp);
+                    }
+            
+           
+        }
+ 
+        public void mousePressed(MouseEvent e) {
+        }
+ 
+        public void mouseReleased(MouseEvent e) {
+        }
+ 
+        public void mouseEntered(MouseEvent e) {
+             e.getComponent().setBackground(Color.red);
+            
+        }
+ 
+        public void mouseExited(MouseEvent e) {
+             e.getComponent().setBackground(Color.white);
+        }
+    }
+    
+    
+    
 }
