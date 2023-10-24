@@ -21,6 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import smallPanel.Phong;
 
 /**
  *
@@ -31,7 +33,7 @@ public class Frame_ListPhong extends javax.swing.JFrame {
     // tạo frame
     public Frame_ListPhong() {
         initComponents();
-         listPhong = addPhongToList(dataTmp());
+         addPhongToList();
     }
 
     /**
@@ -91,11 +93,13 @@ public class Frame_ListPhong extends javax.swing.JFrame {
 
         ComboFilterOption3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(330, 160));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(330, 160));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(330, 160));
 
-        panel_Container_ListPhong.setBackground(new java.awt.Color(204, 204, 204));
-        panel_Container_ListPhong.setMaximumSize(new java.awt.Dimension(500, 500));
-        panel_Container_ListPhong.setLayout(new java.awt.GridLayout(1, 0));
+        panel_Container_ListPhong.setBackground(new java.awt.Color(255, 255, 255));
+        panel_Container_ListPhong.setMaximumSize(new java.awt.Dimension(330, 160));
+        panel_Container_ListPhong.setLayout(new java.awt.GridLayout(0, 3, 10, 10));
         jScrollPane1.setViewportView(panel_Container_ListPhong);
 
         javax.swing.GroupLayout Panel_Container_FramLayout = new javax.swing.GroupLayout(Panel_Container_Fram);
@@ -105,7 +109,7 @@ public class Frame_ListPhong extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_Container_FramLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(Panel_Container_FramLayout.createSequentialGroup()
                         .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lableFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -255,24 +259,19 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         return GUI_A_Phong;
     }
     // thêm phòng vào danh sách phòng
-    private JPanel addPhongToList(String[] list){
-         
-         panel_Container_ListPhong.setLayout(new GridLayout(0,3,20,20));
-         panel_Container_ListPhong.setBorder(new EmptyBorder(30,30,30,30));
-         jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
-         // dữ liệu test thao tác thêm phòng vào danh sách
-         for (String list1 : list){
-              JPanel tmpPhong =  CreateGUI_A_Phong("Empty","12",list1);
-              tmpPhong.addMouseListener(new CustomMouseListener_A_Phong());
-//              tmpPhong.addMouseListener( new CustomMouseListener_A_Phong());
-              panel_Container_ListPhong.add(tmpPhong);
-              
+    public void addPhongToList(){
+//        panel_Container_ListPhong.setLayout(new GridLayout(0,3,20,20));
+         panel_Container_ListPhong.setBorder(new EmptyBorder(20,20,20,20));
+          jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
+         dataPhong=new Phong[5];
+         for(int i = 0;i<dataPhong.length;i++){
+             dataPhong[i] = new Phong();
+             dataPhong[i].addData(i, i*10, "00"+i, 5, 150.000, 2);
+//             Border border = new LineBorder(Color.ORANGE, 4, true);
+//             dataPhong[i].setBorder(border);
+//             dataPhong[i].setBackground(Color.red);
+             panel_Container_ListPhong.add(dataPhong[i]);
          }
-         
-         return  panel_Container_ListPhong;
-         
-         
-        
     }
     
     // hàm main
@@ -317,7 +316,8 @@ public class Frame_ListPhong extends javax.swing.JFrame {
     
     private javax.swing.JLabel txt_PhongCode;
     private javax.swing.JLabel txt_SucChua;
-    public JPanel listPhong;
+    protected Phong dataPhong[];
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboFilterOption1;
     private javax.swing.JComboBox<String> ComboFilterOption2;
@@ -355,53 +355,13 @@ public class Frame_ListPhong extends javax.swing.JFrame {
 
         @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-            g.drawRoundRect(x,y,width-1,height-1,radius,radius);
+//            g.drawRoundRect(x,y,width-1,height-1,radius,radius);
         }
     }
     
     // EVENT 
     
-    class CustomMouseListener_A_Phong implements MouseListener {
-        public void mouseClicked(MouseEvent e) {
-            JPanel Phong = (JPanel) e.getComponent();
-            Component[] components = Phong.getComponents();
-            String tmp = "";
-            for (Component component : components) {
-//                   txt_PhongCode = name ("PhongCode");
-//                   txt_SucChua =   name ("SucChua");
-                    
-                    if(component instanceof JLabel){
-                        
-                        if(component.getName()!= null && ((JLabel) component).getName().equalsIgnoreCase("PhongCode")){
-                            tmp += "Phòng: "+ ((JLabel) component).getText() +"\n         ";
-                        }
-                        if(component.getName()!= null && ((JLabel) component).getName().equalsIgnoreCase("SucChua")){
-                            tmp += "\n"+" Sức Chứa: "+((JLabel) component).getText()+"\n\n";  
-                        }
-                    }
-                }
-                    if(tmp!= ""){
-                        JOptionPane.showConfirmDialog(panel_Container_ListPhong,tmp);
-                    }
-            
-           
-        }
- 
-        public void mousePressed(MouseEvent e) {
-        }
- 
-        public void mouseReleased(MouseEvent e) {
-        }
- 
-        public void mouseEntered(MouseEvent e) {
-             e.getComponent().setBackground(Color.red);
-            
-        }
- 
-        public void mouseExited(MouseEvent e) {
-             e.getComponent().setBackground(Color.white);
-        }
-    }
+    
     
     
     
