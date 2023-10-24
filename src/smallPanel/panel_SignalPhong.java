@@ -20,7 +20,7 @@ public class panel_SignalPhong extends javax.swing.JPanel {
      */
     public panel_SignalPhong() {
         initComponents();
-        this.setBorder(new RoundedBorder(90));
+//        this.setBorder(new RoundedBorder(90));
     }
 
     /**
@@ -50,15 +50,16 @@ public class panel_SignalPhong extends javax.swing.JPanel {
         lb_Quantity_Available2 = new javax.swing.JLabel();
         lb_ngoacTronTrai2 = new javax.swing.JLabel();
 
-        setMaximumSize(new java.awt.Dimension(1021, 100));
-        setMinimumSize(new java.awt.Dimension(1021, 100));
-        setPreferredSize(new java.awt.Dimension(1021, 100));
+        setMaximumSize(new java.awt.Dimension(800, 80));
+        setMinimumSize(new java.awt.Dimension(800, 80));
+        setPreferredSize(new java.awt.Dimension(800, 80));
+        setVerifyInputWhenFocusTarget(false);
         setLayout(new java.awt.BorderLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setMaximumSize(new java.awt.Dimension(1021, 100));
-        jPanel1.setMinimumSize(new java.awt.Dimension(1021, 100));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1021, 100));
+        jPanel1.setMaximumSize(new java.awt.Dimension(1021, 80));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1021, 80));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1021, 80));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         lb_Icon_Availabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Available.png"))); // NOI18N
@@ -111,7 +112,7 @@ public class panel_SignalPhong extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         gridBagConstraints.ipady = 1;
         gridBagConstraints.weighty = 0.5;
-        gridBagConstraints.insets = new java.awt.Insets(0, 100, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 50, 0, 0);
         jPanel1.add(lb_Icon_Waiting, gridBagConstraints);
 
         lb_Available1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
@@ -170,7 +171,7 @@ public class panel_SignalPhong extends javax.swing.JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridheight = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.ipady = 1;
-        gridBagConstraints.insets = new java.awt.Insets(0, 100, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 50, 0, 0);
         jPanel1.add(lb_Icon_UnAvailabel, gridBagConstraints);
 
         lb_Quantity_Available2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N

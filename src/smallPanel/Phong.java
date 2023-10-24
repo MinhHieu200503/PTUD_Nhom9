@@ -101,7 +101,7 @@ public class Phong extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(320, 150));
         setLayout(new java.awt.GridBagLayout());
 
-        lb_Icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Group 59 (2).png"))); // NOI18N
+        lb_Icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Available.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
