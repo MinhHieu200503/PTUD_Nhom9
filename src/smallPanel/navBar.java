@@ -5,9 +5,12 @@
 package smallPanel;
 
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Panel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JFrame;
 
 /**
  *
@@ -40,7 +43,6 @@ public class navBar extends javax.swing.JPanel implements Runnable{
 					ngayTrongTuan = "Thứ " + (thoiGianHienTai.getDay() + 1) + ", ";// do getDay() tính từ 1.
 				thread.sleep(1000); // cho phép ngủ trong khoảng 1000 mns =1s
 				// lấy thời gian hiện tại vào giờ vào
-                                System.out.println("mainFrame.mainFrame.run()");
                                 time_Account.setText(
                                         sdf_Gio.format(thoiGianHienTai) + " " + ngayTrongTuan +
                                         sdf_Ngay.format(thoiGianHienTai)
@@ -63,6 +65,7 @@ public class navBar extends javax.swing.JPanel implements Runnable{
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jPanel1 = new javax.swing.JPanel();
         leftPanel = new javax.swing.JPanel();
         icon_Account = new javax.swing.JLabel();
         userPanel = new javax.swing.JPanel();
@@ -80,17 +83,25 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         statisticalTextIcon = new javax.swing.JLabel();
         manage = new javax.swing.JPanel();
         manageTextIcon = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        sideBarXuLy1 = new smallPanel.SideBarXuLy();
 
-        setBackground(new java.awt.Color(40, 77, 133));
-        setMaximumSize(new java.awt.Dimension(1536, 66));
-        setMinimumSize(new java.awt.Dimension(1536, 66));
-        setPreferredSize(new java.awt.Dimension(1536, 66));
-        setLayout(new java.awt.GridBagLayout());
+        setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(1920, 1030));
+        setMinimumSize(new java.awt.Dimension(1920, 1030));
+        setPreferredSize(new java.awt.Dimension(1920, 1030));
+        setLayout(new java.awt.BorderLayout());
+
+        jPanel1.setBackground(new java.awt.Color(40, 77, 133));
+        jPanel1.setMaximumSize(new java.awt.Dimension(1920, 66));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1920, 66));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1920, 66));
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
         leftPanel.setBackground(new java.awt.Color(40, 77, 133));
-        leftPanel.setMaximumSize(new java.awt.Dimension(323, 60));
-        leftPanel.setMinimumSize(new java.awt.Dimension(323, 60));
-        leftPanel.setPreferredSize(new java.awt.Dimension(423, 60));
+        leftPanel.setMaximumSize(new java.awt.Dimension(423, 66));
+        leftPanel.setMinimumSize(new java.awt.Dimension(423, 66));
+        leftPanel.setPreferredSize(new java.awt.Dimension(423, 66));
         leftPanel.setLayout(new java.awt.GridBagLayout());
 
         icon_Account.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-account-60.png"))); // NOI18N
@@ -118,16 +129,13 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         userPanel.add(time_Account);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 2.1;
-        leftPanel.add(userPanel, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 0.1;
-        add(leftPanel, gridBagConstraints);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(0, 84, 0, 0);
+        leftPanel.add(userPanel, gridBagConstraints);
+
+        jPanel1.add(leftPanel, java.awt.BorderLayout.LINE_START);
 
         rightPanel.setBackground(new java.awt.Color(40, 77, 133));
         rightPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -155,7 +163,7 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.ipady = 4;
@@ -167,6 +175,9 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         home.setMinimumSize(new java.awt.Dimension(191, 66));
         home.setPreferredSize(new java.awt.Dimension(191, 66));
         home.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickedMenu(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
@@ -210,6 +221,9 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         room.setMinimumSize(new java.awt.Dimension(191, 66));
         room.setPreferredSize(new java.awt.Dimension(191, 66));
         room.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickedMenu(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
@@ -222,23 +236,27 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         roomTextIcon.setForeground(new java.awt.Color(255, 255, 255));
         roomTextIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-micro-40.png"))); // NOI18N
         roomTextIcon.setText("Xử lý");
-        roomTextIcon.setVerifyInputWhenFocusTarget(false);
+        roomTextIcon.setAlignmentY(0.0F);
+        roomTextIcon.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        roomTextIcon.setMaximumSize(null);
+        roomTextIcon.setMinimumSize(null);
+        roomTextIcon.setPreferredSize(new java.awt.Dimension(191, 66));
 
         javax.swing.GroupLayout roomLayout = new javax.swing.GroupLayout(room);
         room.setLayout(roomLayout);
         roomLayout.setHorizontalGroup(
             roomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roomLayout.createSequentialGroup()
-                .addGap(0, 50, Short.MAX_VALUE)
-                .addComponent(roomTextIcon)
-                .addGap(0, 50, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE)
+                .addComponent(roomTextIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         roomLayout.setVerticalGroup(
             roomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roomLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(roomTextIcon)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(roomTextIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         rightPanel.add(room, new java.awt.GridBagConstraints());
@@ -248,6 +266,9 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         search.setMinimumSize(new java.awt.Dimension(191, 66));
         search.setPreferredSize(new java.awt.Dimension(191, 66));
         search.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickedMenu(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
@@ -277,9 +298,9 @@ public class navBar extends javax.swing.JPanel implements Runnable{
             .addGap(0, 66, Short.MAX_VALUE)
             .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(searchLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 13, Short.MAX_VALUE)
                     .addComponent(searchTextIcon)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 13, Short.MAX_VALUE)))
         );
 
         rightPanel.add(search, new java.awt.GridBagConstraints());
@@ -289,6 +310,9 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         statistical.setMinimumSize(new java.awt.Dimension(191, 66));
         statistical.setPreferredSize(new java.awt.Dimension(191, 66));
         statistical.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickedMenu(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
@@ -318,9 +342,9 @@ public class navBar extends javax.swing.JPanel implements Runnable{
             .addGap(0, 66, Short.MAX_VALUE)
             .addGroup(statisticalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(statisticalLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 13, Short.MAX_VALUE)
                     .addComponent(statisticalTextIcon)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 13, Short.MAX_VALUE)))
         );
 
         rightPanel.add(statistical, new java.awt.GridBagConstraints());
@@ -330,6 +354,9 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         manage.setMinimumSize(new java.awt.Dimension(191, 66));
         manage.setPreferredSize(new java.awt.Dimension(191, 66));
         manage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickedMenu(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
@@ -359,19 +386,34 @@ public class navBar extends javax.swing.JPanel implements Runnable{
             .addGap(0, 66, Short.MAX_VALUE)
             .addGroup(manageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(manageLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 13, Short.MAX_VALUE)
                     .addComponent(manageTextIcon)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 13, Short.MAX_VALUE)))
         );
 
         rightPanel.add(manage, new java.awt.GridBagConstraints());
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        add(rightPanel, gridBagConstraints);
+        jPanel1.add(rightPanel, java.awt.BorderLayout.LINE_END);
+
+        add(jPanel1, java.awt.BorderLayout.NORTH);
+
+        jPanel2.setMaximumSize(new java.awt.Dimension(1920, 964));
+        jPanel2.setMinimumSize(new java.awt.Dimension(1920, 964));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(sideBarXuLy1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1620, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sideBarXuLy1, javax.swing.GroupLayout.DEFAULT_SIZE, 964, Short.MAX_VALUE)
+        );
+
+        add(jPanel2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void enteredMenu(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enteredMenu
@@ -394,10 +436,9 @@ public class navBar extends javax.swing.JPanel implements Runnable{
     }//GEN-LAST:event_enteredMenu
 
     public void enterMenu(javax.swing.JPanel panel){
+        underline.setBackground(new Color(0, 204, 255));
         panel.setBackground(new Color(40,94,178));
-        underline.setBackground(new Color(0,204,255));
-        underline.setVisible(false);
-        underline.setVisible(true);
+        
     }
     
     
@@ -418,18 +459,55 @@ public class navBar extends javax.swing.JPanel implements Runnable{
             exitMenu(manage);
         }
     }//GEN-LAST:event_exitedMenu
-
+    
     public void exitMenu(javax.swing.JPanel panel){
         panel.setBackground(new Color(40,77,133));
-        underline.setBackground(new Color(0,204,255));
-        underline.setVisible(false);
-        underline.setVisible(true);
+         underline.setBackground(new Color(0, 204, 255));
+        repaint();
     }
+    
+    private void clickedMenu(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickedMenu
+        if (evt.getSource().equals(home)){
+            clickMenuUnderline(0);
+        }
+        else if (evt.getSource().equals(room)){
+            clickMenuUnderline(1);
+        }
+        else if (evt.getSource().equals(search)){
+            clickMenuUnderline(2);
+        }
+        else if (evt.getSource().equals(statistical)){
+            clickMenuUnderline(3);
+        }
+        else if (evt.getSource().equals(manage)){
+            clickMenuUnderline(4);
+        }
+    }//GEN-LAST:event_clickedMenu
+    
+    public int clickMenuUnderline(int index){
+            GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
+            gridBagConstraints.gridx = index;
+            gridBagConstraints.gridy = 0;
+            gridBagConstraints.gridheight = 2;
+            gridBagConstraints.ipady = 4;
+            gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
+            rightPanel.remove(underline);
+            rightPanel.add(underline, gridBagConstraints,0);
+            repaint();
+            return index;
+    }
+    
+    
+ 
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel home;
     private javax.swing.JLabel homePageTextIcon;
     private javax.swing.JLabel icon_Account;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel manage;
     private javax.swing.JLabel manageTextIcon;
@@ -439,6 +517,7 @@ public class navBar extends javax.swing.JPanel implements Runnable{
     private javax.swing.JLabel roomTextIcon;
     private javax.swing.JPanel search;
     private javax.swing.JLabel searchTextIcon;
+    private smallPanel.SideBarXuLy sideBarXuLy1;
     private javax.swing.JPanel statistical;
     private javax.swing.JLabel statisticalTextIcon;
     private javax.swing.JLabel time_Account;
