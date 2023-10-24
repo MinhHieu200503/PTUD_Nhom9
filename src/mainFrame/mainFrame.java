@@ -31,25 +31,24 @@ public class mainFrame extends javax.swing.JFrame{
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
-        navBar1 = new smallPanel.navBar();
+        navBar2 = new smallPanel.navBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1920, 1030));
+        setMinimumSize(new java.awt.Dimension(1920, 1030));
         setResizable(false);
-        java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
-        layout.columnWidths = new int[] {1};
-        layout.rowHeights = new int[] {1};
-        layout.columnWeights = new double[] {1.0};
-        layout.rowWeights = new double[] {1.0};
-        getContentPane().setLayout(layout);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        getContentPane().add(navBar1, gridBagConstraints);
-
-        setSize(new java.awt.Dimension(1552, 808));
-        setLocationRelativeTo(null);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mouse(evt);
+            }
+        });
+        getContentPane().add(navBar2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mouse(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouse
+
+    }//GEN-LAST:event_mouse
 
     /**
      * @param args the command line arguments
@@ -81,9 +80,11 @@ public class mainFrame extends javax.swing.JFrame{
         /* Create and display the form */
                 new mainFrame().setVisible(true);
     }
+    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private smallPanel.navBar navBar1;
+    private smallPanel.navBar navBar2;
     // End of variables declaration//GEN-END:variables
 
     
