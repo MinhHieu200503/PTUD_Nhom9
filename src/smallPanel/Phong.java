@@ -32,7 +32,6 @@ public class Phong extends javax.swing.JPanel {
      */
     public Phong() {
         initComponents();
-        
         this.setBorder(new RoundedBorder(90));
         thisPhong = this;
         this.addMouseListener(new CustomMouseListener_A_Phong());

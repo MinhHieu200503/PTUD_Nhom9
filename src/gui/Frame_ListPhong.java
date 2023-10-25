@@ -54,8 +54,21 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         ComboFilterOption3 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         panel_Container_ListPhong = new javax.swing.JPanel();
+        panel_mot_dong = new javax.swing.JPanel();
+        phong1 = new smallPanel.Phong();
+        phong2 = new smallPanel.Phong();
+        phong3 = new smallPanel.Phong();
+        jPanel4 = new javax.swing.JPanel();
+        phong10 = new smallPanel.Phong();
+        phong11 = new smallPanel.Phong();
+        phong12 = new smallPanel.Phong();
+        jPanel5 = new javax.swing.JPanel();
+        phong13 = new smallPanel.Phong();
+        phong14 = new smallPanel.Phong();
+        phong15 = new smallPanel.Phong();
         jPanel1 = new javax.swing.JPanel();
-        panel_SignalPhong2 = new smallPanel.panel_SignalPhong();
+        jPanel2 = new javax.swing.JPanel();
+        panel_SignalPhong1 = new smallPanel.panel_SignalPhong();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1920, 964));
@@ -63,7 +76,9 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(1920, 964));
 
         Panel_Container_Fram.setBackground(new java.awt.Color(204, 204, 255));
-        Panel_Container_Fram.setMaximumSize(new java.awt.Dimension(108, 108));
+        Panel_Container_Fram.setMaximumSize(new java.awt.Dimension(1620, 948));
+        Panel_Container_Fram.setMinimumSize(new java.awt.Dimension(1620, 948));
+        Panel_Container_Fram.setPreferredSize(new java.awt.Dimension(1620, 948));
 
         lableFilterOption1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lableFilterOption1.setText("Lọc theo loại phòng");
@@ -101,10 +116,38 @@ public class Frame_ListPhong extends javax.swing.JFrame {
 
         panel_Container_ListPhong.setBackground(new java.awt.Color(255, 255, 255));
         panel_Container_ListPhong.setMaximumSize(new java.awt.Dimension(330, 160));
-        panel_Container_ListPhong.setLayout(new java.awt.GridLayout(0, 3, 10, 10));
+        panel_Container_ListPhong.setLayout(new java.awt.GridLayout(0, 1, 1, 1));
+
+        panel_mot_dong.setMaximumSize(new java.awt.Dimension(980, 160));
+        panel_mot_dong.setPreferredSize(new java.awt.Dimension(980, 160));
+        panel_mot_dong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        panel_mot_dong.add(phong1);
+        panel_mot_dong.add(phong2);
+        panel_mot_dong.add(phong3);
+
+        panel_Container_ListPhong.add(panel_mot_dong);
+
+        jPanel4.setMaximumSize(new java.awt.Dimension(980, 160));
+        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanel4.add(phong10);
+        jPanel4.add(phong11);
+        jPanel4.add(phong12);
+
+        panel_Container_ListPhong.add(jPanel4);
+
+        jPanel5.setMaximumSize(new java.awt.Dimension(980, 160));
+        jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanel5.add(phong13);
+        jPanel5.add(phong14);
+        jPanel5.add(phong15);
+
+        panel_Container_ListPhong.add(jPanel5);
+
         jScrollPane1.setViewportView(panel_Container_ListPhong);
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
 
         javax.swing.GroupLayout Panel_Container_FramLayout = new javax.swing.GroupLayout(Panel_Container_Fram);
         Panel_Container_Fram.setLayout(Panel_Container_FramLayout);
@@ -115,47 +158,59 @@ public class Frame_ListPhong extends javax.swing.JFrame {
                 .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(Panel_Container_FramLayout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(1027, 1027, 1027))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(Panel_Container_FramLayout.createSequentialGroup()
-                        .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lableFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ComboFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(179, 179, 179)
-                        .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lableFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ComboFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
-                        .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lableFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(1056, 1056, 1056))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Panel_Container_FramLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(panel_SignalPhong2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(29, 29, 29))
+                        .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(Panel_Container_FramLayout.createSequentialGroup()
+                                .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lableFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ComboFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(179, 179, 179)
+                                .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lableFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ComboFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(179, 179, 179)
+                                .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lableFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(521, 521, 521))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_Container_FramLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panel_SignalPhong1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(634, 634, 634))
         );
         Panel_Container_FramLayout.setVerticalGroup(
             Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_Container_FramLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lableFilterOption1)
-                    .addComponent(lableFilterOption3)
-                    .addComponent(lableFilterOption2))
-                .addGap(15, 15, 15)
                 .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(ComboFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(ComboFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Panel_Container_FramLayout.createSequentialGroup()
+                        .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lableFilterOption1)
+                            .addComponent(lableFilterOption3))
+                        .addGap(15, 15, 15)
+                        .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ComboFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(Panel_Container_FramLayout.createSequentialGroup()
+                        .addComponent(lableFilterOption2)
+                        .addGap(15, 15, 15)
+                        .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panel_SignalPhong2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Panel_Container_FramLayout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_Container_FramLayout.createSequentialGroup()
+                        .addComponent(panel_SignalPhong1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -164,11 +219,11 @@ public class Frame_ListPhong extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Panel_Container_Fram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 803, Short.MAX_VALUE))
+                .addGap(0, 300, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Panel_Container_Fram, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Panel_Container_Fram, javax.swing.GroupLayout.DEFAULT_SIZE, 964, Short.MAX_VALUE)
         );
 
         pack();
@@ -273,6 +328,16 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         
         return GUI_A_Phong;
     }
+    
+    // tao panel chứa 1 dòng phòng
+    private JPanel taoPanel_1_Dong(){
+        panel_mot_dong = new javax.swing.JPanel();
+        panel_mot_dong.setMaximumSize(new java.awt.Dimension(980, 160));
+        panel_mot_dong.setPreferredSize(new java.awt.Dimension(980, 160));
+        panel_mot_dong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        return panel_mot_dong;
+    }
+    
     // thêm phòng vào danh sách phòng
     public void addPhongToList(){
 //        panel_Container_ListPhong.setLayout(new GridLayout(0,3,20,20));
@@ -285,6 +350,8 @@ public class Frame_ListPhong extends javax.swing.JFrame {
 //             Border border = new LineBorder(Color.ORANGE, 4, true);
 //             dataPhong[i].setBorder(border);
 //             dataPhong[i].setBackground(Color.red);
+            dataPhong[i].setPreferredSize(new Dimension(320,150));
+            dataPhong[i].setSize(350,100);
              panel_Container_ListPhong.add(dataPhong[i]);
          }
     }
@@ -332,19 +399,32 @@ public class Frame_ListPhong extends javax.swing.JFrame {
     private javax.swing.JLabel txt_PhongCode;
     private javax.swing.JLabel txt_SucChua;
     protected Phong dataPhong[];
-    
+//    private javax.swing.JPanel panel_mot_dong;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboFilterOption1;
     private javax.swing.JComboBox<String> ComboFilterOption2;
     private javax.swing.JComboBox<String> ComboFilterOption3;
     private javax.swing.JPanel Panel_Container_Fram;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lableFilterOption1;
     private javax.swing.JLabel lableFilterOption2;
     private javax.swing.JLabel lableFilterOption3;
     private javax.swing.JPanel panel_Container_ListPhong;
-    private smallPanel.panel_SignalPhong panel_SignalPhong2;
+    private smallPanel.panel_SignalPhong panel_SignalPhong1;
+    private javax.swing.JPanel panel_mot_dong;
+    private smallPanel.Phong phong1;
+    private smallPanel.Phong phong10;
+    private smallPanel.Phong phong11;
+    private smallPanel.Phong phong12;
+    private smallPanel.Phong phong13;
+    private smallPanel.Phong phong14;
+    private smallPanel.Phong phong15;
+    private smallPanel.Phong phong2;
+    private smallPanel.Phong phong3;
     // End of variables declaration//GEN-END:variables
 
     
