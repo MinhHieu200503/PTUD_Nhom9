@@ -32,7 +32,7 @@ public class mainFrame extends javax.swing.JFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        navBar1 = new smallPanel.navBar();
+        navBar2 = new smallPanel.navBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1920, 1030));
@@ -43,7 +43,7 @@ public class mainFrame extends javax.swing.JFrame{
                 mouse(evt);
             }
         });
-        getContentPane().add(navBar1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(navBar2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void mouse(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouse
@@ -84,7 +84,7 @@ public class mainFrame extends javax.swing.JFrame{
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private smallPanel.navBar navBar1;
+    private smallPanel.navBar navBar2;
     // End of variables declaration//GEN-END:variables
 
     

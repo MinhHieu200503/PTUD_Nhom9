@@ -1,7 +1,7 @@
 B1. Nếu không xài hoặc chỉnh sửa file của người khác thì cứ code của mình rồi push lên nhánh của mình
     - Nếu xài code của người khác hoặc chỉnh sửa thì:
-        + pull hết code ở main trên git về main trong máy. Chú ý là log ra để xem có đúng là version mới nhất của main trên git hay chưa.
-        + NHỚ REBASE RỒI THÌ HÃY CODE TIẾP: Pull rồi thì đổi ra nhánh mình xài git rebase main, Check log để xem có commit version mới nhất như trên main hay chưa.  
+        + pull hết code (qua main (git checkout main)) ở main trên git về main trong máy (git pull). Chú ý là log ra để xem (git log --oneline) có đúng là version mới nhất của main trên git hay chưa.
+        + NHỚ REBASE (Để lấy code từ main về) RỒI THÌ HÃY CODE TIẾP: Pull rồi thì đổi ra nhánh mình xài git rebase main, Check log để xem có commit version mới nhất như trên main hay chưa.  
         + Nếu log ra mà thấy mấy commit trước bị trùng thì tốt nhất là "git reset <code commit ở git log> --hard"  về cái commit mới nhất theo như commit của main trên git. Nếu không thì kệ nó, xấu cái commit trên main chứ không ảnh hưởng code
         + Nếu pull rebase từ main thành công thì code như bth
 B2. Code xog tại 1 cái pull rebase
