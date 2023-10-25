@@ -45,13 +45,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Component id="itemDanhSachPhong" min="-2" max="-2" attributes="0"/>
-<<<<<<< HEAD
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="itemDatPhongNgay" min="-2" max="-2" attributes="0"/>
-=======
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="itemDanhSachPhong7" min="-2" max="-2" attributes="0"/>
->>>>>>> main
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="itemDatPhongTruoc" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
@@ -60,7 +55,7 @@
               <Component id="itemGoiDichVu" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="itemTraPhong" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="191" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -125,12 +120,6 @@
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="d2" red="ae" type="rgb"/>
-        </Property>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[300, 76]"/>
-        </Property>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[300, 76]"/>
         </Property>
       </Properties>
       <Events>
