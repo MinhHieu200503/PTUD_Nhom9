@@ -54,26 +54,12 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         ComboFilterOption3 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         panel_Container_ListPhong = new javax.swing.JPanel();
-        panel_mot_dong = new javax.swing.JPanel();
-        phong1 = new smallPanel.Phong();
-        phong2 = new smallPanel.Phong();
-        phong3 = new smallPanel.Phong();
-        jPanel4 = new javax.swing.JPanel();
-        phong10 = new smallPanel.Phong();
-        phong11 = new smallPanel.Phong();
-        phong12 = new smallPanel.Phong();
-        jPanel5 = new javax.swing.JPanel();
-        phong13 = new smallPanel.Phong();
-        phong14 = new smallPanel.Phong();
-        phong15 = new smallPanel.Phong();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         panel_SignalPhong1 = new smallPanel.panel_SignalPhong();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1920, 964));
         setMinimumSize(new java.awt.Dimension(1920, 964));
-        setPreferredSize(new java.awt.Dimension(1920, 964));
 
         Panel_Container_Fram.setBackground(new java.awt.Color(204, 204, 255));
         Panel_Container_Fram.setMaximumSize(new java.awt.Dimension(1620, 948));
@@ -117,32 +103,6 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         panel_Container_ListPhong.setBackground(new java.awt.Color(255, 255, 255));
         panel_Container_ListPhong.setMaximumSize(new java.awt.Dimension(330, 160));
         panel_Container_ListPhong.setLayout(new java.awt.GridLayout(0, 1, 1, 1));
-
-        panel_mot_dong.setMaximumSize(new java.awt.Dimension(980, 160));
-        panel_mot_dong.setPreferredSize(new java.awt.Dimension(980, 160));
-        panel_mot_dong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-        panel_mot_dong.add(phong1);
-        panel_mot_dong.add(phong2);
-        panel_mot_dong.add(phong3);
-
-        panel_Container_ListPhong.add(panel_mot_dong);
-
-        jPanel4.setMaximumSize(new java.awt.Dimension(980, 160));
-        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-        jPanel4.add(phong10);
-        jPanel4.add(phong11);
-        jPanel4.add(phong12);
-
-        panel_Container_ListPhong.add(jPanel4);
-
-        jPanel5.setMaximumSize(new java.awt.Dimension(980, 160));
-        jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-        jPanel5.add(phong13);
-        jPanel5.add(phong14);
-        jPanel5.add(phong15);
-
-        panel_Container_ListPhong.add(jPanel5);
-
         jScrollPane1.setViewportView(panel_Container_ListPhong);
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
@@ -334,7 +294,8 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         panel_mot_dong = new javax.swing.JPanel();
         panel_mot_dong.setMaximumSize(new java.awt.Dimension(980, 160));
         panel_mot_dong.setPreferredSize(new java.awt.Dimension(980, 160));
-        panel_mot_dong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        panel_mot_dong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER));
+        panel_mot_dong.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 1, 1, 1));
         return panel_mot_dong;
     }
     
@@ -343,16 +304,24 @@ public class Frame_ListPhong extends javax.swing.JFrame {
 //        panel_Container_ListPhong.setLayout(new GridLayout(0,3,20,20));
          panel_Container_ListPhong.setBorder(new EmptyBorder(20,20,20,20));
           jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
-         dataPhong=new Phong[5];
-         for(int i = 0;i<dataPhong.length;i++){
-             dataPhong[i] = new Phong();
-             dataPhong[i].addData(i, i*10, "00"+i, 5, 150.000, 2);
-//             Border border = new LineBorder(Color.ORANGE, 4, true);
-//             dataPhong[i].setBorder(border);
-//             dataPhong[i].setBackground(Color.red);
-            dataPhong[i].setPreferredSize(new Dimension(320,150));
-            dataPhong[i].setSize(350,100);
-             panel_Container_ListPhong.add(dataPhong[i]);
+         dataPhong=new Phong[10];
+         JPanel panel_Dong =  taoPanel_1_Dong();
+         for(int i = 1;i<=dataPhong.length;i++){
+            dataPhong[i-1] = new Phong();
+            dataPhong[i-1].addData(i, i*10, "00"+i, 5, 150.000, 2);
+            panel_Dong.add(dataPhong[i-1]);
+            if(i%3 == 0  || (i ==  dataPhong.length && dataPhong.length % 3 != 0)){
+                if((i ==  dataPhong.length && dataPhong.length % 3 != 0)){
+                    panel_Dong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+                    panel_Dong.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 1, 1));
+                    panel_mot_dong.setPreferredSize(new java.awt.Dimension(980, 170));
+//                    panel_Dong.
+                }
+                System.out.println(i + "\n");
+                panel_Container_ListPhong.add(panel_Dong);
+                panel_Dong =  taoPanel_1_Dong();
+                
+            } 
          }
     }
     
@@ -399,6 +368,7 @@ public class Frame_ListPhong extends javax.swing.JFrame {
     private javax.swing.JLabel txt_PhongCode;
     private javax.swing.JLabel txt_SucChua;
     protected Phong dataPhong[];
+    private javax.swing.JPanel panel_mot_dong;
 //    private javax.swing.JPanel panel_mot_dong;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboFilterOption1;
@@ -407,24 +377,12 @@ public class Frame_ListPhong extends javax.swing.JFrame {
     private javax.swing.JPanel Panel_Container_Fram;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lableFilterOption1;
     private javax.swing.JLabel lableFilterOption2;
     private javax.swing.JLabel lableFilterOption3;
     private javax.swing.JPanel panel_Container_ListPhong;
     private smallPanel.panel_SignalPhong panel_SignalPhong1;
-    private javax.swing.JPanel panel_mot_dong;
-    private smallPanel.Phong phong1;
-    private smallPanel.Phong phong10;
-    private smallPanel.Phong phong11;
-    private smallPanel.Phong phong12;
-    private smallPanel.Phong phong13;
-    private smallPanel.Phong phong14;
-    private smallPanel.Phong phong15;
-    private smallPanel.Phong phong2;
-    private smallPanel.Phong phong3;
     // End of variables declaration//GEN-END:variables
 
     
