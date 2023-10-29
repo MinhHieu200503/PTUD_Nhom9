@@ -87,7 +87,6 @@ public class SideBarXuLy extends javax.swing.JPanel {
 
         itemDatPhongNgay.setBackground(new java.awt.Color(174, 210, 255));
         itemDatPhongNgay.setForeground(new java.awt.Color(174, 210, 255));
-        itemDatPhongNgay.setPreferredSize(new java.awt.Dimension(300, 76));
         itemDatPhongNgay.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 SelectItem(evt);
