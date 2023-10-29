@@ -121,7 +121,7 @@
                       </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="700" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" pref="700" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
@@ -247,6 +247,10 @@
                 <Property name="rows" type="int" value="0"/>
                 <Property name="verticalGap" type="int" value="1"/>
               </Layout>
+              <SubComponents>
+                <Component class="smallPanel.DanhSachPhong" name="danhSachPhong1">
+                </Component>
+              </SubComponents>
             </Container>
           </SubComponents>
         </Container>

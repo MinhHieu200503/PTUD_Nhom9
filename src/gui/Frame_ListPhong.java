@@ -54,6 +54,7 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         ComboFilterOption3 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         panel_Container_ListPhong = new javax.swing.JPanel();
+        danhSachPhong1 = new smallPanel.DanhSachPhong();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         panel_SignalPhong1 = new smallPanel.panel_SignalPhong();
@@ -103,6 +104,8 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         panel_Container_ListPhong.setBackground(new java.awt.Color(255, 255, 255));
         panel_Container_ListPhong.setMaximumSize(new java.awt.Dimension(330, 160));
         panel_Container_ListPhong.setLayout(new java.awt.GridLayout(0, 1, 1, 1));
+        panel_Container_ListPhong.add(danhSachPhong1);
+
         jScrollPane1.setViewportView(panel_Container_ListPhong);
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
@@ -160,7 +163,7 @@ public class Frame_ListPhong extends javax.swing.JFrame {
                         .addGap(15, 15, 15)
                         .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(Panel_Container_FramLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Panel_Container_FramLayout.createSequentialGroup()
@@ -189,13 +192,13 @@ public class Frame_ListPhong extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ComboFilterOption1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboFilterOption1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ComboFilterOption1ActionPerformed
-
     private void ComboFilterOption2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComboFilterOption2MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboFilterOption2MouseClicked
+
+    private void ComboFilterOption1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboFilterOption1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboFilterOption1ActionPerformed
 
     private void ComboFilterOption1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComboFilterOption1MouseExited
         // TODO add your handling code here:
@@ -308,7 +311,7 @@ public class Frame_ListPhong extends javax.swing.JFrame {
          JPanel panel_Dong =  taoPanel_1_Dong();
          for(int i = 1;i<=dataPhong.length;i++){
             dataPhong[i-1] = new Phong();
-            dataPhong[i-1].addData(i, i*10, "00"+i, 5, 150.000, 2);
+            dataPhong[i-1].addData(i,( i*10) +" ", "00"+i, 5, 150.000, 2);
             panel_Dong.add(dataPhong[i-1]);
             if(i%3 == 0  || (i ==  dataPhong.length && dataPhong.length % 3 != 0)){
                 if((i ==  dataPhong.length && dataPhong.length % 3 != 0)){
@@ -375,6 +378,7 @@ public class Frame_ListPhong extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> ComboFilterOption2;
     private javax.swing.JComboBox<String> ComboFilterOption3;
     private javax.swing.JPanel Panel_Container_Fram;
+    private smallPanel.DanhSachPhong danhSachPhong1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
