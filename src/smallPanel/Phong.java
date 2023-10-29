@@ -45,13 +45,28 @@ public class Phong extends javax.swing.JPanel {
     
     class CustomMouseListener_A_Phong implements MouseListener {
         public void mouseClicked(MouseEvent e) {
+//                Phong tmpPhong = thisPhong;
+//                JOptionPane.showConfirmDialog(null, "index: "+tmpPhong.getIndex()+"\nTen Phong: "+tmpPhong.getTenPhong()+
+//                        "\nid Phong: "+ tmpPhong.getId()+"\nSuc Chua: "+tmpPhong.getSucChua()+"\nTrang thai: "+tmpPhong.getTrangThai()
+//                        +"\nGia: "+tmpPhong.getGia()
+//                );
+                
+            if(e.getComponent().getBackground().equals(Color.WHITE)){
+                e.getComponent().setBackground(Color.red);
                 Phong tmpPhong = thisPhong;
-                JOptionPane.showConfirmDialog(null, "index: "+tmpPhong.getIndex()+"\nTen Phong: "+tmpPhong.getTenPhong()+
-                        "\nid Phong: "+ tmpPhong.getId()+"\nSuc Chua: "+tmpPhong.getSucChua()+"\nTrang thai: "+tmpPhong.getTrangThai()
-                        +"\nGia: "+tmpPhong.getGia()
-                );
+                Border border = new LineBorder(Color.ORANGE, 4, true);
+                tmpPhong.setBorder(border);
+                thisPhong.setFlag(true);
+            }
+            else{
+                
+               e.getComponent().setBackground(Color.white);
+               Phong tmpPhong = thisPhong;
+               tmpPhong.setBorder(new RoundedBorder(90));
+               thisPhong.setFlag(false);
+            }
             
-           
+            System.out.println(thisPhong.getFlag());
         }
  
         public void mousePressed(MouseEvent e) {
@@ -61,19 +76,14 @@ public class Phong extends javax.swing.JPanel {
         }
  
         public void mouseEntered(MouseEvent e) {
-             e.getComponent().setBackground(Color.red);
-            Phong tmpPhong = thisPhong;
-             Border border = new LineBorder(Color.ORANGE, 4, true);
-             tmpPhong.setBorder(border);
+            
 //              Border border = new LineBorder(Color.ORANGE, 4, true);
 ////             dataPhong[i].setBorder(border);
         }
  
         public void mouseExited(MouseEvent e) {
              
-            e.getComponent().setBackground(Color.white);
-            Phong tmpPhong = thisPhong;
-            tmpPhong.setBorder(new RoundedBorder(90));
+            
         }
     }
 
@@ -149,10 +159,10 @@ public class Phong extends javax.swing.JPanel {
             return this;
         }
     
-        public int getId() {
+        public String getId() {
 			return id;
 		}
-		public void setId(int id) {
+		public void setId(String id) {
 			this.id = id;
 		}
 		public int getIndex() {
@@ -215,12 +225,16 @@ public class Phong extends javax.swing.JPanel {
 		public void setLb_TenPhong(javax.swing.JLabel lb_TenPhong) {
 			this.lb_TenPhong = lb_TenPhong;
 		}
+                
+                public boolean getFlag() {
+			return flag;
+		}
+		public void setFlag(boolean flag) {
+			this.flag = flag;
+		}
     
     
-    
-        
-    
-    public void addData(int index,int id,String tenPhong,int sucChua,Double gia,int trangThai){
+    public void addData(int index,String id,String tenPhong,int sucChua,Double gia,int trangThai){
         //set giá trị getter/setter cho các thành phần trong object Phong
         this.index = index;
         this.id = id;
@@ -238,13 +252,15 @@ public class Phong extends javax.swing.JPanel {
         this.lb_TenPhong.setName("PhongCode");
         
     }
+    
     protected Phong thisPhong; 
-    private int id;
+    private String id;
     private int index;
     private String tenPhong;
     private int sucChua;
     private Double gia;
     private int trangThai;
+    private boolean flag;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lb_Gia;
