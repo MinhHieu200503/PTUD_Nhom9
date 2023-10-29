@@ -45,9 +45,9 @@ public class SideBarXuLy extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(174, 210, 255));
-        setMaximumSize(new java.awt.Dimension(300, 312));
-        setMinimumSize(new java.awt.Dimension(300, 312));
-        setPreferredSize(new java.awt.Dimension(300, 312));
+        setMaximumSize(new java.awt.Dimension(300, 964));
+        setMinimumSize(new java.awt.Dimension(300, 964));
+        setPreferredSize(new java.awt.Dimension(300, 964));
 
         itemDanhSachPhong.setBackground(new java.awt.Color(174, 210, 255));
         itemDanhSachPhong.setForeground(new java.awt.Color(51, 0, 102));
@@ -294,7 +294,7 @@ public class SideBarXuLy extends javax.swing.JPanel {
                 .addComponent(itemGoiDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(itemTraPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleDescription("");
@@ -385,6 +385,7 @@ public class SideBarXuLy extends javax.swing.JPanel {
             panel.setBackground(new Color(142, 143, 250));
             panel.getComponent(0).setForeground(Color.WHITE);
         }
+        repaint();
        
     }
     
@@ -396,6 +397,7 @@ public class SideBarXuLy extends javax.swing.JPanel {
             panel.setBackground(new Color(174, 210, 255));
             panel.getComponent(0).setForeground( new Color(51,0,102));
         }
+        repaint();
         
     }
     

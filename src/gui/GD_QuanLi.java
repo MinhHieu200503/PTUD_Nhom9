@@ -4,6 +4,15 @@
  */
 package gui;
 
+import gui.GD_QuanLi_Ca;
+import gui.GD_QuanLi_ChucVu;
+import gui.GD_QuanLi_DichVu;
+import gui.GD_QuanLi_KhachHang;
+import gui.GD_QuanLi_LoaiPhong;
+import gui.GD_QuanLi_NhanVien;
+import gui.GD_QuanLi_Phong;
+import gui.GD_QuanLi_UuDai;
+
 /**
  *
  * @author quang
