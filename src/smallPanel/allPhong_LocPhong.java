@@ -221,7 +221,7 @@ public class allPhong_LocPhong extends javax.swing.JPanel {
     }
     
     public String LocOption1(){
-        
+
         return ComboFilterOption1.getSelectedItem().toString();
     }
     
