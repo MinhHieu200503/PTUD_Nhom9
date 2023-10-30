@@ -5,7 +5,9 @@
 package smallPanel;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridBagConstraints;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -52,14 +54,14 @@ public class SideBarXuLy extends javax.swing.JPanel {
         itemDanhSachPhong.setBackground(new java.awt.Color(174, 210, 255));
         itemDanhSachPhong.setForeground(new java.awt.Color(51, 0, 102));
         itemDanhSachPhong.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SelectItem(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 exitedMenu(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                SetSelectedItem(evt);
             }
         });
 
@@ -88,14 +90,14 @@ public class SideBarXuLy extends javax.swing.JPanel {
         itemDatPhongNgay.setBackground(new java.awt.Color(174, 210, 255));
         itemDatPhongNgay.setForeground(new java.awt.Color(174, 210, 255));
         itemDatPhongNgay.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SelectItem(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 exitedMenu(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                SetSelectedItem(evt);
             }
         });
 
@@ -125,14 +127,14 @@ public class SideBarXuLy extends javax.swing.JPanel {
         itemDatPhongTruoc.setForeground(new java.awt.Color(51, 0, 102));
         itemDatPhongTruoc.setPreferredSize(new java.awt.Dimension(300, 76));
         itemDatPhongTruoc.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SelectItem(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 exitedMenu(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                SetSelectedItem(evt);
             }
         });
 
@@ -162,14 +164,14 @@ public class SideBarXuLy extends javax.swing.JPanel {
         ItemNhanPhong.setForeground(new java.awt.Color(51, 0, 102));
         ItemNhanPhong.setPreferredSize(new java.awt.Dimension(300, 76));
         ItemNhanPhong.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SelectItem(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 exitedMenu(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                SetSelectedItem(evt);
             }
         });
 
@@ -199,14 +201,14 @@ public class SideBarXuLy extends javax.swing.JPanel {
         itemGoiDichVu.setForeground(new java.awt.Color(51, 0, 102));
         itemGoiDichVu.setPreferredSize(new java.awt.Dimension(300, 76));
         itemGoiDichVu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SelectItem(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 exitedMenu(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                SetSelectedItem(evt);
             }
         });
 
@@ -236,14 +238,14 @@ public class SideBarXuLy extends javax.swing.JPanel {
         itemTraPhong.setForeground(new java.awt.Color(51, 0, 102));
         itemTraPhong.setPreferredSize(new java.awt.Dimension(300, 76));
         itemTraPhong.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SelectItem(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 exitedMenu(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                SetSelectedItem(evt);
             }
         });
 
@@ -301,87 +303,41 @@ public class SideBarXuLy extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void enteredMenu(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enteredMenu
-        if (evt.getSource().equals(itemDanhSachPhong)){
-            enterMenu(itemDanhSachPhong);
-        }
-        else if (evt.getSource().equals(itemDatPhongNgay)){
-            enterMenu(itemDatPhongNgay);
-        }
-        else if (evt.getSource().equals(itemDatPhongTruoc)){
-            enterMenu(itemDatPhongTruoc);
-        }
-        else if (evt.getSource().equals(ItemNhanPhong)){
-            enterMenu(ItemNhanPhong);
-        }
-        else if (evt.getSource().equals(itemTraPhong)){
-            enterMenu(itemTraPhong);
-        }
-        else if (evt.getSource().equals(itemGoiDichVu)){
-            enterMenu(itemGoiDichVu);
-        }
-        
+        enterMenu((JPanel) evt.getSource());
     }//GEN-LAST:event_enteredMenu
 
     private void exitedMenu(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitedMenu
-        if (evt.getSource().equals(itemDanhSachPhong)){
-            exitMenu(itemDanhSachPhong);
-        }
-        else if (evt.getSource().equals(itemDatPhongNgay)){
-            exitMenu(itemDatPhongNgay);
-        }
-        else if (evt.getSource().equals(itemDatPhongTruoc)){
-            exitMenu(itemDatPhongTruoc);
-        }
-        else if (evt.getSource().equals(ItemNhanPhong)){
-            exitMenu(ItemNhanPhong);
-        }
-        else if (evt.getSource().equals(itemTraPhong)){
-            exitMenu(itemTraPhong);
-        }
-        else if (evt.getSource().equals(itemGoiDichVu)){
-            exitMenu(itemGoiDichVu);
-        }
+        exitMenu((JPanel) evt.getSource());
     }//GEN-LAST:event_exitedMenu
 
-    private void SelectItem(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SelectItem
-            if (evt.getSource().equals(itemDanhSachPhong)){
-            SetSelectedItem(itemDanhSachPhong);
-        }
-        else if (evt.getSource().equals(itemDatPhongNgay)){
-            SetSelectedItem(itemDatPhongNgay);
-        }
-        else if (evt.getSource().equals(itemDatPhongTruoc)){
-            SetSelectedItem(itemDatPhongTruoc);
-        }
-        else if (evt.getSource().equals(ItemNhanPhong)){
-            SetSelectedItem(ItemNhanPhong);
-        }
-        else if (evt.getSource().equals(itemTraPhong)){
-            SetSelectedItem(itemTraPhong);
-        }
-        else if (evt.getSource().equals(itemGoiDichVu)){
-            SetSelectedItem(itemGoiDichVu);
-        }
-    }//GEN-LAST:event_SelectItem
+    private void SetSelectedItem(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SetSelectedItem
+        Object temp = evt.getSource();
+        SetSelectedItem((JPanel) temp);
+        //Nên chuyển sang If else để thay đổi màn hình
+        
+    }//GEN-LAST:event_SetSelectedItem
     
-     public void SetSelectedItem(javax.swing.JPanel panel){
-         
-          
-          
-          for(int i=0; i<this.getComponentCount(); i++){
-              this.getComponent(i).setBackground(new Color(174, 210, 255));
-              JPanel a = (JPanel) this.getComponent(i);
-              a.getComponent(0).setForeground( new Color(51,0,102));
-          }
-          panel.setBackground(new Color(119, 82, 254));
-          panel.getComponent(0).setForeground(Color.WHITE);
-          
+    
+
+     public void SetSelectedItem(javax.swing.JPanel pnl){
+        pnl.setBackground(new Color(44, 85, 180)); // Đánh dấu khi được chọn
+        pnl.getComponent(0).setForeground(Color.WHITE);   
+
+        for (Component com : this.getComponents()) {
+            if (com instanceof JPanel && !com.equals(pnl)) {
+                com.setBackground(new Color(174, 210, 255)); // Chỉnh về màu mặc định
+                JPanel temp = (JPanel) com;
+                temp.getComponent(0).setForeground(new Color(51,0,102));
+                
+            }
+        }
+         choice_Panel = pnl;
+         repaint();
           
     }
     
     public void enterMenu(javax.swing.JPanel panel){
-        
-        if(!panel.getBackground().equals(new Color(119, 82, 254))){
+        if (!choice_Panel.equals(panel)){
             panel.setBackground(new Color(142, 143, 250));
             panel.getComponent(0).setForeground(Color.WHITE);
         }
@@ -392,47 +348,14 @@ public class SideBarXuLy extends javax.swing.JPanel {
     
 
     public void exitMenu(javax.swing.JPanel panel){
-        
-        if(!panel.getBackground().equals(new Color(119, 82, 254))){
+        if (!choice_Panel.equals(panel)){
             panel.setBackground(new Color(174, 210, 255));
             panel.getComponent(0).setForeground( new Color(51,0,102));
         }
         repaint();
         
     }
-    
-//    private void clickedMenu(java.awt.event.MouseEvent evt) {                             
-//        if (evt.getSource().equals(home)){
-//            clickMenuUnderline(0);
-//        }
-//        else if (evt.getSource().equals(room)){
-//            clickMenuUnderline(1);
-//        }
-//        else if (evt.getSource().equals(search)){
-//            clickMenuUnderline(2);
-//        }
-//        else if (evt.getSource().equals(statistical)){
-//            clickMenuUnderline(3);
-//        }
-//        else if (evt.getSource().equals(manage)){
-//            clickMenuUnderline(4);
-//        }
-//    }                            
-//    
-//    public int clickMenuUnderline(int index){
-//            GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
-//            gridBagConstraints.gridx = index;
-//            gridBagConstraints.gridy = 0;
-//            gridBagConstraints.gridheight = 2;
-//            gridBagConstraints.ipady = 4;
-//            gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
-//            rightPanel.remove(underline);
-//            rightPanel.add(underline, gridBagConstraints,0);
-//            repaint();
-//            return index;
-//    }
-    
-    protected int choice;
+    private javax.swing.JPanel choice_Panel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ItemNhanPhong;
     private javax.swing.JPanel itemDanhSachPhong;
