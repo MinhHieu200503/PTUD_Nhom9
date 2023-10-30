@@ -87,7 +87,6 @@ public class SideBarXuLy extends javax.swing.JPanel {
 
         itemDatPhongNgay.setBackground(new java.awt.Color(174, 210, 255));
         itemDatPhongNgay.setForeground(new java.awt.Color(174, 210, 255));
-        itemDatPhongNgay.setPreferredSize(new java.awt.Dimension(300, 76));
         itemDatPhongNgay.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 SelectItem(evt);
@@ -295,7 +294,7 @@ public class SideBarXuLy extends javax.swing.JPanel {
                 .addComponent(itemGoiDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(itemTraPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleDescription("");
