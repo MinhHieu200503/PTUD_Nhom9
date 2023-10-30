@@ -4,15 +4,17 @@
  */
 package smallPanel;
 
-import gui.GD_QuanLi_Panel;
-import gui.GD_TraCuu_Panel;
+import gui.GD_QuanLi;
+import gui.GD_TraCuu;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Panel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -28,8 +30,8 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         //Tạo Luồng Để run() thread được Implements với Runnable
         thread = new Thread(this);
         thread.start();
-        
         initComponents();
+        clickMenuUnderline(home);
     }
     public  void run(){
         try {
@@ -74,17 +76,21 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         name_Account = new javax.swing.JLabel();
         time_Account = new javax.swing.JLabel();
         rightPanel = new javax.swing.JPanel();
-        underline = new javax.swing.JPanel();
         home = new javax.swing.JPanel();
         label_TrangChu = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         room = new javax.swing.JPanel();
         label_XuLy = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         search = new javax.swing.JPanel();
         label_TraCuu = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         statistical = new javax.swing.JPanel();
         label_ThongKe = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
         manage = new javax.swing.JPanel();
         label_QuanLy = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
         add = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -140,37 +146,13 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         jPanel1.add(leftPanel);
 
         rightPanel.setBackground(new java.awt.Color(40, 77, 133));
+        rightPanel.setAlignmentX(0.0F);
         rightPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         rightPanel.setMaximumSize(new java.awt.Dimension(944, 66));
         rightPanel.setMinimumSize(new java.awt.Dimension(944, 66));
         rightPanel.setPreferredSize(new java.awt.Dimension(944, 66));
         rightPanel.setRequestFocusEnabled(false);
         rightPanel.setLayout(new java.awt.GridBagLayout());
-
-        underline.setBackground(new java.awt.Color(0, 204, 255));
-        underline.setMaximumSize(new java.awt.Dimension(191, 3));
-        underline.setMinimumSize(new java.awt.Dimension(191, 3));
-        underline.setPreferredSize(new java.awt.Dimension(191, 3));
-        underline.setRequestFocusEnabled(false);
-
-        javax.swing.GroupLayout underlineLayout = new javax.swing.GroupLayout(underline);
-        underline.setLayout(underlineLayout);
-        underlineLayout.setHorizontalGroup(
-            underlineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 191, Short.MAX_VALUE)
-        );
-        underlineLayout.setVerticalGroup(
-            underlineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 7, Short.MAX_VALUE)
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipady = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
-        rightPanel.add(underline, gridBagConstraints);
 
         home.setBackground(new java.awt.Color(40, 77, 133));
         home.setMaximumSize(new java.awt.Dimension(191, 66));
@@ -187,7 +169,9 @@ public class navBar extends javax.swing.JPanel implements Runnable{
                 exitedMenu(evt);
             }
         });
+        home.setLayout(new java.awt.GridBagLayout());
 
+        label_TrangChu.setBackground(new java.awt.Color(204, 255, 51));
         label_TrangChu.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         label_TrangChu.setForeground(new java.awt.Color(255, 255, 255));
         label_TrangChu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -197,21 +181,35 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         label_TrangChu.setMaximumSize(new java.awt.Dimension(191, 66));
         label_TrangChu.setMinimumSize(new java.awt.Dimension(191, 66));
         label_TrangChu.setPreferredSize(new java.awt.Dimension(191, 66));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        home.add(label_TrangChu, gridBagConstraints);
 
-        javax.swing.GroupLayout homeLayout = new javax.swing.GroupLayout(home);
-        home.setLayout(homeLayout);
-        homeLayout.setHorizontalGroup(
-            homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(homeLayout.createSequentialGroup()
-                .addComponent(label_TrangChu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        jPanel2.setBackground(new java.awt.Color(0, 204, 255));
+        jPanel2.setMaximumSize(new java.awt.Dimension(191, 5));
+        jPanel2.setMinimumSize(new java.awt.Dimension(191, 5));
+        jPanel2.setPreferredSize(new java.awt.Dimension(191, 5));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 191, Short.MAX_VALUE)
         );
-        homeLayout.setVerticalGroup(
-            homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homeLayout.createSequentialGroup()
-                .addComponent(label_TrangChu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 5, Short.MAX_VALUE)
         );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
+        home.add(jPanel2, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -233,6 +231,7 @@ public class navBar extends javax.swing.JPanel implements Runnable{
                 exitedMenu(evt);
             }
         });
+        room.setLayout(new java.awt.GridBagLayout());
 
         label_XuLy.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         label_XuLy.setForeground(new java.awt.Color(255, 255, 255));
@@ -244,17 +243,36 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         label_XuLy.setMaximumSize(null);
         label_XuLy.setMinimumSize(null);
         label_XuLy.setPreferredSize(new java.awt.Dimension(191, 66));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.ipady = 26;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        room.add(label_XuLy, gridBagConstraints);
 
-        javax.swing.GroupLayout roomLayout = new javax.swing.GroupLayout(room);
-        room.setLayout(roomLayout);
-        roomLayout.setHorizontalGroup(
-            roomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(label_XuLy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jPanel3.setBackground(new java.awt.Color(0, 204, 255));
+        jPanel3.setMaximumSize(new java.awt.Dimension(191, 5));
+        jPanel3.setMinimumSize(new java.awt.Dimension(191, 5));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 191, Short.MAX_VALUE)
         );
-        roomLayout.setVerticalGroup(
-            roomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(label_XuLy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 5, Short.MAX_VALUE)
         );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 0, 0);
+        room.add(jPanel3, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_END;
@@ -275,6 +293,7 @@ public class navBar extends javax.swing.JPanel implements Runnable{
                 exitedMenu(evt);
             }
         });
+        search.setLayout(new java.awt.GridBagLayout());
 
         label_TraCuu.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         label_TraCuu.setForeground(new java.awt.Color(255, 255, 255));
@@ -284,21 +303,34 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         label_TraCuu.setMaximumSize(new java.awt.Dimension(191, 66));
         label_TraCuu.setMinimumSize(new java.awt.Dimension(191, 66));
         label_TraCuu.setPreferredSize(new java.awt.Dimension(191, 66));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
+        search.add(label_TraCuu, gridBagConstraints);
 
-        javax.swing.GroupLayout searchLayout = new javax.swing.GroupLayout(search);
-        search.setLayout(searchLayout);
-        searchLayout.setHorizontalGroup(
-            searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(searchLayout.createSequentialGroup()
-                .addComponent(label_TraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+        jPanel4.setBackground(new java.awt.Color(0, 204, 255));
+        jPanel4.setMaximumSize(new java.awt.Dimension(191, 5));
+        jPanel4.setMinimumSize(new java.awt.Dimension(191, 5));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 191, Short.MAX_VALUE)
         );
-        searchLayout.setVerticalGroup(
-            searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(searchLayout.createSequentialGroup()
-                .addComponent(label_TraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 5, Short.MAX_VALUE)
         );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 0, 0);
+        search.add(jPanel4, gridBagConstraints);
 
         rightPanel.add(search, new java.awt.GridBagConstraints());
 
@@ -317,6 +349,7 @@ public class navBar extends javax.swing.JPanel implements Runnable{
                 exitedMenu(evt);
             }
         });
+        statistical.setLayout(new java.awt.GridBagLayout());
 
         label_ThongKe.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         label_ThongKe.setForeground(new java.awt.Color(255, 255, 255));
@@ -326,27 +359,34 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         label_ThongKe.setMaximumSize(new java.awt.Dimension(191, 66));
         label_ThongKe.setMinimumSize(new java.awt.Dimension(191, 66));
         label_ThongKe.setPreferredSize(new java.awt.Dimension(191, 66));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        statistical.add(label_ThongKe, gridBagConstraints);
 
-        javax.swing.GroupLayout statisticalLayout = new javax.swing.GroupLayout(statistical);
-        statistical.setLayout(statisticalLayout);
-        statisticalLayout.setHorizontalGroup(
-            statisticalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel5.setBackground(new java.awt.Color(0, 204, 255));
+        jPanel5.setMaximumSize(new java.awt.Dimension(191, 5));
+        jPanel5.setMinimumSize(new java.awt.Dimension(191, 5));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 191, Short.MAX_VALUE)
-            .addGroup(statisticalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(statisticalLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(label_ThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
-        statisticalLayout.setVerticalGroup(
-            statisticalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 66, Short.MAX_VALUE)
-            .addGroup(statisticalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(statisticalLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(label_ThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 5, Short.MAX_VALUE)
         );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 0, 0);
+        statistical.add(jPanel5, gridBagConstraints);
 
         rightPanel.add(statistical, new java.awt.GridBagConstraints());
 
@@ -365,6 +405,7 @@ public class navBar extends javax.swing.JPanel implements Runnable{
                 exitedMenu(evt);
             }
         });
+        manage.setLayout(new java.awt.GridBagLayout());
 
         label_QuanLy.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         label_QuanLy.setForeground(new java.awt.Color(255, 255, 255));
@@ -374,27 +415,34 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         label_QuanLy.setMaximumSize(new java.awt.Dimension(191, 66));
         label_QuanLy.setMinimumSize(new java.awt.Dimension(191, 66));
         label_QuanLy.setPreferredSize(new java.awt.Dimension(191, 66));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        manage.add(label_QuanLy, gridBagConstraints);
 
-        javax.swing.GroupLayout manageLayout = new javax.swing.GroupLayout(manage);
-        manage.setLayout(manageLayout);
-        manageLayout.setHorizontalGroup(
-            manageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel6.setBackground(new java.awt.Color(0, 204, 255));
+        jPanel6.setMaximumSize(new java.awt.Dimension(191, 5));
+        jPanel6.setMinimumSize(new java.awt.Dimension(191, 5));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 191, Short.MAX_VALUE)
-            .addGroup(manageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(manageLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(label_QuanLy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
-        manageLayout.setVerticalGroup(
-            manageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 66, Short.MAX_VALUE)
-            .addGroup(manageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(manageLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(label_QuanLy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 5, Short.MAX_VALUE)
         );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
+        gridBagConstraints.insets = new java.awt.Insets(30, 0, 0, 0);
+        manage.add(jPanel6, gridBagConstraints);
 
         rightPanel.add(manage, new java.awt.GridBagConstraints());
 
@@ -409,106 +457,74 @@ public class navBar extends javax.swing.JPanel implements Runnable{
     }// </editor-fold>//GEN-END:initComponents
 
     private void enteredMenu(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enteredMenu
-        Object a = evt.getSource();
-        if (a.equals(home)){
-            enterMenu(home);
-        }
-        else if (a.equals(room)){
-            enterMenu(room);
-        }
-        else if (a.equals(search)){
-            enterMenu(search);
-        }
-        else if (a.equals(statistical)){
-            enterMenu(statistical);
-        }
-        else if (a.equals(manage)){
-            enterMenu(manage);
-        }
-        
+        enterMenu((JPanel) evt.getSource());
     }//GEN-LAST:event_enteredMenu
 
     public void enterMenu(javax.swing.JPanel panel){
-        underline.setBackground(new Color(0, 204, 255));
+
         panel.setBackground(new Color(40,94,178));
         repaint();
+        
         
     }
     
     
     private void exitedMenu(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitedMenu
-        Object a = evt.getSource();
-        if (a.equals(home)){
-            exitMenu(home);
-        }
-        else if (a.equals(room)){
-            exitMenu(room);
-        }
-        else if (a.equals(search)){
-            exitMenu(search);
-        }
-        else if (a.equals(statistical)){
-            exitMenu(statistical);
-        }
-        else if (a.equals(manage)){
-            exitMenu(manage);
-        }
+        exitMenu((JPanel) evt.getSource());
     }//GEN-LAST:event_exitedMenu
     
     public void exitMenu(javax.swing.JPanel panel){
         panel.setBackground(new Color(40,77,133));
-         underline.setBackground(new Color(0, 204, 255));
         repaint();
     }
     
     private void clickedMenu(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickedMenu
         Object a = evt.getSource();
-        
+        clickMenuUnderline((JPanel) a);
         if (a.equals(home)){
-            clickMenuUnderline(0);
+            
         }
         else if (a.equals(room)){
-            clickMenuUnderline(1);
+            this.remove(1);
+            this.add(new SideBarXuLy());
         }
         else if (a.equals(search)){
-            clickMenuUnderline(2);
             this.remove(1);
-            this.add(new GD_TraCuu_Panel());
+            this.add(new GD_TraCuu().getContentPane());
         }
         else if (a.equals(statistical)){
-            clickMenuUnderline(3);
+            
         }
         else if (a.equals(manage)){
-            clickMenuUnderline(4);
             this.remove(1);
-            this.add(new GD_QuanLi_Panel());
+            this.add(new GD_QuanLi().getContentPane());
         }
         repaint();
     }//GEN-LAST:event_clickedMenu
-    
-    public void clickMenuUnderline(int index){
-            rightPanel.remove(underline);
-            GridBagConstraints gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = index;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.gridheight = 2;
-            gridBagConstraints.ipady = 4;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
-            
-            rightPanel.add(underline, gridBagConstraints,0);
+
+    public void clickMenuUnderline(JPanel panel){
+        panel.getComponent(1).setVisible(true);
+        
+            for (Component a: rightPanel.getComponents()){
+                JPanel temp = (JPanel) a;
+                if(!temp.equals(panel)){
+                    temp.getComponent(1).setVisible(false);
+                }
+            }
+        choice = panel;
             repaint();
     }
-    
-    
- 
-
-
-
+    private javax.swing.JPanel choice;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel add;
     private javax.swing.JPanel home;
     private javax.swing.JLabel icon_Account;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel label_QuanLy;
     private javax.swing.JLabel label_ThongKe;
     private javax.swing.JLabel label_TraCuu;
@@ -522,7 +538,6 @@ public class navBar extends javax.swing.JPanel implements Runnable{
     private javax.swing.JPanel search;
     private javax.swing.JPanel statistical;
     private javax.swing.JLabel time_Account;
-    private javax.swing.JPanel underline;
     private javax.swing.JPanel userPanel;
     // End of variables declaration//GEN-END:variables
     private Thread thread = null; // khởi tạo luồng
