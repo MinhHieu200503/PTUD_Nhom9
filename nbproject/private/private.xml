@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>src/smallPanel/SideBarXuLy.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>315</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/17d/Ptud/doan/PTUD_Nhom9/src/gui/GD_TraCuu.java</file>
-            <file>file:/D:/17d/Ptud/doan/PTUD_Nhom9/src/gui/GD_TraCuu_DichVu.java</file>
-            <file>file:/D:/17d/Ptud/doan/PTUD_Nhom9/src/dao/I_CRUD.java</file>
-            <file>file:/D:/17d/Ptud/doan/PTUD_Nhom9/src/dao/DAO_DichVu.java</file>
+
+            <file>file:/D:/PTUD/PTUD_Nhom9/src/smallPanel/navBar.java</file>
+
         </group>
     </open-files>
 </project-private>
