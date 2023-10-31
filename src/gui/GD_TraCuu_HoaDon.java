@@ -69,11 +69,6 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame {
         tf_TraCuu.setFont(new java.awt.Font("Segoe UI", 0, 27)); // NOI18N
         tf_TraCuu.setToolTipText("");
         tf_TraCuu.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153), 2, true));
-        tf_TraCuu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_TraCuuActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlThongTinTraCuuLayout = new javax.swing.GroupLayout(pnlThongTinTraCuu);
         pnlThongTinTraCuu.setLayout(pnlThongTinTraCuuLayout);
@@ -192,10 +187,6 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tf_TraCuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_TraCuuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_TraCuuActionPerformed
 
     private void btn_xemChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xemChiTietActionPerformed
         // TODO add your handling code here:

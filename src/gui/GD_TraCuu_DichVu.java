@@ -4,6 +4,11 @@
  */
 package gui;
 
+import dao.DAO_DichVu;
+import entity.DichVu;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author quang
@@ -15,6 +20,8 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame {
      */
     public GD_TraCuu_DichVu() {
         initComponents();
+        model = (DefaultTableModel) table_TraCuu.getModel();
+        loadTable(daodv.getAll(DichVu.class));
     }
 
     /**
@@ -86,9 +93,9 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame {
         tf_TraCuu.setFont(new java.awt.Font("Segoe UI", 0, 27)); // NOI18N
         tf_TraCuu.setToolTipText("");
         tf_TraCuu.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153), 2, true));
-        tf_TraCuu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_TraCuuActionPerformed(evt);
+        tf_TraCuu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_TraCuuKeyReleased(evt);
             }
         });
 
@@ -132,11 +139,18 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         table_TraCuu.setGridColor(new java.awt.Color(153, 153, 153));
@@ -210,13 +224,15 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tf_TraCuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_TraCuuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_TraCuuActionPerformed
-
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_editActionPerformed
+
+    private void tf_TraCuuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_TraCuuKeyReleased
+        // TODO add your handling code here:
+        dsdv = daodv.search(tf_TraCuu.getText().trim(), DichVu.class);
+        loadTable(dsdv);
+    }//GEN-LAST:event_tf_TraCuuKeyReleased
 
     /**
      * @param args the command line arguments
@@ -252,7 +268,22 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame {
             }
         });
     }
-
+    private void loadTable(ArrayList<DichVu> ds) {
+        model.setRowCount(0);
+        dsdv.forEach(e -> {
+            String id = e.getMaDichVu();
+            String ten = e.getTenDichVu();
+            String gia = e.getGia() + "";
+            String soLuong = e.getSoLuong() + "";
+            String trangThai = e.getTrangThai() + "";
+            String mota = e.getMoTa();
+            String[] row = {id, ten, gia, soLuong, trangThai, mota};
+            model.addRow(row);
+        });
+    }
+    private DAO_DichVu daodv = new DAO_DichVu();
+    private ArrayList<DichVu> dsdv = daodv.getAll(DichVu.class);
+    private DefaultTableModel model;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_edit;
     private javax.swing.JScrollPane jScrollPane1;
