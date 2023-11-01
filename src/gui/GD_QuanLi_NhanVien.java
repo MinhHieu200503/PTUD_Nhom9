@@ -4,17 +4,26 @@
  */
 package gui;
 
+import dao.DAO_NhanVien;
+import entity.NhanVien;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
- * @author quang
+ * @author quang 
  */
-public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
+public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_QuanLi<NhanVien>{
 
     /**
      * Creates new form GD_QuanLiNhanVien
      */
     public GD_QuanLi_NhanVien() {
         initComponents();
+        model = (DefaultTableModel) tbl_danhSach.getModel();
+//        setEnableInput(false, jPanel2);
+        loadTable(daonv.getAll(NhanVien.class), model);
+        
     }
 
     /**
@@ -53,6 +62,9 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         cb_trangThai = new javax.swing.JComboBox<>();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        tf_gmail = new javax.swing.JTextField();
         jPanel14 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -81,12 +93,12 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
         jPanel1.setPreferredSize(new java.awt.Dimension(1920, 763));
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 10, 10, 10));
 
         jPanel2.setPreferredSize(new java.awt.Dimension(290, 1141));
-        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 7));
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 5));
 
-        jPanel3.setPreferredSize(new java.awt.Dimension(283, 75));
+        jPanel3.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel3.setLayout(new java.awt.BorderLayout(0, 5));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -105,6 +117,9 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
 
         jPanel2.add(jPanel3);
 
+        jPanel6.setMaximumSize(new java.awt.Dimension(281, 75));
+        jPanel6.setMinimumSize(new java.awt.Dimension(281, 75));
+        jPanel6.setPreferredSize(new java.awt.Dimension(280, 83));
         jPanel6.setLayout(new java.awt.BorderLayout(0, 5));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -113,7 +128,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
 
         tf_ten.setBackground(new java.awt.Color(142, 172, 207));
         tf_ten.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        tf_ten.setText("Nguyễn Hồ Đăng Quang");
+        tf_ten.setText("gg");
         jPanel6.add(tf_ten, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(jPanel6);
@@ -125,6 +140,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
         jLabel3.setText("Ngày sinh:");
         jPanel7.add(jLabel3, java.awt.BorderLayout.NORTH);
 
+        datechooser_ngaySinh.setDateFormatString("yyyy/MM/dd");
         datechooser_ngaySinh.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         datechooser_ngaySinh.setPreferredSize(new java.awt.Dimension(160, 38));
         jPanel7.add(datechooser_ngaySinh, java.awt.BorderLayout.CENTER);
@@ -145,20 +161,23 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
 
         jPanel2.add(jPanel8);
 
-        jPanel9.setPreferredSize(new java.awt.Dimension(281, 75));
-        jPanel9.setLayout(new java.awt.BorderLayout(0, 5));
+        jPanel9.setMinimumSize(new java.awt.Dimension(141, 46));
+        jPanel9.setPreferredSize(new java.awt.Dimension(281, 47));
+        jPanel9.setLayout(new java.awt.BorderLayout());
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel5.setText("CMND:");
-        jPanel9.add(jLabel5, java.awt.BorderLayout.NORTH);
+        jPanel9.add(jLabel5, java.awt.BorderLayout.WEST);
 
         tf_cmnd.setBackground(new java.awt.Color(142, 172, 207));
         tf_cmnd.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        tf_cmnd.setText("g");
+        tf_cmnd.setPreferredSize(new java.awt.Dimension(200, 38));
         jPanel9.add(tf_cmnd, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(jPanel9);
 
-        jPanel10.setPreferredSize(new java.awt.Dimension(281, 75));
+        jPanel10.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel10.setLayout(new java.awt.BorderLayout(0, 5));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -176,7 +195,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
 
         jPanel2.add(jPanel10);
 
-        jPanel11.setPreferredSize(new java.awt.Dimension(281, 75));
+        jPanel11.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel11.setLayout(new java.awt.BorderLayout(0, 5));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -213,6 +232,24 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
 
         jPanel2.add(jPanel13);
 
+        jPanel12.setPreferredSize(new java.awt.Dimension(281, 47));
+        jPanel12.setLayout(new java.awt.BorderLayout(0, 5));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel8.setText("gmail:");
+        jPanel12.add(jLabel8, java.awt.BorderLayout.WEST);
+
+        tf_gmail.setBackground(new java.awt.Color(142, 172, 207));
+        tf_gmail.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        tf_gmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_gmailActionPerformed(evt);
+            }
+        });
+        jPanel12.add(tf_gmail, java.awt.BorderLayout.CENTER);
+
+        jPanel2.add(jPanel12);
+
         jPanel14.setPreferredSize(new java.awt.Dimension(281, 38));
         jPanel14.setLayout(new java.awt.BorderLayout(0, 5));
 
@@ -222,7 +259,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
 
         jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân viên", "Quản lí", " " }));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(160, 38));
+        jComboBox1.setPreferredSize(new java.awt.Dimension(161, 38));
         jPanel14.add(jComboBox1, java.awt.BorderLayout.EAST);
 
         jPanel2.add(jPanel14);
@@ -243,10 +280,10 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 204));
         jSeparator1.setForeground(new java.awt.Color(0, 0, 204));
-        jSeparator1.setPreferredSize(new java.awt.Dimension(281, 5));
+        jSeparator1.setPreferredSize(new java.awt.Dimension(281, 3));
         jPanel2.add(jSeparator1);
 
-        jPanel17.setPreferredSize(new java.awt.Dimension(281, 75));
+        jPanel17.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel17.setLayout(new java.awt.BorderLayout(0, 5));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -279,26 +316,38 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
 
         tbl_danhSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {".....", "Nguyễn Hồ Đăng Quang", "12/12/2023", "Nam", "0722", "VN", "123", "Đang làm", "Nhân viên", "Sáng"},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {".....", "Nguyễn Hồ Đăng Quang", "12/12/2023", "Nam", "0722", "VN", "123", "Đang làm", null, "Nhân viên", "Sáng"},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã nhân viên", "Tên nhân viên", "Ngày sinh", "Giới tính", "CMND", "Địa chỉ", "Số điện thoại", "Trạng thái", "Chức vụ", "Ca"
+                "Mã nhân viên", "Tên nhân viên", "Ngày sinh", "Giới tính", "CMND", "Địa chỉ", "Số điện thoại", "Trạng thái", "gmail", "Chức vụ", "Ca"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         tbl_danhSach.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbl_danhSach.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbl_danhSach.getTableHeader().setReorderingAllowed(false);
+        tbl_danhSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_danhSachMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbl_danhSach);
 
         jPanel19.add(jScrollPane2, java.awt.BorderLayout.CENTER);
@@ -420,6 +469,16 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_xoaTrangActionPerformed
 
+    private void tf_gmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_gmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_gmailActionPerformed
+
+    private void tbl_danhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_danhSachMouseClicked
+        // TODO add your handling code here:
+        int i = tbl_danhSach.getSelectedRow();
+        showDetailInput(jPanel2, model, i);
+    }//GEN-LAST:event_tbl_danhSachMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -455,7 +514,10 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
             }
         });
     }
-
+    private DAO_NhanVien daonv = new DAO_NhanVien();
+    private ArrayList<NhanVien> dsnv = daonv.getAll(NhanVien.class);
+    private DefaultTableModel model;
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_luu;
     private javax.swing.JButton btn_sua;
@@ -477,10 +539,12 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
@@ -502,6 +566,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame {
     private javax.swing.JTable tbl_danhSach;
     private javax.swing.JTextField tf_cmnd;
     private javax.swing.JTextField tf_diaChi;
+    private javax.swing.JTextField tf_gmail;
     private javax.swing.JTextField tf_id;
     private javax.swing.JTextField tf_phone;
     private javax.swing.JTextField tf_ten;
