@@ -55,6 +55,8 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1650, 964));
+        setMinimumSize(new java.awt.Dimension(1650, 964));
 
         pnlMain.setPreferredSize(new java.awt.Dimension(1650, 964));
         pnlMain.setLayout(new java.awt.BorderLayout());

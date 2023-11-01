@@ -39,6 +39,7 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame {
         btn_xemChiTiet = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1650, 964));
 
         pnlMain.setPreferredSize(new java.awt.Dimension(1650, 964));
         pnlMain.setLayout(new java.awt.BorderLayout());
