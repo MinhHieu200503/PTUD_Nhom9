@@ -41,6 +41,8 @@ public class GD_TraCuu_Phong extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        pnlMain.setMaximumSize(new java.awt.Dimension(1650, 964));
+        pnlMain.setMinimumSize(new java.awt.Dimension(1650, 964));
         pnlMain.setPreferredSize(new java.awt.Dimension(1650, 964));
         pnlMain.setLayout(new java.awt.BorderLayout());
 
