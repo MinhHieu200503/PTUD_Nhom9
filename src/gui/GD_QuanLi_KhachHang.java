@@ -58,7 +58,7 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame {
         jPanel11.setPreferredSize(new java.awt.Dimension(290, 1141));
         jPanel11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 7));
 
-        jPanel12.setPreferredSize(new java.awt.Dimension(283, 75));
+        jPanel12.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel12.setLayout(new java.awt.BorderLayout(0, 5));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -77,6 +77,7 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame {
 
         jPanel11.add(jPanel12);
 
+        jPanel13.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel13.setLayout(new java.awt.BorderLayout(0, 5));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
