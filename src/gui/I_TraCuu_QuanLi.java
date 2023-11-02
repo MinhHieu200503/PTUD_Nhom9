@@ -140,10 +140,10 @@ public interface I_TraCuu_QuanLi<T> {
             if (c instanceof JPanel) { // bỏ cái này bị dính lỗi JSeparator
                 Component c1 = ((JPanel) c).getComponent(1);
                 // nếu là panel con đầu tiên thì không cho chỉnh
-                if (i++ == 0) {
-                    ((JTextField) c1).setEditable(false);
-                    continue;
-                }
+//                if (i++ == 0) {
+//                    ((JTextField) c1).setEditable(false);
+//                    continue;
+//                }
                 if (c1 instanceof JTextField || c1 instanceof JTextArea || c1 instanceof JPasswordField) {
                     ((JTextComponent) c1).setEditable(b);
                 } else {

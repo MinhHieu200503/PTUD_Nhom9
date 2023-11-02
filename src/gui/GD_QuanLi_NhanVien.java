@@ -7,11 +7,22 @@ package gui;
 import dao.DAO_Ca;
 import dao.DAO_ChucVu;
 import dao.DAO_NhanVien;
+import dao.DAO_TaiKhoan;
+import dao.I_CRUD;
 import entity.Ca;
 import entity.ChucVu;
 import entity.NhanVien;
+import entity.TaiKhoan;
+import java.awt.Font;
+import java.awt.event.MouseListener;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -137,7 +148,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         jLabel3.setText("Ngày sinh:");
         jPanel7.add(jLabel3, java.awt.BorderLayout.NORTH);
 
-        datechooser_ngaySinh.setDateFormatString("yyyy/MM/dd");
+        datechooser_ngaySinh.setDateFormatString("yyyy-MM-dd");
         datechooser_ngaySinh.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         datechooser_ngaySinh.setPreferredSize(new java.awt.Dimension(160, 38));
         jPanel7.add(datechooser_ngaySinh, java.awt.BorderLayout.CENTER);
@@ -297,10 +308,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
 
         tbl_danhSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {".....", "Nguyễn Hồ Đăng Quang", "12/12/2023", "Nam", "0722", "VN", "123", "Đang làm", null, "Nhân viên", "Sáng"},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Mã nhân viên", "Tên nhân viên", "Ngày sinh", "Giới tính", "CMND", "Địa chỉ", "Số điện thoại", "Trạng thái", "gmail", "Chức vụ", "Ca"
@@ -330,6 +338,14 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
             }
         });
         jScrollPane2.setViewportView(tbl_danhSach);
+        tbl_danhSach.setRowHeight(35);
+        // Chỉnh font cho header
+        JTableHeader header = tbl_danhSach.getTableHeader();
+        header.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        // Căn lề cho header
+        TableCellRenderer rendererFromHeader = header.getDefaultRenderer();
+        JLabel headerLabel = (JLabel) rendererFromHeader;
+        headerLabel.setHorizontalAlignment(JLabel.CENTER);
 
         jPanel19.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
@@ -346,7 +362,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         btn_them.setText("Thêm");
         btn_them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_themActionPerformed(evt);
+                ActionPerformed(evt);
             }
         });
         jPanel20.add(btn_them);
@@ -358,7 +374,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         btn_sua.setText("Sửa");
         btn_sua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_suaActionPerformed(evt);
+                ActionPerformed(evt);
             }
         });
         jPanel20.add(btn_sua);
@@ -368,9 +384,10 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         btn_luu.setForeground(new java.awt.Color(255, 255, 255));
         btn_luu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_save30.png"))); // NOI18N
         btn_luu.setText("Lưu");
+        btn_luu.setEnabled(false);
         btn_luu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_luuActionPerformed(evt);
+                ActionPerformed(evt);
             }
         });
         jPanel20.add(btn_luu);
@@ -380,9 +397,10 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         btn_xoaTrang.setForeground(new java.awt.Color(255, 255, 255));
         btn_xoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_clear30.png"))); // NOI18N
         btn_xoaTrang.setText("Xoá trắng");
+        btn_xoaTrang.setEnabled(false);
         btn_xoaTrang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_xoaTrangActionPerformed(evt);
+                ActionPerformed(evt);
             }
         });
         jPanel20.add(btn_xoaTrang);
@@ -418,27 +436,158 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_themActionPerformed
-
-    private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_suaActionPerformed
-
-    private void btn_luuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_luuActionPerformed
-
-    private void btn_xoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaTrangActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_xoaTrangActionPerformed
-
     private void tbl_danhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_danhSachMouseClicked
         // TODO add your handling code here:
         int i = tbl_danhSach.getSelectedRow();
         showDetailInput(jPanel2, model, i);
     }//GEN-LAST:event_tbl_danhSachMouseClicked
+
+    private void ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActionPerformed
+        // TODO add your handling code here:
+        Object o = evt.getSource();
+        if (o.equals(btn_them)) {
+            clearInput(jPanel2);
+            if (btn_them.getText().equals("Thêm")) {
+                tbl_danhSach.clearSelection();
+                tbl_danhSach.removeMouseListener(tbl_danhSach.getMouseListeners()[tbl_danhSach.getMouseListeners().length - 1]); // loại bỏ sự kiện cuối cùng
+                setEnableInput(true, jPanel2);
+                btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/chuyenPhong_huy30.png")));
+                btn_them.setText("Huỷ");
+                btn_sua.setEnabled(false);
+                btn_luu.setEnabled(true);
+                btn_xoaTrang.setEnabled(true);
+            } else {
+                clearInput(jPanel2);
+                // Thêm lại sự kiện click chuột
+                tbl_danhSach.addMouseListener(new java.awt.event.MouseAdapter() {
+                    @Override
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        tbl_danhSachMouseClicked(evt);
+                    }
+                });
+                tf_id.setText("");
+                setEnableInput(false, jPanel2);
+                btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_add30.png")));
+                btn_them.setText("Thêm");
+                btn_sua.setEnabled(true);
+                btn_luu.setEnabled(false);
+                btn_xoaTrang.setEnabled(false);
+            }
+        } else if (o.equals(btn_sua)) {
+            int r = tbl_danhSach.getSelectedRow();
+            if (r != -1) {
+                if (btn_sua.getText().equals("Sửa")) {
+                    tbl_danhSach.removeMouseListener(tbl_danhSach.getMouseListeners()[tbl_danhSach.getMouseListeners().length - 1]);
+                    setEnableInput(true, jPanel2);
+                    btn_sua.setText("Huỷ");
+                    btn_sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/chuyenPhong_huy30.png")));
+                    btn_them.setEnabled(false);
+                    btn_luu.setEnabled(true);
+                    btn_xoaTrang.setEnabled(true);
+                } else {
+                    tbl_danhSach.clearSelection();
+                    tbl_danhSach.addMouseListener(new java.awt.event.MouseAdapter() {
+                    @Override
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        tbl_danhSachMouseClicked(evt);
+                    }
+                    });
+                    clearInput(jPanel2);
+                    tf_id.setText("");
+                    setEnableInput(false, jPanel2);
+                    btn_sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_edit30.png")));
+                    btn_sua.setText("Sửa");
+                    btn_them.setEnabled(true);
+                    btn_luu.setEnabled(false);
+                    btn_xoaTrang.setEnabled(false);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Hãy chọn dòng");
+            }
+        } else if (o.equals(btn_luu)) {
+            if (btn_them.getText().equals("Huỷ")) {
+                if (true) { // để nhét regex vào
+                    String id = tf_id.getText().trim();
+                    String ten = tf_ten.getText().trim();
+                    SimpleDateFormat date = new SimpleDateFormat("yyy-MM-dd");
+                    String d = date.format(datechooser_ngaySinh.getDate());
+                    LocalDate ngaySinh = LocalDate.parse( d);
+                    boolean gioiTinh = cb_gioiTinh.getSelectedItem().toString().equals("Name");
+                    String cmnd = tf_cmnd.getText().trim();
+                    String diaChi = tf_diaChi.getText().trim();
+                    String sdt = tf_phone.getText().trim();
+                    boolean trangThai = cb_trangThai.getSelectedItem().toString().equals("Đang làm");
+                    String gmail = tf_gmail.getText().trim();
+                    ChucVu chucVu = daocv.getChucVuTheoTen(cb_chucVu.getSelectedItem().toString());
+                    Ca ca = daoca.getCaTheoTen(cb_ca.getSelectedItem().toString());
+                    
+                    NhanVien nv = new NhanVien(id, ten, ngaySinh, gioiTinh, cmnd, diaChi, sdt, trangThai, gmail,chucVu, ca);
+                    TaiKhoan tk = new TaiKhoan(sdt, String.valueOf(pf_matKhau.getPassword()), cb_chucVu.getSelectedItem().toString().equals("Quản lí"), nv);
+                    if (daonv.create(nv)&& daotk.create(tk)) {
+                        JOptionPane.showMessageDialog(this, "Thêm thành công");
+                        loadTable(daonv.getAll(NhanVien.class), model);
+                        clearInput(jPanel2);
+                        // Thêm lại sự kiện click chuột
+                        tbl_danhSach.addMouseListener(new java.awt.event.MouseAdapter() {
+                            @Override
+                            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                tbl_danhSachMouseClicked(evt);
+                            }
+                        });
+                        tf_id.setText("");
+                        setEnableInput(false, jPanel2);
+                        btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_add30.png")));
+                        btn_them.setText("Thêm");
+                        btn_sua.setEnabled(true);
+                        btn_luu.setEnabled(false);
+                        btn_xoaTrang.setEnabled(false);
+                    }
+                }
+            }
+            if (btn_sua.getText().equals("Huỷ")) {
+                if (true) {
+                    String id = tf_id.getText().trim();
+                    String ten = tf_ten.getText().trim();
+                    SimpleDateFormat date = new SimpleDateFormat("yyy-MM-dd");
+                    String d = date.format(datechooser_ngaySinh.getDate());
+                    LocalDate ngaySinh = LocalDate.parse( d);
+                    boolean gioiTinh = cb_gioiTinh.getSelectedItem().toString().equals("Name");
+                    String cmnd = tf_cmnd.getText().trim();
+                    String diaChi = tf_diaChi.getText().trim();
+                    String sdt = tf_phone.getText().trim();
+                    boolean trangThai = cb_trangThai.getSelectedItem().toString().equals("Đang làm");
+                    String gmail = tf_gmail.getText().trim();
+                    ChucVu chucVu = daocv.getChucVuTheoTen(cb_chucVu.getSelectedItem().toString());
+                    Ca ca = daoca.getCaTheoTen(cb_ca.getSelectedItem().toString());
+                    
+                    NhanVien nv = new NhanVien(id, ten, ngaySinh, gioiTinh, cmnd, diaChi, sdt, trangThai, gmail,chucVu, ca);
+                    TaiKhoan tk = new TaiKhoan(sdt, String.valueOf(pf_matKhau.getPassword()), cb_chucVu.getSelectedItem().toString().equals("Quản lí"), nv);
+                    if (daonv.update(nv) && daotk.update(tk)) {
+                        JOptionPane.showMessageDialog(this, "Sửa thành công");
+                        loadTable(daonv.getAll(NhanVien.class), model);
+                        tbl_danhSach.clearSelection();
+                        tbl_danhSach.addMouseListener(new java.awt.event.MouseAdapter() {
+                            @Override
+                            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                tbl_danhSachMouseClicked(evt);
+                            }
+                        });
+                        clearInput(jPanel2);
+                        tf_id.setText("");
+                        setEnableInput(false, jPanel2);
+                        btn_sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_edit30.png")));
+                        btn_sua.setText("Sửa");
+                        btn_them.setEnabled(true);
+                        btn_luu.setEnabled(false);
+                        btn_xoaTrang.setEnabled(false);
+                    }
+                }
+            }
+        } else if (o.equals(btn_xoaTrang)) {
+            clearInput(jPanel2);
+        }
+        
+    }//GEN-LAST:event_ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -478,6 +627,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
     private DAO_NhanVien daonv = new DAO_NhanVien();
     private DAO_ChucVu daocv = new DAO_ChucVu();
     private DAO_Ca daoca = new DAO_Ca();
+    private DAO_TaiKhoan daotk = new DAO_TaiKhoan();
     private ArrayList<NhanVien> dsnv = daonv.getAll(NhanVien.class);
     private DefaultTableModel model;
 
