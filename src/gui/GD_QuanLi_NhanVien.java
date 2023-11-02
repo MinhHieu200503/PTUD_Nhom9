@@ -4,7 +4,11 @@
  */
 package gui;
 
+import dao.DAO_Ca;
+import dao.DAO_ChucVu;
 import dao.DAO_NhanVien;
+import entity.Ca;
+import entity.ChucVu;
 import entity.NhanVien;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +25,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
     public GD_QuanLi_NhanVien() {
         initComponents();
         model = (DefaultTableModel) tbl_danhSach.getModel();
-//        setEnableInput(false, jPanel2);
+        setEnableInput(false, jPanel2);
         loadTable(daonv.getAll(NhanVien.class), model);
         
     }
@@ -67,7 +71,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         tf_gmail = new javax.swing.JTextField();
         jPanel14 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cb_chucVu = new javax.swing.JComboBox<>();
         jPanel15 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         cb_ca = new javax.swing.JComboBox<>();
@@ -107,12 +111,6 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
 
         tf_id.setBackground(new java.awt.Color(142, 172, 207));
         tf_id.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        tf_id.setText(".......");
-        tf_id.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_idActionPerformed(evt);
-            }
-        });
         jPanel3.add(tf_id, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(jPanel3);
@@ -128,7 +126,6 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
 
         tf_ten.setBackground(new java.awt.Color(142, 172, 207));
         tf_ten.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        tf_ten.setText("gg");
         jPanel6.add(tf_ten, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(jPanel6);
@@ -155,7 +152,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         jPanel8.add(jLabel4, java.awt.BorderLayout.WEST);
 
         cb_gioiTinh.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        cb_gioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ", " " }));
+        cb_gioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
         cb_gioiTinh.setPreferredSize(new java.awt.Dimension(160, 38));
         jPanel8.add(cb_gioiTinh, java.awt.BorderLayout.EAST);
 
@@ -171,7 +168,6 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
 
         tf_cmnd.setBackground(new java.awt.Color(142, 172, 207));
         tf_cmnd.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        tf_cmnd.setText("g");
         tf_cmnd.setPreferredSize(new java.awt.Dimension(200, 38));
         jPanel9.add(tf_cmnd, java.awt.BorderLayout.CENTER);
 
@@ -186,11 +182,6 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
 
         tf_diaChi.setBackground(new java.awt.Color(142, 172, 207));
         tf_diaChi.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        tf_diaChi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_diaChiActionPerformed(evt);
-            }
-        });
         jPanel10.add(tf_diaChi, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(jPanel10);
@@ -204,11 +195,6 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
 
         tf_phone.setBackground(new java.awt.Color(142, 172, 207));
         tf_phone.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        tf_phone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_phoneActionPerformed(evt);
-            }
-        });
         jPanel11.add(tf_phone, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(jPanel11);
@@ -223,11 +209,6 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         cb_trangThai.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         cb_trangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang làm", "Đã nghỉ" }));
         cb_trangThai.setPreferredSize(new java.awt.Dimension(160, 38));
-        cb_trangThai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_trangThaiActionPerformed(evt);
-            }
-        });
         jPanel13.add(cb_trangThai, java.awt.BorderLayout.EAST);
 
         jPanel2.add(jPanel13);
@@ -241,11 +222,6 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
 
         tf_gmail.setBackground(new java.awt.Color(142, 172, 207));
         tf_gmail.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        tf_gmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_gmailActionPerformed(evt);
-            }
-        });
         jPanel12.add(tf_gmail, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(jPanel12);
@@ -257,10 +233,13 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         jLabel10.setText("Chức vụ:");
         jPanel14.add(jLabel10, java.awt.BorderLayout.WEST);
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân viên", "Quản lí", " " }));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(161, 38));
-        jPanel14.add(jComboBox1, java.awt.BorderLayout.EAST);
+        cb_chucVu.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        cb_chucVu.setPreferredSize(new java.awt.Dimension(161, 38));
+        jPanel14.add(cb_chucVu, java.awt.BorderLayout.EAST);
+        ArrayList<ChucVu> dscv = daocv.getAll(ChucVu.class);
+        dscv.forEach(e -> {
+            cb_chucVu.addItem(e.getTenChucVu());
+        });
 
         jPanel2.add(jPanel14);
 
@@ -272,9 +251,12 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         jPanel15.add(jLabel11, java.awt.BorderLayout.WEST);
 
         cb_ca.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        cb_ca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sáng", "chiều", "Tối", " " }));
         cb_ca.setPreferredSize(new java.awt.Dimension(160, 38));
         jPanel15.add(cb_ca, java.awt.BorderLayout.EAST);
+        ArrayList<Ca> dsca = daoca.getAll(Ca.class);
+        dsca.forEach(e -> {
+            cb_ca.addItem(e.getTenCa());
+        });
 
         jPanel2.add(jPanel15);
 
@@ -292,7 +274,6 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
 
         pf_matKhau.setBackground(new java.awt.Color(142, 172, 207));
         pf_matKhau.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        pf_matKhau.setText("jPasswordField1");
         jPanel17.add(pf_matKhau, java.awt.BorderLayout.PAGE_END);
 
         jPanel2.add(jPanel17);
@@ -437,22 +418,6 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tf_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_idActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_idActionPerformed
-
-    private void tf_diaChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_diaChiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_diaChiActionPerformed
-
-    private void tf_phoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_phoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_phoneActionPerformed
-
-    private void cb_trangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_trangThaiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb_trangThaiActionPerformed
-
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_themActionPerformed
@@ -468,10 +433,6 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
     private void btn_xoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaTrangActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_xoaTrangActionPerformed
-
-    private void tf_gmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_gmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_gmailActionPerformed
 
     private void tbl_danhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_danhSachMouseClicked
         // TODO add your handling code here:
@@ -515,19 +476,21 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         });
     }
     private DAO_NhanVien daonv = new DAO_NhanVien();
+    private DAO_ChucVu daocv = new DAO_ChucVu();
+    private DAO_Ca daoca = new DAO_Ca();
     private ArrayList<NhanVien> dsnv = daonv.getAll(NhanVien.class);
     private DefaultTableModel model;
-   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_luu;
     private javax.swing.JButton btn_sua;
     private javax.swing.JButton btn_them;
     private javax.swing.JButton btn_xoaTrang;
     private javax.swing.JComboBox<String> cb_ca;
+    private javax.swing.JComboBox<String> cb_chucVu;
     private javax.swing.JComboBox<String> cb_gioiTinh;
     private javax.swing.JComboBox<String> cb_trangThai;
     private com.toedter.calendar.JDateChooser datechooser_ngaySinh;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -1,6 +1,7 @@
 package gui;
 
 import com.toedter.calendar.JDateChooser;
+import dao.I_CRUD;
 import java.awt.Component;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -67,11 +68,15 @@ public interface I_TraCuu_QuanLi<T> {
                             case "HoaDon":
                                 row[i] = ((HoaDon) fields[i].get(e)).getMaHoaDon();
                                 break;
-                            case "vaiTro":
-                                // nếu vai trò là 1 thì quản lí, 0 thì nhân viên
-                                row[i] = ((TaiKhoan) fields[i].get(e)).getVaiTro() == true ? "Quản lí" : "Nhân viên";
+                            case "boolean":
+                                // Nếu tên biến là gioiTinh thì lấy ra giới tính, còn không thì lấy ra trạng thái
+                                if (fields[i].getName().equals("gioiTinh")) {
+                                    row[i] = fields[i].get(e).equals(true) ? "Nam" : "Nữ";
+                                } else {
+                                    row[i] = fields[i].get(e).equals(true) ? "Đang làm" : "Đã nghỉ";
+                                }
                                 break;
-                            case "trangThai":
+                            case "int":
                                 // kiểm tra xem nó là trạng thái của phòng hay hóa đơn hay Phiếu đặt phòng hay nhân viên hay dịch vụ
                                 if (e instanceof Phong) {
                                     switch (((Phong) fields[i].get(e)).getTrangThai()) {
@@ -93,6 +98,7 @@ public interface I_TraCuu_QuanLi<T> {
                                     }
                                 } else if (e instanceof HoaDon) {
                                     row[i] = ((HoaDon) fields[i].get(e)).getTrangThai() == 1 ? "Đã thanh toán" : "Chưa thanh toán";
+                                    break;
                                 } else if (e instanceof PhieuDatPhong) {
                                     switch (((PhieuDatPhong) fields[i].get(e)).getTrangThai()) {
                                         case 0: 
@@ -105,10 +111,12 @@ public interface I_TraCuu_QuanLi<T> {
                                             row[i] = "Đang chờ";
                                             break;
                                     }
-                                } else if (e instanceof NhanVien) {
-                                    row[i] = ((NhanVien) fields[i].get(e)).getTrangThai() == true ? "Đang làm" : "Đã nghỉ";
                                 } else if (e instanceof DichVu) {
                                     row[i] = ((DichVu) fields[i].get(e)).getTrangThai() == 1 ? "Còn hàng" : "Hết hàng";
+                                    break;
+                                } else {
+                                    row[i] = fields[i].get(e);
+                                    break;
                                 }
                             default:
                                 row[i] = fields[i].get(e);
@@ -126,10 +134,16 @@ public interface I_TraCuu_QuanLi<T> {
         });
     }
     default void setEnableInput(boolean b, JPanel pnlInput) {
+        int i = 0;
         // Trong pnlInput là các panel con chứa các control nhập liệu
         for (Component c : pnlInput.getComponents()) {
             if (c instanceof JPanel) { // bỏ cái này bị dính lỗi JSeparator
                 Component c1 = ((JPanel) c).getComponent(1);
+                // nếu là panel con đầu tiên thì không cho chỉnh
+                if (i++ == 0) {
+                    ((JTextField) c1).setEditable(false);
+                    continue;
+                }
                 if (c1 instanceof JTextField || c1 instanceof JTextArea || c1 instanceof JPasswordField) {
                     ((JTextComponent) c1).setEditable(b);
                 } else {
@@ -139,8 +153,12 @@ public interface I_TraCuu_QuanLi<T> {
         }
     }
     default void clearInput(JPanel pnlInput) {
+        int i = 0;
         for (Component c : pnlInput.getComponents()) {
             if (c instanceof JPanel) {
+                if (i++ == 0) {
+                    continue;
+                }
                 Component c1 = ((JPanel) c).getComponent(1); // lấy component thứ 2 của panel
                 if (c1 instanceof JTextField || c1 instanceof JTextArea || c1 instanceof JPasswordField) {
                     ((JTextComponent) c1).setText("");
@@ -158,20 +176,38 @@ public interface I_TraCuu_QuanLi<T> {
             if (c instanceof JPanel) {
                 Component c1 = ((JPanel) c).getComponent(1);
                 if (c1 instanceof JTextField || c1 instanceof JTextArea) {
-                    ((JTextComponent) c1).setText(model.getValueAt(index, i++).toString());
+                    if (i < model.getColumnCount()) { // khắc phục lỗi indexOutOfBound của Array
+                        ((JTextComponent) c1).setText(model.getValueAt(index, i++).toString());
+              
+                    } else {
+                        ((JPasswordField) c1).setText(I_CRUD.findById(model.getValueAt(index, 6).toString(), new TaiKhoan()).getMatKhau());
+                    }
                 } else if (c1 instanceof JDateChooser) {
-                    java.util.Date date;
-                    try {
-                        date = new SimpleDateFormat("yyyy-MM-dd").parse(model.getValueAt(index, i++).toString());
-                        ((JDateChooser) c1).setDate(date);
-                    } catch (ParseException ex) {
-                        Logger.getLogger(I_TraCuu_QuanLi.class.getName()).log(Level.SEVERE, null, ex);
+                    if (i < model.getColumnCount()) {
+                        java.util.Date date;
+                        try {
+                            date = new SimpleDateFormat("yyyy-MM-dd").parse(model.getValueAt(index, i++).toString());
+                            ((JDateChooser) c1).setDate(date);
+                        } catch (ParseException ex) {
+                            Logger.getLogger(I_TraCuu_QuanLi.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        
                     }
                 } else if (c1 instanceof JComboBox) {
-                    ((JComboBox) c1).setSelectedItem(model.getValueAt(index, i++).toString());
-                } else {
-                    continue;
+                    if (i < model.getColumnCount()) {
+                        ((JComboBox) c1).setSelectedItem(model.getValueAt(index, i++));
+                    }
                 }
+//                } else if (c1 instanceof JPasswordField) { // chả hiểu sao jpasswordfield mà nó lại tính luôn là jtextfield
+//                    // Dùng hàm finbyid lấy ra mật khẩu dựa vào số điện thoại
+////                    if (i < model.getColumnCount()) {
+//                        ((JPasswordField) c1).setText(I_CRUD.findById(model.getValueAt(index, 6).toString(), new TaiKhoan()).getMatKhau());
+//                        System.out.println(2333);
+////                    }
+//                } 
+//                else {
+////                    i++;
+////                }
             }
         }
     } 
