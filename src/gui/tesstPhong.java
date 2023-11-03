@@ -114,7 +114,7 @@ public class tesstPhong extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(1080, 698));
         jPanel1.setPreferredSize(new java.awt.Dimension(1080, 698));
         jPanel1.setVerifyInputWhenFocusTarget(false);
-        jPanel1.setLayout(new java.awt.GridLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         testClick.setText("lấy all id");
         testClick.addMouseListener(new java.awt.event.MouseAdapter() {

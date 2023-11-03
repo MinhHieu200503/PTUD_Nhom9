@@ -5,7 +5,10 @@
 package gui;
 
 import ComponentCustom.FormSignIn;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.RoundRectangle2D;
+import mainFrame.mainFrame;
 
 /**
  *
@@ -23,6 +26,35 @@ public class GD_DangNhap extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         FormSignIn form = new FormSignIn();
         add(form);
+        
+        form.lblForgotPass.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                gdQuenMK = new GD_QuenMatKhau();
+                setVisible(false);
+                gdQuenMK.setVisible(true);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                
+            }
+        });
     }
 
     /**
@@ -73,6 +105,8 @@ public class GD_DangNhap extends javax.swing.JFrame {
             }
         });
     }
+    
+    public GD_QuenMatKhau gdQuenMK;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ComponentCustom.ExitButton exitButton1;
