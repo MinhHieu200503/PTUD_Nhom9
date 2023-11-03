@@ -48,7 +48,7 @@ public interface I_CRUD<T> {
         Connection con = ConnectDB.getConnection();
         System.out.println(con);
         PreparedStatement pstm = null;
-        int n = 0;
+        int n = 0; // trả về số dòng ảnh hưởng
         
         try {
             String sql = "INSERT INTO " + entity.getClass().getSimpleName() + " VALUES (";

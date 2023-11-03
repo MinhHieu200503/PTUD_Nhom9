@@ -70,7 +70,7 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(290, 1141));
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 7));
 
-        jPanel3.setPreferredSize(new java.awt.Dimension(283, 75));
+        jPanel3.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel3.setLayout(new java.awt.BorderLayout(0, 5));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -89,7 +89,7 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame {
 
         jPanel2.add(jPanel3);
 
-        jPanel6.setPreferredSize(new java.awt.Dimension(281, 75));
+        jPanel6.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel6.setLayout(new java.awt.BorderLayout(0, 5));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -153,7 +153,7 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame {
 
         jPanel2.add(jPanel15);
 
-        jPanel16.setPreferredSize(new java.awt.Dimension(281, 75));
+        jPanel16.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel16.setLayout(new java.awt.BorderLayout(0, 5));
 
         tf_gia.setBackground(new java.awt.Color(142, 172, 207));

@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author quang
  */
-public class GD_TraCuu_DichVu extends javax.swing.JFrame {
+public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_QuanLi<DichVu>{
 
     /**
      * Creates new form GD_TraCuu_DichVu
@@ -21,7 +21,7 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame {
     public GD_TraCuu_DichVu() {
         initComponents();
         model = (DefaultTableModel) table_TraCuu.getModel();
-        loadTable(daodv.getAll(DichVu.class));
+        loadTable(daodv.getAll(DichVu.class), model);
     }
 
     /**
@@ -231,7 +231,7 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame {
     private void tf_TraCuuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_TraCuuKeyReleased
         // TODO add your handling code here:
         dsdv = daodv.search(tf_TraCuu.getText().trim(), DichVu.class);
-        loadTable(dsdv);
+        loadTable(dsdv, model);
     }//GEN-LAST:event_tf_TraCuuKeyReleased
 
     /**
@@ -268,19 +268,19 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame {
             }
         });
     }
-    private void loadTable(ArrayList<DichVu> ds) {
-        model.setRowCount(0);
-        dsdv.forEach(e -> {
-            String id = e.getMaDichVu();
-            String ten = e.getTenDichVu();
-            String gia = e.getGia() + "";
-            String soLuong = e.getSoLuong() + "";
-            String trangThai = e.getTrangThai() + "";
-            String mota = e.getMoTa();
-            String[] row = {id, ten, gia, soLuong, trangThai, mota};
-            model.addRow(row);
-        });
-    }
+//    private void loadTable(ArrayList<DichVu> ds) {
+//        model.setRowCount(0);
+//        dsdv.forEach(e -> {
+//            String id = e.getMaDichVu();
+//            String ten = e.getTenDichVu();
+//            String gia = e.getGia() + "";
+//            String soLuong = e.getSoLuong() + "";
+//            String trangThai = e.getTrangThai() + "";
+//            String mota = e.getMoTa();
+//            String[] row = {id, ten, gia, soLuong, trangThai, mota};
+//            model.addRow(row);
+//        });
+//    }
     private DAO_DichVu daodv = new DAO_DichVu();
     private ArrayList<DichVu> dsdv = daodv.getAll(DichVu.class);
     private DefaultTableModel model;
