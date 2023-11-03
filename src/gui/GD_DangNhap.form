@@ -23,28 +23,13 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="717" max="-2" attributes="0"/>
-              <Component id="exitButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
+          <EmptySpace min="0" pref="724" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
-              <Component id="exitButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="293" max="32767" attributes="0"/>
-          </Group>
+          <EmptySpace min="0" pref="489" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
-  <SubComponents>
-    <Component class="ComponentCustom.ExitButton" name="exitButton1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="exitButton1"/>
-      </Properties>
-    </Component>
-  </SubComponents>
 </Form>

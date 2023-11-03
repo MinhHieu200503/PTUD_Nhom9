@@ -80,7 +80,7 @@ public class allPhong_LocPhong extends javax.swing.JPanel {
         ContainerListPhong.setMinimumSize(new java.awt.Dimension(1080, 698));
         ContainerListPhong.setPreferredSize(new java.awt.Dimension(1080, 698));
         ContainerListPhong.setVerifyInputWhenFocusTarget(false);
-        ContainerListPhong.setLayout(new java.awt.GridLayout());
+        ContainerListPhong.setLayout(new java.awt.GridLayout(1, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -102,32 +102,32 @@ public class allPhong_LocPhong extends javax.swing.JPanel {
                 .addContainerGap(47, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(18, 18, 18)
-                    .addComponent(ContainerListPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 1074, Short.MAX_VALUE)
+                    .addContainerGap()
+                    .addComponent(ContainerListPhong, javax.swing.GroupLayout.DEFAULT_SIZE, 1086, Short.MAX_VALUE)
                     .addGap(18, 18, 18)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lableFilterOption1)
                             .addComponent(lableFilterOption2))
-                        .addGap(15, 15, 15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ComboFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ComboFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lableFilterOption3)
-                        .addGap(15, 15, 15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(817, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(99, 99, 99)
-                    .addComponent(ContainerListPhong, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
+                    .addComponent(ContainerListPhong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGap(99, 99, 99)))
         );
     }// </editor-fold>//GEN-END:initComponents

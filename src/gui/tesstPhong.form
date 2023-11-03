@@ -78,16 +78,6 @@
         <Property name="columns" type="int" value="0"/>
         <Property name="rows" type="int" value="1"/>
       </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JButton" name="testClick">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="l&#x1ea5;y all id"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="testClickMouseClicked"/>
-          </Events>
-        </Component>
-      </SubComponents>
     </Container>
   </SubComponents>
 </Form>
