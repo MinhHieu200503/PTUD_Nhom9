@@ -48,12 +48,9 @@ public interface I_CRUD<T> {
         Connection con = ConnectDB.getConnection();
         System.out.println(con);
         PreparedStatement pstm = null;
-        int n = 0;
+        int n = 0; // trả về số dòng ảnh hưởng
         
         try {
-            /*
-            * Viết 1 câu lệnh sql để thêm 1 bản ghi vào bảng
-            */
             String sql = "INSERT INTO " + entity.getClass().getSimpleName() + " VALUES (";
             Field[] fields = entity.getClass().getDeclaredFields();
             for (int j = 0; j < fields.length; j++) {
@@ -142,9 +139,8 @@ public interface I_CRUD<T> {
         Statement stm = null;
         try {
             Field[] fields = clazz.getDeclaredFields();
-            // Tạo câu truy vấn để lấy tất cả bản ghi trong bảng
             String sql = "SELECT * FROM " + clazz.getSimpleName();
-            System.out.println(sql);
+//            System.out.println(sql);
             stm = con.createStatement();
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
@@ -234,8 +230,6 @@ public interface I_CRUD<T> {
         System.out.println(con);
         PreparedStatement pstm = null;
         try {
-           
-           // Tạo câu truy vấn để lấy tất cả bản ghi trong bảng
             String sql = "SELECT * FROM " + entity.getClass().getSimpleName() + " WHERE ";
             Field[] fields = entity.getClass().getDeclaredFields();
             sql += fields[0].getName() + " = ?"; // lấy tên cột đầu tiên
@@ -330,9 +324,6 @@ public interface I_CRUD<T> {
         PreparedStatement pstm = null;
         int n = 0;
         try {
-            /*
-            * Viết 1 câu lệnh sql để cập nhật 1 bản ghi vào bảng
-            */
             String sql = "UPDATE " + entity.getClass().getSimpleName() + " SET ";
             Field[] fields = entity.getClass().getDeclaredFields();
             for (int j = 1; j < fields.length; j++) {
@@ -428,31 +419,34 @@ public interface I_CRUD<T> {
         return n > 0;            
     }
     // Hàm search tất cả các cột và trả về danh sách các bản ghi
+    // Dùng cho key release vì mấy sự kiện key kia phải nhấn space nó mới load table
     default ArrayList<T> search(String key, Class<T> c) {
         ArrayList<T> ds = new ArrayList<T>();
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         System.out.println(con);
-        PreparedStatement pstm = null;
         try {
             Field[] fields = c.getDeclaredFields();
+            int so = -1;
+            if (key.matches("^\\d+$"))
+                so = Integer.parseInt(key);
             // Tạo câu truy vấn để lấy tất cả bản ghi trong bảng
             String sql = "SELECT * FROM " + c.getSimpleName() + " WHERE ";
             for (int i = 0; i < fields.length; i++) {
-                sql += fields[i].getName() + " LIKE ? OR ";
-            }
-            sql = sql.substring(0, sql.length() - 4); // loại bỏ " OR " ở cuối
-            System.out.println(sql);
-            pstm = con.prepareStatement(sql);
-            for (int i = 0; i < fields.length; i++) {
-                // nếu key là số
-                if (key.matches("\\d+")) {
-                    pstm.setInt(i + 1, Integer.parseInt(key));
-                } else {
-                    pstm.setString(i + 1, "%" + key + "%");
+                // nếu tên cột là số thì dùng = thay vì like
+                switch (fields[i].getType().getSimpleName()) {
+                    case "trangThai", "soLuong", "gia", "datCoc", "giamGia", "gioiTinh":
+                        sql += fields[i].getName() + " = "+ so + " OR ";
+                        break;
+                    default:
+                        sql += fields[i].getName() + " LIKE N'%" + key + "%' OR ";
+                        break;
                 }
             }
-            ResultSet rs = pstm.executeQuery();
+            sql = sql.substring(0, sql.length() - 4); // loại bỏ " OR " ở cuối
+//            System.out.println(sql);
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
                 T entity = c.getDeclaredConstructor().newInstance(); // Tạo đối tượng mới
                 for (Field field : fields) {
@@ -522,13 +516,7 @@ public interface I_CRUD<T> {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-               pstm.close();
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        }
+        } 
         return ds;
     }
 }

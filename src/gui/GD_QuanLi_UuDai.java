@@ -67,7 +67,7 @@ public class GD_QuanLi_UuDai extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(290, 1141));
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 7));
 
-        jPanel3.setPreferredSize(new java.awt.Dimension(283, 75));
+        jPanel3.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel3.setLayout(new java.awt.BorderLayout(0, 5));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -86,7 +86,7 @@ public class GD_QuanLi_UuDai extends javax.swing.JFrame {
 
         jPanel2.add(jPanel3);
 
-        jPanel6.setPreferredSize(new java.awt.Dimension(281, 75));
+        jPanel6.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel6.setLayout(new java.awt.BorderLayout(0, 5));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -95,11 +95,17 @@ public class GD_QuanLi_UuDai extends javax.swing.JFrame {
 
         tf_ten.setBackground(new java.awt.Color(142, 172, 207));
         tf_ten.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        tf_ten.setText("ggg");
+        tf_ten.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_tenActionPerformed(evt);
+            }
+        });
         jPanel6.add(tf_ten, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(jPanel6);
 
-        jPanel13.setPreferredSize(new java.awt.Dimension(281, 75));
+        jPanel13.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel13.setLayout(new java.awt.BorderLayout(0, 5));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -285,6 +291,10 @@ public class GD_QuanLi_UuDai extends javax.swing.JFrame {
     private void btn_xoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaTrangActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_xoaTrangActionPerformed
+
+    private void tf_tenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_tenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_tenActionPerformed
 
     /**
      * @param args the command line arguments

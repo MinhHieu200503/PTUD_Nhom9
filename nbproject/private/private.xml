@@ -3,38 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/gui/GD_QuanLi_KhachHang.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/gui/GD_ChuyenPhong.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/mainFrame/mainFrame.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/gui/GD_QuanLi_UuDai.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/smallPanel/GD_XuLy.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/smallPanel/panel_SignalPhong.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/ComponentCustom/FormSignIn.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/dao/DAO_ChucVu.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/smallPanel/SideBarXuLy.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/smallPanel/Phong.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/ComponentCustom/TextFieldCustom.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/dao/DAO_ChiTietDichVu_HoaDon.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/smallPanel/PanelGradient.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/dao/DAO_KhachHang.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/gui/GD_QuanLi_Ca.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/ComponentCustom/TextFieldPassCustom.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/gui/GD_QuenMatKhau.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/gui/GD_TraCuu_Phong.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/gui/tesstPhong.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/dao/DAO_DichVu.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/ComponentCustom/FontCustom.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/smallPanel/navBar.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/gui/GD_QuanLi_DichVu.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/gui/Frame_ListPhong.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/gui/GD_QuanLi_ChucVu.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/smallPanel/allPhong_LocPhong.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/main/main.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/gui/GD_DangNhap.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/ComponentCustom/ExitButton.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/smallPanel/DanhSachPhong.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/dao/DAO_LoaiPhong.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/ComponentCustom/Button.java</file>
+
+
+
+            <file>file:/D:/IUH/DHKTPM17B_Nam_3/KH1/PhatTrienUngDung/Project_PTUD/Phat_trien_ung_dung/src/gui/GD_TraCuu_KhachHang.java</file>
+            <file>file:/D:/IUH/DHKTPM17B_Nam_3/KH1/PhatTrienUngDung/Project_PTUD/Phat_trien_ung_dung/src/smallPanel/Phong.java</file>
+            <file>file:/D:/IUH/DHKTPM17B_Nam_3/KH1/PhatTrienUngDung/Project_PTUD/Phat_trien_ung_dung/src/gui/tesstPhong.java</file>
+            <file>file:/D:/IUH/DHKTPM17B_Nam_3/KH1/PhatTrienUngDung/Project_PTUD/Phat_trien_ung_dung/src/gui/GD_QuanLi_LoaiPhong.java</file>
+            <file>file:/D:/IUH/DHKTPM17B_Nam_3/KH1/PhatTrienUngDung/Project_PTUD/Phat_trien_ung_dung/src/smallPanel/SideBarXuLy.java</file>
+            <file>file:/D:/IUH/DHKTPM17B_Nam_3/KH1/PhatTrienUngDung/Project_PTUD/Phat_trien_ung_dung/src/gui/GD_TraCuu_NhanVien.java</file>
+            <file>file:/D:/IUH/DHKTPM17B_Nam_3/KH1/PhatTrienUngDung/Project_PTUD/Phat_trien_ung_dung/src/gui/login.java</file>
+
+
+
         </group>
     </open-files>
 </project-private>

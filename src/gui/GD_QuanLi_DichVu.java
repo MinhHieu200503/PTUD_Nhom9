@@ -44,9 +44,10 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         cb_trangThai = new javax.swing.JComboBox<>();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        tf_mota = new javax.swing.JTextField();
+        jPanel21 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ta_moTa = new javax.swing.JTextArea();
         jPanel5 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -70,7 +71,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(290, 1141));
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 7));
 
-        jPanel3.setPreferredSize(new java.awt.Dimension(283, 75));
+        jPanel3.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel3.setLayout(new java.awt.BorderLayout(0, 5));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -89,7 +90,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame {
 
         jPanel2.add(jPanel3);
 
-        jPanel6.setPreferredSize(new java.awt.Dimension(281, 75));
+        jPanel6.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel6.setLayout(new java.awt.BorderLayout(0, 5));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -102,7 +103,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame {
 
         jPanel2.add(jPanel6);
 
-        jPanel16.setPreferredSize(new java.awt.Dimension(281, 75));
+        jPanel16.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel16.setLayout(new java.awt.BorderLayout(0, 5));
 
         tf_gia.setBackground(new java.awt.Color(142, 172, 207));
@@ -121,7 +122,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame {
 
         jPanel2.add(jPanel16);
 
-        jPanel17.setPreferredSize(new java.awt.Dimension(281, 75));
+        jPanel17.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel17.setLayout(new java.awt.BorderLayout(0, 5));
 
         tf_soLuong.setBackground(new java.awt.Color(142, 172, 207));
@@ -159,18 +160,22 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame {
 
         jPanel2.add(jPanel13);
 
-        jPanel7.setPreferredSize(new java.awt.Dimension(281, 75));
-        jPanel7.setLayout(new java.awt.BorderLayout(0, 5));
+        jPanel21.setPreferredSize(new java.awt.Dimension(283, 180));
+        jPanel21.setLayout(new java.awt.BorderLayout(0, 5));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setText("Mô tả:");
-        jPanel7.add(jLabel3, java.awt.BorderLayout.NORTH);
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel15.setText("Mô tả:");
+        jPanel21.add(jLabel15, java.awt.BorderLayout.PAGE_START);
 
-        tf_mota.setBackground(new java.awt.Color(142, 172, 207));
-        tf_mota.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jPanel7.add(tf_mota, java.awt.BorderLayout.CENTER);
+        ta_moTa.setBackground(new java.awt.Color(142, 172, 207));
+        ta_moTa.setColumns(20);
+        ta_moTa.setLineWrap(true);
+        ta_moTa.setRows(5);
+        jScrollPane1.setViewportView(ta_moTa);
 
-        jPanel2.add(jPanel7);
+        jPanel21.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jPanel2.add(jPanel21);
 
         jPanel4.add(jPanel2);
 
@@ -377,8 +382,8 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel13;
@@ -388,16 +393,17 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea ta_moTa;
     private javax.swing.JTable tbl_danhSach;
     private javax.swing.JTextField tf_gia;
     private javax.swing.JTextField tf_id;
-    private javax.swing.JTextField tf_mota;
     private javax.swing.JTextField tf_soLuong;
     private javax.swing.JTextField tf_ten;
     // End of variables declaration//GEN-END:variables

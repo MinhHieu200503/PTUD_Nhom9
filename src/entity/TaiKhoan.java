@@ -31,7 +31,7 @@ public class TaiKhoan {
         this.matKhau = matKhau;
     }
 
-    public boolean isVaiTro() {
+    public boolean getVaiTro() {
         return vaiTro;
     }
 
