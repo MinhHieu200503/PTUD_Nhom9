@@ -19,6 +19,7 @@ public class PhieuDatPhong {
     private NhanVien nhanVien;
     private KhachHang khachHang;
     private Phong phong;
+    private HoaDon hoaDon;
 
     public String getMaPhieuDatPhong() {
         return maPhieuDatPhong;
@@ -84,7 +85,15 @@ public class PhieuDatPhong {
         this.phong = phong;
     }
 
-    public PhieuDatPhong(String maPhieuDatPhong, LocalDateTime thoiGianTaoPhieu, LocalDateTime thoiGianNhanPhong, int trangThai, double datCoc, NhanVien nhanVien, KhachHang khachHang, Phong phong) {
+    public HoaDon getHoaDon() {
+        return hoaDon;
+    }
+
+    public void setHoaDon(HoaDon hoaDon) {
+        this.hoaDon = hoaDon;
+    }
+
+    public PhieuDatPhong(String maPhieuDatPhong, LocalDateTime thoiGianTaoPhieu, LocalDateTime thoiGianNhanPhong, int trangThai, double datCoc, NhanVien nhanVien, KhachHang khachHang, Phong phong, HoaDon hoaDon) {
         this.maPhieuDatPhong = maPhieuDatPhong;
         this.thoiGianTaoPhieu = thoiGianTaoPhieu;
         this.thoiGianNhanPhong = thoiGianNhanPhong;
@@ -93,8 +102,14 @@ public class PhieuDatPhong {
         this.nhanVien = nhanVien;
         this.khachHang = khachHang;
         this.phong = phong;
+        this.hoaDon = hoaDon;
     }
 
+    
+
+    public PhieuDatPhong() {
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;

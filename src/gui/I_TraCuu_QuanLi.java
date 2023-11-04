@@ -13,6 +13,8 @@ import entity.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +37,7 @@ public interface I_TraCuu_QuanLi<T> {
                 // cho phép truy cập vào các trường private
                 fields[i].setAccessible(true);
                 try {
-                    if (i != 0) {
+//                    if (i != 0) {
                         // nếu trường là có tên là Phòng, thì lấy ra tên của phòng
                         switch (fields[i].getType().getSimpleName()) {
                             case "Phong":
@@ -76,44 +78,53 @@ public interface I_TraCuu_QuanLi<T> {
                                     row[i] = fields[i].get(e).equals(true) ? "Đang làm" : "Đã nghỉ";
                                 }
                                 break;
+                            case "LocalDateTime":
+                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                                row[i] = formatter.format((LocalDateTime) fields[i].get(e));
+                                break;
                             case "int":
-                                // kiểm tra xem nó là trạng thái của phòng hay hóa đơn hay Phiếu đặt phòng hay nhân viên hay dịch vụ
-                                if (e instanceof Phong) {
-                                    switch (((Phong) fields[i].get(e)).getTrangThai()) {
-                                        case 0:
-                                            row[i] = "Trống";
-                                            break;
-                                        case 1:
-                                            row[i] = "Đang hoạt động";
-                                            break;
-                                        case 2: 
-                                            row[i] = "Chưa sẵn sàng";
-                                            break;
-                                        case 3:
-                                            row[i] = "Đang chờ";
-                                            break;
-                                        default:
-                                            row[i] = "Không sử dụng";
-                                            break;
+                                // nếu fields[i] là trạng thái
+                                if (fields[i].getName().equals("trangThai")) {
+                                    // kiểm tra xem nó là trạng thái của phòng hay hóa đơn hay Phiếu đặt phòng hay nhân viên hay dịch vụ
+                                    if (e instanceof Phong) {
+                                        switch ((int) fields[i].get(e)) {
+                                            case 0:
+                                                row[i] = "Trống";
+                                                break;
+                                            case 1:
+                                                row[i] = "Đang hoạt động";
+                                                break;
+                                            case 2: 
+                                                row[i] = "Chưa sẵn sàng";
+                                                break;
+                                            case 3:
+                                                row[i] = "Đang chờ";
+                                                break;
+                                            default:
+                                                row[i] = "Không sử dụng";
+                                                break;
+                                        }
+                                        break;
+                                    } else if (e instanceof HoaDon) {
+                                        row[i] = (int) fields[i].get(e) == 1 ? "Đã thanh toán" : "Chưa thanh toán";
+                                        break;
+                                    } else if (e instanceof PhieuDatPhong) {
+                                        switch ((int) fields[i].get(e)) {
+                                            case 0: 
+                                                row[i] = "Đã huỷ";
+                                                break;
+                                            case 1:
+                                                row[i] = "Đã nhận";
+                                                break;
+                                            default:
+                                                row[i] = "Đang chờ";
+                                                break;
+                                        }
+                                        break;
+                                    } else if (e instanceof DichVu) {
+                                        row[i] = (int) fields[i].get(e) == 1 ? "Còn hàng" : "Hết hàng";
+                                        break;
                                     }
-                                } else if (e instanceof HoaDon) {
-                                    row[i] = ((HoaDon) fields[i].get(e)).getTrangThai() == 1 ? "Đã thanh toán" : "Chưa thanh toán";
-                                    break;
-                                } else if (e instanceof PhieuDatPhong) {
-                                    switch (((PhieuDatPhong) fields[i].get(e)).getTrangThai()) {
-                                        case 0: 
-                                            row[i] = "Đã huỷ";
-                                            break;
-                                        case 1:
-                                            row[i] = "Đã nhận";
-                                            break;
-                                        default:
-                                            row[i] = "Đang chờ";
-                                            break;
-                                    }
-                                } else if (e instanceof DichVu) {
-                                    row[i] = ((DichVu) fields[i].get(e)).getTrangThai() == 1 ? "Còn hàng" : "Hết hàng";
-                                    break;
                                 } else {
                                     row[i] = fields[i].get(e);
                                     break;
@@ -122,9 +133,9 @@ public interface I_TraCuu_QuanLi<T> {
                                 row[i] = fields[i].get(e);
                                 break;
                         }
-                    } else {
-                        row[i] = fields[i].get(e);
-                    }
+//                    } else {
+//                        row[i] = fields[i].get(e);
+//                    }
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
