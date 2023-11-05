@@ -8,6 +8,15 @@ import java.sql.*;
 import connectDB.ConnectDB;
 import entity.TaiKhoan;
 import java.util.List;
+import java.util.Properties;
+import java.util.Random;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  *
@@ -15,7 +24,59 @@ import java.util.List;
  */
 public class DAO_TaiKhoan implements I_CRUD<TaiKhoan>{
 
-
+    public int sendEmail(String email){
+        final String from = "tathang253@gmail.com";
+        final String password = "hscd sfem dcan hjng";
+        
+        
+        Properties props = new Properties();
+        props.put("mail.smtp.host","smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth","true");
+        props.put("mail.smtp.starttls.enable","true");
+        
+        // create authenticator
+        Authenticator auth;
+        auth = new Authenticator() {
+            @Override
+            protected  PasswordAuthentication getPasswordAuthentication(){
+                return new PasswordAuthentication(from,password);
+            }       
+        };
+        
+        // Phiên làm việc
+        Session session = Session.getInstance(props, auth);
+        
+        //Gui email
+       final String to = "ldmhieu205@gmail.com";
+       //tạo 1 tin nhắn mới
+        MimeMessage msg = new MimeMessage(session);
+        
+        try {
+            msg.addHeader("Content-type", "text/HTML;charset=UTF-8");
+            //người gửi
+            msg.setFrom(from);
+            // người nhận
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to,false));
+            //tiêu đề
+            msg.setSubject("OTP quên mật khẩu");
+            //Quy định ngày gửi
+            msg.setSentDate(new java.util.Date());
+            // nội dung
+            Random generator = new Random();
+            int OTP = generator.nextInt();
+            if(OTP<0) OTP = OTP * (-1);
+            msg.setText(String.valueOf(OTP),"UTF-8");
+            
+            //Gửi email
+            Transport.send(msg);
+            return OTP;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+        
+    }
 
     
 }
