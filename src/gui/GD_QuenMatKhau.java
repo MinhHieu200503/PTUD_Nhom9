@@ -7,11 +7,13 @@ package gui;
 import ComponentCustom.ExitButton;
 import ComponentCustom.FormSignIn;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import dao.DAO_TaiKhoan;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 
@@ -41,7 +43,9 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
         btnExit = new ExitButton();
         btnExit.setBounds( (628 - 35) , 0, 35, 35);
         panelGradient1.add(btnExit);
-        
+        btnXacNhanOTP.setEnabled(false);        
+        btnXacNhan.setEnabled(false);
+
         
        
     }
@@ -87,6 +91,11 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
         btnXacNhan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnXacNhan.setForeground(new java.awt.Color(255, 255, 255));
         btnXacNhan.setText("Xác nhận");
+        btnXacNhan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnXacNhanMouseClicked(evt);
+            }
+        });
         btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXacNhanActionPerformed(evt);
@@ -116,6 +125,11 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
         btnXacNhanOTP.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnXacNhanOTP.setForeground(new java.awt.Color(255, 255, 255));
         btnXacNhanOTP.setText("Xác nhận OTP");
+        btnXacNhanOTP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnXacNhanOTPMouseClicked(evt);
+            }
+        });
         btnXacNhanOTP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXacNhanOTPActionPerformed(evt);
@@ -131,6 +145,11 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
         btnNhanOTP.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnNhanOTP.setForeground(new java.awt.Color(255, 255, 255));
         btnNhanOTP.setText("Nhận OTP");
+        btnNhanOTP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNhanOTPMouseClicked(evt);
+            }
+        });
         btnNhanOTP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNhanOTPActionPerformed(evt);
@@ -189,6 +208,31 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnNhanOTPActionPerformed
 
+    private void btnNhanOTPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNhanOTPMouseClicked
+        // TODO add your handling code here:
+        dao.DAO_TaiKhoan taiKhoan = new DAO_TaiKhoan();
+        OTP = taiKhoan.sendEmail(txtNhapMail.getText());
+        btnXacNhanOTP.setEnabled(true);
+        
+    }//GEN-LAST:event_btnNhanOTPMouseClicked
+
+    private void btnXacNhanOTPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXacNhanOTPMouseClicked
+        // TODO add your handling code here:
+        if(OTP == Integer.parseInt(txtOPT.getText())){
+            btnXacNhan.setEnabled(true);
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane, "OTP không đúng !!! Xin vui lòng thử lại");
+        }
+    }//GEN-LAST:event_btnXacNhanOTPMouseClicked
+
+    private void btnXacNhanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXacNhanMouseClicked
+        // TODO add your handling code here:
+        if(txtNhapMatKhauMoi.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng không để trống mật khẩu !!!!");
+        }
+    }//GEN-LAST:event_btnXacNhanMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -208,6 +252,8 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
     
 
     public ExitButton btnExit;
+    public int OTP;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNhanOTP;
     private javax.swing.JButton btnXacNhan;
