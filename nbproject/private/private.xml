@@ -3,14 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/17d/Ptud/doan/PTUD_Nhom9/src/dao/DAO_Phong.java</file>
-            <file>file:/D:/17d/Ptud/doan/PTUD_Nhom9/src/dao/DAO_PhieuDatPhong.java</file>
-            <file>file:/D:/17d/Ptud/doan/PTUD_Nhom9/src/gui/GD_TraCuu_PhieuDatPhong.java</file>
-            <file>file:/D:/17d/Ptud/doan/PTUD_Nhom9/src/entity/UuDai.java</file>
-            <file>file:/D:/17d/Ptud/doan/PTUD_Nhom9/src/gui/GD_TraCuu_DichVu.java</file>
+            <file>file:/D:/17d/Ptud/doan/PTUD_Nhom9/src/gui/GD_QuanLi_DichVu.java</file>
+            <file>file:/D:/17d/Ptud/doan/PTUD_Nhom9/src/gui/GD_QuanLi_Phong.java</file>
+            <file>file:/D:/17d/Ptud/doan/PTUD_Nhom9/src/gui/GD_QuanLi_ChucVu.java</file>
+            <file>file:/D:/17d/Ptud/doan/PTUD_Nhom9/src/gui/GD_QuanLi_Ca.java</file>
             <file>file:/D:/17d/Ptud/doan/PTUD_Nhom9/src/dao/I_CRUD.java</file>
+            <file>file:/D:/17d/Ptud/doan/PTUD_Nhom9/src/gui/GD_QuanLi_NhanVien.java</file>
+            <file>file:/D:/17d/Ptud/doan/PTUD_Nhom9/src/gui/GD_QuanLi_UuDai.java</file>
             <file>file:/D:/17d/Ptud/doan/PTUD_Nhom9/src/gui/I_TraCuu_QuanLi.java</file>
-            <file>file:/D:/17d/Ptud/doan/PTUD_Nhom9/src/gui/GD_TraCuu_Phong.java</file>
+            <file>file:/D:/17d/Ptud/doan/PTUD_Nhom9/src/gui/GD_QuanLi_LoaiPhong.java</file>
+            <file>file:/D:/17d/Ptud/doan/PTUD_Nhom9/src/gui/GD_QuanLi_KhachHang.java</file>
         </group>
     </open-files>
 </project-private>
