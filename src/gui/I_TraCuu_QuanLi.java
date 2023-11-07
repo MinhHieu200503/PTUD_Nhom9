@@ -19,6 +19,9 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JViewport;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
 
@@ -151,12 +154,17 @@ public interface I_TraCuu_QuanLi<T> {
             if (c instanceof JPanel) { // bỏ cái này bị dính lỗi JSeparator
                 Component c1 = ((JPanel) c).getComponent(1);
                 // nếu là panel con đầu tiên thì không cho chỉnh
-//                if (i++ == 0) {
-//                    ((JTextField) c1).setEditable(false);
-//                    continue;
-//                }
-                if (c1 instanceof JTextField || c1 instanceof JTextArea || c1 instanceof JPasswordField) {
+                if (i++ == 0) {
+                    ((JTextField) c1).setEditable(false);
+                    continue;
+                }
+                if (c1 instanceof JScrollPane) { 
+                    JViewport viewport = ((JScrollPane) c1).getViewport();
+                    JTextArea tmp = (JTextArea) viewport.getView();
+                    tmp.setEditable(b);
+                } else if (c1 instanceof JTextField || c1 instanceof JPasswordField) {
                     ((JTextComponent) c1).setEditable(b);
+            
                 } else {
                     c1.setEnabled(b);
                 }
@@ -171,7 +179,11 @@ public interface I_TraCuu_QuanLi<T> {
                     continue;
                 }
                 Component c1 = ((JPanel) c).getComponent(1); // lấy component thứ 2 của panel
-                if (c1 instanceof JTextField || c1 instanceof JTextArea || c1 instanceof JPasswordField) {
+                if (c1 instanceof JScrollPane) { 
+                    JViewport viewport = ((JScrollPane) c1).getViewport();
+                    JTextArea tmp = (JTextArea) viewport.getView();
+                    tmp.setText("");
+                } else if (c1 instanceof JTextField || c1 instanceof JPasswordField) {
                     ((JTextComponent) c1).setText("");
                 } else if (c1 instanceof JDateChooser) {
                     ((JDateChooser) c1).setDate(null);
@@ -186,7 +198,11 @@ public interface I_TraCuu_QuanLi<T> {
         for (Component c : pnlInput.getComponents()) {
             if (c instanceof JPanel) {
                 Component c1 = ((JPanel) c).getComponent(1);
-                if (c1 instanceof JTextField || c1 instanceof JTextArea) {
+                if (c1 instanceof JScrollPane) { 
+                    JViewport viewport = ((JScrollPane) c1).getViewport();
+                    JTextArea tmp = (JTextArea) viewport.getView();
+                    tmp.setText(model.getValueAt(index, i++).toString());
+                } else if (c1 instanceof JTextField) {
                     if (i < model.getColumnCount()) { // khắc phục lỗi indexOutOfBound của Array
                         ((JTextComponent) c1).setText(model.getValueAt(index, i++).toString());
               
@@ -194,7 +210,7 @@ public interface I_TraCuu_QuanLi<T> {
                         ((JPasswordField) c1).setText(I_CRUD.findById(model.getValueAt(index, 6).toString(), new TaiKhoan()).getMatKhau());
                     }
                 } else if (c1 instanceof JDateChooser) {
-                    if (i < model.getColumnCount()) {
+//                    if (i < model.getColumnCount()) {
                         java.util.Date date;
                         try {
                             date = new SimpleDateFormat("yyyy-MM-dd").parse(model.getValueAt(index, i++).toString());
@@ -203,11 +219,11 @@ public interface I_TraCuu_QuanLi<T> {
                             Logger.getLogger(I_TraCuu_QuanLi.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         
-                    }
+//                    }
                 } else if (c1 instanceof JComboBox) {
-                    if (i < model.getColumnCount()) {
+//                    if (i < model.getColumnCount()) {
                         ((JComboBox) c1).setSelectedItem(model.getValueAt(index, i++));
-                    }
+//                    }
                 }
 //                } else if (c1 instanceof JPasswordField) { // chả hiểu sao jpasswordfield mà nó lại tính luôn là jtextfield
 //                    // Dùng hàm finbyid lấy ra mật khẩu dựa vào số điện thoại
@@ -222,4 +238,24 @@ public interface I_TraCuu_QuanLi<T> {
             }
         }
     } 
+    // viết hàm show Lỗi regex
+    default void showRegexError(JTextComponent tf, String message) {
+        tf.requestFocus();
+        tf.setText("");
+        JOptionPane.showMessageDialog(null, message,"Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+    default void createID(JTextField tf, ArrayList<String> dsid, String prefix) {
+        // Kiểm tra xem ds có rỗng hay không nếu rỗng thì mã là prefix + '001' không thì lấy mã cuối cùng trong ds + 1
+        if (dsid.isEmpty()) {
+            tf.setText(prefix + "001");
+        } else {
+            // lấy mã cuối cùng trong ds
+            String lastID = dsid.get(dsid.size() - 1).toString();
+            // tách chuỗi để lấy số thứ tự
+            int index = Integer.parseInt(lastID.substring(prefix.length())) + 1;
+            // tạo mã mới
+            String newID = prefix + String.format("%03d", index);
+            tf.setText(newID);
+        }
+    }
 }

@@ -49,11 +49,11 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         jLabel2 = new javax.swing.JLabel();
         tf_ten = new javax.swing.JTextField();
         jPanel16 = new javax.swing.JPanel();
-        tf_gia = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        tf_gia = new javax.swing.JTextField();
         jPanel17 = new javax.swing.JPanel();
-        tf_soLuong = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
+        tf_soLuong = new javax.swing.JTextField();
         jPanel13 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         cb_trangThai = new javax.swing.JComboBox<>();
@@ -113,26 +113,26 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         jPanel16.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel16.setLayout(new java.awt.BorderLayout(0, 5));
 
-        tf_gia.setBackground(new java.awt.Color(142, 172, 207));
-        tf_gia.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jPanel16.add(tf_gia, java.awt.BorderLayout.CENTER);
-
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel12.setText("Giá:");
         jPanel16.add(jLabel12, java.awt.BorderLayout.PAGE_START);
+
+        tf_gia.setBackground(new java.awt.Color(142, 172, 207));
+        tf_gia.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jPanel16.add(tf_gia, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(jPanel16);
 
         jPanel17.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel17.setLayout(new java.awt.BorderLayout(0, 5));
 
-        tf_soLuong.setBackground(new java.awt.Color(142, 172, 207));
-        tf_soLuong.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jPanel17.add(tf_soLuong, java.awt.BorderLayout.CENTER);
-
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel13.setText("Số lượng");
         jPanel17.add(jLabel13, java.awt.BorderLayout.PAGE_START);
+
+        tf_soLuong.setBackground(new java.awt.Color(142, 172, 207));
+        tf_soLuong.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jPanel17.add(tf_soLuong, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(jPanel17);
 
@@ -144,6 +144,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         jPanel13.add(jLabel9, java.awt.BorderLayout.NORTH);
 
         cb_trangThai.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        cb_trangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Còn hàng", "Hết hàng" }));
         cb_trangThai.setPreferredSize(new java.awt.Dimension(160, 38));
         jPanel13.add(cb_trangThai, java.awt.BorderLayout.CENTER);
 
@@ -316,17 +317,24 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
     private void tbl_danhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_danhSachMouseClicked
         // TODO add your handling code here:
         int i = tbl_danhSach.getSelectedRow();
-        showDetailInput(jPanel2, model, i);
+        if (i != -1) {
+            showDetailInput(jPanel2, model, i);
+        }
     }//GEN-LAST:event_tbl_danhSachMouseClicked
 
     private void actionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actionPerformed
         // TODO add your handling code here:
         Object o = evt.getSource();
         if (o.equals(btn_them)) {
+            ArrayList<String> dsid = new ArrayList<>();
+                for (DichVu i : daodv.getAll(DichVu.class)) {
+                    dsid.add(i.getMaDichVu());
+                }
+            createID(tf_id, dsid, "DV");
             clearInput(jPanel2);
             if (btn_them.getText().equals("Thêm")) {
                 tbl_danhSach.clearSelection();
-                tbl_danhSach.removeMouseListener(tbl_danhSach.getMouseListeners()[tbl_danhSach.getMouseListeners().length - 1]); // loại bỏ sự kiện cuối cùng
+                tbl_danhSach.setEnabled(false);
                 setEnableInput(true, jPanel2);
                 btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/chuyenPhong_huy30.png")));
                 btn_them.setText("Huỷ");
@@ -335,13 +343,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
                 btn_xoaTrang.setEnabled(true);
             } else {
                 clearInput(jPanel2);
-                // Thêm lại sự kiện click chuột
-                tbl_danhSach.addMouseListener(new java.awt.event.MouseAdapter() {
-                    @Override
-                    public void mouseClicked(java.awt.event.MouseEvent evt) {
-                        tbl_danhSachMouseClicked(evt);
-                    }
-                });
+                tbl_danhSach.setEnabled(true);
                 tf_id.setText("");
                 setEnableInput(false, jPanel2);
                 btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_add30.png")));
@@ -354,7 +356,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
             int r = tbl_danhSach.getSelectedRow();
             if (r != -1) {
                 if (btn_sua.getText().equals("Sửa")) {
-                    tbl_danhSach.removeMouseListener(tbl_danhSach.getMouseListeners()[tbl_danhSach.getMouseListeners().length - 1]);
+                    tbl_danhSach.setEnabled(false);
                     setEnableInput(true, jPanel2);
                     btn_sua.setText("Huỷ");
                     btn_sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/chuyenPhong_huy30.png")));
@@ -363,12 +365,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
                     btn_xoaTrang.setEnabled(true);
                 } else {
                     tbl_danhSach.clearSelection();
-                    tbl_danhSach.addMouseListener(new java.awt.event.MouseAdapter() {
-                    @Override
-                    public void mouseClicked(java.awt.event.MouseEvent evt) {
-                        tbl_danhSachMouseClicked(evt);
-                    }
-                    });
+                    tbl_danhSach.setEnabled(true);
                     clearInput(jPanel2);
                     tf_id.setText("");
                     setEnableInput(false, jPanel2);
@@ -383,7 +380,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
             }
         } else if (o.equals(btn_luu)) {
             if (btn_them.getText().equals("Huỷ")) {
-                if (true) { // để nhét regex vào
+                if (validateInput()) { // để nhét regex vào
                     String id = tf_id.getText().trim();
                     String ten = tf_ten.getText().trim();
                     Double gia = Double.parseDouble(tf_gia.getText().trim());
@@ -391,18 +388,12 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
                     int trangthai = cb_trangThai.getSelectedIndex();
                     String mota = ta_moTa.getText().trim();
                     
-                   DichVu dv = new DichVu(mota, ten, gia, soluong, trangthai, mota);
+                   DichVu dv = new DichVu(id, ten, gia, soluong, trangthai, mota);
                     if (daodv.create(dv)) {
                         JOptionPane.showMessageDialog(this, "Thêm thành công");
                         loadTable(daodv.getAll(DichVu.class), model);
                         clearInput(jPanel2);
-                        // Thêm lại sự kiện click chuột
-                        tbl_danhSach.addMouseListener(new java.awt.event.MouseAdapter() {
-                            @Override
-                            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                                tbl_danhSachMouseClicked(evt);
-                            }
-                        });
+                        tbl_danhSach.setEnabled(true);
                         tf_id.setText("");
                         setEnableInput(false, jPanel2);
                         btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_add30.png")));
@@ -414,25 +405,20 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
                 }
             }
             if (btn_sua.getText().equals("Huỷ")) {
-                if (true) {
-                   String id = tf_id.getText().trim();
+                if (validateInput()) {
+                    String id = tf_id.getText().trim();
                     String ten = tf_ten.getText().trim();
                     Double gia = Double.parseDouble(tf_gia.getText().trim());
                     int soluong = Integer.parseInt(tf_soLuong.getText().trim());
                     int trangthai = cb_trangThai.getSelectedIndex();
                     String mota = ta_moTa.getText().trim();
                     
-                   DichVu dv = new DichVu(mota, ten, gia, soluong, trangthai, mota);
+                    DichVu dv = new DichVu(id, ten, gia, soluong, trangthai, mota);
                     if (daodv.update(dv)) {
                         JOptionPane.showMessageDialog(this, "Sửa thành công");
                         loadTable(daodv.getAll(DichVu.class), model);
                         tbl_danhSach.clearSelection();
-                        tbl_danhSach.addMouseListener(new java.awt.event.MouseAdapter() {
-                            @Override
-                            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                                tbl_danhSachMouseClicked(evt);
-                            }
-                        });
+                        tbl_danhSach.setEnabled(true);
                         clearInput(jPanel2);
                         tf_id.setText("");
                         setEnableInput(false, jPanel2);
@@ -444,9 +430,50 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
                     }
                 }
             }
+        } else if (o.equals(btn_xoaTrang)) {
+            clearInput(jPanel2);
         }
     }//GEN-LAST:event_actionPerformed
-
+    private boolean validateInput() {
+        String ten = tf_ten.getText().trim();
+        String gia = tf_gia.getText().trim();
+        String soluong = tf_soLuong.getText().trim();
+        String mota = ta_moTa.getText().trim();
+        
+        if (ten.isEmpty()) {
+            showRegexError(tf_ten, "Tên không được rỗng");
+            return false;
+        }
+        if (ten.length() > 30) {
+            showRegexError(tf_ten, "Tên không được quá 30 kí tự");
+            return false;
+        }
+        if (!ten.matches("^[A-ZÀ-Ỹ]([a-zà-ỹ\\d]*\\s?)+$")) {
+            showRegexError(tf_ten, "Viết hoa kí tự đầu, không bao gồm kí tự đặc biệt");
+            return false;
+        }
+        if (gia.isEmpty()) {
+            showRegexError(tf_gia, "Vui lòng nhập giá");
+            return false;
+        }
+        if (!gia.matches("^[1-9][0-9]*$")) {
+            showRegexError(tf_gia, "Giá phải > 0");
+            return false;
+        }
+        if (soluong.isEmpty()) {
+            showRegexError(tf_soLuong, "Vui lòng nhập số lượng");
+            return false;
+        }
+        if (!soluong.matches("^[1-9]\\d{0,8}$")) {
+            showRegexError(tf_soLuong, "Số lượng phải > 0 và có tối đa 9 chữ số");
+            return false;
+        }
+        if (mota.length() > 50) {
+            showRegexError(ta_moTa, "Mô tả không được quá 50 kí tự");
+            return false;
+        }
+        return false;
+    }
     /**
      * @param args the command line arguments
      */
