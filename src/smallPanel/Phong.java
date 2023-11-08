@@ -6,8 +6,11 @@ package smallPanel;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Insets;
+import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
@@ -37,6 +40,17 @@ public class Phong extends javax.swing.JPanel {
         this.addMouseListener(new CustomMouseListener_A_Phong());
         
         
+    }
+    
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        int w = getWidth(), h = getHeight();
+        GradientPaint gp = new GradientPaint(0, 0, Color.decode("#A1FFCE"), w, h, Color.decode("#FAFFD1"));
+        g2d.setPaint(gp);
+        g2d.fillRoundRect(0, 0, w, h,40,40);
     }
     
     

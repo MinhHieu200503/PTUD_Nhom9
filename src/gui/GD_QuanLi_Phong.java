@@ -4,17 +4,32 @@
  */
 package gui;
 
+import dao.DAO_LoaiPhong;
+import dao.DAO_Phong;
+import entity.LoaiPhong;
+import entity.Phong;
+import java.awt.Font;
+import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+
 /**
  *
  * @author quang
  */
-public class GD_QuanLi_Phong extends javax.swing.JFrame {
+public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_QuanLi<Phong>{
 
     /**
      * Creates new form GD_QuanLi_Phong
      */
     public GD_QuanLi_Phong() {
         initComponents();
+        model = (DefaultTableModel) tbl_danhSach.getModel();
+        setEnableInput(false, jPanel2);
+        loadTable(dsp, model);
     }
 
     /**
@@ -45,8 +60,8 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         cb_sucChua = new javax.swing.JComboBox<>();
         jPanel16 = new javax.swing.JPanel();
-        tf_gia = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        tf_gia = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -79,12 +94,6 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame {
 
         tf_id.setBackground(new java.awt.Color(142, 172, 207));
         tf_id.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        tf_id.setText(".......");
-        tf_id.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_idActionPerformed(evt);
-            }
-        });
         jPanel3.add(tf_id, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(jPanel3);
@@ -110,13 +119,8 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame {
         jPanel13.add(jLabel9, java.awt.BorderLayout.NORTH);
 
         cb_trangThai.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        cb_trangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Trống", "Đang hoạt động", "Chưa sẵn sàng, ", "Đang chờ, ", "Không sử dụng.", " " }));
+        cb_trangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Trống", "Đang hoạt động", "Chưa sẵn sàng ", "Đang chờ", "Không sử dụng" }));
         cb_trangThai.setPreferredSize(new java.awt.Dimension(160, 38));
-        cb_trangThai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_trangThaiActionPerformed(evt);
-            }
-        });
         jPanel13.add(cb_trangThai, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(jPanel13);
@@ -129,13 +133,11 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame {
         jPanel14.add(jLabel10, java.awt.BorderLayout.NORTH);
 
         cb_loai.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        cb_loai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thường", "VIP" }));
-        cb_loai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_loaiActionPerformed(evt);
-            }
-        });
         jPanel14.add(cb_loai, java.awt.BorderLayout.CENTER);
+        ArrayList<LoaiPhong> dslp = daolp.getAll(LoaiPhong.class);
+        dslp.forEach(e -> {
+            cb_loai.addItem(e.getLoaiPhong());
+        });
 
         jPanel2.add(jPanel14);
 
@@ -147,7 +149,7 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame {
         jPanel15.add(jLabel11, java.awt.BorderLayout.NORTH);
 
         cb_sucChua.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        cb_sucChua.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "10", "15", " ", " " }));
+        cb_sucChua.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "10", "15" }));
         cb_sucChua.setPreferredSize(new java.awt.Dimension(160, 38));
         jPanel15.add(cb_sucChua, java.awt.BorderLayout.CENTER);
 
@@ -156,19 +158,13 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame {
         jPanel16.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel16.setLayout(new java.awt.BorderLayout(0, 5));
 
-        tf_gia.setBackground(new java.awt.Color(142, 172, 207));
-        tf_gia.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        tf_gia.setText("30.000");
-        tf_gia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_giaActionPerformed(evt);
-            }
-        });
-        jPanel16.add(tf_gia, java.awt.BorderLayout.CENTER);
-
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel12.setText("Giá mỗi giờ:");
         jPanel16.add(jLabel12, java.awt.BorderLayout.PAGE_START);
+
+        tf_gia.setBackground(new java.awt.Color(142, 172, 207));
+        tf_gia.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jPanel16.add(tf_gia, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(jPanel16);
 
@@ -191,10 +187,7 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame {
 
         tbl_danhSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {".....", "", "", "", "", "VN"},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Mã phòng", "Tên phòng", "Trạng thái", "Loại phòng ", "Sức chứa", "Giá"
@@ -203,15 +196,35 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         tbl_danhSach.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbl_danhSach.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbl_danhSach.getTableHeader().setReorderingAllowed(false);
+        tbl_danhSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_danhSachMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbl_danhSach);
+        tbl_danhSach.setRowHeight(35);
+        // Chỉnh font cho header
+        JTableHeader header = tbl_danhSach.getTableHeader();
+        header.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        // Căn lề cho header
+        TableCellRenderer rendererFromHeader = header.getDefaultRenderer();
+        JLabel headerLabel = (JLabel) rendererFromHeader;
+        headerLabel.setHorizontalAlignment(JLabel.CENTER);
 
         jPanel19.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
@@ -228,7 +241,7 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame {
         btn_them.setText("Thêm");
         btn_them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_themActionPerformed(evt);
+                GD_QuanLi_Phong.this.actionPerformed(evt);
             }
         });
         jPanel20.add(btn_them);
@@ -240,7 +253,7 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame {
         btn_sua.setText("Sửa");
         btn_sua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_suaActionPerformed(evt);
+                GD_QuanLi_Phong.this.actionPerformed(evt);
             }
         });
         jPanel20.add(btn_sua);
@@ -250,9 +263,10 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame {
         btn_luu.setForeground(new java.awt.Color(255, 255, 255));
         btn_luu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_save30.png"))); // NOI18N
         btn_luu.setText("Lưu");
+        btn_luu.setEnabled(false);
         btn_luu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_luuActionPerformed(evt);
+                GD_QuanLi_Phong.this.actionPerformed(evt);
             }
         });
         jPanel20.add(btn_luu);
@@ -262,9 +276,10 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame {
         btn_xoaTrang.setForeground(new java.awt.Color(255, 255, 255));
         btn_xoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_clear30.png"))); // NOI18N
         btn_xoaTrang.setText("Xoá trắng");
+        btn_xoaTrang.setEnabled(false);
         btn_xoaTrang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_xoaTrangActionPerformed(evt);
+                GD_QuanLi_Phong.this.actionPerformed(evt);
             }
         });
         jPanel20.add(btn_xoaTrang);
@@ -300,38 +315,152 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tf_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_idActionPerformed
+    private void tbl_danhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_danhSachMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_idActionPerformed
+        int i = tbl_danhSach.getSelectedRow();
+        if (i != -1) {
+            showDetailInput(jPanel2, model, i);
+        }
+    }//GEN-LAST:event_tbl_danhSachMouseClicked
 
-    private void cb_trangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_trangThaiActionPerformed
+    private void actionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cb_trangThaiActionPerformed
-
-    private void cb_loaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_loaiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb_loaiActionPerformed
-
-    private void tf_giaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_giaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_giaActionPerformed
-
-    private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_themActionPerformed
-
-    private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_suaActionPerformed
-
-    private void btn_luuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_luuActionPerformed
-
-    private void btn_xoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaTrangActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_xoaTrangActionPerformed
-
+        Object o = evt.getSource();
+        if (o.equals(btn_them)) {
+            clearInput(jPanel2);
+            if (btn_them.getText().equals("Thêm")) {
+                ArrayList<String> dsid = new ArrayList<>();
+                for (Phong i : daop.getAll(Phong.class)) {
+                    dsid.add(i.getMaPhong());
+                }
+                createID(tf_id, dsid, "MP");
+                tbl_danhSach.clearSelection();
+                tbl_danhSach.setEnabled(false);
+                setEnableInput(true, jPanel2);
+                btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/chuyenPhong_huy30.png")));
+                btn_them.setText("Huỷ");
+                btn_sua.setEnabled(false);
+                btn_luu.setEnabled(true);
+                btn_xoaTrang.setEnabled(true);
+            } else {
+                clearInput(jPanel2);
+                tbl_danhSach.setEnabled(true);
+                tf_id.setText("");
+                setEnableInput(false, jPanel2);
+                btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_add30.png")));
+                btn_them.setText("Thêm");
+                btn_sua.setEnabled(true);
+                btn_luu.setEnabled(false);
+                btn_xoaTrang.setEnabled(false);
+            }
+        } else if (o.equals(btn_sua)) {
+            int r = tbl_danhSach.getSelectedRow();
+            if (r != -1) {
+                if (btn_sua.getText().equals("Sửa")) {
+                    tbl_danhSach.setEnabled(false);
+                    setEnableInput(true, jPanel2);
+                    btn_sua.setText("Huỷ");
+                    btn_sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/chuyenPhong_huy30.png")));
+                    btn_them.setEnabled(false);
+                    btn_luu.setEnabled(true);
+                    btn_xoaTrang.setEnabled(true);
+                } else {
+                    tbl_danhSach.clearSelection();
+                    tbl_danhSach.setEnabled(true);
+                    clearInput(jPanel2);
+                    tf_id.setText("");
+                    setEnableInput(false, jPanel2);
+                    btn_sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_edit30.png")));
+                    btn_sua.setText("Sửa");
+                    btn_them.setEnabled(true);
+                    btn_luu.setEnabled(false);
+                    btn_xoaTrang.setEnabled(false);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Hãy chọn dòng");
+            }
+        } else if (o.equals(btn_luu)) {
+            if (btn_them.getText().equals("Huỷ")) {
+                if (validateInput()) { // để nhét regex vào
+                    String id = tf_id.getText().trim();
+                    String ten = tf_ten.getText().trim();
+                    int trangthai = cb_trangThai.getSelectedIndex();
+                    LoaiPhong lp = daolp.getLoaiPhongTheoTen(cb_loai.getSelectedItem().toString().trim());
+                    int succhua = Integer.parseInt(cb_sucChua.getSelectedItem().toString());
+                    Double gia = Double.parseDouble(tf_gia.getText().trim());
+                    
+                    Phong p = new Phong(id, ten, trangthai, lp, succhua, gia);
+                    if (daop.create(p)) {
+                        JOptionPane.showMessageDialog(this, "Thêm thành công");
+                        loadTable(daop.getAll(Phong.class), model);
+                        clearInput(jPanel2);
+                        tbl_danhSach.setEnabled(true);
+                        tf_id.setText("");
+                        setEnableInput(false, jPanel2);
+                        btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_add30.png")));
+                        btn_them.setText("Thêm");
+                        btn_sua.setEnabled(true);
+                        btn_luu.setEnabled(false);
+                        btn_xoaTrang.setEnabled(false);
+                    }
+                }
+            }
+            if (btn_sua.getText().equals("Huỷ")) {
+                if (validateInput()) {
+                    String id = tf_id.getText().trim();
+                    String ten = tf_ten.getText().trim();
+                    int trangthai = cb_trangThai.getSelectedIndex();
+                    LoaiPhong lp = daolp.getLoaiPhongTheoTen(cb_loai.getSelectedItem().toString().trim());
+                    int succhua = Integer.parseInt(cb_sucChua.getSelectedItem().toString());
+                    Double gia = Double.parseDouble(tf_gia.getText().trim());
+                    
+                    Phong p = new Phong(id, ten, trangthai, lp, succhua, gia);
+                    if (daop.update(p)) {
+                        JOptionPane.showMessageDialog(this, "Sửa thành công");
+                        loadTable(daop.getAll(Phong.class), model);
+                        tbl_danhSach.clearSelection();
+                        tbl_danhSach.setEnabled(true);
+                        clearInput(jPanel2);
+                        tf_id.setText("");
+                        setEnableInput(false, jPanel2);
+                        btn_sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_edit30.png")));
+                        btn_sua.setText("Sửa");
+                        btn_them.setEnabled(true);
+                        btn_luu.setEnabled(false);
+                        btn_xoaTrang.setEnabled(false);
+                    }
+                }
+            }
+        } else if (o.equals(btn_xoaTrang)) {
+            clearInput(jPanel2);
+        }
+    }//GEN-LAST:event_actionPerformed
+    
+    private boolean validateInput() {
+        String ten = tf_ten.getText().trim();
+        String gia = tf_gia.getText().trim();
+        if (ten.isEmpty()) {
+            showRegexError(tf_ten, "Tên không được rỗng");
+            return false;
+        }
+        if (ten.length() > 30) {
+            showRegexError(tf_ten, "Tên không được quá 30 kí tự");
+            return false;
+        }
+        if (!ten.matches("^[A-ZÀ-Ỹ]([a-zà-ỹ\\d]*\\s?)+$")) {
+            showRegexError(tf_ten, "Viết hoa kí tự đầu, không bao gồm kí tự đặc biệt");
+            return false;
+        }
+        if (gia.isEmpty()) {
+            showRegexError(tf_gia, "Vui lòng nhập giá");
+            return false;
+        }
+        if (!gia.matches("^[1-9][0-9]*$")) {
+            showRegexError(tf_gia, "Giá phải > 0");
+            return false;
+        }
+        return true;
+    }
     /**
      * @param args the command line arguments
      */
@@ -366,7 +495,10 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame {
             }
         });
     }
-
+    private DAO_Phong daop = new DAO_Phong();
+    private DAO_LoaiPhong daolp = new DAO_LoaiPhong();
+    private ArrayList<Phong> dsp = daop.getAll(Phong.class);
+    private DefaultTableModel model;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_luu;
     private javax.swing.JButton btn_sua;

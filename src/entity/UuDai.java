@@ -4,7 +4,7 @@
  */
 package entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -14,7 +14,7 @@ import java.util.Objects;
 public class UuDai {
     private String maUuDai, tenUuDai;
     private double giamGia;
-    private LocalDateTime ngayBatDauApDung, ngayKetThucApDung;
+    private LocalDate ngayBatDauApDung, ngayKetThucApDung;
 
     public String getMaUuDai() {
         return maUuDai;
@@ -40,23 +40,23 @@ public class UuDai {
         this.giamGia = giamGia;
     }
 
-    public LocalDateTime getNgayBatDauApDung() {
+    public LocalDate getNgayBatDauApDung() {
         return ngayBatDauApDung;
     }
 
-    public void setNgayBatDauApDung(LocalDateTime ngayBatDauApDung) {
+    public void setNgayBatDauApDung(LocalDate ngayBatDauApDung) {
         this.ngayBatDauApDung = ngayBatDauApDung;
     }
 
-    public LocalDateTime getNgayKetThucApDung() {
+    public LocalDate getNgayKetThucApDung() {
         return ngayKetThucApDung;
     }
 
-    public void setNgayKetThucApDung(LocalDateTime ngayKetThucApDung) {
+    public void setNgayKetThucApDung(LocalDate ngayKetThucApDung) {
         this.ngayKetThucApDung = ngayKetThucApDung;
     }
 
-    public UuDai(String maUuDai, String tenUuDai, double giamGia, LocalDateTime ngayBatDauApDung, LocalDateTime ngayKetThucApDung) {
+    public UuDai(String maUuDai, String tenUuDai, double giamGia, LocalDate ngayBatDauApDung, LocalDate ngayKetThucApDung) {
         this.maUuDai = maUuDai;
         this.tenUuDai = tenUuDai;
         this.giamGia = giamGia;

@@ -14,8 +14,8 @@ public class Phong {
     private String maPhong, tenPhong;
     private int trangThai;
     private LoaiPhong loaiPhong;
-    private int sucChua;
-    private double giaPhong;
+    private int sucChuaToiDa;
+    private double giaPhongTheoGio;
 
     public String getMaPhong() {
         return maPhong;
@@ -49,29 +49,29 @@ public class Phong {
         this.loaiPhong = loaiPhong;
     }
 
-    public int getSucChua() {
-        return sucChua;
+    public int getSucChuaToiDa() {
+        return sucChuaToiDa;
     }
 
-    public void setSucChua(int sucChua) {
-        this.sucChua = sucChua;
+    public void setSucChuaToiDa(int sucChuaToiDa) {
+        this.sucChuaToiDa = sucChuaToiDa;
     }
 
-    public double getGiaPhong() {
-        return giaPhong;
+    public double getGiaPhongTheoGio() {
+        return giaPhongTheoGio;
     }
 
-    public void setGiaPhong(double giaPhong) {
-        this.giaPhong = giaPhong;
+    public void setGiaPhongTheoGio(double giaPhongTheoGio) {
+        this.giaPhongTheoGio = giaPhongTheoGio;
     }
 
-    public Phong(String maPhong, String tenPhong, int trangThai, LoaiPhong loaiPhong, int sucChua, double giaPhong) {
+    public Phong(String maPhong, String tenPhong, int trangThai, LoaiPhong loaiPhong, int sucChuaToiDa, double giaPhong) {
         this.maPhong = maPhong;
         this.tenPhong = tenPhong;
         this.trangThai = trangThai;
         this.loaiPhong = loaiPhong;
-        this.sucChua = sucChua;
-        this.giaPhong = giaPhong;
+        this.sucChuaToiDa = sucChuaToiDa;
+        this.giaPhongTheoGio = giaPhong;
     }
 
     public Phong() {
@@ -101,7 +101,7 @@ public class Phong {
 
     @Override
     public String toString() {
-        return "Phong{" + "maPhong=" + maPhong + ", tenPhong=" + tenPhong + ", trangThai=" + trangThai + ", loaiPhong=" + loaiPhong + ", sucChua=" + sucChua + ", giaPhong=" + giaPhong + '}';
+        return "Phong{" + "maPhong=" + maPhong + ", tenPhong=" + tenPhong + ", trangThai=" + trangThai + ", loaiPhong=" + loaiPhong + ", sucChuaToiDa=" + sucChuaToiDa + ", giaPhong=" + giaPhongTheoGio + '}';
     }
     
 }

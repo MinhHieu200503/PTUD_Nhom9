@@ -4,17 +4,30 @@
  */
 package gui;
 
+import dao.DAO_Ca;
+import entity.Ca;
+import java.awt.Font;
+import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+
 /**
  *
  * @author quang
  */
-public class GD_QuanLi_Ca extends javax.swing.JFrame {
-
+public class GD_QuanLi_Ca extends javax.swing.JFrame implements I_TraCuu_QuanLi<Ca>{
+    
     /**
      * Creates new form GD_QuanLi_Ca
      */
     public GD_QuanLi_Ca() {
         initComponents();
+        model = (DefaultTableModel) tbl_danhSach.getModel();
+        setEnableInput(false, jPanel2);
+        loadTable(dsca, model);
     }
 
     /**
@@ -44,7 +57,7 @@ public class GD_QuanLi_Ca extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jPanel19 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_danhSach = new javax.swing.JTable();
         jPanel20 = new javax.swing.JPanel();
         btn_them = new javax.swing.JButton();
         btn_sua = new javax.swing.JButton();
@@ -71,12 +84,6 @@ public class GD_QuanLi_Ca extends javax.swing.JFrame {
 
         tf_id.setBackground(new java.awt.Color(142, 172, 207));
         tf_id.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        tf_id.setText(".......");
-        tf_id.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_idActionPerformed(evt);
-            }
-        });
         jPanel3.add(tf_id, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(jPanel3);
@@ -128,12 +135,9 @@ public class GD_QuanLi_Ca extends javax.swing.JFrame {
 
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_danhSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {".....", "", null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Mã ca", "Tên ca", "Mô tả"
@@ -142,15 +146,35 @@ public class GD_QuanLi_Ca extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(jTable1);
+        tbl_danhSach.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbl_danhSach.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbl_danhSach.getTableHeader().setReorderingAllowed(false);
+        tbl_danhSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_danhSachMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tbl_danhSach);
+        tbl_danhSach.setRowHeight(35);
+        // Chỉnh font cho header
+        JTableHeader header = tbl_danhSach.getTableHeader();
+        header.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        // Căn lề cho header
+        TableCellRenderer rendererFromHeader = header.getDefaultRenderer();
+        JLabel headerLabel = (JLabel) rendererFromHeader;
+        headerLabel.setHorizontalAlignment(JLabel.CENTER);
 
         jPanel19.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
@@ -167,7 +191,7 @@ public class GD_QuanLi_Ca extends javax.swing.JFrame {
         btn_them.setText("Thêm");
         btn_them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_themActionPerformed(evt);
+                GD_QuanLi_Ca.this.actionPerformed(evt);
             }
         });
         jPanel20.add(btn_them);
@@ -179,7 +203,7 @@ public class GD_QuanLi_Ca extends javax.swing.JFrame {
         btn_sua.setText("Sửa");
         btn_sua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_suaActionPerformed(evt);
+                GD_QuanLi_Ca.this.actionPerformed(evt);
             }
         });
         jPanel20.add(btn_sua);
@@ -189,9 +213,10 @@ public class GD_QuanLi_Ca extends javax.swing.JFrame {
         btn_luu.setForeground(new java.awt.Color(255, 255, 255));
         btn_luu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_save30.png"))); // NOI18N
         btn_luu.setText("Lưu");
+        btn_luu.setEnabled(false);
         btn_luu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_luuActionPerformed(evt);
+                GD_QuanLi_Ca.this.actionPerformed(evt);
             }
         });
         jPanel20.add(btn_luu);
@@ -201,9 +226,10 @@ public class GD_QuanLi_Ca extends javax.swing.JFrame {
         btn_xoaTrang.setForeground(new java.awt.Color(255, 255, 255));
         btn_xoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_clear30.png"))); // NOI18N
         btn_xoaTrang.setText("Xoá trắng");
+        btn_xoaTrang.setEnabled(false);
         btn_xoaTrang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_xoaTrangActionPerformed(evt);
+                GD_QuanLi_Ca.this.actionPerformed(evt);
             }
         });
         jPanel20.add(btn_xoaTrang);
@@ -239,26 +265,143 @@ public class GD_QuanLi_Ca extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tf_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_idActionPerformed
+    private void tbl_danhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_danhSachMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_idActionPerformed
+        int i = tbl_danhSach.getSelectedRow();
+        if (i != -1) { // setEnabled cho table là false, khi đó click vào thì i = -1, nên chặn lại
+            showDetailInput(jPanel2, model, i);
+        }
+    }//GEN-LAST:event_tbl_danhSachMouseClicked
 
-    private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
+    private void actionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_themActionPerformed
+        Object o = evt.getSource();
+        if (o.equals(btn_them)) {
+            clearInput(jPanel2);
+            if (btn_them.getText().equals("Thêm")) {
+                ArrayList<String> dsid = new ArrayList<>();
+                for (Ca i : daoca.getAll(Ca.class)) {
+                    dsid.add(i.getMaCa());
+                }
+                createID(tf_id, dsid, "CA");
+                tbl_danhSach.clearSelection();
+                tbl_danhSach.setEnabled(false);
+                setEnableInput(true, jPanel2);
+                btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/chuyenPhong_huy30.png")));
+                btn_them.setText("Huỷ");
+                btn_sua.setEnabled(false);
+                btn_luu.setEnabled(true);
+                btn_xoaTrang.setEnabled(true);
+            } else {
+                tbl_danhSach.setEnabled(true);
+                tf_id.setText("");
+                setEnableInput(false, jPanel2);
+                btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_add30.png")));
+                btn_them.setText("Thêm");
+                btn_sua.setEnabled(true);
+                btn_luu.setEnabled(false);
+                btn_xoaTrang.setEnabled(false);
+            }
+        } else if (o.equals(btn_sua)) {
+            int r = tbl_danhSach.getSelectedRow();
+            if (r != -1) {
+                if (btn_sua.getText().equals("Sửa")) {
+                    tbl_danhSach.setEnabled(false);
+                    setEnableInput(true, jPanel2);
+                    btn_sua.setText("Huỷ");
+                    btn_sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/chuyenPhong_huy30.png")));
+                    btn_them.setEnabled(false);
+                    btn_luu.setEnabled(true);
+                    btn_xoaTrang.setEnabled(true);
+                } else {
+                    tbl_danhSach.clearSelection();
+                    tbl_danhSach.setEnabled(true);
+                    clearInput(jPanel2);
+                    tf_id.setText("");
+                    setEnableInput(false, jPanel2);
+                    btn_sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_edit30.png")));
+                    btn_sua.setText("Sửa");
+                    btn_them.setEnabled(true);
+                    btn_luu.setEnabled(false);
+                    btn_xoaTrang.setEnabled(false);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Hãy chọn dòng");
+            }
+        } else if (o.equals(btn_luu)) {
+            if (btn_them.getText().equals("Huỷ")) {
+                if (validateInput()) { // để nhét regex vào
+                    String id = tf_id.getText().trim();
+                    String ten = tf_ten.getText().trim();
+                    String mota = ta_moTa.getText().trim();
 
-    private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_suaActionPerformed
-
-    private void btn_luuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_luuActionPerformed
-
-    private void btn_xoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaTrangActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_xoaTrangActionPerformed
-
+                    Ca ca = new Ca(id, ten, mota);
+                    if (daoca.create(ca)) {
+                        JOptionPane.showMessageDialog(this, "Thêm thành công");
+                        loadTable(daoca.getAll(Ca.class), model);
+                        clearInput(jPanel2);
+                        tbl_danhSach.setEnabled(true);
+                        tf_id.setText("");
+                        setEnableInput(false, jPanel2);
+                        btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_add30.png")));
+                        btn_them.setText("Thêm");
+                        btn_sua.setEnabled(true);
+                        btn_luu.setEnabled(false);
+                        btn_xoaTrang.setEnabled(false);
+                    }
+                }
+            }
+            if (btn_sua.getText().equals("Huỷ")) {
+                if (validateInput()) {
+                    String id = tf_id.getText().trim();
+                    String ten = tf_ten.getText().trim();
+                    String mota = ta_moTa.getText().trim();
+                        
+                    Ca ca = new Ca(id, ten, mota);
+                    if (daoca.update(ca)) {
+                        JOptionPane.showMessageDialog(this, "Sửa thành công");
+                        loadTable(daoca.getAll(Ca.class), model);
+                        tbl_danhSach.clearSelection();
+                        tbl_danhSach.setEnabled(true);
+                        clearInput(jPanel2);
+                        tf_id.setText("");
+                        setEnableInput(false, jPanel2);
+                        btn_sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_edit30.png")));
+                        btn_sua.setText("Sửa");
+                        btn_them.setEnabled(true);
+                        btn_luu.setEnabled(false);
+                        btn_xoaTrang.setEnabled(false);
+                    }
+                }
+            }
+        } else if (o.equals(btn_xoaTrang)) {
+            clearInput(jPanel2);
+        }
+    }//GEN-LAST:event_actionPerformed
+    
+    private boolean validateInput() {
+        
+        String ten = tf_ten.getText().trim();
+        String mota = ta_moTa.getText().trim();
+        
+        if (ten.isEmpty()) {
+            showRegexError(tf_ten, "Tên không được rỗng");
+            return false;
+        }
+        if (ten.length() > 30) {
+            showRegexError(tf_ten, "Tên không được quá 30 kí tự");
+            return false;
+        }
+        if (!ten.matches("^[A-ZÀ-Ỹ]([a-zà-ỹ\\d]*\\s?)+$")) {
+            showRegexError(tf_ten, "Viết hoa kí tự đầu, không bao gồm kí tự đặc biệt");
+            return false;
+        }
+        if (mota.length() > 50) {
+            showRegexError(ta_moTa, "Mô tả không được quá 50 kí tự");
+            return false;
+        }
+        return true;
+    }
     /**
      * @param args the command line arguments
      */
@@ -293,7 +436,9 @@ public class GD_QuanLi_Ca extends javax.swing.JFrame {
             }
         });
     }
-
+    private DAO_Ca daoca = new DAO_Ca();
+    private ArrayList<Ca> dsca = daoca.getAll(Ca.class);
+    private DefaultTableModel model;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_luu;
     private javax.swing.JButton btn_sua;
@@ -315,8 +460,8 @@ public class GD_QuanLi_Ca extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea ta_moTa;
+    private javax.swing.JTable tbl_danhSach;
     private javax.swing.JTextField tf_id;
     private javax.swing.JTextField tf_ten;
     // End of variables declaration//GEN-END:variables

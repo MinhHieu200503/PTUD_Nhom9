@@ -1,10 +1,12 @@
 package ComponentCustom;
 
+import gui.GD_QuenMatKhau;
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import mainFrame.mainFrame;
 
 public class FormSignIn extends JPanel {
     private final ExitButton btnExit;
@@ -13,7 +15,8 @@ public class FormSignIn extends JPanel {
   
     private  TextFieldPassCustom pPassWord;
     private final Button btnConfirm;
-    private final JLabel lblLogin;
+    public final JLabel lblForgotPass;
+    public GD_QuenMatKhau gd_quenMatKhau;
 
     public FormSignIn() {
         FontCustom cus = new FontCustom();
@@ -52,15 +55,15 @@ public class FormSignIn extends JPanel {
         btnConfirm.setBounds(30, 180 + 120, 340, 50);
         add(btnConfirm);
 
-        lblLogin = new JLabel("Forgot password ?!!");
-        lblLogin.setFont(cus.customFont17);
-        lblLogin.setBounds((400 - 178) / 2,180 + 200, 178, 30);
-        add(lblLogin);
+        lblForgotPass = new JLabel("Forgot password ?!!");
+        lblForgotPass.setFont(cus.customFont17);
+        lblForgotPass.setBounds((400 - 178) / 2,180 + 200, 178, 30);
+        add(lblForgotPass);
 
-        lblLogin.addMouseListener(new MouseListener() {
+        lblForgotPass.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                
             }
 
             @Override
@@ -75,14 +78,16 @@ public class FormSignIn extends JPanel {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                lblLogin.setBorder(new MatteBorder(0,0,1,0,Color.black));
+                lblForgotPass.setBorder(new MatteBorder(0,0,1,0,Color.black));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                lblLogin.setBorder(null);
+                lblForgotPass.setBorder(null);
             }
         });
+        
+        
     }
 
     // Paint Component
@@ -99,4 +104,3 @@ public class FormSignIn extends JPanel {
 }
 
 
-// Thank for watching !!!!!
