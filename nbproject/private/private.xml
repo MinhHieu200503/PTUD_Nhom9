@@ -3,16 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/gui/GD_TraCuu_KhachHang.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/gui/tesstPhong.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/mainFrame/mainFrame.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/gui/GD_XuLyDanhSachPhong.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/smallPanel/GD_XuLy.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/smallPanel/navBar.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/gui/GD_TraCuu.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/smallPanel/SideBarXuLy.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/smallPanel/PanelGradient.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/smallPanel/DanhSachPhong.java</file>
+
+
+
+
+            <file>file:/D:/IUH/DHKTPM17B_Nam_3/KH1/PhatTrienUngDung/Project_PTUD/Phat_trien_ung_dung/src/gui/GD_TraCuu_KhachHang.java</file>
+            <file>file:/D:/IUH/DHKTPM17B_Nam_3/KH1/PhatTrienUngDung/Project_PTUD/Phat_trien_ung_dung/src/smallPanel/Phong.java</file>
+            <file>file:/D:/IUH/DHKTPM17B_Nam_3/KH1/PhatTrienUngDung/Project_PTUD/Phat_trien_ung_dung/src/gui/tesstPhong.java</file>
+            <file>file:/D:/IUH/DHKTPM17B_Nam_3/KH1/PhatTrienUngDung/Project_PTUD/Phat_trien_ung_dung/src/gui/GD_QuanLi_LoaiPhong.java</file>
+            <file>file:/D:/IUH/DHKTPM17B_Nam_3/KH1/PhatTrienUngDung/Project_PTUD/Phat_trien_ung_dung/src/smallPanel/SideBarXuLy.java</file>
+            <file>file:/D:/IUH/DHKTPM17B_Nam_3/KH1/PhatTrienUngDung/Project_PTUD/Phat_trien_ung_dung/src/gui/GD_TraCuu_NhanVien.java</file>
+            <file>file:/D:/IUH/DHKTPM17B_Nam_3/KH1/PhatTrienUngDung/Project_PTUD/Phat_trien_ung_dung/src/gui/login.java</file>
+
+
+
         </group>
     </open-files>
 </project-private>

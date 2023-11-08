@@ -215,28 +215,14 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lbl_TraCuu;
-    private javax.swing.JLabel lbl_TraCuu1;
     private javax.swing.JLabel lbl_TraCuu2;
-    private javax.swing.JPanel pnlCenter;
-    private javax.swing.JPanel pnlCenter1;
     private javax.swing.JPanel pnlCenter2;
     private javax.swing.JPanel pnlData;
-    private javax.swing.JPanel pnlMain;
-    private javax.swing.JPanel pnlMain1;
     private javax.swing.JPanel pnlMain2;
-    private javax.swing.JPanel pnlThongTinTraCuu;
-    private javax.swing.JPanel pnlThongTinTraCuu1;
     private javax.swing.JPanel pnlThongTinTraCuu2;
-    private javax.swing.JPanel pnlTop;
-    private javax.swing.JPanel pnlTop1;
     private javax.swing.JPanel pnlTop2;
-    private javax.swing.JLabel pnlTop_title;
-    private javax.swing.JLabel pnlTop_title1;
     private javax.swing.JLabel pnlTop_title2;
     private javax.swing.JTable table_TraCuu;
-    private javax.swing.JTextField tf_TraCuu;
-    private javax.swing.JTextField tf_TraCuu1;
     private javax.swing.JTextField tf_TraCuu2;
     // End of variables declaration//GEN-END:variables
 }
