@@ -94,7 +94,7 @@ public class tesstPhong extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private JPanel createList(){
+    public JPanel createList(){
         ArrayList<Phong> dataPhong = tmpData();
         allPhong_LocPhong allPhong_LocPhong = new allPhong_LocPhong(dataPhong);
         String[] title = {"Lọc theo loại phòng","Lọc theo sức chứa","lọc theo ngày"};
@@ -130,7 +130,7 @@ public class tesstPhong extends javax.swing.JFrame {
         });
     }
     
-    private ArrayList<Phong> list = new ArrayList<>();
+    public ArrayList<Phong> list = new ArrayList<>();
     public DanhSachPhong tmpDSPhong;
      public allPhong_LocPhong tmpAllPhong_LocPhong;
     // Variables declaration - do not modify//GEN-BEGIN:variables
