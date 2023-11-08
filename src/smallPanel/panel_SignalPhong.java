@@ -34,21 +34,18 @@ public class panel_SignalPhong extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         lb_Icon_Availabel = new javax.swing.JLabel();
         lb_Available = new javax.swing.JLabel();
         lb_Quantity_Available = new javax.swing.JLabel();
-        lb_ngoacTronTrai = new javax.swing.JLabel();
-        lb_ngoacTronPhai = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         lb_Icon_Waiting = new javax.swing.JLabel();
         lb_Available1 = new javax.swing.JLabel();
-        lb_ngoacTronTrai1 = new javax.swing.JLabel();
         lb_Quantity_Available1 = new javax.swing.JLabel();
-        lb_ngoacTronPhai1 = new javax.swing.JLabel();
-        lb_Available2 = new javax.swing.JLabel();
-        lb_ngoacTronPhai2 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         lb_Icon_UnAvailabel = new javax.swing.JLabel();
+        lb_Available2 = new javax.swing.JLabel();
         lb_Quantity_Available2 = new javax.swing.JLabel();
-        lb_ngoacTronTrai2 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(800, 80));
         setMinimumSize(new java.awt.Dimension(800, 80));
@@ -63,133 +60,45 @@ public class panel_SignalPhong extends javax.swing.JPanel {
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         lb_Icon_Availabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Available.png"))); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 4;
-        gridBagConstraints.ipady = 1;
-        jPanel1.add(lb_Icon_Availabel, gridBagConstraints);
+        jPanel2.add(lb_Icon_Availabel);
 
         lb_Available.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         lb_Available.setText("Sẵn sàng");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 5);
-        jPanel1.add(lb_Available, gridBagConstraints);
+        jPanel2.add(lb_Available);
 
         lb_Quantity_Available.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        lb_Quantity_Available.setText("99");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 4;
-        jPanel1.add(lb_Quantity_Available, gridBagConstraints);
+        lb_Quantity_Available.setText("(99)");
+        jPanel2.add(lb_Quantity_Available);
 
-        lb_ngoacTronTrai.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        lb_ngoacTronTrai.setText("(");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 4;
-        jPanel1.add(lb_ngoacTronTrai, gridBagConstraints);
-
-        lb_ngoacTronPhai.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        lb_ngoacTronPhai.setText(")");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 4;
-        jPanel1.add(lb_ngoacTronPhai, gridBagConstraints);
+        jPanel1.add(jPanel2, new java.awt.GridBagConstraints());
 
         lb_Icon_Waiting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Wating.png"))); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
-        gridBagConstraints.ipady = 1;
-        gridBagConstraints.weighty = 0.5;
-        gridBagConstraints.insets = new java.awt.Insets(0, 50, 0, 0);
-        jPanel1.add(lb_Icon_Waiting, gridBagConstraints);
+        jPanel3.add(lb_Icon_Waiting);
 
         lb_Available1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         lb_Available1.setText("Đã được đặt");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 4;
-        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 5);
-        jPanel1.add(lb_Available1, gridBagConstraints);
-
-        lb_ngoacTronTrai1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        lb_ngoacTronTrai1.setText("(");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 4;
-        jPanel1.add(lb_ngoacTronTrai1, gridBagConstraints);
+        jPanel3.add(lb_Available1);
 
         lb_Quantity_Available1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        lb_Quantity_Available1.setText("99");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 4;
-        jPanel1.add(lb_Quantity_Available1, gridBagConstraints);
+        lb_Quantity_Available1.setText("(99)");
+        jPanel3.add(lb_Quantity_Available1);
 
-        lb_ngoacTronPhai1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        lb_ngoacTronPhai1.setText(")");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 4;
-        jPanel1.add(lb_ngoacTronPhai1, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 80, 0, 80);
+        jPanel1.add(jPanel3, gridBagConstraints);
+
+        lb_Icon_UnAvailabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Unvailable123.png"))); // NOI18N
+        jPanel4.add(lb_Icon_UnAvailabel);
 
         lb_Available2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         lb_Available2.setText("Sẵn sàng");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 11;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 4;
-        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 5);
-        jPanel1.add(lb_Available2, gridBagConstraints);
-
-        lb_ngoacTronPhai2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        lb_ngoacTronPhai2.setText(")");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 14;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 4;
-        jPanel1.add(lb_ngoacTronPhai2, gridBagConstraints);
-
-        lb_Icon_UnAvailabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Unvailable123.png"))); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.ipady = 1;
-        gridBagConstraints.insets = new java.awt.Insets(0, 50, 0, 0);
-        jPanel1.add(lb_Icon_UnAvailabel, gridBagConstraints);
+        jPanel4.add(lb_Available2);
 
         lb_Quantity_Available2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        lb_Quantity_Available2.setText("99");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 13;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 4;
-        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
-        jPanel1.add(lb_Quantity_Available2, gridBagConstraints);
+        lb_Quantity_Available2.setText("(99)");
+        jPanel4.add(lb_Quantity_Available2);
 
-        lb_ngoacTronTrai2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        lb_ngoacTronTrai2.setText("(");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 12;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 4;
-        jPanel1.add(lb_ngoacTronTrai2, gridBagConstraints);
+        jPanel1.add(jPanel4, new java.awt.GridBagConstraints());
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -197,6 +106,9 @@ public class panel_SignalPhong extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lb_Available;
     private javax.swing.JLabel lb_Available1;
     private javax.swing.JLabel lb_Available2;
@@ -206,12 +118,6 @@ public class panel_SignalPhong extends javax.swing.JPanel {
     private javax.swing.JLabel lb_Quantity_Available;
     private javax.swing.JLabel lb_Quantity_Available1;
     private javax.swing.JLabel lb_Quantity_Available2;
-    private javax.swing.JLabel lb_ngoacTronPhai;
-    private javax.swing.JLabel lb_ngoacTronPhai1;
-    private javax.swing.JLabel lb_ngoacTronPhai2;
-    private javax.swing.JLabel lb_ngoacTronTrai;
-    private javax.swing.JLabel lb_ngoacTronTrai1;
-    private javax.swing.JLabel lb_ngoacTronTrai2;
     // End of variables declaration//GEN-END:variables
 
 

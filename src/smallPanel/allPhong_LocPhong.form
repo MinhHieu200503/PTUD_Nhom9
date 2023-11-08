@@ -30,29 +30,33 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lableFilterOption1" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
-                  <Component id="ComboFilterOption1" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
+                  <Component id="lableFilterOption1" min="-2" pref="132" max="-2" attributes="0"/>
+                  <Component id="ComboFilterOption1" min="-2" pref="330" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="179" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lableFilterOption2" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
-                  <Component id="ComboFilterOption2" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
+                  <Component id="ComboFilterOption2" min="-2" pref="330" max="-2" attributes="0"/>
+                  <Component id="lableFilterOption2" min="-2" pref="129" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="179" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="ComboFilterOption3" alignment="0" min="-2" pref="230" max="-2" attributes="0"/>
-                  <Component id="lableFilterOption3" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
+                  <Component id="ComboFilterOption3" min="-2" pref="326" max="-2" attributes="0"/>
+                  <Component id="lableFilterOption3" min="-2" pref="128" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="47" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="panel_SignalPhong1" min="-2" pref="1083" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="27" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="ContainerListPhong" pref="1086" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Component id="ContainerListPhong" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="24" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -61,31 +65,28 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lableFilterOption1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lableFilterOption2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lableFilterOption3" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lableFilterOption1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lableFilterOption2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="ComboFilterOption2" alignment="0" min="-2" pref="42" max="-2" attributes="0"/>
-                          <Component id="ComboFilterOption1" alignment="0" min="-2" pref="42" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lableFilterOption3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="ComboFilterOption3" min="-2" pref="42" max="-2" attributes="0"/>
+                  <Component id="ComboFilterOption1" min="-2" pref="42" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="ComboFilterOption2" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="ComboFilterOption3" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="817" max="32767" attributes="0"/>
+              <EmptySpace pref="660" max="32767" attributes="0"/>
+              <Component id="panel_SignalPhong1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
-                  <Component id="ContainerListPhong" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                  <Component id="ContainerListPhong" min="-2" pref="673" max="-2" attributes="0"/>
+                  <EmptySpace pref="128" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -164,6 +165,9 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboFilterOption3ActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -171,7 +175,7 @@
     <Container class="javax.swing.JPanel" name="ContainerListPhong">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="cc" red="cc" type="rgb"/>
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[1080, 698]"/>
@@ -190,5 +194,7 @@
         <Property name="rows" type="int" value="1"/>
       </Layout>
     </Container>
+    <Component class="smallPanel.panel_SignalPhong" name="panel_SignalPhong1">
+    </Component>
   </SubComponents>
 </Form>

@@ -28,6 +28,7 @@ public class tesstPhong extends javax.swing.JFrame {
     public tesstPhong() {
         initComponents();
         jPanel1.add(createList());
+
         
 //        testClick.setName("ButtonClick");
     }
@@ -91,7 +92,11 @@ public class tesstPhong extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
         );
-
+        FlatMacLightLaf.setup();
+        UIManager.put( "Button.arc", 10 );
+        UIManager.put( "Component.arc", 10 );
+        UIManager.put( "ProgressBar.arc", 10 );
+        UIManager.put( "TextComponent.arc", 10 );
         pack();
     }// </editor-fold>//GEN-END:initComponents
     public JPanel createList(){
@@ -116,11 +121,7 @@ public class tesstPhong extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        FlatMacLightLaf.setup();
-        UIManager.put( "Button.arc", 10 );
-        UIManager.put( "Component.arc", 10 );
-        UIManager.put( "ProgressBar.arc", 10 );
-        UIManager.put( "TextComponent.arc", 10 );
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

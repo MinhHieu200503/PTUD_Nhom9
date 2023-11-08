@@ -4,10 +4,12 @@
  */
 package smallPanel;
 
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.util.ArrayList;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 /**
  *
@@ -39,6 +41,7 @@ public class allPhong_LocPhong extends javax.swing.JPanel {
         lableFilterOption3 = new javax.swing.JLabel();
         ComboFilterOption3 = new javax.swing.JComboBox<>();
         ContainerListPhong = new javax.swing.JPanel();
+        panel_SignalPhong1 = new smallPanel.panel_SignalPhong();
 
         setBackground(new java.awt.Color(204, 255, 204));
         setMaximumSize(new java.awt.Dimension(1110, 900));
@@ -74,8 +77,13 @@ public class allPhong_LocPhong extends javax.swing.JPanel {
         lableFilterOption3.setText("Lọc theo trạng thái:");
 
         ComboFilterOption3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboFilterOption3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboFilterOption3ActionPerformed(evt);
+            }
+        });
 
-        ContainerListPhong.setBackground(new java.awt.Color(204, 204, 255));
+        ContainerListPhong.setBackground(new java.awt.Color(255, 255, 255));
         ContainerListPhong.setMaximumSize(new java.awt.Dimension(1080, 698));
         ContainerListPhong.setMinimumSize(new java.awt.Dimension(1080, 698));
         ContainerListPhong.setPreferredSize(new java.awt.Dimension(1080, 698));
@@ -90,55 +98,61 @@ public class allPhong_LocPhong extends javax.swing.JPanel {
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lableFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ComboFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(179, 179, 179)
+                    .addComponent(ComboFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lableFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ComboFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(179, 179, 179)
+                    .addComponent(ComboFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lableFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lableFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panel_SignalPhong1, javax.swing.GroupLayout.PREFERRED_SIZE, 1083, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 27, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(ContainerListPhong, javax.swing.GroupLayout.DEFAULT_SIZE, 1086, Short.MAX_VALUE)
-                    .addGap(18, 18, 18)))
+                    .addComponent(ContainerListPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(24, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lableFilterOption1)
+                    .addComponent(lableFilterOption2)
+                    .addComponent(lableFilterOption3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lableFilterOption1)
-                            .addComponent(lableFilterOption2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ComboFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ComboFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lableFilterOption3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(ComboFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ComboFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(817, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 660, Short.MAX_VALUE)
+                .addComponent(panel_SignalPhong1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(99, 99, 99)
-                    .addComponent(ContainerListPhong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(99, 99, 99)))
+                    .addComponent(ContainerListPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 673, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(128, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ComboFilterOption1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComboFilterOption1MouseExited
+    private void ComboFilterOption3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboFilterOption3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ComboFilterOption1MouseExited
+    }//GEN-LAST:event_ComboFilterOption3ActionPerformed
 
     private void ComboFilterOption1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboFilterOption1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboFilterOption1ActionPerformed
+
+    private void ComboFilterOption1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComboFilterOption1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboFilterOption1MouseExited
 
     private void ComboFilterOption2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComboFilterOption2MouseClicked
         // TODO add your handling code here:
@@ -223,6 +237,8 @@ public class allPhong_LocPhong extends javax.swing.JPanel {
     public String LocOption1(){
 
         return ComboFilterOption1.getSelectedItem().toString();
+       
+        
     }
     
     
@@ -243,5 +259,6 @@ public DanhSachPhong tmpDSPhong;
     private javax.swing.JLabel lableFilterOption1;
     private javax.swing.JLabel lableFilterOption2;
     private javax.swing.JLabel lableFilterOption3;
+    private smallPanel.panel_SignalPhong panel_SignalPhong1;
     // End of variables declaration//GEN-END:variables
 }

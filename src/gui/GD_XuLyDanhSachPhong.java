@@ -4,6 +4,7 @@
  */
 package gui;
 
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import smallPanel.DanhSachPhong;
@@ -21,7 +22,7 @@ public class GD_XuLyDanhSachPhong extends javax.swing.JFrame {
      */
     public GD_XuLyDanhSachPhong() {
         initComponents();
-                jPanel1.add(createList());
+                jPanel1.add(new tesstPhong().getContentPane());
     }
 
     public ArrayList<Phong> list = new ArrayList<>();
@@ -112,14 +113,13 @@ public class GD_XuLyDanhSachPhong extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1620, 964));
         setMinimumSize(new java.awt.Dimension(1620, 964));
-        setPreferredSize(new java.awt.Dimension(1620, 964));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setMaximumSize(new java.awt.Dimension(1080, 698));
         jPanel1.setMinimumSize(new java.awt.Dimension(1080, 698));
         jPanel1.setPreferredSize(new java.awt.Dimension(1080, 698));
         jPanel1.setVerifyInputWhenFocusTarget(false);
-        jPanel1.setLayout(new java.awt.GridLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,28 +141,6 @@ public class GD_XuLyDanhSachPhong extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GD_XuLyDanhSachPhong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GD_XuLyDanhSachPhong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GD_XuLyDanhSachPhong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GD_XuLyDanhSachPhong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
