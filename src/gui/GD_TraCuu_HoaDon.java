@@ -4,17 +4,28 @@
  */
 package gui;
 
+import dao.DAO_HoaDon;
+import entity.HoaDon;
+import java.awt.Font;
+import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+
 /**
  *
  * @author quang
  */
-public class GD_TraCuu_HoaDon extends javax.swing.JFrame {
+public class GD_TraCuu_HoaDon extends javax.swing.JFrame implements I_TraCuu_QuanLi<HoaDon>{
 
     /**
      * Creates new form GD_TraCuu_HoaDon
      */
     public GD_TraCuu_HoaDon() {
         initComponents();
+        model = (DefaultTableModel) table_TraCuu.getModel();
+        loadTable(dshd, model);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,6 +80,11 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame {
         tf_TraCuu.setFont(new java.awt.Font("Segoe UI", 0, 27)); // NOI18N
         tf_TraCuu.setToolTipText("");
         tf_TraCuu.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153), 2, true));
+        tf_TraCuu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_TraCuuKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlThongTinTraCuuLayout = new javax.swing.GroupLayout(pnlThongTinTraCuu);
         pnlThongTinTraCuu.setLayout(pnlThongTinTraCuuLayout);
@@ -100,21 +116,25 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame {
         table_TraCuu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         table_TraCuu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"", "", null, null, null, null},
-                {"", null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Mã hoá đơn", "Ngày lập hoá đơn", "Trạng thái", "Tên khách hàng", "Ưu đãi", "Tên nhân viên"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         table_TraCuu.setGridColor(new java.awt.Color(153, 153, 153));
@@ -123,6 +143,14 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame {
         table_TraCuu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         table_TraCuu.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(table_TraCuu);
+        table_TraCuu.setRowHeight(35);
+        // Chỉnh font cho header
+        JTableHeader header = table_TraCuu.getTableHeader();
+        header.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        // Căn lề cho header
+        TableCellRenderer rendererFromHeader = header.getDefaultRenderer();
+        JLabel headerLabel = (JLabel) rendererFromHeader;
+        headerLabel.setHorizontalAlignment(JLabel.CENTER);
 
         javax.swing.GroupLayout pnlDataLayout = new javax.swing.GroupLayout(pnlData);
         pnlData.setLayout(pnlDataLayout);
@@ -192,6 +220,12 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_xemChiTietActionPerformed
 
+    private void tf_TraCuuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_TraCuuKeyReleased
+        // TODO add your handling code here:
+        dshd = daohd.search(tf_TraCuu.getText().trim(), HoaDon.class);
+        loadTable(dshd, model);
+    }//GEN-LAST:event_tf_TraCuuKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -226,7 +260,10 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    private DAO_HoaDon daohd = new DAO_HoaDon();
+    private ArrayList<HoaDon> dshd = daohd.getAll(HoaDon.class);
+    private DefaultTableModel model;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_xemChiTiet;
     private javax.swing.JScrollPane jScrollPane2;

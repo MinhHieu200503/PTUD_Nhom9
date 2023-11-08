@@ -6,8 +6,12 @@ package gui;
 
 import dao.DAO_DichVu;
 import entity.DichVu;
+import java.awt.Font;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -62,8 +66,6 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1650, 964));
-        setMinimumSize(new java.awt.Dimension(1650, 964));
 
         pnlMain.setPreferredSize(new java.awt.Dimension(1650, 964));
         pnlMain.setLayout(new java.awt.BorderLayout());
@@ -159,6 +161,14 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         table_TraCuu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         table_TraCuu.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(table_TraCuu);
+        table_TraCuu.setRowHeight(35);
+        // Chỉnh font cho header
+        JTableHeader header = table_TraCuu.getTableHeader();
+        header.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        // Căn lề cho header
+        TableCellRenderer rendererFromHeader = header.getDefaultRenderer();
+        JLabel headerLabel = (JLabel) rendererFromHeader;
+        headerLabel.setHorizontalAlignment(JLabel.CENTER);
 
         javax.swing.GroupLayout pnlDataLayout = new javax.swing.GroupLayout(pnlData);
         pnlData.setLayout(pnlDataLayout);
@@ -166,7 +176,7 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
             pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDataLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1860, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1590, Short.MAX_VALUE)
                 .addGap(30, 30, 30))
         );
         pnlDataLayout.setVerticalGroup(
