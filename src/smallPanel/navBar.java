@@ -466,9 +466,12 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         
         if (a.equals(home)){
             clickMenuUnderline(0);
+
         }
         else if (a.equals(room)){
             clickMenuUnderline(1);
+            this.remove(1);
+            this.add(new GD_XuLy());
         }
         else if (a.equals(search)){
             clickMenuUnderline(2);
