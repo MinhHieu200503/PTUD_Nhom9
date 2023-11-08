@@ -13,10 +13,15 @@ import entity.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JViewport;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
 
@@ -35,7 +40,7 @@ public interface I_TraCuu_QuanLi<T> {
                 // cho phép truy cập vào các trường private
                 fields[i].setAccessible(true);
                 try {
-                    if (i != 0) {
+//                    if (i != 0) {
                         // nếu trường là có tên là Phòng, thì lấy ra tên của phòng
                         switch (fields[i].getType().getSimpleName()) {
                             case "Phong":
@@ -76,44 +81,53 @@ public interface I_TraCuu_QuanLi<T> {
                                     row[i] = fields[i].get(e).equals(true) ? "Đang làm" : "Đã nghỉ";
                                 }
                                 break;
+                            case "LocalDateTime":
+                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                                row[i] = formatter.format((LocalDateTime) fields[i].get(e));
+                                break;
                             case "int":
-                                // kiểm tra xem nó là trạng thái của phòng hay hóa đơn hay Phiếu đặt phòng hay nhân viên hay dịch vụ
-                                if (e instanceof Phong) {
-                                    switch (((Phong) fields[i].get(e)).getTrangThai()) {
-                                        case 0:
-                                            row[i] = "Trống";
-                                            break;
-                                        case 1:
-                                            row[i] = "Đang hoạt động";
-                                            break;
-                                        case 2: 
-                                            row[i] = "Chưa sẵn sàng";
-                                            break;
-                                        case 3:
-                                            row[i] = "Đang chờ";
-                                            break;
-                                        default:
-                                            row[i] = "Không sử dụng";
-                                            break;
+                                // nếu fields[i] là trạng thái
+                                if (fields[i].getName().equals("trangThai")) {
+                                    // kiểm tra xem nó là trạng thái của phòng hay hóa đơn hay Phiếu đặt phòng hay nhân viên hay dịch vụ
+                                    if (e instanceof Phong) {
+                                        switch ((int) fields[i].get(e)) {
+                                            case 0:
+                                                row[i] = "Trống";
+                                                break;
+                                            case 1:
+                                                row[i] = "Đang hoạt động";
+                                                break;
+                                            case 2: 
+                                                row[i] = "Chưa sẵn sàng";
+                                                break;
+                                            case 3:
+                                                row[i] = "Đang chờ";
+                                                break;
+                                            default:
+                                                row[i] = "Không sử dụng";
+                                                break;
+                                        }
+                                        break;
+                                    } else if (e instanceof HoaDon) {
+                                        row[i] = (int) fields[i].get(e) == 1 ? "Đã thanh toán" : "Chưa thanh toán";
+                                        break;
+                                    } else if (e instanceof PhieuDatPhong) {
+                                        switch ((int) fields[i].get(e)) {
+                                            case 0: 
+                                                row[i] = "Đã huỷ";
+                                                break;
+                                            case 1:
+                                                row[i] = "Đã nhận";
+                                                break;
+                                            default:
+                                                row[i] = "Đang chờ";
+                                                break;
+                                        }
+                                        break;
+                                    } else if (e instanceof DichVu) {
+                                        row[i] = (int) fields[i].get(e) == 1 ? "Còn hàng" : "Hết hàng";
+                                        break;
                                     }
-                                } else if (e instanceof HoaDon) {
-                                    row[i] = ((HoaDon) fields[i].get(e)).getTrangThai() == 1 ? "Đã thanh toán" : "Chưa thanh toán";
-                                    break;
-                                } else if (e instanceof PhieuDatPhong) {
-                                    switch (((PhieuDatPhong) fields[i].get(e)).getTrangThai()) {
-                                        case 0: 
-                                            row[i] = "Đã huỷ";
-                                            break;
-                                        case 1:
-                                            row[i] = "Đã nhận";
-                                            break;
-                                        default:
-                                            row[i] = "Đang chờ";
-                                            break;
-                                    }
-                                } else if (e instanceof DichVu) {
-                                    row[i] = ((DichVu) fields[i].get(e)).getTrangThai() == 1 ? "Còn hàng" : "Hết hàng";
-                                    break;
                                 } else {
                                     row[i] = fields[i].get(e);
                                     break;
@@ -122,9 +136,9 @@ public interface I_TraCuu_QuanLi<T> {
                                 row[i] = fields[i].get(e);
                                 break;
                         }
-                    } else {
-                        row[i] = fields[i].get(e);
-                    }
+//                    } else {
+//                        row[i] = fields[i].get(e);
+//                    }
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
@@ -140,12 +154,17 @@ public interface I_TraCuu_QuanLi<T> {
             if (c instanceof JPanel) { // bỏ cái này bị dính lỗi JSeparator
                 Component c1 = ((JPanel) c).getComponent(1);
                 // nếu là panel con đầu tiên thì không cho chỉnh
-//                if (i++ == 0) {
-//                    ((JTextField) c1).setEditable(false);
-//                    continue;
-//                }
-                if (c1 instanceof JTextField || c1 instanceof JTextArea || c1 instanceof JPasswordField) {
+                if (i++ == 0) {
+                    ((JTextField) c1).setEditable(false);
+                    continue;
+                }
+                if (c1 instanceof JScrollPane) { 
+                    JViewport viewport = ((JScrollPane) c1).getViewport();
+                    JTextArea tmp = (JTextArea) viewport.getView();
+                    tmp.setEditable(b);
+                } else if (c1 instanceof JTextField || c1 instanceof JPasswordField) {
                     ((JTextComponent) c1).setEditable(b);
+            
                 } else {
                     c1.setEnabled(b);
                 }
@@ -160,7 +179,11 @@ public interface I_TraCuu_QuanLi<T> {
                     continue;
                 }
                 Component c1 = ((JPanel) c).getComponent(1); // lấy component thứ 2 của panel
-                if (c1 instanceof JTextField || c1 instanceof JTextArea || c1 instanceof JPasswordField) {
+                if (c1 instanceof JScrollPane) { 
+                    JViewport viewport = ((JScrollPane) c1).getViewport();
+                    JTextArea tmp = (JTextArea) viewport.getView();
+                    tmp.setText("");
+                } else if (c1 instanceof JTextField || c1 instanceof JPasswordField) {
                     ((JTextComponent) c1).setText("");
                 } else if (c1 instanceof JDateChooser) {
                     ((JDateChooser) c1).setDate(null);
@@ -175,7 +198,11 @@ public interface I_TraCuu_QuanLi<T> {
         for (Component c : pnlInput.getComponents()) {
             if (c instanceof JPanel) {
                 Component c1 = ((JPanel) c).getComponent(1);
-                if (c1 instanceof JTextField || c1 instanceof JTextArea) {
+                if (c1 instanceof JScrollPane) { 
+                    JViewport viewport = ((JScrollPane) c1).getViewport();
+                    JTextArea tmp = (JTextArea) viewport.getView();
+                    tmp.setText(model.getValueAt(index, i++).toString());
+                } else if (c1 instanceof JTextField) {
                     if (i < model.getColumnCount()) { // khắc phục lỗi indexOutOfBound của Array
                         ((JTextComponent) c1).setText(model.getValueAt(index, i++).toString());
               
@@ -183,7 +210,7 @@ public interface I_TraCuu_QuanLi<T> {
                         ((JPasswordField) c1).setText(I_CRUD.findById(model.getValueAt(index, 6).toString(), new TaiKhoan()).getMatKhau());
                     }
                 } else if (c1 instanceof JDateChooser) {
-                    if (i < model.getColumnCount()) {
+//                    if (i < model.getColumnCount()) {
                         java.util.Date date;
                         try {
                             date = new SimpleDateFormat("yyyy-MM-dd").parse(model.getValueAt(index, i++).toString());
@@ -192,11 +219,11 @@ public interface I_TraCuu_QuanLi<T> {
                             Logger.getLogger(I_TraCuu_QuanLi.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         
-                    }
+//                    }
                 } else if (c1 instanceof JComboBox) {
-                    if (i < model.getColumnCount()) {
+//                    if (i < model.getColumnCount()) {
                         ((JComboBox) c1).setSelectedItem(model.getValueAt(index, i++));
-                    }
+//                    }
                 }
 //                } else if (c1 instanceof JPasswordField) { // chả hiểu sao jpasswordfield mà nó lại tính luôn là jtextfield
 //                    // Dùng hàm finbyid lấy ra mật khẩu dựa vào số điện thoại
@@ -211,4 +238,24 @@ public interface I_TraCuu_QuanLi<T> {
             }
         }
     } 
+    // viết hàm show Lỗi regex
+    default void showRegexError(JTextComponent tf, String message) {
+        tf.requestFocus();
+        tf.setText("");
+        JOptionPane.showMessageDialog(null, message,"Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+    default void createID(JTextField tf, ArrayList<String> dsid, String prefix) {
+        // Kiểm tra xem ds có rỗng hay không nếu rỗng thì mã là prefix + '001' không thì lấy mã cuối cùng trong ds + 1
+        if (dsid.isEmpty()) {
+            tf.setText(prefix + "001");
+        } else {
+            // lấy mã cuối cùng trong ds
+            String lastID = dsid.get(dsid.size() - 1).toString();
+            // tách chuỗi để lấy số thứ tự
+            int index = Integer.parseInt(lastID.substring(prefix.length())) + 1;
+            // tạo mã mới
+            String newID = prefix + String.format("%03d", index);
+            tf.setText(newID);
+        }
+    }
 }

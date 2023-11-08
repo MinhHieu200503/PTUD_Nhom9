@@ -4,17 +4,28 @@
  */
 package gui;
 
+import dao.DAO_PhieuDatPhong;
+import entity.PhieuDatPhong;
+import java.awt.Font;
+import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+
 /**
  *
  * @author quang
  */
-public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame {
+public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_TraCuu_QuanLi<PhieuDatPhong>{
 
     /**
      * Creates new form GD_TraCuu_PhieuDatPhong
      */
     public GD_TraCuu_PhieuDatPhong() {
         initComponents();
+        model = (DefaultTableModel) table_TraCuu.getModel();
+        loadTable(daopdp.getAll(PhieuDatPhong.class), model);
     }
 
     /**
@@ -67,9 +78,9 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame {
         tf_TraCuu2.setFont(new java.awt.Font("Segoe UI", 0, 27)); // NOI18N
         tf_TraCuu2.setToolTipText("");
         tf_TraCuu2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153), 2, true));
-        tf_TraCuu2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_TraCuu2ActionPerformed(evt);
+        tf_TraCuu2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_TraCuu2KeyReleased(evt);
             }
         });
 
@@ -103,21 +114,25 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame {
         table_TraCuu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         table_TraCuu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"", "", null, null, null, null, null, null},
-                {"", null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Mã phiếu", "Ngày tạo phiếu", "Ngày nhận phòng", "Trạng thái", "Giá cọc", "Nhân viên", "Khách hàng", "Phòng"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         table_TraCuu.setGridColor(new java.awt.Color(153, 153, 153));
@@ -126,6 +141,14 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame {
         table_TraCuu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         table_TraCuu.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(table_TraCuu);
+        table_TraCuu.setRowHeight(35);
+        // Chỉnh font cho header
+        JTableHeader header = table_TraCuu.getTableHeader();
+        header.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        // Căn lề cho header
+        TableCellRenderer rendererFromHeader = header.getDefaultRenderer();
+        JLabel headerLabel = (JLabel) rendererFromHeader;
+        headerLabel.setHorizontalAlignment(JLabel.CENTER);
 
         javax.swing.GroupLayout pnlDataLayout = new javax.swing.GroupLayout(pnlData);
         pnlData.setLayout(pnlDataLayout);
@@ -174,9 +197,11 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tf_TraCuu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_TraCuu2ActionPerformed
+    private void tf_TraCuu2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_TraCuu2KeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_TraCuu2ActionPerformed
+        dspdp = daopdp.search(tf_TraCuu2.getText().trim(), PhieuDatPhong.class);
+        loadTable(dspdp, model);
+    }//GEN-LAST:event_tf_TraCuu2KeyReleased
 
     /**
      * @param args the command line arguments
@@ -212,7 +237,10 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame {
             }
         });
     }
-
+       
+    private DAO_PhieuDatPhong daopdp = new DAO_PhieuDatPhong();
+    private ArrayList<PhieuDatPhong> dspdp = daopdp.getAll(PhieuDatPhong.class);
+    private DefaultTableModel model;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbl_TraCuu2;

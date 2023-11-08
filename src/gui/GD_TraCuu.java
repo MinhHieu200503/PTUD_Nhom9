@@ -366,7 +366,7 @@ public class GD_TraCuu extends javax.swing.JFrame {
            pnlRight.getComponent(i).setVisible(false);
        }
        pnlRight.getComponent(choice_int).setVisible(true);
-        
+       
        repaint();
 
         

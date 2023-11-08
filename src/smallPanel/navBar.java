@@ -453,7 +453,7 @@ public class navBar extends javax.swing.JPanel implements Runnable{
         add.setMaximumSize(new java.awt.Dimension(1920, 964));
         add.setMinimumSize(new java.awt.Dimension(1920, 964));
         add.setLayout(new java.awt.BorderLayout());
-        add(add, java.awt.BorderLayout.WEST);
+        add(add, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void enteredMenu(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enteredMenu

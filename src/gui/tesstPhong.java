@@ -53,47 +53,9 @@ public class tesstPhong extends javax.swing.JFrame {
         list.add(new Phong());
         list.add(new Phong());
         list.add(new Phong());
-        list.add(new Phong());
-        list.add(new Phong());
 //        list.add(new Phong());
 //        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
+
         return list;
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
