@@ -5,6 +5,7 @@
 package smallPanel;
 
 import com.sun.security.auth.module.JndiLoginModule;
+import java.awt.Color;
 import java.awt.List;
 import java.util.ArrayList;
 import javax.swing.JPanel;
@@ -114,7 +115,7 @@ public class DanhSachPhong extends javax.swing.JPanel {
         panel_mot_dong.setPreferredSize(new java.awt.Dimension(980, 160));
         panel_mot_dong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER,20,0));
         panel_mot_dong.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 1, 1, 1));
-
+        panel_mot_dong.setBackground(Color.white);
         return panel_mot_dong;
     }
     

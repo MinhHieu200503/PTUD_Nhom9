@@ -49,8 +49,6 @@ public class GD_XuLy extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1920, 964));
         setMinimumSize(new java.awt.Dimension(1920, 964));
-        setPreferredSize(new java.awt.Dimension(1920, 964));
-        setLayout(new java.awt.BorderLayout());
 
         leftPanel.setBackground(new java.awt.Color(174, 210, 255));
         leftPanel.setMaximumSize(new java.awt.Dimension(300, 964));
@@ -304,7 +302,7 @@ public class GD_XuLy extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        add(leftPanel, java.awt.BorderLayout.WEST);
+        getContentPane().add(leftPanel, java.awt.BorderLayout.WEST);
 
         rightPanel.setMaximumSize(new java.awt.Dimension(1620, 964));
         rightPanel.setMinimumSize(new java.awt.Dimension(1620, 964));
@@ -321,7 +319,9 @@ public class GD_XuLy extends javax.swing.JFrame {
             .addGap(0, 964, Short.MAX_VALUE)
         );
 
-        add(rightPanel, java.awt.BorderLayout.CENTER);
+        getContentPane().add(rightPanel, java.awt.BorderLayout.CENTER);
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemSelectItem(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itemSelectItem
@@ -345,10 +345,8 @@ public class GD_XuLy extends javax.swing.JFrame {
             SetSelectedItem(itemGoiDichVu);
         }
     }//GEN-LAST:event_itemSelectItem
-        getContentPane().add(sideBarXuLy1, java.awt.BorderLayout.WEST);
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+    // </editor-fold>                        
 
     /**
      * @param args the command line arguments
