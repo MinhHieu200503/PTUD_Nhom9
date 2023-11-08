@@ -4,6 +4,7 @@
  */
 package smallPanel;
 
+import gui.GD_XuLy;
 import gui.GD_QuanLi;
 import gui.GD_TraCuu;
 import java.awt.Color;
@@ -20,12 +21,12 @@ import javax.swing.JPanel;
  *
  * @author Admin
  */
-public class navBar extends javax.swing.JPanel implements Runnable{
+public class NavBar extends javax.swing.JPanel implements Runnable{
 
     /**
      * Creates new form navBar
      */
-    public navBar() {
+    public NavBar() {
         
         //Tạo Luồng Để run() thread được Implements với Runnable
         thread = new Thread(this);

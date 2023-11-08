@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package smallPanel;
+package gui;
 
 import java.awt.Color;
+import java.awt.Component;
 import javax.swing.JPanel;
 
 /**
@@ -18,8 +19,18 @@ public class GD_XuLy extends javax.swing.JFrame {
      */
     public GD_XuLy() {
         initComponents();
-        SetSelectedItem(itemDanhSachPhong);
-        rightPanel.add(new gui.GD_XuLyDanhSachPhong().getContentPane());
+        setSelectedItem(itemDanhSachPhong);
+//        ========------ IMPORTANT DEMO FRAME PROJECT ------========       
+//        ========------ IMPORTANT DEMO FRAME PROJECT ------========     
+//        ========------ IMPORTANT DEMO FRAME PROJECT ------========     
+                rightPanel.remove(jPanel1);
+//        ========------ IMPORTANT DEMO FRAME PROJECT ------========       
+//        ========------ IMPORTANT DEMO FRAME PROJECT ------========     
+//        ========------ IMPORTANT DEMO FRAME PROJECT ------========     
+        
+        rightPanel.add(new gui.GD_XuLy_DanhSachPhong().getContentPane(),0);
+        repaint();
+
     }
 
     /**
@@ -38,13 +49,14 @@ public class GD_XuLy extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         itemDatPhongTruoc = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        ItemNhanPhong = new javax.swing.JPanel();
+        itemNhanPhong = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         itemGoiDichVu = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         itemTraPhong = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         rightPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1920, 964));
@@ -57,14 +69,14 @@ public class GD_XuLy extends javax.swing.JFrame {
         itemDanhSachPhong.setBackground(new java.awt.Color(174, 210, 255));
         itemDanhSachPhong.setForeground(new java.awt.Color(51, 0, 102));
         itemDanhSachPhong.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                itemSelectItem(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 exitedMenu(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                itemSelectItem(evt);
             }
         });
 
@@ -93,14 +105,14 @@ public class GD_XuLy extends javax.swing.JFrame {
         itemDatPhongNgay.setBackground(new java.awt.Color(174, 210, 255));
         itemDatPhongNgay.setForeground(new java.awt.Color(174, 210, 255));
         itemDatPhongNgay.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                itemSelectItem(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 exitedMenu(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                itemSelectItem(evt);
             }
         });
 
@@ -130,14 +142,14 @@ public class GD_XuLy extends javax.swing.JFrame {
         itemDatPhongTruoc.setForeground(new java.awt.Color(51, 0, 102));
         itemDatPhongTruoc.setPreferredSize(new java.awt.Dimension(300, 76));
         itemDatPhongTruoc.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                itemSelectItem(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 exitedMenu(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                itemSelectItem(evt);
             }
         });
 
@@ -163,18 +175,18 @@ public class GD_XuLy extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        ItemNhanPhong.setBackground(new java.awt.Color(174, 210, 255));
-        ItemNhanPhong.setForeground(new java.awt.Color(51, 0, 102));
-        ItemNhanPhong.setPreferredSize(new java.awt.Dimension(300, 76));
-        ItemNhanPhong.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                itemSelectItem(evt);
-            }
+        itemNhanPhong.setBackground(new java.awt.Color(174, 210, 255));
+        itemNhanPhong.setForeground(new java.awt.Color(51, 0, 102));
+        itemNhanPhong.setPreferredSize(new java.awt.Dimension(300, 76));
+        itemNhanPhong.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 exitedMenu(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                itemSelectItem(evt);
             }
         });
 
@@ -183,18 +195,18 @@ public class GD_XuLy extends javax.swing.JFrame {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-check-in-40.png"))); // NOI18N
         jLabel10.setText("Nhận phòng");
 
-        javax.swing.GroupLayout ItemNhanPhongLayout = new javax.swing.GroupLayout(ItemNhanPhong);
-        ItemNhanPhong.setLayout(ItemNhanPhongLayout);
-        ItemNhanPhongLayout.setHorizontalGroup(
-            ItemNhanPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ItemNhanPhongLayout.createSequentialGroup()
+        javax.swing.GroupLayout itemNhanPhongLayout = new javax.swing.GroupLayout(itemNhanPhong);
+        itemNhanPhong.setLayout(itemNhanPhongLayout);
+        itemNhanPhongLayout.setHorizontalGroup(
+            itemNhanPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(itemNhanPhongLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(35, Short.MAX_VALUE))
         );
-        ItemNhanPhongLayout.setVerticalGroup(
-            ItemNhanPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ItemNhanPhongLayout.createSequentialGroup()
+        itemNhanPhongLayout.setVerticalGroup(
+            itemNhanPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemNhanPhongLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
                 .addContainerGap())
@@ -204,14 +216,14 @@ public class GD_XuLy extends javax.swing.JFrame {
         itemGoiDichVu.setForeground(new java.awt.Color(51, 0, 102));
         itemGoiDichVu.setPreferredSize(new java.awt.Dimension(300, 76));
         itemGoiDichVu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                itemSelectItem(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 exitedMenu(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                itemSelectItem(evt);
             }
         });
 
@@ -241,14 +253,14 @@ public class GD_XuLy extends javax.swing.JFrame {
         itemTraPhong.setForeground(new java.awt.Color(51, 0, 102));
         itemTraPhong.setPreferredSize(new java.awt.Dimension(300, 76));
         itemTraPhong.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                itemSelectItem(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 exitedMenu(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                itemSelectItem(evt);
             }
         });
 
@@ -281,7 +293,7 @@ public class GD_XuLy extends javax.swing.JFrame {
             .addComponent(itemDanhSachPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(itemDatPhongNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(itemDatPhongTruoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(ItemNhanPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(itemNhanPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(itemGoiDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(itemTraPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
@@ -294,7 +306,7 @@ public class GD_XuLy extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(itemDatPhongTruoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(ItemNhanPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(itemNhanPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(itemGoiDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -307,17 +319,24 @@ public class GD_XuLy extends javax.swing.JFrame {
         rightPanel.setMaximumSize(new java.awt.Dimension(1620, 964));
         rightPanel.setMinimumSize(new java.awt.Dimension(1620, 964));
         rightPanel.setPreferredSize(new java.awt.Dimension(1620, 964));
+        rightPanel.setLayout(new javax.swing.BoxLayout(rightPanel, javax.swing.BoxLayout.X_AXIS));
 
-        javax.swing.GroupLayout rightPanelLayout = new javax.swing.GroupLayout(rightPanel);
-        rightPanel.setLayout(rightPanelLayout);
-        rightPanelLayout.setHorizontalGroup(
-            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1620, Short.MAX_VALUE)
+        jPanel1.setBackground(new java.awt.Color(51, 204, 0));
+        jPanel1.setMaximumSize(new java.awt.Dimension(1096, 964));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1096, 964));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1096, Short.MAX_VALUE)
         );
-        rightPanelLayout.setVerticalGroup(
-            rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 964, Short.MAX_VALUE)
         );
+
+        rightPanel.add(jPanel1);
 
         getContentPane().add(rightPanel, java.awt.BorderLayout.CENTER);
 
@@ -325,24 +344,27 @@ public class GD_XuLy extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemSelectItem(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itemSelectItem
+
         if (evt.getSource().equals(itemDanhSachPhong)){
-            SetSelectedItem(itemDanhSachPhong);
-            rightPanel.add(new gui.GD_XuLyDanhSachPhong().getContentPane());
+            setSelectedItem(itemDanhSachPhong);
+            rightPanel.add(new gui.GD_XuLy_DanhSachPhong().getContentPane());
+            pack();
+            repaint();
         }
         else if (evt.getSource().equals(itemDatPhongNgay)){
-            SetSelectedItem(itemDatPhongNgay);
+            setSelectedItem(itemDatPhongNgay);
         }
         else if (evt.getSource().equals(itemDatPhongTruoc)){
-            SetSelectedItem(itemDatPhongTruoc);
+            setSelectedItem(itemDatPhongTruoc);
         }
-        else if (evt.getSource().equals(ItemNhanPhong)){
-            SetSelectedItem(ItemNhanPhong);
+        else if (evt.getSource().equals(itemNhanPhong)){
+            setSelectedItem(itemNhanPhong);
         }
         else if (evt.getSource().equals(itemTraPhong)){
-            SetSelectedItem(itemTraPhong);
+            setSelectedItem(itemTraPhong);
         }
         else if (evt.getSource().equals(itemGoiDichVu)){
-            SetSelectedItem(itemGoiDichVu);
+            setSelectedItem(itemGoiDichVu);
         }
     }//GEN-LAST:event_itemSelectItem
 
@@ -384,66 +406,32 @@ public class GD_XuLy extends javax.swing.JFrame {
     }
 
     private void enteredMenu(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enteredMenu
-        if (evt.getSource().equals(itemDanhSachPhong)){
-            enterMenu(itemDanhSachPhong);
-        }
-        else if (evt.getSource().equals(itemDatPhongNgay)){
-            enterMenu(itemDatPhongNgay);
-        }
-        else if (evt.getSource().equals(itemDatPhongTruoc)){
-            enterMenu(itemDatPhongTruoc);
-        }
-        else if (evt.getSource().equals(ItemNhanPhong)){
-            enterMenu(ItemNhanPhong);
-        }
-        else if (evt.getSource().equals(itemTraPhong)){
-            enterMenu(itemTraPhong);
-        }
-        else if (evt.getSource().equals(itemGoiDichVu)){
-            enterMenu(itemGoiDichVu);
-        }
-
+        enterMenu((JPanel) evt.getSource());
     }//GEN-LAST:event_enteredMenu
 
     private void exitedMenu(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitedMenu
-        if (evt.getSource().equals(itemDanhSachPhong)){
-            exitMenu(itemDanhSachPhong);
-        }
-        else if (evt.getSource().equals(itemDatPhongNgay)){
-            exitMenu(itemDatPhongNgay);
-        }
-        else if (evt.getSource().equals(itemDatPhongTruoc)){
-            exitMenu(itemDatPhongTruoc);
-        }
-        else if (evt.getSource().equals(ItemNhanPhong)){
-            exitMenu(ItemNhanPhong);
-        }
-        else if (evt.getSource().equals(itemTraPhong)){
-            exitMenu(itemTraPhong);
-        }
-        else if (evt.getSource().equals(itemGoiDichVu)){
-            exitMenu(itemGoiDichVu);
-        }
+        exitMenu((JPanel) evt.getSource());
     }//GEN-LAST:event_exitedMenu
 
-     public void SetSelectedItem(javax.swing.JPanel panel){
-         
-          
-          
-          for(int i=0; i<leftPanel.getComponentCount(); i++){
-              leftPanel.getComponent(i).setBackground(new Color(174, 210, 255));
-              JPanel a = (JPanel) leftPanel.getComponent(i);
-              a.getComponent(0).setForeground( new Color(51,0,102));
-          }
-          panel.setBackground(new Color(119, 82, 254));
-          panel.getComponent(0).setForeground(Color.WHITE);
-          
+     public void setSelectedItem(javax.swing.JPanel pnl){
+        pnl.setBackground(new Color(44, 85, 180)); // Đánh dấu khi được chọn
+        pnl.getComponent(0).setForeground(Color.WHITE);   
+
+        for (Component com : leftPanel.getComponents()) {
+            if (com instanceof JPanel && !com.equals(pnl)) {
+                com.setBackground(new Color(174, 210, 255)); // Chỉnh về màu mặc định
+                JPanel temp = (JPanel) com;
+                temp.getComponent(0).setForeground(new Color(51,0,102));
+                
+            }
+        }
+         choice_Panel = pnl;
+         repaint();
           
     }
     
     public void enterMenu(javax.swing.JPanel panel){
-        
-        if(!panel.getBackground().equals(new Color(119, 82, 254))){
+        if (!choice_Panel.equals(panel)){
             panel.setBackground(new Color(142, 143, 250));
             panel.getComponent(0).setForeground(Color.WHITE);
         }
@@ -454,20 +442,21 @@ public class GD_XuLy extends javax.swing.JFrame {
     
 
     public void exitMenu(javax.swing.JPanel panel){
-        
-        if(!panel.getBackground().equals(new Color(119, 82, 254))){
+        if (!choice_Panel.equals(panel)){
             panel.setBackground(new Color(174, 210, 255));
             panel.getComponent(0).setForeground( new Color(51,0,102));
         }
         repaint();
         
     }
+    
+    private javax.swing.JPanel choice_Panel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel ItemNhanPhong;
     private javax.swing.JPanel itemDanhSachPhong;
     private javax.swing.JPanel itemDatPhongNgay;
     private javax.swing.JPanel itemDatPhongTruoc;
     private javax.swing.JPanel itemGoiDichVu;
+    private javax.swing.JPanel itemNhanPhong;
     private javax.swing.JPanel itemTraPhong;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -475,6 +464,7 @@ public class GD_XuLy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel rightPanel;
     // End of variables declaration//GEN-END:variables

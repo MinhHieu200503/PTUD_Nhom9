@@ -34,7 +34,7 @@ public class mainFrame extends javax.swing.JFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        navBar2 = new smallPanel.navBar();
+        navBar2 = new smallPanel.NavBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1920, 1030));
@@ -89,7 +89,7 @@ public class mainFrame extends javax.swing.JFrame{
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private smallPanel.navBar navBar2;
+    private smallPanel.NavBar navBar2;
     // End of variables declaration//GEN-END:variables
 
     

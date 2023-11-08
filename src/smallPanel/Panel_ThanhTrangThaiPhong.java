@@ -13,12 +13,12 @@ import javax.swing.border.Border;
  *
  * @author Minh Hieu
  */
-public class panel_SignalPhong extends javax.swing.JPanel {
+public class Panel_ThanhTrangThaiPhong extends javax.swing.JPanel {
 
     /**
      * Creates new form panel_SignalPhong
      */
-    public panel_SignalPhong() {
+    public Panel_ThanhTrangThaiPhong() {
         initComponents();
 //        this.setBorder(new RoundedBorder(90));
     }
@@ -59,6 +59,8 @@ public class panel_SignalPhong extends javax.swing.JPanel {
         jPanel1.setPreferredSize(new java.awt.Dimension(1021, 80));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
         lb_Icon_Availabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Available.png"))); // NOI18N
         jPanel2.add(lb_Icon_Availabel);
 
@@ -71,6 +73,8 @@ public class panel_SignalPhong extends javax.swing.JPanel {
         jPanel2.add(lb_Quantity_Available);
 
         jPanel1.add(jPanel2, new java.awt.GridBagConstraints());
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         lb_Icon_Waiting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Wating.png"))); // NOI18N
         jPanel3.add(lb_Icon_Waiting);
@@ -86,6 +90,8 @@ public class panel_SignalPhong extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(0, 80, 0, 80);
         jPanel1.add(jPanel3, gridBagConstraints);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         lb_Icon_UnAvailabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Unvailable123.png"))); // NOI18N
         jPanel4.add(lb_Icon_UnAvailabel);
