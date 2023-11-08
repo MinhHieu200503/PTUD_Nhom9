@@ -5,7 +5,10 @@
 package gui;
 
 import ComponentCustom.FormSignIn;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.RoundRectangle2D;
+import mainFrame.mainFrame;
 
 /**
  *
@@ -23,6 +26,35 @@ public class GD_DangNhap extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         FormSignIn form = new FormSignIn();
         add(form);
+        
+        form.lblForgotPass.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                gdQuenMK = new GD_QuenMatKhau();
+                setVisible(false);
+                gdQuenMK.setVisible(true);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                
+            }
+        });
     }
 
     /**
@@ -34,27 +66,17 @@ public class GD_DangNhap extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        exitButton1 = new ComponentCustom.ExitButton();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        exitButton1.setText("exitButton1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(717, 717, 717)
-                .addComponent(exitButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 724, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(195, 195, 195)
-                .addComponent(exitButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(293, Short.MAX_VALUE))
+            .addGap(0, 489, Short.MAX_VALUE)
         );
 
         pack();
@@ -73,8 +95,9 @@ public class GD_DangNhap extends javax.swing.JFrame {
             }
         });
     }
+    
+    public GD_QuenMatKhau gdQuenMK;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private ComponentCustom.ExitButton exitButton1;
     // End of variables declaration//GEN-END:variables
 }

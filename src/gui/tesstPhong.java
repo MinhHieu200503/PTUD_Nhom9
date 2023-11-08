@@ -4,12 +4,14 @@
  */
 package gui;
 
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.Color;
 import java.awt.LayoutManager;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import smallPanel.DanhSachPhong;
 import smallPanel.Phong;
 import smallPanel.allPhong_LocPhong;
@@ -27,7 +29,7 @@ public class tesstPhong extends javax.swing.JFrame {
         initComponents();
         jPanel1.add(createList());
         
-        testClick.setName("ButtonClick");
+//        testClick.setName("ButtonClick");
     }
 
     /**
@@ -51,47 +53,9 @@ public class tesstPhong extends javax.swing.JFrame {
         list.add(new Phong());
         list.add(new Phong());
         list.add(new Phong());
-        list.add(new Phong());
-        list.add(new Phong());
 //        list.add(new Phong());
 //        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
-//        list.add(new Phong());
+
         return list;
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -99,7 +63,6 @@ public class tesstPhong extends javax.swing.JFrame {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jPanel1 = new javax.swing.JPanel();
-        testClick = new javax.swing.JButton();
 
         jInternalFrame1.setVisible(true);
 
@@ -114,15 +77,7 @@ public class tesstPhong extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(1080, 698));
         jPanel1.setPreferredSize(new java.awt.Dimension(1080, 698));
         jPanel1.setVerifyInputWhenFocusTarget(false);
-        jPanel1.setLayout(new java.awt.GridLayout());
-
-        testClick.setText("lấy all id");
-        testClick.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                testClickMouseClicked(evt);
-            }
-        });
-        jPanel1.add(testClick);
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,15 +94,6 @@ public class tesstPhong extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void testClickMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_testClickMouseClicked
-        if(evt.getComponent().getName().equalsIgnoreCase("ButtonClick")){
-            ArrayList<String> tmpListID =  tmpDSPhong.getAllSelectPhong();
-            JOptionPane.showConfirmDialog(rootPane, tmpListID);
-            String locPhongOpion1 = tmpAllPhong_LocPhong.LocOption1();
-            System.out.println(locPhongOpion1);
-        }
-    }//GEN-LAST:event_testClickMouseClicked
     private JPanel createList(){
         ArrayList<Phong> dataPhong = tmpData();
         allPhong_LocPhong allPhong_LocPhong = new allPhong_LocPhong(dataPhong);
@@ -170,28 +116,11 @@ public class tesstPhong extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(tesstPhong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(tesstPhong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(tesstPhong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(tesstPhong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        FlatMacLightLaf.setup();
+        UIManager.put( "Button.arc", 10 );
+        UIManager.put( "Component.arc", 10 );
+        UIManager.put( "ProgressBar.arc", 10 );
+        UIManager.put( "TextComponent.arc", 10 );
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -207,6 +136,5 @@ public class tesstPhong extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton testClick;
     // End of variables declaration//GEN-END:variables
 }

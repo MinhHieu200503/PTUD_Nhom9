@@ -40,6 +40,7 @@ public class DanhSachPhong extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1080, 698));
         setPreferredSize(new java.awt.Dimension(1080, 698));
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setMaximumSize(new java.awt.Dimension(1080, 698));
         jScrollPane1.setMinimumSize(new java.awt.Dimension(1080, 698));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1080, 900));
@@ -68,6 +69,7 @@ public class DanhSachPhong extends javax.swing.JPanel {
 
     public JPanel loadData(ArrayList<Phong> list){
         JPanel panel_Dong =  taoPanel_1_Dong();
+        
         for(int i = 1;i<=list.size();i++){
             Phong tmp = new Phong();
             tmp.addData(i-1,(i*10)+" ", "00"+i, 5, 150.000, 2);
@@ -75,8 +77,9 @@ public class DanhSachPhong extends javax.swing.JPanel {
             jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
             if(i%3 == 0  || (i ==  list.size() && list.size() % 3 != 0)){
                 if((i ==  list.size() && list.size() % 3 != 0)){
-                    panel_Dong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-                    panel_Dong.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 40, 1, 1));
+                    panel_Dong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT,20,0));
+                    panel_Dong.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 15, 1, 1));
+
                     panel_mot_dong.setPreferredSize(new java.awt.Dimension(980, 170));
 //                    panel_Dong.
                 }
@@ -109,8 +112,9 @@ public class DanhSachPhong extends javax.swing.JPanel {
         panel_mot_dong = new javax.swing.JPanel();
         panel_mot_dong.setMaximumSize(new java.awt.Dimension(980, 160));
         panel_mot_dong.setPreferredSize(new java.awt.Dimension(980, 160));
-        panel_mot_dong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER));
+        panel_mot_dong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER,20,0));
         panel_mot_dong.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 1, 1, 1));
+
         return panel_mot_dong;
     }
     
