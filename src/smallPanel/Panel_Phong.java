@@ -31,11 +31,7 @@ public class Panel_Phong extends javax.swing.JPanel {
         initComponents();
         this.setBorder(new RoundedBorder(90));
         this.entityPhong = data;
-        this.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clickPanel(evt,choose);
-            }
-        });
+       
         setData(this.entityPhong);
         
     }
@@ -147,14 +143,113 @@ public class Panel_Phong extends javax.swing.JPanel {
         lb_TenPhong.setText("Phòng: " + data.getTenPhong() + " - " + data.getMaPhong());
         lb_SucChua.setText("Sức chứa: " + String.valueOf(data.getSucChuaToiDa()));
         lb_Gia.setText("Giá: "+ String.valueOf(data.getGiaPhongTheoGio()));
+        this.setTenPhong(data.getTenPhong());
+        this.setSucChua(data.getSucChuaToiDa());
+        this.setGia(data.getGiaPhongTheoGio());
     }
     
-    public boolean getFlag(){
-        return flag;
+        public smallPanel.Panel_Phong   getPhong(){
+            return this;
+        }
+    
+        public String getId() {
+			return id;
+		}
+		public void setId(String id) {
+			this.id = id;
+		}
+		public int getIndex() {
+			return index;
+		}
+		public void setIndex(int index) {
+			this.index = index;
+		}
+		public String getTenPhong() {
+			return tenPhong;
+		}
+		public void setTenPhong(String tenPhong) {
+			this.tenPhong = tenPhong;
+		}
+		public int getSucChua() {
+			return sucChua;
+		}
+		public void setSucChua(int sucChua) {
+			this.sucChua = sucChua;
+		}
+		public Double getGia() {
+			return gia;
+		}
+		public void setGia(Double gia) {
+			this.gia = gia;
+		}
+		public int getTrangThai() {
+			return trangThai;
+		}
+		public void setTrangThai(int trangThai) {
+			this.trangThai = trangThai;
+		}
+		
+		public javax.swing.JLabel getLb_Gia() {
+			return lb_Gia;
+		}
+		public void setLb_Gia(javax.swing.JLabel lb_Gia) {
+			this.lb_Gia = lb_Gia;
+		}
+		public javax.swing.JLabel getLb_Icon() {
+			return lb_Icon;
+		}
+		public void setLb_Icon(javax.swing.JLabel lb_Icon) {
+			this.lb_Icon = lb_Icon;
+		}
+		public javax.swing.JLabel getLb_SucChua() {
+			return lb_SucChua;
+		}
+		public void setLb_SucChua(javax.swing.JLabel lb_SucChua) {
+			this.lb_SucChua = lb_SucChua;
+		}
+		public javax.swing.JLabel getLb_TenPhong() {
+			return lb_TenPhong;
+		}
+		public void setLb_TenPhong(javax.swing.JLabel lb_TenPhong) {
+			this.lb_TenPhong = lb_TenPhong;
+		}
+                
+                public boolean getFlag() {
+			return flag;
+		}
+		public void setFlag(boolean flag) {
+			this.flag = flag;
+		}
+    
+    
+    public void addData(int index,String id,String tenPhong,int sucChua,Double gia,int trangThai){
+        //set giá trị getter/setter cho các thành phần trong object Phong
+        this.index = index;
+        this.id = id;
+        this.tenPhong = tenPhong;
+        this.sucChua = sucChua;
+        this.trangThai = trangThai;
+        this.gia = gia;
+        
+        // set giá trị cho các label hiển thị
+        this.lb_TenPhong.setText(tenPhong);
+        this.lb_SucChua.setText("Sức chứa: "+ sucChua+" người");
+        this.lb_Gia.setText("Giá: "+gia+ " VND ");
+        
+        this.lb_SucChua.setName("SucChua");
+        this.lb_TenPhong.setName("PhongCode");
+        
     }
-     
+    
+    protected smallPanel.Panel_Phong thisPhong; 
+    private String id;
+    private int index;
+    private String tenPhong;
+    private int sucChua;
+    private Double gia;
+    private int trangThai;
+    private boolean flag = false; 
     protected entity.Phong entityPhong;
-    private boolean flag = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lb_Gia;
     private javax.swing.JLabel lb_Icon;
@@ -166,7 +261,7 @@ public class Panel_Phong extends javax.swing.JPanel {
 
 
     //RoundBorder
-    private static class RoundedBorder implements Border {
+    public static class RoundedBorder implements Border {
         
         private int radius;
         
