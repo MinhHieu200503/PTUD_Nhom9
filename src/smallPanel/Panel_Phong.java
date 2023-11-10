@@ -27,10 +27,15 @@ public class Panel_Phong extends javax.swing.JPanel {
     /**
      * Creates new form ListPhong
      */
-    public Panel_Phong(entity.Phong data) {
+    public Panel_Phong(entity.Phong data,int choose) {
         initComponents();
         this.setBorder(new RoundedBorder(90));
         this.entityPhong = data;
+        this.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickPanel(evt,choose);
+            }
+        });
         setData(this.entityPhong);
         
     }
@@ -71,11 +76,6 @@ public class Panel_Phong extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(320, 150));
         setMinimumSize(new java.awt.Dimension(320, 150));
         setPreferredSize(new java.awt.Dimension(320, 150));
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clickPanel(evt);
-            }
-        });
         setLayout(new java.awt.GridBagLayout());
 
         lb_Icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Available.png"))); // NOI18N
@@ -114,15 +114,22 @@ public class Panel_Phong extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHWEST;
         add(lb_Gia, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void clickPanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickPanel
+    
+    private void clickPanel(java.awt.event.MouseEvent evt,int choose) {                            
         //                Phong tmpPhong = thisPhong;
 //                JOptionPane.showConfirmDialog(null, "index: "+tmpPhong.getIndex()+"\nTen Phong: "+tmpPhong.getTenPhong()+
 //                        "\nid Phong: "+ tmpPhong.getId()+"\nSuc Chua: "+tmpPhong.getSucChua()+"\nTrang thai: "+tmpPhong.getTrangThai()
 //                        +"\nGia: "+tmpPhong.getGia()
 //                );
                 
-            if(this.getBackground().equals(Color.WHITE)){
+            
+            if(choose == 1){
+                clickMulPanel();
+            }
+    }
+    
+    public  void clickMulPanel(){
+        if(this.getBackground().equals(Color.WHITE)){
                 this.setBackground(Color.red);
                 Border border = new LineBorder(Color.ORANGE, 4, true);
                 this.setBorder(border);
@@ -134,8 +141,7 @@ public class Panel_Phong extends javax.swing.JPanel {
                this.setBorder(new RoundedBorder(90));
                flag = false;
             }
-            
-    }//GEN-LAST:event_clickPanel
+    }
     
     public void setData(entity.Phong data){
         lb_TenPhong.setText("Phòng: " + data.getTenPhong() + " - " + data.getMaPhong());

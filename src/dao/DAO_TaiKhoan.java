@@ -48,7 +48,7 @@ public class DAO_TaiKhoan implements I_CRUD<TaiKhoan>{
         Session session = Session.getInstance(props, auth);
         
         //Gui email
-       final String to = "ldmhieu205@gmail.com";
+       final String to = email;
        //tạo 1 tin nhắn mới
         MimeMessage msg = new MimeMessage(session);
         

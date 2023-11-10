@@ -63,7 +63,8 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
                 temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
                 temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
                 temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-        
+                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+           
                 
         panel_FullOptionDanhSachPhong = new Panel_FullOptionDanhSachPhong();
         this.add(panel_FullOptionDanhSachPhong, java.awt.BorderLayout.WEST );

@@ -156,7 +156,7 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
         tmpPhong = new ArrayList<smallPanel.Panel_Phong>();
         if (dataPhong != null){
             for (entity.Phong phong : dataPhong) {
-                temp = new Panel_Phong(phong);
+                temp = new Panel_Phong(phong,1);
                 tmpPhong.add(temp);
             }
         }
