@@ -86,6 +86,7 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
     private void initComponents() {
 
         panel_FullOptionDanhSachPhong1 = new smallPanel.Panel_FullOptionDanhSachPhong();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -94,6 +95,7 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(1620, 964));
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
         getContentPane().add(panel_FullOptionDanhSachPhong1);
+        getContentPane().add(jPanel1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -114,6 +116,7 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
     
      public Panel_FullOptionDanhSachPhong panel_FullOptionDanhSachPhong;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
     private smallPanel.Panel_FullOptionDanhSachPhong panel_FullOptionDanhSachPhong1;
     // End of variables declaration//GEN-END:variables
 }
