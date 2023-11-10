@@ -152,6 +152,10 @@ public class Panel_Phong extends javax.swing.JPanel {
     public boolean getFlag(){
         return flag;
     }
+    
+    public  String getCode(){
+        return lb_TenPhong.getText();
+    }
      
     protected entity.Phong entityPhong;
     private boolean flag = false;

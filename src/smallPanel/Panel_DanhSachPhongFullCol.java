@@ -5,10 +5,14 @@
 package smallPanel;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import gui.GD_XuLy_DatPhongNgay;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.UIManager;
 
 /**
@@ -20,6 +24,26 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
     /**
      * Creates new form Panel_DanhSachPhong
      */
+//    public Panel_DanhSachPhongFullCol(ArrayList<entity.Phong> data) {
+//        FlatMacLightLaf.setup();
+//        UIManager.put( "Button.arc", 10 );
+//        UIManager.put( "Component.arc", 10 );
+//        UIManager.put( "ProgressBar.arc", 10 );
+//        UIManager.put( "TextComponent.arc", 10 );
+//        initComponents();
+//        if (data != null){
+//            loadData(setEntityPhongToPanelPhong(data));
+//        }
+//        
+//       jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+//            public void mouseClicked(java.awt.event.MouseEvent evt) {
+//                System.out.println(".mouseClicked()");
+//                clickPanel(evt);
+//            }
+//        });
+//        return;
+//    }
+    
     public Panel_DanhSachPhongFullCol(ArrayList<entity.Phong> data) {
         FlatMacLightLaf.setup();
         UIManager.put( "Button.arc", 10 );
@@ -30,6 +54,14 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
         if (data != null){
             loadData(setEntityPhongToPanelPhong(data));
         }
+        
+       jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                System.out.println(".mouseClicked()");
+                clickPanel(evt);
+            }
+        });
+       
         return;
     }
 
@@ -187,6 +219,11 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                 System.out.println("in If: "+ i);
             }
             panel_Container_ListPhong.add(panel_Dong);
+            list.get(i).addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickPanel(evt);
+            }
+        });
             System.out.println("out If: "+ i);
         } 
         }
@@ -209,6 +246,13 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
         }
         return idAllPhong;
     }
+    
+
+        
+//        public void getPhongSelect(){
+//            System.out.println("smallPanel.Panel_DanhSachPhongFullCol.getPhongSelect()");
+//        }
+    
     
     private JPanel taoPanel_1_Dong(){
         panel_mot_dong = new javax.swing.JPanel();
@@ -241,4 +285,21 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panel_Container_ListPhong;
     // End of variables declaration//GEN-END:variables
+
+            public int clickPanel(MouseEvent evt) {
+                if (evt.getClickCount() == 2 && !evt.isConsumed()) {
+                     evt.consume();
+                     smallPanel.Panel_Phong temp = (smallPanel.Panel_Phong) evt.getSource();
+                     codePhong = temp.getCode();
+//                     System.out.println("smallPanel.Panel_DanhSachPhongFullCol.clickPanel()" + codePhong);
+                      
+                       GD_XuLy_DatPhongNgay.setTableData(codePhong);
+                }
+        return 1;
+
+            }
+            
+          public static String codePhong = "123";
 }
+
+
