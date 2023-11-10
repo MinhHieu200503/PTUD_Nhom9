@@ -81,6 +81,7 @@ public class mainFrame extends javax.swing.JFrame{
             java.util.logging.Logger.getLogger(mainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
         
         /* Create and display the form */
                 new mainFrame().setVisible(true);

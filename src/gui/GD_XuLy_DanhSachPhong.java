@@ -66,7 +66,7 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
         
                 
         panel_FullOptionDanhSachPhong = new Panel_FullOptionDanhSachPhong();
-        this.add(panel_FullOptionDanhSachPhong);
+        this.add(panel_FullOptionDanhSachPhong, java.awt.BorderLayout.WEST );
         
         
         //FUNCITON LOAD LIST 
@@ -90,12 +90,9 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(1620, 964));
         setMinimumSize(new java.awt.Dimension(1620, 964));
-        setPreferredSize(new java.awt.Dimension(1620, 964));
-        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
-        getContentPane().add(panel_FullOptionDanhSachPhong1);
-        getContentPane().add(jPanel1);
+        getContentPane().add(panel_FullOptionDanhSachPhong1, java.awt.BorderLayout.WEST);
+        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
