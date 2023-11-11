@@ -241,6 +241,12 @@ public class Panel_Phong extends javax.swing.JPanel {
         
     }
     
+
+    public  String getCode(){
+        return lb_TenPhong.getText();
+    }
+     
+
     protected smallPanel.Panel_Phong thisPhong; 
     private String id;
     private int index;
@@ -249,6 +255,7 @@ public class Panel_Phong extends javax.swing.JPanel {
     private Double gia;
     private int trangThai;
     private boolean flag = false; 
+
     protected entity.Phong entityPhong;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lb_Gia;
