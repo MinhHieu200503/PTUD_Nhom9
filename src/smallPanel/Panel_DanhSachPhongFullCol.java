@@ -84,18 +84,20 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMinimumSize(new java.awt.Dimension(1096, 964));
+        setMaximumSize(new java.awt.Dimension(900, 964));
+        setMinimumSize(new java.awt.Dimension(900, 964));
+        setPreferredSize(new java.awt.Dimension(900, 964));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setMaximumSize(new java.awt.Dimension(1096, 964));
-        jPanel1.setMinimumSize(new java.awt.Dimension(1096, 964));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1096, 964));
+        jPanel1.setMaximumSize(new java.awt.Dimension(900, 964));
+        jPanel1.setMinimumSize(new java.awt.Dimension(900, 964));
+        jPanel1.setPreferredSize(new java.awt.Dimension(900, 964));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);
-        jScrollPane1.setMaximumSize(new java.awt.Dimension(1096, 964));
-        jScrollPane1.setMinimumSize(new java.awt.Dimension(1096, 964));
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(1096, 964));
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(900, 964));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(900, 964));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(900, 964));
 
         panel_Container_ListPhong.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -315,7 +317,6 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                 }
             });
             
-                    System.out.println("panelContainer" + panel_Container_ListPhong.getSize().toString() + panel_Container_ListPhong.getMaximumSize().toString() + panel_Container_ListPhong.getMinimumSize().toString() + panel_Container_ListPhong.getPreferredSize().toString());
 
             panel_Container_ListPhong.setLayout(new java.awt.GridLayout(0, 1, 1, 1));
             for(int i = 1;i<=list.size();i++){
@@ -330,7 +331,6 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                     
                     panel_mot_dong.setPreferredSize(new java.awt.Dimension(980, 170));
                     
-                    System.out.println("panelMotDong" + panel_mot_dong.getSize().toString() + panel_mot_dong.getMaximumSize().toString() + panel_mot_dong.getMinimumSize().toString() + panel_mot_dong.getPreferredSize().toString());
 
 //                    panel_Dong.
                 
@@ -343,7 +343,6 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) evt.getSource();
                     
-                    System.out.println(".mouseClicked()" + tmp.getTenPhong()+ " "+ tmp.getFlag() + " "+ tmp.getSucChua() + " "+ tmp.getGia());
                     if(tmp.getBackground().equals(Color.WHITE)){
                     setAllPanelPhongFalse();
                     tmp.setBackground(Color.red);
@@ -484,7 +483,7 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
         panel_mot_dong = new javax.swing.JPanel();
         panel_mot_dong.setMaximumSize(new java.awt.Dimension(980, 160));
         panel_mot_dong.setPreferredSize(new java.awt.Dimension(980, 160));
-        panel_mot_dong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER,20,0));
+        panel_mot_dong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT,20,0));
         panel_mot_dong.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 1, 1, 1));
         panel_mot_dong.setBackground(Color.white);
         return panel_mot_dong;
