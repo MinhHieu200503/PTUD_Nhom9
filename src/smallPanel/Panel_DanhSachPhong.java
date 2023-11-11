@@ -25,6 +25,8 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
  */
 public class Panel_DanhSachPhong extends javax.swing.JFrame {
 
+    public String codePhong;
+
     /**
      * Creates new form Panel_DanhSachPhong
      */
@@ -34,6 +36,13 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
         if (data != null){
             loadData(setEntityPhongToPanelPhong(data));
         }
+        
+        System.out.println("Jscorll" + jScrollPane1.getSize().toString() + jScrollPane1.getMaximumSize().toString() + jScrollPane1.getMinimumSize().toString() + jScrollPane1.getPreferredSize().toString());
+
+        
+        
+        
+        
         return;
     }
 
@@ -90,10 +99,10 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1080, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,10 +177,10 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
                temp.add(new entity.Phong("002", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
                 temp.add(new entity.Phong("003", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
                 temp.add(new entity.Phong("004", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("005", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("007", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("005", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("007", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                        temp.add(new entity.Phong("003", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
@@ -228,6 +237,8 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
                         clickOnePhong(evt);
                     }
                 });
+                
+                        System.out.println("");
                 container_ListPhong_minisize.setLayout(new java.awt.GridLayout(0, 1, 1, 1));
                 for(int i = 1;i<=list.size();i++){
                 smallPanel.Panel_Phong tmp = list.get(i-1);
@@ -289,6 +300,9 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
                     clickOnePhong(evt);
                 }
             });
+            
+                    System.out.println("panelContainer" + panel_Container_ListPhong.getSize().toString() + panel_Container_ListPhong.getMaximumSize().toString() + panel_Container_ListPhong.getMinimumSize().toString() + panel_Container_ListPhong.getPreferredSize().toString());
+
             panel_Container_ListPhong.setLayout(new java.awt.GridLayout(0, 1, 1, 1));
             for(int i = 1;i<=list.size();i++){
             smallPanel.Panel_Phong tmp = list.get(i-1);
@@ -301,6 +315,9 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
                     panel_Dong.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 15, 1, 1));
                     
                     panel_mot_dong.setPreferredSize(new java.awt.Dimension(980, 170));
+                    
+                    System.out.println("panelMotDong" + panel_mot_dong.getSize().toString() + panel_mot_dong.getMaximumSize().toString() + panel_mot_dong.getMinimumSize().toString() + panel_mot_dong.getPreferredSize().toString());
+
 //                    panel_Dong.
                 
                 }
