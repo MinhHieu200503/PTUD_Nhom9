@@ -64,6 +64,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         thread = new Thread(this);
         thread.start();
         initComponents();
+
         
         loadDSPhongTrong();
         
@@ -139,6 +140,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
 //       
         
         danhSachPhong = new smallPanel.Panel_DanhSachPhongFullCol(listPhong1);
+
                 
         
         ContainerListPhong.add( danhSachPhong.getContentPane(), BorderLayout.WEST);
@@ -253,7 +255,6 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         Container_DatPhongNgay.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ContainerListPhong.setBackground(new java.awt.Color(255, 255, 255));
-        ContainerListPhong.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DANH SÁCH PHÒNG TRỐNG:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 18))); // NOI18N
         ContainerListPhong.setMaximumSize(new java.awt.Dimension(1080, 698));
         ContainerListPhong.setMinimumSize(new java.awt.Dimension(1080, 698));
         ContainerListPhong.setName(""); // NOI18N
@@ -419,10 +420,17 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
     private void xoaMotDongTable(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMotDongTable
         if (evt.getClickCount() == 2) { // Kiểm tra xem là double click
                     int selectedRow = tablePhongDatNgay.getSelectedRow();
+                    String maPhong = (String) tablePhongDatNgay.getValueAt(tablePhongDatNgay.getSelectedRow(), 0);
+                    System.out.println("maPhong" + maPhong);
                     if (selectedRow != -1) { // Kiểm tra xem có dòng được chọn không
                         // Xóa dòng được chọn từ mô hình
+                        System.out.println("remove "+ maPhong);
+                        smallPanel.Panel_DanhSachPhongFullCol.setPhongDefault(maPhong);
                         model.removeRow(selectedRow);
+                        
+                        
                     }
+                     
         }
     }//GEN-LAST:event_xoaMotDongTable
 
