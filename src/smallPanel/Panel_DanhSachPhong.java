@@ -4,7 +4,11 @@
  */
 package smallPanel;
 
+
+import dao.DAO_Phong;
+
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -171,16 +175,25 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            DAO_Phong dao_phong = new DAO_Phong();
+            
             public void run() {
-                ArrayList<entity.Phong> temp = new ArrayList<entity.Phong>();
+
+                ArrayList<entity.Phong> listPhong = new ArrayList<entity.Phong>();
+               
+                
+                
+
+                
                 temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
                temp.add(new entity.Phong("002", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
                 temp.add(new entity.Phong("003", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
                 temp.add(new entity.Phong("004", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-//                temp.add(new entity.Phong("005", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-//                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-//                temp.add(new entity.Phong("007", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-//                temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("005", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("007", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+
 //                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                        temp.add(new entity.Phong("003", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
@@ -200,9 +213,10 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
 //                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-//           
-//                
-                new Panel_DanhSachPhong(temp).setVisible(true);
+
+           
+                new Panel_DanhSachPhong(listPhong).setVisible(true);
+
             }
         });
     }
@@ -420,7 +434,7 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
     }
     
     public JPanel getList;
- 
+    private dao.DAO_Phong daophong;
     private javax.swing.JPanel panel_mot_dong;
     private ArrayList<smallPanel.Panel_Phong> tmpPhong;
     // Variables declaration - do not modify//GEN-BEGIN:variables

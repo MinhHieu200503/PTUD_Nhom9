@@ -59,15 +59,16 @@ public class GD_XuLy extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1920, 964));
         setMinimumSize(new java.awt.Dimension(1920, 964));
 
-        leftPanel.setBackground(new java.awt.Color(174, 210, 255));
+        leftPanel.setBackground(new java.awt.Color(165, 241, 233));
         leftPanel.setMaximumSize(new java.awt.Dimension(300, 964));
         leftPanel.setMinimumSize(new java.awt.Dimension(300, 964));
 
-        itemDanhSachPhong.setBackground(new java.awt.Color(174, 210, 255));
+        itemDanhSachPhong.setBackground(new java.awt.Color(165, 241, 233));
+        itemDanhSachPhong.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         itemDanhSachPhong.setForeground(new java.awt.Color(51, 0, 102));
+        itemDanhSachPhong.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         itemDanhSachPhong.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
@@ -80,7 +81,7 @@ public class GD_XuLy extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 0, 102));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-list-40.png"))); // NOI18N
         jLabel1.setText("Danh sách phòng");
@@ -102,8 +103,10 @@ public class GD_XuLy extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        itemDatPhongNgay.setBackground(new java.awt.Color(174, 210, 255));
+        itemDatPhongNgay.setBackground(new java.awt.Color(165, 241, 233));
+        itemDatPhongNgay.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         itemDatPhongNgay.setForeground(new java.awt.Color(174, 210, 255));
+        itemDatPhongNgay.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         itemDatPhongNgay.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enteredMenu(evt);
@@ -116,7 +119,7 @@ public class GD_XuLy extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(51, 0, 102));
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-reception-40.png"))); // NOI18N
         jLabel8.setText("Đặt phòng ngay");
@@ -138,8 +141,10 @@ public class GD_XuLy extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        itemDatPhongTruoc.setBackground(new java.awt.Color(174, 210, 255));
+        itemDatPhongTruoc.setBackground(new java.awt.Color(165, 241, 233));
+        itemDatPhongTruoc.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         itemDatPhongTruoc.setForeground(new java.awt.Color(51, 0, 102));
+        itemDatPhongTruoc.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         itemDatPhongTruoc.setPreferredSize(new java.awt.Dimension(300, 76));
         itemDatPhongTruoc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -153,7 +158,7 @@ public class GD_XuLy extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(51, 0, 102));
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-calendar-40.png"))); // NOI18N
         jLabel9.setText("Đặt phòng trước");
@@ -165,18 +170,20 @@ public class GD_XuLy extends javax.swing.JFrame {
             .addGroup(itemDatPhongTruocLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         itemDatPhongTruocLayout.setVerticalGroup(
             itemDatPhongTruocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemDatPhongTruocLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        itemNhanPhong.setBackground(new java.awt.Color(174, 210, 255));
+        itemNhanPhong.setBackground(new java.awt.Color(165, 241, 233));
+        itemNhanPhong.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         itemNhanPhong.setForeground(new java.awt.Color(51, 0, 102));
+        itemNhanPhong.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         itemNhanPhong.setPreferredSize(new java.awt.Dimension(300, 76));
         itemNhanPhong.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -190,7 +197,7 @@ public class GD_XuLy extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(51, 0, 102));
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-check-in-40.png"))); // NOI18N
         jLabel10.setText("Nhận phòng");
@@ -202,18 +209,20 @@ public class GD_XuLy extends javax.swing.JFrame {
             .addGroup(itemNhanPhongLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         itemNhanPhongLayout.setVerticalGroup(
             itemNhanPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemNhanPhongLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        itemGoiDichVu.setBackground(new java.awt.Color(174, 210, 255));
+        itemGoiDichVu.setBackground(new java.awt.Color(165, 241, 233));
+        itemGoiDichVu.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         itemGoiDichVu.setForeground(new java.awt.Color(51, 0, 102));
+        itemGoiDichVu.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         itemGoiDichVu.setPreferredSize(new java.awt.Dimension(300, 76));
         itemGoiDichVu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -227,7 +236,8 @@ public class GD_XuLy extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel11.setBackground(new java.awt.Color(102, 0, 255));
+        jLabel11.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(51, 0, 102));
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-wine-40.png"))); // NOI18N
         jLabel11.setText("Gọi dịch vụ");
@@ -239,18 +249,20 @@ public class GD_XuLy extends javax.swing.JFrame {
             .addGroup(itemGoiDichVuLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         itemGoiDichVuLayout.setVerticalGroup(
             itemGoiDichVuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemGoiDichVuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        itemTraPhong.setBackground(new java.awt.Color(174, 210, 255));
+        itemTraPhong.setBackground(new java.awt.Color(165, 241, 233));
+        itemTraPhong.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         itemTraPhong.setForeground(new java.awt.Color(51, 0, 102));
+        itemTraPhong.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         itemTraPhong.setPreferredSize(new java.awt.Dimension(300, 76));
         itemTraPhong.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -264,7 +276,7 @@ public class GD_XuLy extends javax.swing.JFrame {
             }
         });
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(51, 0, 102));
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-check-out-40.png"))); // NOI18N
         jLabel12.setText("Trả phòng");
@@ -276,13 +288,13 @@ public class GD_XuLy extends javax.swing.JFrame {
             .addGroup(itemTraPhongLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         itemTraPhongLayout.setVerticalGroup(
             itemTraPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemTraPhongLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -419,12 +431,12 @@ public class GD_XuLy extends javax.swing.JFrame {
     }//GEN-LAST:event_exitedMenu
 
      public void setSelectedItem(javax.swing.JPanel pnl){
-        pnl.setBackground(new Color(44, 85, 180)); // Đánh dấu khi được chọn
+        pnl.setBackground(new Color(0,153,153)); // Đánh dấu khi được chọn
         pnl.getComponent(0).setForeground(Color.WHITE);   
 
         for (Component com : leftPanel.getComponents()) {
             if (com instanceof JPanel && !com.equals(pnl)) {
-                com.setBackground(new Color(174, 210, 255)); // Chỉnh về màu mặc định
+                com.setBackground(new Color(165,241,233)); // Chỉnh về màu mặc định
                 JPanel temp = (JPanel) com;
                 temp.getComponent(0).setForeground(new Color(51,0,102));
                 
@@ -437,7 +449,7 @@ public class GD_XuLy extends javax.swing.JFrame {
     
     public void enterMenu(javax.swing.JPanel panel){
         if (!choice_Panel.equals(panel)){
-            panel.setBackground(new Color(142, 143, 250));
+            panel.setBackground(new Color(127, 233, 222));
             panel.getComponent(0).setForeground(Color.WHITE);
         }
         repaint();
@@ -448,7 +460,7 @@ public class GD_XuLy extends javax.swing.JFrame {
 
     public void exitMenu(javax.swing.JPanel panel){
         if (!choice_Panel.equals(panel)){
-            panel.setBackground(new Color(174, 210, 255));
+            panel.setBackground(new Color(165,241,233));
             panel.getComponent(0).setForeground( new Color(51,0,102));
         }
         repaint();
