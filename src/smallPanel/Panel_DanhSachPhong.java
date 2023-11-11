@@ -18,6 +18,7 @@ import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -148,11 +149,11 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
                 }
 
                 private void setBackground(Color red) {
-                    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                    
                 }
 
                 private void setBorder(Border border) {
-                    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                    
                 }
             });
         });
@@ -179,7 +180,7 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
             
             public void run() {
 
-                ArrayList<entity.Phong> listPhong = new ArrayList<entity.Phong>();
+                ArrayList<entity.Phong> temp = new ArrayList<entity.Phong>();
                
                 
                 
@@ -194,12 +195,12 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
                 temp.add(new entity.Phong("007", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
                 temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 
-//                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-//                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-//                        temp.add(new entity.Phong("003", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-//                temp.add(new entity.Phong("004", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-//                temp.add(new entity.Phong("005", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-//                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("003", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("004", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("005", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                temp.add(new entity.Phong("007", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
@@ -215,7 +216,7 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
 //                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 
            
-                new Panel_DanhSachPhong(listPhong).setVisible(true);
+                new Panel_DanhSachPhong(temp).setVisible(true);
 
             }
         });
@@ -279,16 +280,18 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
                 list.get(i-1).addMouseListener(new java.awt.event.MouseAdapter() {
                     public void mouseClicked(java.awt.event.MouseEvent evt) {
                         smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) evt.getSource();
-                        setAllPanelPhongFalse();
+                        
         //                System.out.println(".mouseClicked()" + tmp.getTenPhong()+ " "+ tmp.getFlag() + " "+ tmp.getSucChua() + " "+ tmp.getGia());
                         if(tmp.getBackground().equals(Color.WHITE)){
+                        setAllPanelPhongFalse();
                         tmp.setBackground(Color.red);
                         Border border = new LineBorder(Color.ORANGE, 4, true);
                         tmp.setBorder(border);
                         tmp.setFlag(true);
                     }
                         else{
-
+                            
+                            JOptionPane.showMessageDialog(rootPane, "DJTME JAVA LOZ");
                            tmp.setBackground(Color.white);
                            tmp.setBorder(new Panel_Phong.RoundedBorder(90));
                             tmp.setFlag(false);
@@ -345,15 +348,18 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
                     setAllPanelPhongFalse();
                     System.out.println(".mouseClicked()" + tmp.getTenPhong()+ " "+ tmp.getFlag() + " "+ tmp.getSucChua() + " "+ tmp.getGia());
                     if(tmp.getBackground().equals(Color.WHITE)){
-                    tmp.setBackground(Color.red);
-                    Border border = new LineBorder(Color.ORANGE, 4, true);
-                    tmp.setBorder(border);
-                    tmp.setFlag(true);
-                }
+                        setAllPanelPhongFalse();
+                        tmp.setBackground(Color.red);
+                       
+                        Border border = new LineBorder(Color.ORANGE, 4, true);
+                        tmp.setBorder(border);
+                        tmp.setFlag(true);
+                       }
                     else{
-
-                       tmp.setBackground(Color.white);
-                       tmp.setBorder(new Panel_Phong.RoundedBorder(90));
+                       
+                        JOptionPane.showMessageDialog(rootPane, "DJTME JAVA LOZ");
+                        tmp.setBackground(Color.white);
+                        tmp.setBorder(new Panel_Phong.RoundedBorder(90));
                         tmp.setFlag(false);
                     }
 
@@ -375,17 +381,36 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
      
      
      public  void setAllPanelPhongFalse(){
-         
-         for(int i = 0;i<panel_Container_ListPhong.getComponentCount();i++){
+        int soLuongPhong = panel_Container_ListPhong.getComponentCount();
+         if(soLuongPhong<=9){
+             for(int i = 0;i<panel_Container_ListPhong.getComponentCount();i++){
              JPanel one_Row  = (JPanel) panel_Container_ListPhong.getComponent(i);
              for(int row = 0; row<one_Row.getComponentCount();row ++){
 //                 System.out.println("smallPanel.Panel_DanhSachPhong.setAllPanelPhongFalse()" +i +" /" + row);
                    
-                 smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) one_Row.getComponent(row);
-                 tmp.setBackground(Color.white);
-                 tmp.setBorder(new Panel_Phong.RoundedBorder(90));
-                 tmp.setFlag(false);
+                 if(one_Row.getComponent(row) instanceof smallPanel.Panel_Phong){
+                     smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) one_Row.getComponent(row);
+                    tmp.setBackground(Color.white);
+                    tmp.setBorder(new Panel_Phong.RoundedBorder(90));
+                    tmp.setFlag(false);
+                 }
              }
+            }
+         }
+         else{
+             for(int i = 0;i<panel_Container_ListPhong.getComponentCount();i++){
+             JPanel one_Row  = (JPanel) panel_Container_ListPhong.getComponent(i);
+             for(int row = 0; row<one_Row.getComponentCount();row ++){
+//                 System.out.println("smallPanel.Panel_DanhSachPhong.setAllPanelPhongFalse()" +i +" /" + row);
+                   
+                 if(one_Row.getComponent(row) instanceof smallPanel.Panel_Phong){
+                     smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) one_Row.getComponent(row);
+                    tmp.setBackground(Color.white);
+                    tmp.setBorder(new Panel_Phong.RoundedBorder(90));
+                    tmp.setFlag(false);
+                 }
+             }
+         }
          }
      }
      

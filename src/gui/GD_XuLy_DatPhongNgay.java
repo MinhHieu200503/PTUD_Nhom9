@@ -420,10 +420,17 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
     private void xoaMotDongTable(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMotDongTable
         if (evt.getClickCount() == 2) { // Kiểm tra xem là double click
                     int selectedRow = tablePhongDatNgay.getSelectedRow();
+                    String maPhong = (String) tablePhongDatNgay.getValueAt(tablePhongDatNgay.getSelectedRow(), 0);
+                    System.out.println("maPhong" + maPhong);
                     if (selectedRow != -1) { // Kiểm tra xem có dòng được chọn không
                         // Xóa dòng được chọn từ mô hình
+                        System.out.println("remove "+ maPhong);
+                        smallPanel.Panel_DanhSachPhongFullCol.setPhongDefault(maPhong);
                         model.removeRow(selectedRow);
+                        
+                        
                     }
+                     
         }
     }//GEN-LAST:event_xoaMotDongTable
 
