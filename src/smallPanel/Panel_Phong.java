@@ -60,55 +60,38 @@ public class Panel_Phong extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         lb_Icon = new javax.swing.JLabel();
         lb_TenPhong = new javax.swing.JLabel();
         lb_SucChua = new javax.swing.JLabel();
         lb_Gia = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 255, 153), new java.awt.Color(0, 51, 204), new java.awt.Color(0, 204, 0), new java.awt.Color(255, 102, 255)));
-        setMaximumSize(new java.awt.Dimension(320, 150));
-        setMinimumSize(new java.awt.Dimension(320, 150));
-        setPreferredSize(new java.awt.Dimension(320, 150));
-        setLayout(new java.awt.GridBagLayout());
+        setMaximumSize(new java.awt.Dimension(262, 135));
+        setMinimumSize(new java.awt.Dimension(262, 135));
+        setPreferredSize(new java.awt.Dimension(262, 135));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lb_Icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Available.png"))); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipady = 8;
-        gridBagConstraints.insets = new java.awt.Insets(0, 27, 0, 27);
-        add(lb_Icon, gridBagConstraints);
+        add(lb_Icon, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 49));
 
-        lb_TenPhong.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        lb_TenPhong.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         lb_TenPhong.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lb_TenPhong.setText("Phòng: 101 - Ha");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        add(lb_TenPhong, gridBagConstraints);
+        add(lb_TenPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, -1, -1));
 
-        lb_SucChua.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        lb_SucChua.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         lb_SucChua.setText("Sức chứa: 20");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(36, 0, 36, 0);
-        add(lb_SucChua, gridBagConstraints);
+        add(lb_SucChua, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
 
-        lb_Gia.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        lb_Gia.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         lb_Gia.setText("Giá : 150.000 VND ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHWEST;
-        add(lb_Gia, gridBagConstraints);
+        add(lb_Gia, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/vip-Mini.gif"))); // NOI18N
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
     
     private void clickPanel(java.awt.event.MouseEvent evt,int choose) {                            
@@ -258,6 +241,7 @@ public class Panel_Phong extends javax.swing.JPanel {
 
     protected entity.Phong entityPhong;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lb_Gia;
     private javax.swing.JLabel lb_Icon;
     private javax.swing.JLabel lb_SucChua;
