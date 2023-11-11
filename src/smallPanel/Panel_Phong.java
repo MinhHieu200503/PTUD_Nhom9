@@ -144,7 +144,7 @@ public class Panel_Phong extends javax.swing.JPanel {
     }
     
     public void setData(entity.Phong data){
-        lb_TenPhong.setText("Phòng: " + data.getTenPhong() + " - " + data.getMaPhong());
+        lb_TenPhong.setText(data.getTenPhong() + " - " + data.getMaPhong());
         lb_SucChua.setText("Sức chứa: " + String.valueOf(data.getSucChuaToiDa()));
         lb_Gia.setText("Giá: "+ String.valueOf(data.getGiaPhongTheoGio()));
     }

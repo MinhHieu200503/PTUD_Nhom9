@@ -7,6 +7,7 @@ package smallPanel;
 import gui.GD_XuLy;
 import gui.GD_QuanLi;
 import gui.GD_TraCuu;
+import gui.GD_TrangChu;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
@@ -107,7 +108,7 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
         jPanel1.setPreferredSize(new java.awt.Dimension(1920, 66));
         jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
-        leftPanel.setBackground(new java.awt.Color(40, 77, 133));
+        leftPanel.setBackground(new java.awt.Color(0, 153, 153));
         leftPanel.setMaximumSize(new java.awt.Dimension(423, 66));
         leftPanel.setMinimumSize(new java.awt.Dimension(423, 66));
         leftPanel.setPreferredSize(new java.awt.Dimension(423, 66));
@@ -122,18 +123,18 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
         gridBagConstraints.insets = new java.awt.Insets(0, 14, 0, 0);
         leftPanel.add(icon_Account, gridBagConstraints);
 
-        userPanel.setBackground(new java.awt.Color(40, 77, 133));
+        userPanel.setBackground(new java.awt.Color(0, 153, 153));
         userPanel.setLayout(new javax.swing.BoxLayout(userPanel, javax.swing.BoxLayout.PAGE_AXIS));
 
-        name_Account.setBackground(new java.awt.Color(255, 255, 255));
+        name_Account.setBackground(new java.awt.Color(0, 0, 0));
         name_Account.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        name_Account.setForeground(new java.awt.Color(255, 255, 255));
+        name_Account.setForeground(new java.awt.Color(0, 0, 0));
         name_Account.setText("Loading...");
         userPanel.add(name_Account);
 
-        time_Account.setBackground(new java.awt.Color(255, 255, 255));
+        time_Account.setBackground(new java.awt.Color(0, 0, 0));
         time_Account.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        time_Account.setForeground(new java.awt.Color(255, 255, 255));
+        time_Account.setForeground(new java.awt.Color(0, 0, 0));
         time_Account.setText("Loading...");
         userPanel.add(time_Account);
 
@@ -146,7 +147,7 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
 
         jPanel1.add(leftPanel);
 
-        rightPanel.setBackground(new java.awt.Color(40, 77, 133));
+        rightPanel.setBackground(new java.awt.Color(0, 153, 153));
         rightPanel.setAlignmentX(0.0F);
         rightPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         rightPanel.setMaximumSize(new java.awt.Dimension(944, 66));
@@ -155,7 +156,7 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
         rightPanel.setRequestFocusEnabled(false);
         rightPanel.setLayout(new java.awt.GridBagLayout());
 
-        home.setBackground(new java.awt.Color(40, 77, 133));
+        home.setBackground(new java.awt.Color(0, 153, 153));
         home.setMaximumSize(new java.awt.Dimension(191, 66));
         home.setMinimumSize(new java.awt.Dimension(191, 66));
         home.setPreferredSize(new java.awt.Dimension(191, 66));
@@ -173,11 +174,11 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
         home.setLayout(new java.awt.GridBagLayout());
 
         label_TrangChu.setBackground(new java.awt.Color(204, 255, 51));
-        label_TrangChu.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        label_TrangChu.setForeground(new java.awt.Color(255, 255, 255));
+        label_TrangChu.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        label_TrangChu.setForeground(new java.awt.Color(0, 0, 0));
         label_TrangChu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_TrangChu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-home-40.png"))); // NOI18N
-        label_TrangChu.setText("Trang chủ");
+        label_TrangChu.setText("TRANG CHỦ");
         label_TrangChu.setAlignmentY(0.0F);
         label_TrangChu.setMaximumSize(new java.awt.Dimension(191, 66));
         label_TrangChu.setMinimumSize(new java.awt.Dimension(191, 66));
@@ -217,7 +218,7 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
         gridBagConstraints.gridy = 0;
         rightPanel.add(home, gridBagConstraints);
 
-        room.setBackground(new java.awt.Color(40, 77, 133));
+        room.setBackground(new java.awt.Color(0, 153, 153));
         room.setMaximumSize(new java.awt.Dimension(191, 66));
         room.setMinimumSize(new java.awt.Dimension(191, 66));
         room.setPreferredSize(new java.awt.Dimension(191, 66));
@@ -234,15 +235,13 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
         });
         room.setLayout(new java.awt.GridBagLayout());
 
-        label_XuLy.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        label_XuLy.setForeground(new java.awt.Color(255, 255, 255));
+        label_XuLy.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        label_XuLy.setForeground(new java.awt.Color(0, 0, 0));
         label_XuLy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_XuLy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-micro-40.png"))); // NOI18N
-        label_XuLy.setText("Xử lý");
+        label_XuLy.setText("XỬ LÝ");
         label_XuLy.setAlignmentY(0.0F);
         label_XuLy.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        label_XuLy.setMaximumSize(null);
-        label_XuLy.setMinimumSize(null);
         label_XuLy.setPreferredSize(new java.awt.Dimension(191, 66));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -279,7 +278,7 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
         gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_END;
         rightPanel.add(room, gridBagConstraints);
 
-        search.setBackground(new java.awt.Color(40, 77, 133));
+        search.setBackground(new java.awt.Color(0, 153, 153));
         search.setMaximumSize(new java.awt.Dimension(191, 66));
         search.setMinimumSize(new java.awt.Dimension(191, 66));
         search.setPreferredSize(new java.awt.Dimension(191, 66));
@@ -296,11 +295,11 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
         });
         search.setLayout(new java.awt.GridBagLayout());
 
-        label_TraCuu.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        label_TraCuu.setForeground(new java.awt.Color(255, 255, 255));
+        label_TraCuu.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        label_TraCuu.setForeground(new java.awt.Color(0, 0, 0));
         label_TraCuu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_TraCuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-find-40.png"))); // NOI18N
-        label_TraCuu.setText("Tra cứu");
+        label_TraCuu.setText("TRA CỨU");
         label_TraCuu.setMaximumSize(new java.awt.Dimension(191, 66));
         label_TraCuu.setMinimumSize(new java.awt.Dimension(191, 66));
         label_TraCuu.setPreferredSize(new java.awt.Dimension(191, 66));
@@ -335,7 +334,7 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
 
         rightPanel.add(search, new java.awt.GridBagConstraints());
 
-        statistical.setBackground(new java.awt.Color(40, 77, 133));
+        statistical.setBackground(new java.awt.Color(0, 153, 153));
         statistical.setMaximumSize(new java.awt.Dimension(191, 66));
         statistical.setMinimumSize(new java.awt.Dimension(191, 66));
         statistical.setPreferredSize(new java.awt.Dimension(191, 66));
@@ -352,11 +351,11 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
         });
         statistical.setLayout(new java.awt.GridBagLayout());
 
-        label_ThongKe.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        label_ThongKe.setForeground(new java.awt.Color(255, 255, 255));
+        label_ThongKe.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        label_ThongKe.setForeground(new java.awt.Color(0, 0, 0));
         label_ThongKe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_ThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-statistics-40.png"))); // NOI18N
-        label_ThongKe.setText("Thống kê");
+        label_ThongKe.setText("THỐNG KÊ");
         label_ThongKe.setMaximumSize(new java.awt.Dimension(191, 66));
         label_ThongKe.setMinimumSize(new java.awt.Dimension(191, 66));
         label_ThongKe.setPreferredSize(new java.awt.Dimension(191, 66));
@@ -391,7 +390,7 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
 
         rightPanel.add(statistical, new java.awt.GridBagConstraints());
 
-        manage.setBackground(new java.awt.Color(40, 77, 133));
+        manage.setBackground(new java.awt.Color(0, 153, 153));
         manage.setMaximumSize(new java.awt.Dimension(191, 66));
         manage.setMinimumSize(new java.awt.Dimension(191, 66));
         manage.setPreferredSize(new java.awt.Dimension(191, 66));
@@ -408,11 +407,11 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
         });
         manage.setLayout(new java.awt.GridBagLayout());
 
-        label_QuanLy.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        label_QuanLy.setForeground(new java.awt.Color(255, 255, 255));
+        label_QuanLy.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        label_QuanLy.setForeground(new java.awt.Color(0, 0, 0));
         label_QuanLy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_QuanLy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-manage-40.png"))); // NOI18N
-        label_QuanLy.setText("Quản lý");
+        label_QuanLy.setText("QUẢN LÝ");
         label_QuanLy.setMaximumSize(new java.awt.Dimension(191, 66));
         label_QuanLy.setMinimumSize(new java.awt.Dimension(191, 66));
         label_QuanLy.setPreferredSize(new java.awt.Dimension(191, 66));
@@ -463,7 +462,7 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
 
     public void enterMenu(javax.swing.JPanel panel){
 
-        panel.setBackground(new Color(40,94,178));
+        panel.setBackground(new Color(127, 233, 222));
         repaint();
         
         
@@ -475,7 +474,7 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
     }//GEN-LAST:event_exitedMenu
     
     public void exitMenu(javax.swing.JPanel panel){
-        panel.setBackground(new Color(40,77,133));
+        panel.setBackground(new Color(0,153,153));
         repaint();
     }
     
@@ -485,7 +484,8 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
         if (a.equals(home)){
 
             clickMenuUnderline((JPanel) a);
-
+            this.remove(1);
+            this.add(new GD_TrangChu().getContentPane());
         }
         else if (a.equals(room)){
             clickMenuUnderline((JPanel) a);
