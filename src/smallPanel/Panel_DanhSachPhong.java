@@ -6,9 +6,14 @@ package smallPanel;
 
 import dao.DAO_Phong;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -102,7 +107,27 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
 
     private void clickOnePhong(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickOnePhong
         ArrayList<Panel_Phong> tmpList = tmpPhong;
+        tmpPhong.forEach(phong -> {
+            phong.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    this.setBackground(Color.red);
+                    Border border = new LineBorder(Color.ORANGE, 4, true);
+                    this.setBorder(border);
+//                    phong.setf flag = true;
+                System.out.println(".mouseClicked()");
+                }
+
+                private void setBackground(Color red) {
+                    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                }
+
+                private void setBorder(Border border) {
+                    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                }
+            });
+        });
         
+    
         
     }//GEN-LAST:event_clickOnePhong
 
@@ -166,14 +191,12 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
         tmpPhong = new ArrayList<smallPanel.Panel_Phong>();
         if (dataPhong != null){
             for (entity.Phong phong : dataPhong) {
-                temp = new Panel_Phong(phong,0);
+                temp = new Panel_Phong(phong,1);
                 tmpPhong.add(temp);
             }
         }
         return tmpPhong;
     }
-    
-    
     
     
     
@@ -192,18 +215,62 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
                 if((i ==  list.size() && list.size() % 3 != 0)){
                     panel_Dong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT,20,0));
                     panel_Dong.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 15, 1, 1));
-                    System.out.println("djttttt");
+                    
                     panel_mot_dong.setPreferredSize(new java.awt.Dimension(980, 170));
 //                    panel_Dong.
+                
                 }
                 panel_Container_ListPhong.add(panel_Dong);
                 panel_Dong =  taoPanel_1_Dong();
-                System.out.println(i + "\n");
+                System.out.println(i + "\n");                
             }
+            list.get(i-1).addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) evt.getSource();
+                setAllPanelPhongFalse();
+//                System.out.println(".mouseClicked()" + tmp.getTenPhong()+ " "+ tmp.getFlag() + " "+ tmp.getSucChua() + " "+ tmp.getGia());
+                if(tmp.getBackground().equals(Color.WHITE)){
+                tmp.setBackground(Color.red);
+                Border border = new LineBorder(Color.ORANGE, 4, true);
+                tmp.setBorder(border);
+                tmp.setFlag(true);
+            }
+                else{
+                    
+                   tmp.setBackground(Color.white);
+                   tmp.setBorder(new Panel_Phong.RoundedBorder(90));
+                    tmp.setFlag(false);
+                }
+
+                
+            }
+
+                private void setBorder(Panel_Phong.RoundedBorder roundedBorder) {
+                     
+                }
+            
+        });
         }
         getList = panel_Container_ListPhong;
         return panel_Container_ListPhong;
     }
+     
+     
+     
+     
+     public  void setAllPanelPhongFalse(){
+         
+         for(int i = 0;i<panel_Container_ListPhong.getComponentCount();i++){
+             JPanel one_Row  = (JPanel) panel_Container_ListPhong.getComponent(i);
+             for(int row = 0; row<one_Row.getComponentCount();row ++){
+                 System.out.println("smallPanel.Panel_DanhSachPhong.setAllPanelPhongFalse()" +i +" /" + row);
+                 smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) one_Row.getComponent(row);
+                 tmp.setBackground(Color.white);
+                 tmp.setBorder(new Panel_Phong.RoundedBorder(90));
+                 tmp.setFlag(false);
+             }
+         }
+     }
      
      
     
