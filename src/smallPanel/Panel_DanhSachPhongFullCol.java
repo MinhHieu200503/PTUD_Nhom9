@@ -86,7 +86,6 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(900, 964));
         setMinimumSize(new java.awt.Dimension(900, 964));
-        setPreferredSize(new java.awt.Dimension(900, 964));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMaximumSize(new java.awt.Dimension(900, 964));
@@ -95,21 +94,24 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setMaximumSize(new java.awt.Dimension(900, 964));
         jScrollPane1.setMinimumSize(new java.awt.Dimension(900, 964));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(900, 964));
 
         panel_Container_ListPhong.setBackground(new java.awt.Color(255, 255, 255));
+        panel_Container_ListPhong.setMaximumSize(new java.awt.Dimension(900, 964));
+        panel_Container_ListPhong.setMinimumSize(new java.awt.Dimension(900, 964));
 
         javax.swing.GroupLayout panel_Container_ListPhongLayout = new javax.swing.GroupLayout(panel_Container_ListPhong);
         panel_Container_ListPhong.setLayout(panel_Container_ListPhongLayout);
         panel_Container_ListPhongLayout.setHorizontalGroup(
             panel_Container_ListPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1096, Short.MAX_VALUE)
+            .addGap(0, 900, Short.MAX_VALUE)
         );
         panel_Container_ListPhongLayout.setVerticalGroup(
             panel_Container_ListPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 910, Short.MAX_VALUE)
+            .addGap(0, 964, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(panel_Container_ListPhong);
@@ -195,7 +197,7 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                 temp.add(new entity.Phong("003", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
                 temp.add(new entity.Phong("004", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
                 temp.add(new entity.Phong("005", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-//                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                temp.add(new entity.Phong("007", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
@@ -245,7 +247,7 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
         JPanel panel_Dong =  taoPanel_1_Dong();
         JPanel container_ListPhong_minisize ;
 
-        if(list.size()<=9){
+        if(list.size()<=12){
                 //tạo container con
                  container_ListPhong_minisize = new JPanel();
                 container_ListPhong_minisize.setBackground(new java.awt.Color(255,255,255));
@@ -255,28 +257,15 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                     }
                 });
                 
-                        System.out.println("");
                 container_ListPhong_minisize.setLayout(new java.awt.GridLayout(0, 1, 1, 1));
                 for(int i = 1;i<=list.size();i++){
                 smallPanel.Panel_Phong tmp = list.get(i-1);
-                    System.out.println("asd: " + panel_mot_dong.toString());
                 panel_Dong.add(tmp);
                 jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
                 if(i%3 == 0  || (i ==  list.size() && list.size() % 3 != 0)){
-                    if((i ==  list.size() && list.size() % 3 != 0)){
-                        panel_Dong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT,20,0));
-                        panel_Dong.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 15, 1, 1));
-                        
-                        panel_Dong.setPreferredSize(new java.awt.Dimension(1080, 170));
-                        panel_Dong.setMaximumSize(new java.awt.Dimension(1080, 170));
-                        panel_Dong.setMinimumSize(new java.awt.Dimension(1080, 170));
-                        panel_Dong.setSize(new java.awt.Dimension(1080, 170));
-                        
-
-                    }
+                    
                     container_ListPhong_minisize.add(panel_Dong);
-                    panel_Dong =  taoPanel_1_Dong();
-                    System.out.println(i + "\n");                
+                    panel_Dong =  taoPanel_1_Dong();              
                 }
                 list.get(i-1).addMouseListener(new java.awt.event.MouseAdapter() {
                     public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -289,13 +278,6 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                             tmp.setFlag(true);
                         
                     }
-                        else{
-                            
-//                           tmp.setBackground(Color.white);
-//                           tmp.setBorder(new Panel_Phong.RoundedBorder(90));
-//                            tmp.setFlag(false);
-                        }
-
                 clickPanel(evt);
                 }
 
@@ -306,7 +288,7 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                 });
                 }
                 // add zo container cha
-//                container_ListPhong_minisize.setSize(1080, 700);
+
                 panel_Container_ListPhong.setLayout(new FlowLayout());
                 panel_Container_ListPhong.add(container_ListPhong_minisize);
         }else{
@@ -325,19 +307,9 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
             panel_Dong.add(tmp);
             jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
             if(i%3 == 0  || (i ==  list.size() && list.size() % 3 != 0)){
-                if((i ==  list.size() && list.size() % 3 != 0)){
-                    panel_Dong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT,20,0));
-                    panel_Dong.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 15, 1, 1));
-                    
-                    panel_mot_dong.setPreferredSize(new java.awt.Dimension(980, 170));
-                    
-
-//                    panel_Dong.
                 
-                }
                 panel_Container_ListPhong.add(panel_Dong);
-                panel_Dong =  taoPanel_1_Dong();
-                System.out.println(i + "\n");                
+                panel_Dong =  taoPanel_1_Dong();              
             }
             list.get(i-1).addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -350,12 +322,6 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                     tmp.setBorder(border);
                     tmp.setFlag(true);
                 }
-                    else{
-//                        JOptionPane.showMessageDialog(rootPane, "Phòng đã được chọn rồi !!!");
-//                       tmp.setBackground(Color.white);
-//                       tmp.setBorder(new Panel_Phong.RoundedBorder(90));
-//                        tmp.setFlag(false);
-                    }
 
                     clickPanel(evt);
             }
@@ -376,17 +342,15 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
      
      public  void setAllPanelPhongFalse(){
          int listPhongCount = tmpPhong.size();
-         if(listPhongCount<=9)
+         if(listPhongCount<=12)
          {
              JPanel panel_Con = (JPanel) panel_Container_ListPhong.getComponent(0);
              for(int i = 0;i<panel_Con.getComponentCount();i++){
              JPanel one_Row  = (JPanel) panel_Con.getComponent(i);
              for(int row = 0; row<one_Row.getComponentCount();row ++){
-//                 System.out.println("smallPanel.Panel_DanhSachPhong.setAllPanelPhongFalse()" +i +" /" + row);
                    
                  smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) one_Row.getComponent(row);
                  if(!tmp.getBackground().equals(Color.BLUE)){
-                    
                     tmp.setBackground(Color.white);
                     tmp.setBorder(new Panel_Phong.RoundedBorder(90));
                     tmp.setFlag(false);
@@ -416,19 +380,15 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
      public static void  setPhongDefault(String maPhong){
          listPhongCount  = tmpPhong.size();
          
-         if(listPhongCount<=9)
+         if(listPhongCount<=12)
          {
              
               panel_Con = (JPanel) panel_Container_ListPhong.getComponent(0);
              for(int i = 0;i<panel_Con.getComponentCount();i++){
              JPanel one_Row  = (JPanel) panel_Con.getComponent(i);
-             for(int row = 0; row<one_Row.getComponentCount();row ++){
-//                 System.out.println("smallPanel.Panel_DanhSachPhong.setAllPanelPhongFalse()" +i +" /" + row);
-                   
-                 smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) one_Row.getComponent(row);
-                 
-                 if(tmp.getCode().substring(codePhong.length() - 5).equals(maPhong)){
-                     System.out.println("");
+             for(int row = 0; row<one_Row.getComponentCount();row ++){   
+                 smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) one_Row.getComponent(row); 
+                 if(tmp.getCode().substring(tmp.getCode().length() - 5).equals(maPhong)){
                     tmp.setBackground(Color.white);
                     tmp.setBorder(new Panel_Phong.RoundedBorder(90));
                     tmp.setFlag(false);
@@ -442,13 +402,9 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
              for(int i = 0;i<panel_Container_ListPhong.getComponentCount();i++){
              JPanel one_Row  = (JPanel) panel_Container_ListPhong.getComponent(i);
              for(int row = 0; row<one_Row.getComponentCount();++row ){
-//                 System.out.println("smallPanel.Panel_DanhSachPhong.setAllPanelPhongFalse()" +i +" /" + row);
                    smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) one_Row.getComponent(row);
-                  System.out.println("Code Phong: "+ codePhong);
                   String maPhongCSDL = tmp.getCode().substring(tmp.getCode().length() - 5);
-                  System.out.println("con cho java => csdl" + maPhongCSDL + "    maPhong : =>" + maPhong + "   codePhong:  =>" +tmp.getCode() +"#$%");  
                  if(maPhongCSDL.equals(maPhong)){
-                    System.out.println("smallPanel.Panel_DanhSachPhongFullCol.setPhongDefault() " +"tmp: "+ tmp.getCode() + "maPhong " + maPhong);
                     tmp.setBackground(Color.white);
                     tmp.setBorder(new Panel_Phong.RoundedBorder(90));
                     tmp.setFlag(false);
@@ -517,8 +473,7 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                      evt.consume();
                      smallPanel.Panel_Phong temp = (smallPanel.Panel_Phong) evt.getSource();
                      codePhong = temp.getCode();
-//                     System.out.println("smallPanel.Panel_DanhSachPhongFullCol.clickPanel()" + codePhong);
-                       temp.setBackground(Color.BLUE);
+                      temp.setBackground(Color.BLUE);
                     Border border = new LineBorder(new Color(0,153,153), 4, true);
                     temp.setBorder(border);
                        GD_XuLy_DatPhongNgay.setTableData(codePhong);
@@ -527,7 +482,7 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
 
             }
             
-    public static String codePhong = "123";
+    public static String codePhong = "Chua nhan sk click dau";
 }
 
 

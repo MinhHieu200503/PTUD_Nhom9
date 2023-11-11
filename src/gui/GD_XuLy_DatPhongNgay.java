@@ -261,7 +261,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         ContainerListPhong.setPreferredSize(new java.awt.Dimension(900, 964));
         ContainerListPhong.setVerifyInputWhenFocusTarget(false);
         ContainerListPhong.setLayout(new java.awt.BorderLayout());
-        Container_DatPhongNgay.add(ContainerListPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 900, 820));
+        Container_DatPhongNgay.add(ContainerListPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 900, 964));
 
         Panel_ThongTinKhachHang.setBackground(new java.awt.Color(255, 255, 255));
         Panel_ThongTinKhachHang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "THÔNG TIN ĐẶT PHÒNG", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 18))); // NOI18N
@@ -350,7 +350,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txt_khachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+                    .addComponent(txt_khachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
                     .addComponent(txt_SoDT, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -367,7 +367,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                 .addGap(0, 14, Short.MAX_VALUE))
         );
 
-        Container_DatPhongNgay.add(Panel_ThongTinKhachHang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 20, 660, 210));
+        Container_DatPhongNgay.add(Panel_ThongTinKhachHang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 20, 650, 210));
 
         tablePhongDatNgay.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -424,7 +424,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                     System.out.println("maPhong" + maPhong);
                     if (selectedRow != -1) { // Kiểm tra xem có dòng được chọn không
                         // Xóa dòng được chọn từ mô hình
-                        System.out.println("remove "+ maPhong);
+                        
                         smallPanel.Panel_DanhSachPhongFullCol.setPhongDefault(maPhong);
                         model.removeRow(selectedRow);
                         
