@@ -255,13 +255,13 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         Container_DatPhongNgay.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ContainerListPhong.setBackground(new java.awt.Color(255, 255, 255));
-        ContainerListPhong.setMaximumSize(new java.awt.Dimension(1080, 698));
-        ContainerListPhong.setMinimumSize(new java.awt.Dimension(1080, 698));
+        ContainerListPhong.setMaximumSize(new java.awt.Dimension(900, 964));
+        ContainerListPhong.setMinimumSize(new java.awt.Dimension(900, 964));
         ContainerListPhong.setName(""); // NOI18N
-        ContainerListPhong.setPreferredSize(new java.awt.Dimension(1080, 698));
+        ContainerListPhong.setPreferredSize(new java.awt.Dimension(900, 964));
         ContainerListPhong.setVerifyInputWhenFocusTarget(false);
         ContainerListPhong.setLayout(new java.awt.BorderLayout());
-        Container_DatPhongNgay.add(ContainerListPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 1110, 820));
+        Container_DatPhongNgay.add(ContainerListPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 900, 820));
 
         Panel_ThongTinKhachHang.setBackground(new java.awt.Color(255, 255, 255));
         Panel_ThongTinKhachHang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "THÔNG TIN ĐẶT PHÒNG", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 18))); // NOI18N
@@ -289,8 +289,8 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txt_MaUuDai, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
-                    .addComponent(txt_GioNhanPhong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE))
+                    .addComponent(txt_MaUuDai, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                    .addComponent(txt_GioNhanPhong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE))
                 .addContainerGap())
         );
         Panel_ThongTinKhachHangLayout.setVerticalGroup(
@@ -306,7 +306,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                 .addContainerGap())
         );
 
-        Container_DatPhongNgay.add(Panel_ThongTinKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 250, 470, 200));
+        Container_DatPhongNgay.add(Panel_ThongTinKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 250, 650, 200));
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel1.setText("PHÒNG ĐƯỢC CHỌN:");
@@ -321,7 +321,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                 datPhongNgay(evt);
             }
         });
-        Container_DatPhongNgay.add(btn_DatPhongNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 780, 470, 60));
+        Container_DatPhongNgay.add(btn_DatPhongNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 780, 640, 60));
 
         Panel_ThongTinKhachHang1.setBackground(new java.awt.Color(255, 255, 255));
         Panel_ThongTinKhachHang1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "THÔNG TIN KHÁCH HÀNG", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 18))); // NOI18N
@@ -350,7 +350,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txt_khachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+                    .addComponent(txt_khachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
                     .addComponent(txt_SoDT, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -367,7 +367,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                 .addGap(0, 14, Short.MAX_VALUE))
         );
 
-        Container_DatPhongNgay.add(Panel_ThongTinKhachHang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 20, 470, 210));
+        Container_DatPhongNgay.add(Panel_ThongTinKhachHang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 20, 660, 210));
 
         tablePhongDatNgay.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -397,7 +397,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         });
         jScrollPane2.setViewportView(tablePhongDatNgay);
 
-        Container_DatPhongNgay.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1132, 490, 470, 270));
+        Container_DatPhongNgay.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(952, 490, 650, 270));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
