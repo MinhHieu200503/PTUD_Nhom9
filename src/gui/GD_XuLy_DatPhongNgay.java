@@ -80,6 +80,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         DAO_HoaDon daoHD = new DAO_HoaDon();
         DAO_ChiTietPhong_HoaDon dao_ctP_HD = new DAO_ChiTietPhong_HoaDon();
         DAO_Phong daoPhong = new DAO_Phong();
+        DAO_KhachHang dao_khachHang = new DAO_KhachHang();
         
         
        ////-------------
@@ -95,8 +96,22 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         //tự động tạo mã hóa đơn mới
         String newID = "HD" + String.format("%03d", index);
         
+        
+        //---Kiểm tra khách hàng 
+        String sdtKhachHang = txt_SoDT.getEditor().getItem().toString();
+        KhachHang khachHang = new KhachHang();
+        
+        if(I_CRUD.findById(sdtKhachHang, new KhachHang())!=null){
+            khachHang = I_CRUD.findById(txt_SoDT.getSelectedItem().toString().trim(), new KhachHang());
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Đã thêm khách hàng mới");
+            khachHang = new KhachHang(sdtKhachHang, txt_khachHang.getText());
+            dao_khachHang.create(khachHang);
+        }
+        
         //---Tạo hóa đơn mới
-        HoaDon hd = new HoaDon(newID, LocalDateTime.now(), 1, I_CRUD.findById(txt_SoDT.getSelectedItem().toString().trim(), new KhachHang()) , 
+        HoaDon hd = new HoaDon(newID, LocalDateTime.now(), 1, khachHang , 
                             txt_MaUuDai.getText().equals("")?I_CRUD.findById("UD001", new UuDai()):I_CRUD.findById(txt_MaUuDai.getText().trim(), new UuDai()), I_CRUD.findById("NV001", new NhanVien()));
         daoHD.create(hd);
         
