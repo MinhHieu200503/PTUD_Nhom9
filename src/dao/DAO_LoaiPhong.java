@@ -35,4 +35,6 @@ public class DAO_LoaiPhong implements I_CRUD<LoaiPhong>{
         }
         return lp;
     }
+    
+    
 }

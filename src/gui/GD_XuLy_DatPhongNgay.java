@@ -139,7 +139,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                 System.out.println("list Phong1111" + listPhong1);
 //       
         
-        danhSachPhong = new smallPanel.Panel_DanhSachPhongFullCol(listPhong1);
+        danhSachPhong = new smallPanel.Panel_DanhSachPhongFullCol(listPhong1,GD_XuLy_DatPhongNgay.class);
 
                 
         

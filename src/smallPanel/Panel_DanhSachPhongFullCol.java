@@ -48,7 +48,8 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
 //        return;
 //    }
     
-    public Panel_DanhSachPhongFullCol(ArrayList<entity.Phong> data) {
+    public Panel_DanhSachPhongFullCol(ArrayList<entity.Phong> data, Class typeClass) {
+        typeInterface = typeClass;
         FlatMacLightLaf.setup();
         UIManager.put( "Button.arc", 10 );
         UIManager.put( "Component.arc", 10 );
@@ -221,7 +222,7 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
 //                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //           
 //                
-                new Panel_DanhSachPhongFullCol(temp).setVisible(true);
+                new Panel_DanhSachPhongFullCol(temp,GD_XuLy_DatPhongNgay.class).setVisible(true);
             }
         });
     }
@@ -231,7 +232,7 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
         tmpPhong = new ArrayList<smallPanel.Panel_Phong>();
         if (dataPhong != null){
             for (entity.Phong phong : dataPhong) {
-                temp = new Panel_Phong(phong,1);
+                temp = new Panel_Phong(phong);
                 tmpPhong.add(temp);
             }
         }
@@ -278,7 +279,13 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                             tmp.setFlag(true);
                         
                     }
-                clickPanel(evt);
+                        String classUse = typeInterface.getName().substring(12);
+                        System.out.println(".mouseClicked() =>>>> " + classUse);
+                    if(classUse.equalsIgnoreCase("DatPhongNgay")){
+                        clickPanel(evt);
+                    }
+                        
+               
                 }
 
                     private void setBorder(Panel_Phong.RoundedBorder roundedBorder) {
@@ -462,6 +469,7 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
     static JPanel panel_Con;
     private javax.swing.JPanel panel_mot_dong;
     private static ArrayList<smallPanel.Panel_Phong> tmpPhong;
+    public Class typeInterface = null;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -476,7 +484,7 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                       temp.setBackground(Color.BLUE);
                     Border border = new LineBorder(new Color(0,153,153), 4, true);
                     temp.setBorder(border);
-                       GD_XuLy_DatPhongNgay.setTableData(codePhong);
+                    GD_XuLy_DatPhongNgay.setTableData(codePhong);
                 }
             return 1;
 
