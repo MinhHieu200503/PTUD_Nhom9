@@ -18,6 +18,7 @@ import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -29,6 +30,8 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
  */
 public class Panel_DanhSachPhong extends javax.swing.JFrame {
 
+    public String codePhong;
+
     /**
      * Creates new form Panel_DanhSachPhong
      */
@@ -38,6 +41,13 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
         if (data != null){
             loadData(setEntityPhongToPanelPhong(data));
         }
+        
+        System.out.println("Jscorll" + jScrollPane1.getSize().toString() + jScrollPane1.getMaximumSize().toString() + jScrollPane1.getMinimumSize().toString() + jScrollPane1.getPreferredSize().toString());
+
+        
+        
+        
+        
         return;
     }
 
@@ -94,10 +104,10 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1080, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,11 +149,11 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
                 }
 
                 private void setBackground(Color red) {
-                    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                    
                 }
 
                 private void setBorder(Border border) {
-                    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                    
                 }
             });
         });
@@ -170,7 +180,7 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
             
             public void run() {
 
-                ArrayList<entity.Phong> listPhong = new ArrayList<entity.Phong>();
+                ArrayList<entity.Phong> temp = new ArrayList<entity.Phong>();
                
                 
                 
@@ -185,12 +195,12 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
 //                temp.add(new entity.Phong("007", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 
-//                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-//                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-//                        temp.add(new entity.Phong("003", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-//                temp.add(new entity.Phong("004", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-//                temp.add(new entity.Phong("005", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-//                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("003", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("004", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("005", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                temp.add(new entity.Phong("007", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
@@ -206,7 +216,7 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
 //                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 
            
-                new Panel_DanhSachPhong(listPhong).setVisible(true);
+                new Panel_DanhSachPhong(temp).setVisible(true);
 
             }
         });
@@ -217,7 +227,7 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
         tmpPhong = new ArrayList<smallPanel.Panel_Phong>();
         if (dataPhong != null){
             for (entity.Phong phong : dataPhong) {
-                temp = new Panel_Phong(phong,1);
+                temp = new Panel_Phong(phong);
                 tmpPhong.add(temp);
             }
         }
@@ -242,6 +252,8 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
                         clickOnePhong(evt);
                     }
                 });
+                
+                        System.out.println("");
                 container_ListPhong_minisize.setLayout(new java.awt.GridLayout(0, 1, 1, 1));
                 for(int i = 1;i<=list.size();i++){
                 smallPanel.Panel_Phong tmp = list.get(i-1);
@@ -268,16 +280,18 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
                 list.get(i-1).addMouseListener(new java.awt.event.MouseAdapter() {
                     public void mouseClicked(java.awt.event.MouseEvent evt) {
                         smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) evt.getSource();
-                        setAllPanelPhongFalse();
+                        
         //                System.out.println(".mouseClicked()" + tmp.getTenPhong()+ " "+ tmp.getFlag() + " "+ tmp.getSucChua() + " "+ tmp.getGia());
                         if(tmp.getBackground().equals(Color.WHITE)){
+                        setAllPanelPhongFalse();
                         tmp.setBackground(Color.red);
                         Border border = new LineBorder(Color.ORANGE, 4, true);
                         tmp.setBorder(border);
                         tmp.setFlag(true);
                     }
                         else{
-
+                            
+                            JOptionPane.showMessageDialog(rootPane, "DJTME JAVA LOZ");
                            tmp.setBackground(Color.white);
                            tmp.setBorder(new Panel_Phong.RoundedBorder(90));
                             tmp.setFlag(false);
@@ -303,6 +317,9 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
                     clickOnePhong(evt);
                 }
             });
+            
+                    System.out.println("panelContainer" + panel_Container_ListPhong.getSize().toString() + panel_Container_ListPhong.getMaximumSize().toString() + panel_Container_ListPhong.getMinimumSize().toString() + panel_Container_ListPhong.getPreferredSize().toString());
+
             panel_Container_ListPhong.setLayout(new java.awt.GridLayout(0, 1, 1, 1));
             for(int i = 1;i<=list.size();i++){
             smallPanel.Panel_Phong tmp = list.get(i-1);
@@ -315,6 +332,9 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
                     panel_Dong.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 15, 1, 1));
                     
                     panel_mot_dong.setPreferredSize(new java.awt.Dimension(980, 170));
+                    
+                    System.out.println("panelMotDong" + panel_mot_dong.getSize().toString() + panel_mot_dong.getMaximumSize().toString() + panel_mot_dong.getMinimumSize().toString() + panel_mot_dong.getPreferredSize().toString());
+
 //                    panel_Dong.
                 
                 }
@@ -328,15 +348,18 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
                     setAllPanelPhongFalse();
                     System.out.println(".mouseClicked()" + tmp.getTenPhong()+ " "+ tmp.getFlag() + " "+ tmp.getSucChua() + " "+ tmp.getGia());
                     if(tmp.getBackground().equals(Color.WHITE)){
-                    tmp.setBackground(Color.red);
-                    Border border = new LineBorder(Color.ORANGE, 4, true);
-                    tmp.setBorder(border);
-                    tmp.setFlag(true);
-                }
+                        setAllPanelPhongFalse();
+                        tmp.setBackground(Color.red);
+                       
+                        Border border = new LineBorder(Color.ORANGE, 4, true);
+                        tmp.setBorder(border);
+                        tmp.setFlag(true);
+                       }
                     else{
-
-                       tmp.setBackground(Color.white);
-                       tmp.setBorder(new Panel_Phong.RoundedBorder(90));
+                       
+                        JOptionPane.showMessageDialog(rootPane, "DJTME JAVA LOZ");
+                        tmp.setBackground(Color.white);
+                        tmp.setBorder(new Panel_Phong.RoundedBorder(90));
                         tmp.setFlag(false);
                     }
 
@@ -358,17 +381,36 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
      
      
      public  void setAllPanelPhongFalse(){
-         
-         for(int i = 0;i<panel_Container_ListPhong.getComponentCount();i++){
+        int soLuongPhong = panel_Container_ListPhong.getComponentCount();
+         if(soLuongPhong<=9){
+             for(int i = 0;i<panel_Container_ListPhong.getComponentCount();i++){
              JPanel one_Row  = (JPanel) panel_Container_ListPhong.getComponent(i);
              for(int row = 0; row<one_Row.getComponentCount();row ++){
 //                 System.out.println("smallPanel.Panel_DanhSachPhong.setAllPanelPhongFalse()" +i +" /" + row);
                    
-                 smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) one_Row.getComponent(row);
-                 tmp.setBackground(Color.white);
-                 tmp.setBorder(new Panel_Phong.RoundedBorder(90));
-                 tmp.setFlag(false);
+                 if(one_Row.getComponent(row) instanceof smallPanel.Panel_Phong){
+                     smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) one_Row.getComponent(row);
+                    tmp.setBackground(Color.white);
+                    tmp.setBorder(new Panel_Phong.RoundedBorder(90));
+                    tmp.setFlag(false);
+                 }
              }
+            }
+         }
+         else{
+             for(int i = 0;i<panel_Container_ListPhong.getComponentCount();i++){
+             JPanel one_Row  = (JPanel) panel_Container_ListPhong.getComponent(i);
+             for(int row = 0; row<one_Row.getComponentCount();row ++){
+//                 System.out.println("smallPanel.Panel_DanhSachPhong.setAllPanelPhongFalse()" +i +" /" + row);
+                   
+                 if(one_Row.getComponent(row) instanceof smallPanel.Panel_Phong){
+                     smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) one_Row.getComponent(row);
+                    tmp.setBackground(Color.white);
+                    tmp.setBorder(new Panel_Phong.RoundedBorder(90));
+                    tmp.setFlag(false);
+                 }
+             }
+         }
          }
      }
      

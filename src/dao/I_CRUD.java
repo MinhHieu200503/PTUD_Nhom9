@@ -50,7 +50,7 @@ public interface I_CRUD<T> {
     default boolean create(T entity) {
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
-        System.out.println(con);
+        
         PreparedStatement pstm = null;
         int n = 0; // trả về số dòng ảnh hưởng
         try { 
@@ -96,7 +96,7 @@ public interface I_CRUD<T> {
         ArrayList<T> ds = new ArrayList<T>();
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
-        System.out.println(con);
+        
         Statement stm = null;
         try {    
             Field[] fields = clazz.getDeclaredFields();
@@ -155,13 +155,13 @@ public interface I_CRUD<T> {
         }
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
-        System.out.println(con);
+        
         PreparedStatement pstm = null;
         try {   
             String sql = "SELECT * FROM " + entity.getClass().getSimpleName() + " WHERE ";
             Field[] fields = entity.getClass().getDeclaredFields();
             sql += fields[0].getName() + " = ?"; // lấy tên cột đầu tiên
-            System.out.println(sql);
+            
             pstm = con.prepareStatement(sql);
             pstm.setString(1, id);
             ResultSet rs = pstm.executeQuery();

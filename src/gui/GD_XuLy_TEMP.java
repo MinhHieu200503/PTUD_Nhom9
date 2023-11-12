@@ -66,7 +66,7 @@ public class GD_XuLy_TEMP extends javax.swing.JFrame {
                 temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
         
                 
-        Panel_DanhSachPhongFullCol panel_DanhSachPhongFullCol = new Panel_DanhSachPhongFullCol(temp);
+        Panel_DanhSachPhongFullCol panel_DanhSachPhongFullCol = new Panel_DanhSachPhongFullCol(temp,null);
         this.add(panel_DanhSachPhongFullCol.getContentPane(), java.awt.BorderLayout.WEST);
         
         

@@ -7,13 +7,17 @@ package smallPanel;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import gui.GD_XuLy_DatPhongNgay;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.UIManager;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -44,7 +48,8 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
 //        return;
 //    }
     
-    public Panel_DanhSachPhongFullCol(ArrayList<entity.Phong> data) {
+    public Panel_DanhSachPhongFullCol(ArrayList<entity.Phong> data, Class typeClass) {
+        typeInterface = typeClass;
         FlatMacLightLaf.setup();
         UIManager.put( "Button.arc", 10 );
         UIManager.put( "Component.arc", 10 );
@@ -54,14 +59,14 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
         if (data != null){
             loadData(setEntityPhongToPanelPhong(data));
         }
+
         
-       jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                System.out.println(".mouseClicked()");
-                clickPanel(evt);
-            }
-        });
-       
+        System.out.println("Jscorll" + jScrollPane1.getSize().toString() + jScrollPane1.getMaximumSize().toString() + jScrollPane1.getMinimumSize().toString() + jScrollPane1.getPreferredSize().toString());
+
+        
+        
+        
+        
         return;
     }
 
@@ -80,22 +85,36 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(1096, 964));
-        setMinimumSize(new java.awt.Dimension(1096, 964));
+        setMaximumSize(new java.awt.Dimension(900, 964));
+        setMinimumSize(new java.awt.Dimension(900, 964));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setMaximumSize(new java.awt.Dimension(1096, 964));
-        jPanel1.setMinimumSize(new java.awt.Dimension(1096, 964));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1096, 964));
+        jPanel1.setMaximumSize(new java.awt.Dimension(900, 964));
+        jPanel1.setMinimumSize(new java.awt.Dimension(900, 964));
+        jPanel1.setPreferredSize(new java.awt.Dimension(900, 964));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);
-        jScrollPane1.setMaximumSize(new java.awt.Dimension(1096, 964));
-        jScrollPane1.setMinimumSize(new java.awt.Dimension(1096, 964));
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(1096, 964));
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(900, 964));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(900, 964));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(900, 964));
 
         panel_Container_ListPhong.setBackground(new java.awt.Color(255, 255, 255));
-        panel_Container_ListPhong.setLayout(new java.awt.GridLayout(0, 1, 1, 1));
+        panel_Container_ListPhong.setMaximumSize(new java.awt.Dimension(900, 964));
+        panel_Container_ListPhong.setMinimumSize(new java.awt.Dimension(900, 964));
+
+        javax.swing.GroupLayout panel_Container_ListPhongLayout = new javax.swing.GroupLayout(panel_Container_ListPhong);
+        panel_Container_ListPhong.setLayout(panel_Container_ListPhongLayout);
+        panel_Container_ListPhongLayout.setHorizontalGroup(
+            panel_Container_ListPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 900, Short.MAX_VALUE)
+        );
+        panel_Container_ListPhongLayout.setVerticalGroup(
+            panel_Container_ListPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 964, Short.MAX_VALUE)
+        );
+
         jScrollPane1.setViewportView(panel_Container_ListPhong);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -134,6 +153,32 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     private void clickOnePhong(java.awt.event.MouseEvent evt) {                               
+        ArrayList<Panel_Phong> tmpList = tmpPhong;
+        tmpPhong.forEach(phong -> {
+            phong.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    this.setBackground(Color.red);
+                    Border border = new LineBorder(Color.ORANGE, 4, true);
+                    this.setBorder(border);
+                    smallPanel.Panel_Phong phong = (smallPanel.Panel_Phong) evt.getSource();
+                    maPhongGoiDVduocChon = phong.getCode();
+//                    phong.setf flag = true;
+                System.out.println(".mouseClicked()");
+                }
+
+                private void setBackground(Color red) {
+                }
+
+                private void setBorder(Border border) {
+                }
+            });
+        });
+        
+        
+        
+    }                              
+
     /**
      * @param args the command line arguments
      */
@@ -149,36 +194,37 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                                ArrayList<entity.Phong> temp = new ArrayList<entity.Phong>();
+                ArrayList<entity.Phong> temp = new ArrayList<entity.Phong>();
                 temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("002", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+               temp.add(new entity.Phong("002", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
                 temp.add(new entity.Phong("003", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
                 temp.add(new entity.Phong("004", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
                 temp.add(new entity.Phong("005", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
                 temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("007", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                        temp.add(new entity.Phong("003", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("004", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("005", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("007", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                        temp.add(new entity.Phong("003", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("004", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("005", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("007", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-        
-                new Panel_DanhSachPhongFullCol(temp).setVisible(true);
+//                temp.add(new entity.Phong("007", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                        temp.add(new entity.Phong("003", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("004", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("005", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("007", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                        temp.add(new entity.Phong("003", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("004", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("005", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("007", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+//           
+//                
+                new Panel_DanhSachPhongFullCol(temp,GD_XuLy_DatPhongNgay.class).setVisible(true);
             }
         });
     }
@@ -188,48 +234,199 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
         tmpPhong = new ArrayList<smallPanel.Panel_Phong>();
         if (dataPhong != null){
             for (entity.Phong phong : dataPhong) {
-                temp = new Panel_Phong(phong,1);
+                temp = new Panel_Phong(phong);
                 tmpPhong.add(temp);
             }
         }
-        
         return tmpPhong;
     }
     
+    
+    
+    
+    
      public JPanel loadData(ArrayList<smallPanel.Panel_Phong> list){
+
         JPanel panel_Dong =  taoPanel_1_Dong();
-        
-        if (list != null){
-            for(int i = 1;i < list.size();i++){
-                System.out.println("Index: "+ i);
-            panel_Dong.add(list.get(i));
+        JPanel container_ListPhong_minisize ;
+
+        if(list.size()<=12){
+                //tạo container con
+                 container_ListPhong_minisize = new JPanel();
+                container_ListPhong_minisize.setBackground(new java.awt.Color(255,255,255));
+                container_ListPhong_minisize.addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        clickOnePhong(evt);
+                    }
+                });
+                
+                container_ListPhong_minisize.setLayout(new java.awt.GridLayout(0, 1, 1, 1));
+                for(int i = 1;i<=list.size();i++){
+                smallPanel.Panel_Phong tmp = list.get(i-1);
+                panel_Dong.add(tmp);
+                jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
+                if(i%3 == 0  || (i ==  list.size() && list.size() % 3 != 0)){
+                    
+                    container_ListPhong_minisize.add(panel_Dong);
+                    panel_Dong =  taoPanel_1_Dong();              
+                }
+                list.get(i-1).addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                        smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) evt.getSource();
+                        if(tmp.getBackground().equals(Color.WHITE)){
+                            setAllPanelPhongFalse();
+                            tmp.setBackground(Color.red);
+                            Border border = new LineBorder(Color.ORANGE, 4, true);
+                            tmp.setBorder(border);
+                            tmp.setFlag(true);
+                        
+                    }
+                        String classUse = typeInterface.getName().substring(12);
+                        System.out.println(".mouseClicked() =>>>> " + classUse);
+                    if(classUse.equalsIgnoreCase("DatPhongNgay")){
+                        clickPanel(evt);
+                        
+                    }
+                    else if(classUse.equalsIgnoreCase("GoiDichVu")){
+                        gui.GD_XuLy_GoiDichVu.fillData(tmp.getCode());
+                    }
+                        
+               
+                }
+
+                    private void setBorder(Panel_Phong.RoundedBorder roundedBorder) {
+
+                    }
+
+                });
+                }
+                // add zo container cha
+
+                panel_Container_ListPhong.setLayout(new FlowLayout());
+                panel_Container_ListPhong.add(container_ListPhong_minisize);
+        }else{
+            panel_Container_ListPhong.setBackground(new java.awt.Color(255, 255, 255));
+            panel_Container_ListPhong.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    clickOnePhong(evt);
+                }
+            });
+            
+
+            panel_Container_ListPhong.setLayout(new java.awt.GridLayout(0, 1, 1, 1));
+            for(int i = 1;i<=list.size();i++){
+            smallPanel.Panel_Phong tmp = list.get(i-1);
+
+            panel_Dong.add(tmp);
             jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
             if(i%3 == 0  || (i ==  list.size() && list.size() % 3 != 0)){
-                System.out.println("cut Row: "+ i);
-                if((i ==  list.size() && list.size() % 3 != 0)){
-                    panel_Dong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT,20,0));
-                    panel_Dong.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 15, 1, 1));
-
-                    panel_mot_dong.setPreferredSize(new java.awt.Dimension(980, 170));
-//                    panel_Dong.
+                
+                panel_Container_ListPhong.add(panel_Dong);
+                panel_Dong =  taoPanel_1_Dong();              
+            }
+            list.get(i-1).addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) evt.getSource();
+                    
+                    if(tmp.getBackground().equals(Color.WHITE)){
+                    setAllPanelPhongFalse();
+                    tmp.setBackground(Color.red);
+                    Border border = new LineBorder(Color.ORANGE, 4, true);
+                    tmp.setBorder(border);
+                    tmp.setFlag(true);
                 }
-                
-                panel_Dong =  taoPanel_1_Dong();
-                
-                System.out.println("in If: "+ i);
+
+                    clickPanel(evt);
             }
-            panel_Container_ListPhong.add(panel_Dong);
-            list.get(i).addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clickPanel(evt);
-            }
+
+                private void setBorder(Panel_Phong.RoundedBorder roundedBorder) {
+                     
+                }
+            
         });
-            System.out.println("out If: "+ i);
-        } 
+        }
         }
         getList = panel_Container_ListPhong;
         return panel_Container_ListPhong;
     }
+     
+     
+     
+     
+     public  void setAllPanelPhongFalse(){
+         int listPhongCount = tmpPhong.size();
+         if(listPhongCount<=12)
+         {
+             JPanel panel_Con = (JPanel) panel_Container_ListPhong.getComponent(0);
+             for(int i = 0;i<panel_Con.getComponentCount();i++){
+             JPanel one_Row  = (JPanel) panel_Con.getComponent(i);
+             for(int row = 0; row<one_Row.getComponentCount();row ++){
+                   
+                 smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) one_Row.getComponent(row);
+                 if(!tmp.getBackground().equals(Color.BLUE)){
+                    tmp.setBackground(Color.white);
+                    tmp.setBorder(new Panel_Phong.RoundedBorder(90));
+                    tmp.setFlag(false);
+                 }
+             }
+         }
+         }
+         else
+         {
+             for(int i = 0;i<panel_Container_ListPhong.getComponentCount();i++){
+             JPanel one_Row  = (JPanel) panel_Container_ListPhong.getComponent(i);
+             for(int row = 0; row<one_Row.getComponentCount();row ++){
+//                 System.out.println("smallPanel.Panel_DanhSachPhong.setAllPanelPhongFalse()" +i +" /" + row);
+                   smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) one_Row.getComponent(row);
+                 if(!tmp.getBackground().equals(Color.BLUE)){
+                    
+                    tmp.setBackground(Color.white);
+                    tmp.setBorder(new Panel_Phong.RoundedBorder(90));
+                    tmp.setFlag(false);
+                 }
+             }
+         }
+         }
+         
+     }
+     
+     public static void  setPhongDefault(String maPhong){
+         listPhongCount  = tmpPhong.size();
+         
+         if(listPhongCount<=12)
+         {
+             
+              panel_Con = (JPanel) panel_Container_ListPhong.getComponent(0);
+             for(int i = 0;i<panel_Con.getComponentCount();i++){
+             JPanel one_Row  = (JPanel) panel_Con.getComponent(i);
+             for(int row = 0; row<one_Row.getComponentCount();row ++){   
+                 smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) one_Row.getComponent(row); 
+                 if(tmp.getCode().substring(tmp.getCode().length() - 5).equals(maPhong)){
+                    tmp.setBackground(Color.white);
+                    tmp.setBorder(new Panel_Phong.RoundedBorder(90));
+                    tmp.setFlag(false);
+                 }
+             }
+         }
+         }
+         else
+         {
+             
+             for(int i = 0;i<panel_Container_ListPhong.getComponentCount();i++){
+             JPanel one_Row  = (JPanel) panel_Container_ListPhong.getComponent(i);
+             for(int row = 0; row<one_Row.getComponentCount();++row ){
+                   smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) one_Row.getComponent(row);
+                  String maPhongCSDL = tmp.getCode().substring(tmp.getCode().length() - 5);
+                 if(maPhongCSDL.equals(maPhong)){
+                    tmp.setBackground(Color.white);
+                    tmp.setBorder(new Panel_Phong.RoundedBorder(90));
+                    tmp.setFlag(false);
+                 }
+             }
+         }
+             
+         }
+     }
     
     public  ArrayList<String>  getAllSelectPhong(){
         ArrayList<String> idAllPhong = new ArrayList<>();
@@ -247,18 +444,15 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
         return idAllPhong;
     }
     
-
+    public void mouseListPhongChoose(int choose){
         
-//        public void getPhongSelect(){
-//            System.out.println("smallPanel.Panel_DanhSachPhongFullCol.getPhongSelect()");
-//        }
-    
+    }
     
     private JPanel taoPanel_1_Dong(){
         panel_mot_dong = new javax.swing.JPanel();
         panel_mot_dong.setMaximumSize(new java.awt.Dimension(980, 160));
         panel_mot_dong.setPreferredSize(new java.awt.Dimension(980, 160));
-        panel_mot_dong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER,20,0));
+        panel_mot_dong.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT,20,0));
         panel_mot_dong.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 1, 1, 1));
         panel_mot_dong.setBackground(Color.white);
         return panel_mot_dong;
@@ -277,13 +471,15 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
     }
     
     public JPanel getList;
- 
+    static int   listPhongCount;
+    static JPanel panel_Con;
     private javax.swing.JPanel panel_mot_dong;
-    private ArrayList<smallPanel.Panel_Phong> tmpPhong;
+    private static ArrayList<smallPanel.Panel_Phong> tmpPhong;
+    public Class typeInterface = null;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JPanel panel_Container_ListPhong;
+    private static javax.swing.JPanel panel_Container_ListPhong;
     // End of variables declaration//GEN-END:variables
 
             public int clickPanel(MouseEvent evt) {
@@ -291,15 +487,17 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                      evt.consume();
                      smallPanel.Panel_Phong temp = (smallPanel.Panel_Phong) evt.getSource();
                      codePhong = temp.getCode();
-//                     System.out.println("smallPanel.Panel_DanhSachPhongFullCol.clickPanel()" + codePhong);
-                      
-                       GD_XuLy_DatPhongNgay.setTableData(codePhong);
+                      temp.setBackground(Color.BLUE);
+                    Border border = new LineBorder(new Color(0,153,153), 4, true);
+                    temp.setBorder(border);
+                    GD_XuLy_DatPhongNgay.setTableData(codePhong);
                 }
-        return 1;
+            return 1;
 
             }
             
-          public static String codePhong = "123";
+    public static String codePhong = "Chua nhan sk click dau";
+    public static String maPhongGoiDVduocChon ="chua co";
 }
 
 

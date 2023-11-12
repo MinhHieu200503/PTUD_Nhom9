@@ -34,7 +34,7 @@ public class DAO_Phong implements I_CRUD<Phong>{
             statement.setInt(1, TrangThai);
 
             statement.setString(2, maPhong);
-
+            
             n = statement.executeUpdate();
 
         } catch (Exception e) {
@@ -51,6 +51,65 @@ public class DAO_Phong implements I_CRUD<Phong>{
         }
         return n > 0;
     }
+    
+    public  ArrayList<entity.Phong> getPhongTheoDieuKien(String loaiPhong,int sucChua,int trangThai){
+         ArrayList<entity.Phong> dsphong = new ArrayList<entity.Phong>();
+
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+        String sqlLoaiPhong = " ";
+        String sqlSucChua = " ";
+        if(loaiPhong != null){
+            sqlLoaiPhong = "  and loaiPhong = ?  ";
+        }
+        if(sucChua !=0){
+            sqlSucChua = "  and sucChuaToiDa = ? ";
+        }
+        
+        try {
+            
+                String sql = "select * from Phong JOIN LoaiPhong\n" +
+                            "on Phong.maLoaiPhong = LoaiPhong.maLoaiPhong\n" +
+                            "where trangThai = ? " + sqlLoaiPhong + sqlSucChua;
+            
+            statement = con.prepareStatement(sql);
+            statement.setInt(1, trangThai);
+            if(sqlLoaiPhong.trim().equals("")){
+                
+                statement.setInt(2, sucChua);
+            }
+            else if(sqlSucChua.trim().equals("")){
+                statement.setString(2, loaiPhong);
+            
+            }
+            else{
+                statement.setString(2, loaiPhong);
+                statement.setInt(3, sucChua);
+            }
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+//			
+                dsphong.add(new entity.Phong(rs.getString(1).trim(), rs.getString(2), rs.getInt(3), I_CRUD.findById(rs.getString(4), new LoaiPhong()), rs.getInt(5), rs.getDouble(6) ));
+                    
+
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+
+        } finally {
+            try {
+                statement.close();
+            } catch (Exception e2) {
+                // TODO: handle exception
+                e2.printStackTrace();
+            }
+        }
+        return dsphong;
+    }
+    
     
     public ArrayList<entity.Phong> getPhongTheoTrangThai(int trangthai) {
         
