@@ -419,7 +419,7 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
             }
         });
     }
-    private DAO_KhachHang daokh = new DAO_KhachHang();
+        private DAO_KhachHang daokh = new DAO_KhachHang();
     private ArrayList<KhachHang> dskh = daokh.getAll(KhachHang.class);
     private DefaultTableModel model;
     // Variables declaration - do not modify//GEN-BEGIN:variables
