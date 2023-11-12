@@ -373,6 +373,10 @@ public class GD_XuLy extends javax.swing.JFrame {
         }
         else if (evt.getSource().equals(itemDatPhongTruoc)){
             setSelectedItem(itemDatPhongTruoc);
+             rightPanel.removeAll();
+            rightPanel.add(new gui.GD_XuLy_DatPhongTruoc().getContentPane());
+            pack();
+            repaint();
         }
         else if (evt.getSource().equals(itemNhanPhong)){
             setSelectedItem(itemNhanPhong);

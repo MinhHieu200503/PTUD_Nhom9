@@ -4,6 +4,9 @@
  */
 package smallPanel;
 
+import dao.DAO_LoaiPhong;
+import dao.DAO_Phong;
+import entity.LoaiPhong;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GradientPaint;
@@ -27,11 +30,10 @@ public class Panel_Phong extends javax.swing.JPanel {
     /**
      * Creates new form ListPhong
      */
-    public Panel_Phong(entity.Phong data,int choose) {
+    public Panel_Phong(entity.Phong data) {
         initComponents();
         this.setBorder(new RoundedBorder(90));
         this.entityPhong = data;
-       
         setData(this.entityPhong);
         
     }
@@ -65,7 +67,7 @@ public class Panel_Phong extends javax.swing.JPanel {
         lb_TenPhong = new javax.swing.JLabel();
         lb_SucChua = new javax.swing.JLabel();
         lb_Gia = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        logoVip = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 255, 153), new java.awt.Color(0, 51, 204), new java.awt.Color(0, 204, 0), new java.awt.Color(255, 102, 255)));
@@ -90,8 +92,8 @@ public class Panel_Phong extends javax.swing.JPanel {
         lb_Gia.setText("Giá : 150.000 VND ");
         add(lb_Gia, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/vip-Mini.gif"))); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
+        logoVip.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/vip-Mini.gif"))); // NOI18N
+        add(logoVip, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
     
     private void clickPanel(java.awt.event.MouseEvent evt,int choose) {                            
@@ -129,6 +131,23 @@ public class Panel_Phong extends javax.swing.JPanel {
         this.setTenPhong(data.getTenPhong());
         this.setSucChua(data.getSucChuaToiDa());
         this.setGia(data.getGiaPhongTheoGio());
+        this.setTrangThai(data.getTrangThai());
+        String loaiPhong = getMaLoaiPhong(data);
+
+        if(loaiPhong.equalsIgnoreCase("thường")){
+            this.logoVip.setIcon(null);
+        }
+        if(this.trangThai==0){
+            lb_Icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Unvailable123.png")));
+        }
+        else if(this.trangThai == 2){
+            lb_Icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Wating.png")));
+        }
+    }
+    
+    public String getMaLoaiPhong(entity.Phong data){
+        entity.LoaiPhong loaiPhong =  data.getLoaiPhong();
+        return loaiPhong.getLoaiPhong();
     }
     
         public smallPanel.Panel_Phong   getPhong(){
@@ -222,6 +241,10 @@ public class Panel_Phong extends javax.swing.JPanel {
         this.lb_SucChua.setName("SucChua");
         this.lb_TenPhong.setName("PhongCode");
         
+        if(this.isVip == false){
+            this.logoVip.setIcon(null);
+        }
+        
     }
     
 
@@ -233,6 +256,7 @@ public class Panel_Phong extends javax.swing.JPanel {
     protected smallPanel.Panel_Phong thisPhong; 
     private String id;
     private int index;
+    private boolean isVip;
     private String tenPhong;
     private int sucChua;
     private Double gia;
@@ -241,11 +265,11 @@ public class Panel_Phong extends javax.swing.JPanel {
 
     protected entity.Phong entityPhong;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lb_Gia;
     private javax.swing.JLabel lb_Icon;
     private javax.swing.JLabel lb_SucChua;
     private javax.swing.JLabel lb_TenPhong;
+    private javax.swing.JLabel logoVip;
     // End of variables declaration//GEN-END:variables
     
 
