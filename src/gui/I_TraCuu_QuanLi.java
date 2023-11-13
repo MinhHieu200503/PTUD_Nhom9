@@ -114,13 +114,13 @@ public interface I_TraCuu_QuanLi<T> {
                                     } else if (e instanceof PhieuDatPhong) {
                                         switch ((int) fields[i].get(e)) {
                                             case 0: 
-                                                row[i] = "Đã huỷ";
+                                                row[i] = "Đang chờ";
                                                 break;
                                             case 1:
                                                 row[i] = "Đã nhận";
                                                 break;
                                             default:
-                                                row[i] = "Đang chờ";
+                                                row[i] = "Đang huỷ";
                                                 break;
                                         }
                                         break;
