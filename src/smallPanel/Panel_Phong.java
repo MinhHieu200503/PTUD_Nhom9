@@ -137,10 +137,10 @@ public class Panel_Phong extends javax.swing.JPanel {
         if(loaiPhong.equalsIgnoreCase("thường")){
             this.logoVip.setIcon(null);
         }
-        if(this.trangThai==0){
-            lb_Icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Unvailable123.png")));
+        if(this.trangThai==2){
+            lb_Icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Available123.png")));
         }
-        else if(this.trangThai == 2){
+        else if(this.trangThai == 1){
             lb_Icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Wating.png")));
         }
     }

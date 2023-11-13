@@ -6,9 +6,12 @@ package dao;
 
 import connectDB.ConnectDB;
 import entity.KhachHang;
+import entity.LoaiPhong;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,5 +37,27 @@ public class DAO_KhachHang implements I_CRUD<KhachHang>{
         }
         return n > 0;
     }
+    
+    public ArrayList<entity.KhachHang> getAllKhachHang(){
+        ArrayList<entity.KhachHang> dsKhachHang =new ArrayList<entity.KhachHang>();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement pstm = null;
+        try {
+            String sql = "select * from KhachHang";
+            pstm = con.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+//			
+                dsKhachHang.add(new entity.KhachHang(rs.getString(1).trim(), rs.getString(2) ));
+            }
+        } catch (Exception e) {
+        } finally {
+        }
+        return dsKhachHang;
+    }
+    
+    
+    
     
 }
