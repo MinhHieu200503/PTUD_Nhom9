@@ -8,9 +8,28 @@ import dao.DAO_Phong;
 import entity.Phong;
 import java.awt.BorderLayout;
 import java.awt.Color;
-
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JDateChooserCellEditor;
+import dao.DAO_HoaDon;
+import dao.DAO_KhachHang;
+import dao.I_CRUD;
+import entity.HoaDon;
+import entity.KhachHang;
+import entity.NhanVien;
+import entity.PhieuDatPhong;
+import entity.UuDai;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import static smallPanel.Panel_DanhSachPhongFullCol.codePhong;
 /**
  *
@@ -25,33 +44,40 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
 //        thread = new Thread((Runnable) this);
 //        thread.start();
         initComponents();
+        FilterDate.setDate(new Date());
+        FilterDate.getDateEditor().addPropertyChangeListener(
+        new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent e) {
+                if ("date".equals(e.getPropertyName())) {
+                    chooserDate();
+                    
+                }
 
+                
+            }
+        });
         
-        loadDSPhongTrong(null,0);
+        loadDSPhongTrong(null,0,null);
+        tuDongTimKiemKhachHang();
     }
     
-    private void loadDSPhongTrong(String loaiPhong,int sucChua){
+    private void loadDSPhongTrong(String loaiPhong,int sucChua,String date){
         ContainerListPhong.removeAll();
         
          dao.DAO_Phong dao_phong = new DAO_Phong();
          ArrayList<entity.Phong> listPhong = new ArrayList<entity.Phong>();
          ArrayList<entity.Phong> listPhong1 = new ArrayList<entity.Phong>();
          listPhong = dao_phong.getAll(Phong.class);
-         // khoi tao chạy lần đầu
-        if(loaiPhong == null && sucChua == 0){
-           
-                
-                listPhong1 = dao_phong.getPhongTheoTrangThai(1);
-                
-               
-//       
         
-        danhSachPhong = new smallPanel.Panel_DanhSachPhongFullCol(listPhong1,GD_XuLy_DatPhongTruoc.class);
-        ContainerListPhong.add( danhSachPhong.getContentPane(), BorderLayout.WEST);
-        ContainerListPhong.getComponent(0).setBackground(Color.white);
+        if(loaiPhong == null && sucChua == 0&&date==null){
+            listPhong1 = dao_phong.getPhongTheoTrangThai(0);
+            danhSachPhong = new smallPanel.Panel_DanhSachPhongFullCol(listPhong1,GD_XuLy_DatPhongTruoc.class);
+            ContainerListPhong.add( danhSachPhong.getContentPane(), BorderLayout.WEST);
+            ContainerListPhong.getComponent(0).setBackground(Color.white);
         }
         else{
-            listPhong1 = dao_phong.getPhongTheoDieuKien(loaiPhong,sucChua,1);
+            listPhong1 = dao_phong.getPhongTheoDieuKien(loaiPhong,sucChua,0,date);
             danhSachPhong = new smallPanel.Panel_DanhSachPhongFullCol(listPhong1,GD_XuLy_DatPhongTruoc.class);
             ContainerListPhong.add( danhSachPhong.getContentPane(), BorderLayout.WEST);
             ContainerListPhong.getComponent(0).setBackground(Color.white);
@@ -72,10 +98,9 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
         ContainerListPhong = new javax.swing.JPanel();
         Panel_ThongTinKhachHang = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        cb_GioNhanPhong = new javax.swing.JComboBox<>();
+        txt_TienCoc = new app.bolivia.swing.JCTextField();
         jLabel3 = new javax.swing.JLabel();
-        txt_MaUuDai = new app.bolivia.swing.JCTextField();
-        txt_GioNhanPhong = new app.bolivia.swing.JCTextField();
-        btn_DatPhongNgay = new javax.swing.JButton();
         Panel_ThongTinKhachHang1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -91,7 +116,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
         ComboFilterOption2 = new javax.swing.JComboBox<>();
         locPanel3 = new javax.swing.JPanel();
         lableFilterOption3 = new javax.swing.JLabel();
-        ComboFilterOption3 = new javax.swing.JComboBox<>();
+        FilterDate = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,13 +141,13 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         jLabel2.setText("Giờ nhận phòng:");
 
+        cb_GioNhanPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", " ", " " }));
+
+        txt_TienCoc.setEditable(false);
+        txt_TienCoc.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
         jLabel3.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
-        jLabel3.setText("Mã ưu đãi:");
-
-        txt_MaUuDai.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        txt_GioNhanPhong.setEditable(false);
-        txt_GioNhanPhong.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setText("Tiền cọc : ");
 
         javax.swing.GroupLayout Panel_ThongTinKhachHangLayout = new javax.swing.GroupLayout(Panel_ThongTinKhachHang);
         Panel_ThongTinKhachHang.setLayout(Panel_ThongTinKhachHangLayout);
@@ -131,13 +156,15 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
             .addGroup(Panel_ThongTinKhachHangLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Panel_ThongTinKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_ThongTinKhachHangLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txt_TienCoc, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(Panel_ThongTinKhachHangLayout.createSequentialGroup()
                         .addGroup(Panel_ThongTinKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cb_GioNhanPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txt_MaUuDai, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
-                    .addComponent(txt_GioNhanPhong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         Panel_ThongTinKhachHangLayout.setVerticalGroup(
@@ -145,31 +172,15 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
             .addGroup(Panel_ThongTinKhachHangLayout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_GioNhanPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
+                .addComponent(cb_GioNhanPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_MaUuDai, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_TienCoc, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         Container_DatPhongNgay.add(Panel_ThongTinKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 250, 650, 200));
-
-        btn_DatPhongNgay.setBackground(new java.awt.Color(0, 204, 204));
-        btn_DatPhongNgay.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        btn_DatPhongNgay.setForeground(new java.awt.Color(255, 255, 255));
-        btn_DatPhongNgay.setText("HỦY ĐẶT");
-        btn_DatPhongNgay.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_DatPhongNgaydatPhongNgay(evt);
-            }
-        });
-        btn_DatPhongNgay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_DatPhongNgayActionPerformed(evt);
-            }
-        });
-        Container_DatPhongNgay.add(btn_DatPhongNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 470, 210, 60));
 
         Panel_ThongTinKhachHang1.setBackground(new java.awt.Color(255, 255, 255));
         Panel_ThongTinKhachHang1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "THÔNG TIN KHÁCH HÀNG", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 18))); // NOI18N
@@ -223,10 +234,10 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
         btn_HuyDat.setText("ĐẶT PHÒNG NGAY");
         btn_HuyDat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_HuyDatdatPhongNgay(evt);
+                click_DatPhong(evt);
             }
         });
-        Container_DatPhongNgay.add(btn_HuyDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 470, -1, 60));
+        Container_DatPhongNgay.add(btn_HuyDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 480, 420, 60));
 
         locPanel.setBackground(new java.awt.Color(255, 255, 255));
         locPanel.setMaximumSize(new java.awt.Dimension(1080, 84));
@@ -317,14 +328,9 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
         lableFilterOption3.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         lableFilterOption3.setText("Lọc theo ngày:");
 
-        ComboFilterOption3.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        ComboFilterOption3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        ComboFilterOption3.setMaximumSize(new java.awt.Dimension(101, 32));
-        ComboFilterOption3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ComboFilterOption3MouseClicked(evt);
-            }
-        });
+        FilterDate.setDateFormatString("dd-MM-yyyy");
+        FilterDate.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        FilterDate.setPreferredSize(new java.awt.Dimension(88, 38));
 
         javax.swing.GroupLayout locPanel3Layout = new javax.swing.GroupLayout(locPanel3);
         locPanel3.setLayout(locPanel3Layout);
@@ -333,7 +339,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
             .addGroup(locPanel3Layout.createSequentialGroup()
                 .addGroup(locPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lableFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(FilterDate, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         locPanel3Layout.setVerticalGroup(
@@ -341,7 +347,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
             .addGroup(locPanel3Layout.createSequentialGroup()
                 .addComponent(lableFilterOption3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(FilterDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -388,20 +394,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_DatPhongNgaydatPhongNgay(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_DatPhongNgaydatPhongNgay
-        
-    }//GEN-LAST:event_btn_DatPhongNgaydatPhongNgay
-
-    private void btn_HuyDatdatPhongNgay(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_HuyDatdatPhongNgay
-        JOptionPane.showConfirmDialog(rootPane, smallPanel.Panel_DanhSachPhongFullCol.codePhong);
-    }//GEN-LAST:event_btn_HuyDatdatPhongNgay
-
-    private void btn_DatPhongNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DatPhongNgayActionPerformed
-        
-    }//GEN-LAST:event_btn_DatPhongNgayActionPerformed
-
     private void ComboFilterOption2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboFilterOption2ActionPerformed
-       JOptionPane.showMessageDialog(rootPane,"HELLLO");
          String loaiPhong = ComboFilterOption1.getSelectedItem().toString();
          if(loaiPhong.equalsIgnoreCase("Không")){
              loaiPhong = null;
@@ -411,16 +404,11 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
          if(sucChua.equalsIgnoreCase("Không")){
              sucChua = "0";
          }
-          System.out.println("gui.GD_XuLy_DatPhongTruoc.ComboFilterOption1ActionPerformed() >>> loaiPhong + "+ loaiPhong +" suc chua: "+ sucChua);
-         loadDSPhongTrong(loaiPhong,Integer.parseInt(sucChua));
+          String date  =getDateChooser();
+         loadDSPhongTrong(loaiPhong,Integer.parseInt(sucChua),date);
     }//GEN-LAST:event_ComboFilterOption2ActionPerformed
 
-    private void ComboFilterOption3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComboFilterOption3MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ComboFilterOption3MouseClicked
-
     private void ComboFilterOption1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboFilterOption1ActionPerformed
-         JOptionPane.showMessageDialog(rootPane,"HELLLO");
          String loaiPhong = ComboFilterOption1.getSelectedItem().toString();
          if(loaiPhong.equalsIgnoreCase("Không")){
              loaiPhong = null;
@@ -430,10 +418,152 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
          if(sucChua.equalsIgnoreCase("Không")){
              sucChua = "0";
          }
-          System.out.println("gui.GD_XuLy_DatPhongTruoc.ComboFilterOption1ActionPerformed() >>> loaiPhong + "+ loaiPhong +" suc chua: "+ sucChua);
-         loadDSPhongTrong(loaiPhong,Integer.parseInt(sucChua));
+         String date = getDateChooser();
+         loadDSPhongTrong(loaiPhong,Integer.parseInt(sucChua),date);
     }//GEN-LAST:event_ComboFilterOption1ActionPerformed
 
+    private void click_DatPhong(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_click_DatPhong
+        JOptionPane.showMessageDialog(rootPane, "Bam Dat");
+        int soLuongHoaDon = 0;
+        dao.DAO_HoaDon DAOHoaDon = new DAO_HoaDon();
+        dao.DAO_KhachHang DAOKhachHang = new DAO_KhachHang();
+        soLuongHoaDon = DAOHoaDon.laySoLuongHoaDon()+1;
+        ArrayList<entity.KhachHang> listKH = DAOKhachHang.getAllKhachHang();
+        entity.HoaDon hoaDon = new HoaDon();
+        String maHoaDon = null;
+        if(soLuongHoaDon<10){
+            maHoaDon = ("HD00"+soLuongHoaDon);
+        }
+        else if(soLuongHoaDon<100){
+            maHoaDon=("HD0"+soLuongHoaDon);
+        }
+        else{
+            maHoaDon=("HD"+soLuongHoaDon);
+        }
+        hoaDon.setMaHoaDon(maHoaDon);
+        hoaDon.setNgayLapHoaDon( LocalDateTime.now());
+        hoaDon.setNhanVien(I_CRUD.findById("NV001",new NhanVien()));
+        hoaDon.setTrangThai(0);
+        hoaDon.setUuDai(I_CRUD.findById("UD001", new UuDai()));
+        boolean isHasKH = false;
+        for(int i = 0;i<listKH.size();i++){
+            if(listKH.get(i).getSoDienThoai().trim().equals( String.valueOf(txt_SoDT.getSelectedItem()).trim())){
+                hoaDon.setKhachHang(listKH.get(i));
+                isHasKH = true;
+            }
+        }
+        if(isHasKH == false){
+            DAOKhachHang.create(new KhachHang( String.valueOf(txt_SoDT.getSelectedItem()).trim(),txt_khachHang.getText()));
+        }
+
+        boolean taoHoaDonStatus = DAOHoaDon.create(hoaDon);
+        if(taoHoaDonStatus==true){
+            PhieuDatPhong pdp = new PhieuDatPhong();
+            
+            //tao ma phieu
+            ArrayList<PhieuDatPhong> lsPdp = new ArrayList<>();
+            dao.DAO_PhieuDatPhong daoPdp = new  dao.DAO_PhieuDatPhong();
+            lsPdp = daoPdp.getAll(PhieuDatPhong.class);
+            ArrayList<String> dsId = new ArrayList<>();
+            for(PhieuDatPhong PhieuDat: lsPdp){
+                dsId.add(PhieuDat.getMaPhieuDatPhong());
+            }
+            String lastID = dsId.get(lsPdp.size() - 1).toString();
+                // tách chuỗi để lấy số thứ tự
+            int index = Integer.parseInt(lastID.substring(3)) + 1;
+            //tự động tạo mã hóa đơn mới
+            String newID = "DPT" + String.format("%03d", index);
+            // lay thoi gian nhan phong
+            
+            String dateChooser = getDateChooser();
+            String[] date = dateChooser.split("/");
+            String cbtimetext = cb_GioNhanPhong.getSelectedItem().toString().trim();
+            int hour = Integer.parseInt(cbtimetext.split(":")[0]);
+            int minus = Integer.parseInt(cbtimetext.split(":")[1]);
+            int day = Integer.parseInt(date[0]);
+            int month = Integer.parseInt(date[1]);
+            int year = Integer.parseInt(date[2]);
+            int second = 0;
+            // tiep tuc insert8
+            pdp.setMaPhieuDatPhong(newID);
+            pdp.setThoiGianTaoPhieu(LocalDateTime.now());
+            pdp.setThoiGianNhanPhong( LocalDateTime.of(year, month, day, hour, minus,second));
+            pdp.setTrangThai(0);
+            pdp.setDatCoc(Double.valueOf(txt_TienCoc.getText()));
+            pdp.setHoaDon(I_CRUD.findById(maHoaDon, new HoaDon()));
+            pdp.setNhanVien(I_CRUD.findById("NV001",new NhanVien()));
+            pdp.setKhachHang(I_CRUD.findById(String.valueOf(txt_SoDT.getSelectedItem()).trim(), new KhachHang()));
+            pdp.setPhong(I_CRUD.findById(smallPanel.Panel_DanhSachPhongFullCol.codePhong, new Phong()));
+            
+            daoPdp.create(pdp);
+            if(CheckDateNow()==true){
+                dao.DAO_Phong daoPhong = new DAO_Phong();
+                daoPhong.capNhatTrangThaiPhong(pdp.getPhong().getMaPhong(), 1);
+            }
+        }
+        loadDSPhongTrong(null, 0,getDateChooser() );
+    }//GEN-LAST:event_click_DatPhong
+
+    private void chooserDate(){
+        // Lấy ngày hiện tại
+        Date now = new Date();
+
+        // Lấy ngày từ FilterDate (assumed to be a JDateChooser)
+        Date selectedDate = FilterDate.getDate();
+
+        // Chuyển đổi thành LocalDate
+        java.time.LocalDate nowLocalDate = now.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        java.time.LocalDate selectedLocalDate = selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        // So sánh chỉ ngày mà không tính thời gian
+        if (!selectedLocalDate.equals(nowLocalDate)&&selectedDate.before(now)) {
+            JOptionPane.showMessageDialog(null, "Không chọn được ngày trước ngày hiện tại");
+            FilterDate.setDate(new Date());
+        }
+        else{
+            
+            // call dao
+            String loaiPhong = ComboFilterOption1.getSelectedItem().toString();
+         if(loaiPhong.equalsIgnoreCase("Không")){
+             loaiPhong = null;
+         }
+         String sucChua = ComboFilterOption2.getSelectedItem().toString();
+         
+         if(sucChua.equalsIgnoreCase("Không")){
+            sucChua = "0";
+         }
+          String selectDate = getDateChooser();
+          loadDSPhongTrong(loaiPhong,Integer.parseInt(sucChua),selectDate);
+        }  
+    }
+    
+    public boolean CheckDateNow(){
+        // Lấy ngày hiện tại
+        Date now = new Date();
+
+        // Lấy ngày từ FilterDate (assumed to be a JDateChooser)
+        Date selectedDate = FilterDate.getDate();
+
+        // Chuyển đổi thành LocalDate
+        java.time.LocalDate nowLocalDate = now.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        java.time.LocalDate selectedLocalDate = selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        if (selectedLocalDate.equals(nowLocalDate)) {
+            JOptionPane.showMessageDialog(null, " ngày hiện tại");
+            return true;
+        }
+        return false;
+    }
+    
+    private String getDateChooser(){
+        
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            String formattedDate = sdf.format(FilterDate.getDate());
+            String day = formattedDate.substring(0, 2);
+            String month = formattedDate.substring(3, 5);
+            String year = formattedDate.substring(6, 10);
+            return day+"/"+month+"/"+year;
+    }
+   
     /**
      * @param args the command line arguments
      */
@@ -470,18 +600,59 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
     }
     smallPanel.Panel_DanhSachPhongFullCol danhSachPhong;
   
+    public static void setTienCoc(String maPhong){
+        dao.DAO_Phong DAOphong = new  DAO_Phong();
+        txt_TienCoc.setText(String.valueOf(DAOphong.getPhongTheoOnlyMaPhong(maPhong).getGiaPhongTheoGio()));
+    }
+    
+    public void tuDongTimKiemKhachHang(){
+        txt_SoDT.removeAllItems();
+        txt_SoDT.addItem("");
+        DAO_KhachHang dao_KhachHang = new DAO_KhachHang();
+		// tự động kiểm tra
+        AutoCompleteDecorator.decorate(txt_SoDT);
+        txt_SoDT.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                        if (txt_SoDT.getSelectedItem() != null) {
+                                String soDT = txt_SoDT.getSelectedItem().toString().trim();
+                                kiemTraSDT(soDT);
+                        }
+                }
+        });
+        for (KhachHang kH : dao_KhachHang.getAll(KhachHang.class)) {
+                txt_SoDT.addItem(kH.getSoDienThoai());
+        }
+    }
+    
+     public boolean kiemTraSDT(String soDT) {
+            
+		KhachHang khachHang = I_CRUD.findById(soDT, new KhachHang());
+		if (khachHang != null) {
+			
+			txt_khachHang.setText(khachHang.getTenKhachHang());
+			
+			return false;
+		}
+		
+		txt_khachHang.setText("");
+		
+		return true;
+	}
+    
 private Thread thread = null;
 private ArrayList<entity.Phong> listPhongLoc;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboFilterOption1;
     private javax.swing.JComboBox<String> ComboFilterOption2;
-    private javax.swing.JComboBox<String> ComboFilterOption3;
     private javax.swing.JPanel ContainerListPhong;
     private javax.swing.JPanel Container_DatPhongNgay;
+    private com.toedter.calendar.JDateChooser FilterDate;
     private javax.swing.JPanel Panel_ThongTinKhachHang;
     private javax.swing.JPanel Panel_ThongTinKhachHang1;
-    private javax.swing.JButton btn_DatPhongNgay;
     private javax.swing.JButton btn_HuyDat;
+    private javax.swing.JComboBox<String> cb_GioNhanPhong;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -493,9 +664,8 @@ private ArrayList<entity.Phong> listPhongLoc;
     private javax.swing.JPanel locPanel1;
     private javax.swing.JPanel locPanel2;
     private javax.swing.JPanel locPanel3;
-    private app.bolivia.swing.JCTextField txt_GioNhanPhong;
-    private app.bolivia.swing.JCTextField txt_MaUuDai;
     private javax.swing.JComboBox<String> txt_SoDT;
+    private static app.bolivia.swing.JCTextField txt_TienCoc;
     private app.bolivia.swing.JCTextField txt_khachHang;
     // End of variables declaration//GEN-END:variables
 }

@@ -105,5 +105,9 @@ public class HoaDon {
     public String toString() {
         return "HoaDon{" + "maHoaDon=" + maHoaDon + ", ngayLapHoaDon=" + ngayLapHoaDon + ", trangThai=" + trangThai + ", khachHang=" + khachHang + ", uuDai=" + uuDai + ", nhanVien=" + nhanVien + '}';
     }
+
+    public void create(HoaDon hd) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

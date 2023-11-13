@@ -318,7 +318,6 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
                 }
             });
             
-                    System.out.println("panelContainer" + panel_Container_ListPhong.getSize().toString() + panel_Container_ListPhong.getMaximumSize().toString() + panel_Container_ListPhong.getMinimumSize().toString() + panel_Container_ListPhong.getPreferredSize().toString());
 
             panel_Container_ListPhong.setLayout(new java.awt.GridLayout(0, 1, 1, 1));
             for(int i = 1;i<=list.size();i++){
@@ -332,11 +331,7 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
                     panel_Dong.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 15, 1, 1));
                     
                     panel_mot_dong.setPreferredSize(new java.awt.Dimension(980, 170));
-                    
-                    System.out.println("panelMotDong" + panel_mot_dong.getSize().toString() + panel_mot_dong.getMaximumSize().toString() + panel_mot_dong.getMinimumSize().toString() + panel_mot_dong.getPreferredSize().toString());
-
-//                    panel_Dong.
-                
+                                    
                 }
                 panel_Container_ListPhong.add(panel_Dong);
                 panel_Dong =  taoPanel_1_Dong();
@@ -346,7 +341,6 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) evt.getSource();
                     setAllPanelPhongFalse();
-                    System.out.println(".mouseClicked()" + tmp.getTenPhong()+ " "+ tmp.getFlag() + " "+ tmp.getSucChua() + " "+ tmp.getGia());
                     if(tmp.getBackground().equals(Color.WHITE)){
                         setAllPanelPhongFalse();
                         tmp.setBackground(Color.red);
@@ -357,7 +351,6 @@ public class Panel_DanhSachPhong extends javax.swing.JFrame {
                        }
                     else{
                        
-                        JOptionPane.showMessageDialog(rootPane, "DJTME JAVA LOZ");
                         tmp.setBackground(Color.white);
                         tmp.setBorder(new Panel_Phong.RoundedBorder(90));
                         tmp.setFlag(false);

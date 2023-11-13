@@ -41,7 +41,7 @@ public interface I_CRUD<T> {
             return null;
         String datetime = java.toString();
         System.out.println(datetime);
-        return datetime.substring(0,   10) + " " + datetime.substring(11, 19);
+        return datetime.substring(0,   10) + " " + datetime.substring(11, 16);
     }
     /**
      * @param entity

@@ -284,6 +284,9 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                     if(classUse.equalsIgnoreCase("DatPhongNgay")){
                         clickPanel(evt);
                     }
+                    else if(classUse.equalsIgnoreCase("DatPhongTruoc")){
+                                                DatPhongTruoc(evt);
+                    }
                         
                
                 }
@@ -330,11 +333,19 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                     tmp.setFlag(true);
                 }
 
-                    clickPanel(evt);
+                    String classUse = typeInterface.getName().substring(12);
+                        System.out.println(".mouseClicked() =>>>> " + classUse);
+                    if(classUse.equalsIgnoreCase("DatPhongNgay")){
+                        clickPanel(evt);
+                    }
+                    else if(classUse.equalsIgnoreCase("DatPhongTruoc")){
+                        DatPhongTruoc(evt);
+                    }
             }
 
                 private void setBorder(Panel_Phong.RoundedBorder roundedBorder) {
                      
+                    
                 }
             
         });
@@ -488,6 +499,15 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                 }
             return 1;
 
+            }
+            
+            public void DatPhongTruoc(MouseEvent evt){
+                evt.consume();
+                smallPanel.Panel_Phong temp = (smallPanel.Panel_Phong) evt.getSource();
+               
+                gui.GD_XuLy_DatPhongTruoc.setTienCoc(temp.getCode().substring(temp.getCode().length() - 5));
+                codePhong =temp.getCode().substring(temp.getCode().length() - 5);
+                    
             }
             
     public static String codePhong = "Chua nhan sk click dau";
