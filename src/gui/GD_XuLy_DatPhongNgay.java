@@ -49,6 +49,10 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableCellRenderer;
+import raven.cell.TableActionCellEditor;
+import raven.cell.TableActionCellRender;
+import raven.cell.TableActionEvent;
 import static smallPanel.Panel_DanhSachPhongFullCol.codePhong;
 
 /**
@@ -70,17 +74,60 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         
         tuDongTimKiemKhachHang();
         
-        
+        editTable();
         
         
 
 		
     }
     
+    
+    public void editTable(){
+        TableActionEvent event = new TableActionEvent() {
+//            @Override
+//            public void onEdit(int row) {
+//                System.out.println("Edit row : " + row);
+//            }
+
+            @Override
+            public void onDelete(int row) {
+                if (tablePhongDatNgay.isEditing()) {
+                    tablePhongDatNgay.getCellEditor().stopCellEditing();
+                }
+                int selectedRow = tablePhongDatNgay.getSelectedRow();
+                    String maPhong = (String) tablePhongDatNgay.getValueAt(tablePhongDatNgay.getSelectedRow(), 0);
+                    System.out.println("maPhong" + maPhong);
+                    if (selectedRow != -1) { // Kiểm tra xem có dòng được chọn không
+                        // Xóa dòng được chọn từ mô hình
+                        
+                        smallPanel.Panel_DanhSachPhongFullCol.setPhongDefault(maPhong);
+                        model.removeRow(selectedRow);
+                        
+                        
+                    }
+            }
+
+//            @Override
+//            public void onView(int row) {
+//                System.out.println("View row : " + row);
+//            }
+        };
+        tablePhongDatNgay.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
+        tablePhongDatNgay.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
+//        tablePhongDatNgay.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer() {
+//            @Override
+//            public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
+//                setHorizontalAlignment(SwingConstants.RIGHT);
+//                return super.getTableCellRendererComponent(jtable, o, bln, bln1, i, i1);
+//            }
+//        });
+    }
+    
     public boolean datPhong(){
         DAO_HoaDon daoHD = new DAO_HoaDon();
         DAO_ChiTietPhong_HoaDon dao_ctP_HD = new DAO_ChiTietPhong_HoaDon();
         DAO_Phong daoPhong = new DAO_Phong();
+        DAO_KhachHang dao_khachHang = new DAO_KhachHang();
         
         
        ////-------------
@@ -96,8 +143,26 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         //tự động tạo mã hóa đơn mới
         String newID = "HD" + String.format("%03d", index);
         
+        
+        //---Kiểm tra khách hàng 
+        String sdtKhachHang = txt_SoDT.getEditor().getItem().toString();
+        KhachHang khachHang = new KhachHang();
+        
+        if(I_CRUD.findById(sdtKhachHang, new KhachHang()).getSoDienThoai() != null){
+            JOptionPane.showMessageDialog(null, "Khách hàng có rồi");
+            khachHang = I_CRUD.findById(txt_SoDT.getSelectedItem().toString().trim(), new KhachHang());
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Đã thêm khách hàng mới");
+            khachHang = new KhachHang(sdtKhachHang, txt_khachHang.getText());
+            dao_khachHang.create(khachHang);
+        }
+        
+        
+        
+        
         //---Tạo hóa đơn mới
-        HoaDon hd = new HoaDon(newID, LocalDateTime.now(), 1, I_CRUD.findById(txt_SoDT.getSelectedItem().toString().trim(), new KhachHang()) , 
+        HoaDon hd = new HoaDon(newID, LocalDateTime.now(), 1, khachHang , 
                             txt_MaUuDai.getText().equals("")?I_CRUD.findById("UD001", new UuDai()):I_CRUD.findById(txt_MaUuDai.getText().trim(), new UuDai()), I_CRUD.findById("NV001", new NhanVien()));
         daoHD.create(hd);
         
@@ -117,7 +182,6 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         }
         
         
-        //CHƯA LÀM TRƯỜNG HỢP CHƯA CÓ SẴN KHÁCH HÀNG
         
         
         
@@ -255,13 +319,14 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         Container_DatPhongNgay.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ContainerListPhong.setBackground(new java.awt.Color(255, 255, 255));
+        ContainerListPhong.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DANH SÁCH PHÒNG TRỐNG", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 18))); // NOI18N
         ContainerListPhong.setMaximumSize(new java.awt.Dimension(900, 964));
         ContainerListPhong.setMinimumSize(new java.awt.Dimension(900, 964));
         ContainerListPhong.setName(""); // NOI18N
         ContainerListPhong.setPreferredSize(new java.awt.Dimension(900, 964));
         ContainerListPhong.setVerifyInputWhenFocusTarget(false);
         ContainerListPhong.setLayout(new java.awt.BorderLayout());
-        Container_DatPhongNgay.add(ContainerListPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 900, 964));
+        Container_DatPhongNgay.add(ContainerListPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 890, 964));
 
         Panel_ThongTinKhachHang.setBackground(new java.awt.Color(255, 255, 255));
         Panel_ThongTinKhachHang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "THÔNG TIN ĐẶT PHÒNG", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 18))); // NOI18N
@@ -275,23 +340,25 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         txt_MaUuDai.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         txt_GioNhanPhong.setEditable(false);
-        txt_GioNhanPhong.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txt_GioNhanPhong.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout Panel_ThongTinKhachHangLayout = new javax.swing.GroupLayout(Panel_ThongTinKhachHang);
         Panel_ThongTinKhachHang.setLayout(Panel_ThongTinKhachHangLayout);
         Panel_ThongTinKhachHangLayout.setHorizontalGroup(
             Panel_ThongTinKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_ThongTinKhachHangLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(28, 28, 28)
                 .addGroup(Panel_ThongTinKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Panel_ThongTinKhachHangLayout.createSequentialGroup()
+                        .addGroup(Panel_ThongTinKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_MaUuDai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_GioNhanPhong, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE))
+                        .addGap(45, 45, 45))
                     .addGroup(Panel_ThongTinKhachHangLayout.createSequentialGroup()
                         .addGroup(Panel_ThongTinKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txt_MaUuDai, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
-                    .addComponent(txt_GioNhanPhong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         Panel_ThongTinKhachHangLayout.setVerticalGroup(
             Panel_ThongTinKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,18 +366,18 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_GioNhanPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
                 .addComponent(txt_MaUuDai, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        Container_DatPhongNgay.add(Panel_ThongTinKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 250, 650, 200));
+        Container_DatPhongNgay.add(Panel_ThongTinKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 250, 670, 200));
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel1.setText("PHÒNG ĐƯỢC CHỌN:");
-        Container_DatPhongNgay.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 460, 210, -1));
+        Container_DatPhongNgay.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 460, 210, -1));
 
         btn_DatPhongNgay.setBackground(new java.awt.Color(0, 204, 204));
         btn_DatPhongNgay.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
@@ -321,7 +388,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                 datPhongNgay(evt);
             }
         });
-        Container_DatPhongNgay.add(btn_DatPhongNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 780, 640, 60));
+        Container_DatPhongNgay.add(btn_DatPhongNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 780, 670, 60));
 
         Panel_ThongTinKhachHang1.setBackground(new java.awt.Color(255, 255, 255));
         Panel_ThongTinKhachHang1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "THÔNG TIN KHÁCH HÀNG", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 18))); // NOI18N
@@ -343,16 +410,13 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         Panel_ThongTinKhachHang1Layout.setHorizontalGroup(
             Panel_ThongTinKhachHang1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_ThongTinKhachHang1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Panel_ThongTinKhachHang1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Panel_ThongTinKhachHang1Layout.createSequentialGroup()
-                        .addGroup(Panel_ThongTinKhachHang1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txt_khachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
-                    .addComponent(txt_SoDT, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(31, 31, 31)
+                .addGroup(Panel_ThongTinKhachHang1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_SoDT, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txt_khachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         Panel_ThongTinKhachHang1Layout.setVerticalGroup(
             Panel_ThongTinKhachHang1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,29 +431,27 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                 .addGap(0, 14, Short.MAX_VALUE))
         );
 
-        Container_DatPhongNgay.add(Panel_ThongTinKhachHang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 20, 650, 210));
+        Container_DatPhongNgay.add(Panel_ThongTinKhachHang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 20, 670, 210));
 
         tablePhongDatNgay.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Phòng", "Loại Phòng", "Sức chứa", "Giá phòng"
+                "Phòng", "Loại Phòng", "Sức chứa", "Giá phòng", ""
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         tablePhongDatNgay.setColorBackgoundHead(new java.awt.Color(0, 153, 153));
-        tablePhongDatNgay.setColorBordeFilas(new java.awt.Color(0, 153, 153));
+        tablePhongDatNgay.setColorBordeFilas(new java.awt.Color(0, 102, 102));
         tablePhongDatNgay.setColorBordeHead(new java.awt.Color(0, 102, 102));
         tablePhongDatNgay.setColorFilasBackgound2(new java.awt.Color(153, 255, 204));
+        tablePhongDatNgay.setColorFilasForeground1(new java.awt.Color(0, 0, 0));
+        tablePhongDatNgay.setColorFilasForeground2(new java.awt.Color(0, 0, 0));
+        tablePhongDatNgay.setColorSelBackgound(new java.awt.Color(0, 153, 153));
+        tablePhongDatNgay.setFuenteFilas(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tablePhongDatNgay.setFuenteFilasSelect(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tablePhongDatNgay.setRowHeight(30);
+        tablePhongDatNgay.setSelectionBackground(new java.awt.Color(0, 204, 204));
         tablePhongDatNgay.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 xoaMotDongTable(evt);
@@ -397,7 +459,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         });
         jScrollPane2.setViewportView(tablePhongDatNgay);
 
-        Container_DatPhongNgay.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(952, 490, 650, 270));
+        Container_DatPhongNgay.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(912, 490, 670, 270));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -418,20 +480,20 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
     }// </editor-fold>//GEN-END:initComponents
 
     private void xoaMotDongTable(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMotDongTable
-        if (evt.getClickCount() == 2) { // Kiểm tra xem là double click
-                    int selectedRow = tablePhongDatNgay.getSelectedRow();
-                    String maPhong = (String) tablePhongDatNgay.getValueAt(tablePhongDatNgay.getSelectedRow(), 0);
-                    System.out.println("maPhong" + maPhong);
-                    if (selectedRow != -1) { // Kiểm tra xem có dòng được chọn không
-                        // Xóa dòng được chọn từ mô hình
-                        
-                        smallPanel.Panel_DanhSachPhongFullCol.setPhongDefault(maPhong);
-                        model.removeRow(selectedRow);
-                        
-                        
-                    }
-                     
-        }
+//        if (evt.getClickCount() == 2) { // Kiểm tra xem là double click
+//                    int selectedRow = tablePhongDatNgay.getSelectedRow();
+//                    String maPhong = (String) tablePhongDatNgay.getValueAt(tablePhongDatNgay.getSelectedRow(), 0);
+//                    System.out.println("maPhong" + maPhong);
+//                    if (selectedRow != -1) { // Kiểm tra xem có dòng được chọn không
+//                        // Xóa dòng được chọn từ mô hình
+//                        
+//                        smallPanel.Panel_DanhSachPhongFullCol.setPhongDefault(maPhong);
+//                        model.removeRow(selectedRow);
+//                        
+//                        
+//                    }
+//                     
+//        }
     }//GEN-LAST:event_xoaMotDongTable
 
     private void datPhongNgay(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datPhongNgay
