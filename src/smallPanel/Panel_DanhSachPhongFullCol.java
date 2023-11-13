@@ -96,9 +96,10 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setMaximumSize(new java.awt.Dimension(900, 964));
-        jScrollPane1.setMinimumSize(new java.awt.Dimension(900, 964));
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(900, 964));
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(900, 820));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(900, 820));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(900, 820));
+        jScrollPane1.setRequestFocusEnabled(false);
 
         panel_Container_ListPhong.setBackground(new java.awt.Color(255, 255, 255));
         panel_Container_ListPhong.setMaximumSize(new java.awt.Dimension(900, 964));
@@ -130,8 +131,8 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 910, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -289,6 +290,9 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                     }
                     else if(classUse.equalsIgnoreCase("GoiDichVu")){
                         gui.GD_XuLy_GoiDichVu.fillData(tmp.getCode());
+                    }
+                    else if(classUse.equalsIgnoreCase("DatPhongTruoc")){
+                                                DatPhongTruoc(evt);
                     }
                     else if(classUse.equalsIgnoreCase("DatPhongTruoc")){
                                                 DatPhongTruoc(evt);

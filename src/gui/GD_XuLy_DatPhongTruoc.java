@@ -132,8 +132,8 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
         ContainerListPhong.setName(""); // NOI18N
         ContainerListPhong.setPreferredSize(new java.awt.Dimension(900, 964));
         ContainerListPhong.setVerifyInputWhenFocusTarget(false);
-        ContainerListPhong.setLayout(new java.awt.BorderLayout());
-        Container_DatPhongNgay.add(ContainerListPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 900, 860));
+        ContainerListPhong.setLayout(new java.awt.GridLayout());
+        Container_DatPhongNgay.add(ContainerListPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 900, 964));
 
         Panel_ThongTinKhachHang.setBackground(new java.awt.Color(255, 255, 255));
         Panel_ThongTinKhachHang.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "THÔNG TIN ĐẶT PHÒNG", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 18))); // NOI18N
