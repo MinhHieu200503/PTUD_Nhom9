@@ -25,7 +25,7 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
      */
     public GD_TraCuu_KhachHang() {
         initComponents();
-        model = (DefaultTableModel) table_TraCuu.getModel();
+        model = (DefaultTableModel) table_traCuu.getModel();
         loadTable(dskh, model);
     }
 
@@ -47,7 +47,7 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
         tf_TraCuu = new javax.swing.JTextField();
         pnlData = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        table_TraCuu = new javax.swing.JTable();
+        table_traCuu = new rojeru_san.complementos.RSTableMetro();
         pnlBottom = new javax.swing.JPanel();
         btn_edit = new javax.swing.JButton();
 
@@ -62,7 +62,7 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
 
         pnlTop_title.setBackground(new java.awt.Color(255, 255, 255));
         pnlTop_title.setFont(new java.awt.Font("Segoe UI Black", 1, 30)); // NOI18N
-        pnlTop_title.setForeground(new java.awt.Color(40, 77, 133));
+        pnlTop_title.setForeground(new java.awt.Color(0, 153, 153));
         pnlTop_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         pnlTop_title.setText("TRA CỨU KHÁCH HÀNG");
         pnlTop.add(pnlTop_title, java.awt.BorderLayout.CENTER);
@@ -77,7 +77,7 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
         lbl_TraCuu.setForeground(new java.awt.Color(40, 77, 133));
         lbl_TraCuu.setText("Nhập thông tin tra cứu:");
 
-        tf_TraCuu.setBackground(new java.awt.Color(142, 172, 207));
+        tf_TraCuu.setBackground(new java.awt.Color(153, 255, 204));
         tf_TraCuu.setFont(new java.awt.Font("Segoe UI", 0, 27)); // NOI18N
         tf_TraCuu.setToolTipText("");
         tf_TraCuu.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153), 2, true));
@@ -113,14 +113,12 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         jScrollPane2.setColumnHeaderView(null);
 
-        table_TraCuu.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        table_TraCuu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        table_TraCuu.setModel(new javax.swing.table.DefaultTableModel(
+        table_traCuu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Số điện thoại", "Tên Khách hàng"
+                "Số điện thoại", "Tên khách hàng"
             }
         ) {
             Class[] types = new Class [] {
@@ -138,20 +136,14 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
                 return canEdit [columnIndex];
             }
         });
-        table_TraCuu.setGridColor(new java.awt.Color(153, 153, 153));
-        table_TraCuu.setRowHeight(30);
-        table_TraCuu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        table_TraCuu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        table_TraCuu.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(table_TraCuu);
-        table_TraCuu.setRowHeight(35);
-        // Chỉnh font cho header
-        JTableHeader header = table_TraCuu.getTableHeader();
-        header.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-        // Căn lề cho header
-        TableCellRenderer rendererFromHeader = header.getDefaultRenderer();
-        JLabel headerLabel = (JLabel) rendererFromHeader;
-        headerLabel.setHorizontalAlignment(JLabel.CENTER);
+        table_traCuu.setColorBackgoundHead(new java.awt.Color(0, 153, 153));
+        table_traCuu.setColorBordeFilas(new java.awt.Color(0, 153, 153));
+        table_traCuu.setColorBordeHead(new java.awt.Color(0, 102, 102));
+        table_traCuu.setColorFilasBackgound2(new java.awt.Color(153, 255, 204));
+        table_traCuu.setRowHeight(30);
+        table_traCuu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        table_traCuu.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(table_traCuu);
 
         javax.swing.GroupLayout pnlDataLayout = new javax.swing.GroupLayout(pnlData);
         pnlData.setLayout(pnlDataLayout);
@@ -189,7 +181,7 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
         pnlBottom.setName(""); // NOI18N
         pnlBottom.setPreferredSize(new java.awt.Dimension(1650, 79));
 
-        btn_edit.setBackground(new java.awt.Color(40, 77, 133));
+        btn_edit.setBackground(new java.awt.Color(0, 153, 153));
         btn_edit.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btn_edit.setForeground(new java.awt.Color(255, 255, 255));
         btn_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_edit30.png"))); // NOI18N
@@ -253,6 +245,7 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
             java.util.logging.Logger.getLogger(GD_TraCuu_KhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -276,7 +269,7 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
     private javax.swing.JPanel pnlThongTinTraCuu;
     private javax.swing.JPanel pnlTop;
     private javax.swing.JLabel pnlTop_title;
-    private javax.swing.JTable table_TraCuu;
+    private rojeru_san.complementos.RSTableMetro table_traCuu;
     private javax.swing.JTextField tf_TraCuu;
     // End of variables declaration//GEN-END:variables
 }

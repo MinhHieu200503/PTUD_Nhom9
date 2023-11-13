@@ -95,13 +95,13 @@ public interface I_TraCuu_QuanLi<T> {
                                                 row[i] = "Trống";
                                                 break;
                                             case 1:
-                                                row[i] = "Đang hoạt động";
+                                                row[i] = "Đang chờ";
                                                 break;
                                             case 2: 
-                                                row[i] = "Chưa sẵn sàng";
+                                                row[i] = "Đang sử dụng";
                                                 break;
                                             case 3:
-                                                row[i] = "Đang chờ";
+                                                row[i] = "Trục trặc";
                                                 break;
                                             default:
                                                 row[i] = "Không sử dụng";
@@ -201,7 +201,7 @@ public interface I_TraCuu_QuanLi<T> {
                 if (c1 instanceof JScrollPane) { 
                     JViewport viewport = ((JScrollPane) c1).getViewport();
                     JTextArea tmp = (JTextArea) viewport.getView();
-                    tmp.setText(model.getValueAt(index, i++).toString());
+                    tmp.setText(model.getValueAt(index, i) == null ? "" :model.getValueAt(index, i++).toString());
                 } else if (c1 instanceof JTextField) {
                     if (i < model.getColumnCount()) { // khắc phục lỗi indexOutOfBound của Array
                         ((JTextComponent) c1).setText(model.getValueAt(index, i++).toString());

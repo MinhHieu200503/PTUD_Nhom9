@@ -66,7 +66,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         jLabel14 = new javax.swing.JLabel();
         jPanel19 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbl_danhSach = new javax.swing.JTable();
+        tbl_danhSach = new rojeru_san.complementos.RSTableMetro();
         jPanel20 = new javax.swing.JPanel();
         btn_them = new javax.swing.JButton();
         btn_sua = new javax.swing.JButton();
@@ -75,15 +75,18 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(142, 172, 207));
+        jPanel1.setBackground(new java.awt.Color(153, 255, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
         jPanel1.setPreferredSize(new java.awt.Dimension(1920, 763));
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(290, 1141));
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 7));
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel3.setLayout(new java.awt.BorderLayout(0, 5));
 
@@ -91,12 +94,13 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         jLabel1.setText("Mã dịch vụ:");
         jPanel3.add(jLabel1, java.awt.BorderLayout.NORTH);
 
-        tf_id.setBackground(new java.awt.Color(142, 172, 207));
+        tf_id.setBackground(new java.awt.Color(153, 255, 204));
         tf_id.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jPanel3.add(tf_id, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(jPanel3);
 
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel6.setLayout(new java.awt.BorderLayout(0, 5));
 
@@ -104,12 +108,13 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         jLabel2.setText("Tên dịch vụ");
         jPanel6.add(jLabel2, java.awt.BorderLayout.NORTH);
 
-        tf_ten.setBackground(new java.awt.Color(142, 172, 207));
+        tf_ten.setBackground(new java.awt.Color(153, 255, 204));
         tf_ten.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jPanel6.add(tf_ten, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(jPanel6);
 
+        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
         jPanel16.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel16.setLayout(new java.awt.BorderLayout(0, 5));
 
@@ -117,12 +122,13 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         jLabel12.setText("Giá:");
         jPanel16.add(jLabel12, java.awt.BorderLayout.PAGE_START);
 
-        tf_gia.setBackground(new java.awt.Color(142, 172, 207));
+        tf_gia.setBackground(new java.awt.Color(153, 255, 204));
         tf_gia.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jPanel16.add(tf_gia, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(jPanel16);
 
+        jPanel17.setBackground(new java.awt.Color(255, 255, 255));
         jPanel17.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel17.setLayout(new java.awt.BorderLayout(0, 5));
 
@@ -130,12 +136,13 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         jLabel13.setText("Số lượng");
         jPanel17.add(jLabel13, java.awt.BorderLayout.PAGE_START);
 
-        tf_soLuong.setBackground(new java.awt.Color(142, 172, 207));
+        tf_soLuong.setBackground(new java.awt.Color(153, 255, 204));
         tf_soLuong.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jPanel17.add(tf_soLuong, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(jPanel17);
 
+        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
         jPanel13.setPreferredSize(new java.awt.Dimension(281, 75));
         jPanel13.setLayout(new java.awt.BorderLayout(0, 5));
 
@@ -150,6 +157,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
 
         jPanel2.add(jPanel13);
 
+        jPanel21.setBackground(new java.awt.Color(255, 255, 255));
         jPanel21.setPreferredSize(new java.awt.Dimension(283, 180));
         jPanel21.setLayout(new java.awt.BorderLayout(0, 5));
 
@@ -157,7 +165,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         jLabel15.setText("Mô tả:");
         jPanel21.add(jLabel15, java.awt.BorderLayout.PAGE_START);
 
-        ta_moTa.setBackground(new java.awt.Color(142, 172, 207));
+        ta_moTa.setBackground(new java.awt.Color(153, 255, 204));
         ta_moTa.setColumns(20);
         ta_moTa.setLineWrap(true);
         ta_moTa.setRows(5);
@@ -171,18 +179,22 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
 
         jPanel5.setLayout(new java.awt.BorderLayout());
 
+        jPanel18.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel14.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(40, 77, 133));
+        jLabel14.setForeground(new java.awt.Color(0, 153, 153));
         jLabel14.setText("DANH SÁCH DỊCH VỤ");
         jPanel18.add(jLabel14);
 
         jPanel5.add(jPanel18, java.awt.BorderLayout.NORTH);
 
+        jPanel19.setBackground(new java.awt.Color(255, 255, 255));
         jPanel19.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 10, 20));
         jPanel19.setPreferredSize(new java.awt.Dimension(1511, 1200));
         jPanel19.setLayout(new java.awt.BorderLayout());
 
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane2.setColumnHeaderView(null);
 
         tbl_danhSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -207,7 +219,11 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
                 return canEdit [columnIndex];
             }
         });
-        tbl_danhSach.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbl_danhSach.setColorBackgoundHead(new java.awt.Color(0, 153, 153));
+        tbl_danhSach.setColorBordeFilas(new java.awt.Color(0, 153, 153));
+        tbl_danhSach.setColorBordeHead(new java.awt.Color(0, 102, 102));
+        tbl_danhSach.setColorFilasBackgound2(new java.awt.Color(153, 255, 204));
+        tbl_danhSach.setRowHeight(30);
         tbl_danhSach.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbl_danhSach.getTableHeader().setReorderingAllowed(false);
         tbl_danhSach.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -216,24 +232,17 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
             }
         });
         jScrollPane2.setViewportView(tbl_danhSach);
-        tbl_danhSach.setRowHeight(35);
-        // Chỉnh font cho header
-        JTableHeader header = tbl_danhSach.getTableHeader();
-        header.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-        // Căn lề cho header
-        TableCellRenderer rendererFromHeader = header.getDefaultRenderer();
-        JLabel headerLabel = (JLabel) rendererFromHeader;
-        headerLabel.setHorizontalAlignment(JLabel.CENTER);
 
         jPanel19.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         jPanel5.add(jPanel19, java.awt.BorderLayout.CENTER);
 
+        jPanel20.setBackground(new java.awt.Color(255, 255, 255));
         jPanel20.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         jPanel20.setPreferredSize(new java.awt.Dimension(1520, 80));
         jPanel20.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 15, 5));
 
-        btn_them.setBackground(new java.awt.Color(40, 77, 133));
+        btn_them.setBackground(new java.awt.Color(0, 153, 153));
         btn_them.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btn_them.setForeground(new java.awt.Color(255, 255, 255));
         btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_add30.png"))); // NOI18N
@@ -245,7 +254,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         });
         jPanel20.add(btn_them);
 
-        btn_sua.setBackground(new java.awt.Color(40, 77, 133));
+        btn_sua.setBackground(new java.awt.Color(0, 153, 153));
         btn_sua.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btn_sua.setForeground(new java.awt.Color(255, 255, 255));
         btn_sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_edit30.png"))); // NOI18N
@@ -257,7 +266,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         });
         jPanel20.add(btn_sua);
 
-        btn_luu.setBackground(new java.awt.Color(40, 77, 133));
+        btn_luu.setBackground(new java.awt.Color(0, 153, 153));
         btn_luu.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btn_luu.setForeground(new java.awt.Color(255, 255, 255));
         btn_luu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_save30.png"))); // NOI18N
@@ -270,7 +279,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         });
         jPanel20.add(btn_luu);
 
-        btn_xoaTrang.setBackground(new java.awt.Color(40, 77, 133));
+        btn_xoaTrang.setBackground(new java.awt.Color(0, 153, 153));
         btn_xoaTrang.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btn_xoaTrang.setForeground(new java.awt.Color(255, 255, 255));
         btn_xoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_clear30.png"))); // NOI18N
@@ -313,14 +322,6 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tbl_danhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_danhSachMouseClicked
-        // TODO add your handling code here:
-        int i = tbl_danhSach.getSelectedRow();
-        if (i != -1) {
-            showDetailInput(jPanel2, model, i);
-        }
-    }//GEN-LAST:event_tbl_danhSachMouseClicked
 
     private void actionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actionPerformed
         // TODO add your handling code here:
@@ -434,6 +435,14 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
             clearInput(jPanel2);
         }
     }//GEN-LAST:event_actionPerformed
+
+    private void tbl_danhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_danhSachMouseClicked
+        // TODO add your handling code here:
+        int i = tbl_danhSach.getSelectedRow();
+        if (i != -1) {
+           showDetailInput(jPanel2, model, i);
+        }
+    }//GEN-LAST:event_tbl_danhSachMouseClicked
     private boolean validateInput() {
         String ten = tf_ten.getText().trim();
         String gia = tf_gia.getText().trim();
@@ -500,6 +509,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
             java.util.logging.Logger.getLogger(GD_QuanLi_DichVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -540,7 +550,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea ta_moTa;
-    private javax.swing.JTable tbl_danhSach;
+    private rojeru_san.complementos.RSTableMetro tbl_danhSach;
     private javax.swing.JTextField tf_gia;
     private javax.swing.JTextField tf_id;
     private javax.swing.JTextField tf_soLuong;

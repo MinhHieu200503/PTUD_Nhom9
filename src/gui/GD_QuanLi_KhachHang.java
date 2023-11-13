@@ -55,7 +55,7 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
         jLabel15 = new javax.swing.JLabel();
         jPanel26 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbl_danhSach = new javax.swing.JTable();
+        tbl_danhSach = new rojeru_san.complementos.RSTableMetro();
         jPanel27 = new javax.swing.JPanel();
         btn_them = new javax.swing.JButton();
         btn_sua = new javax.swing.JButton();
@@ -64,15 +64,18 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel9.setBackground(new java.awt.Color(142, 172, 207));
+        jPanel9.setBackground(new java.awt.Color(153, 255, 204));
         jPanel9.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
         jPanel9.setPreferredSize(new java.awt.Dimension(1920, 763));
 
+        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
+        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setPreferredSize(new java.awt.Dimension(290, 1141));
         jPanel11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 7));
 
+        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
         jPanel12.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel12.setLayout(new java.awt.BorderLayout(0, 5));
 
@@ -80,12 +83,13 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
         jLabel3.setText("Số điện thoại:");
         jPanel12.add(jLabel3, java.awt.BorderLayout.NORTH);
 
-        tf_phone.setBackground(new java.awt.Color(142, 172, 207));
+        tf_phone.setBackground(new java.awt.Color(153, 255, 204));
         tf_phone.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jPanel12.add(tf_phone, java.awt.BorderLayout.CENTER);
 
         jPanel11.add(jPanel12);
 
+        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
         jPanel13.setPreferredSize(new java.awt.Dimension(283, 83));
         jPanel13.setLayout(new java.awt.BorderLayout(0, 5));
 
@@ -93,7 +97,7 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
         jLabel4.setText("Tên khách hàng:");
         jPanel13.add(jLabel4, java.awt.BorderLayout.NORTH);
 
-        tf_ten.setBackground(new java.awt.Color(142, 172, 207));
+        tf_ten.setBackground(new java.awt.Color(153, 255, 204));
         tf_ten.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jPanel13.add(tf_ten, java.awt.BorderLayout.CENTER);
 
@@ -103,18 +107,22 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
 
         jPanel24.setLayout(new java.awt.BorderLayout());
 
+        jPanel25.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel15.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(40, 77, 133));
+        jLabel15.setForeground(new java.awt.Color(0, 153, 153));
         jLabel15.setText("DANH SÁCH KHÁCH HÀNG");
         jPanel25.add(jLabel15);
 
         jPanel24.add(jPanel25, java.awt.BorderLayout.NORTH);
 
+        jPanel26.setBackground(new java.awt.Color(255, 255, 255));
         jPanel26.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 10, 20));
         jPanel26.setPreferredSize(new java.awt.Dimension(1511, 1200));
         jPanel26.setLayout(new java.awt.BorderLayout());
 
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane2.setColumnHeaderView(null);
 
         tbl_danhSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -139,32 +147,30 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
                 return canEdit [columnIndex];
             }
         });
+        tbl_danhSach.setColorBackgoundHead(new java.awt.Color(0, 153, 153));
+        tbl_danhSach.setColorBordeFilas(new java.awt.Color(0, 153, 153));
+        tbl_danhSach.setColorBordeHead(new java.awt.Color(0, 102, 102));
+        tbl_danhSach.setColorFilasBackgound2(new java.awt.Color(153, 255, 204));
+        tbl_danhSach.setRowHeight(30);
         tbl_danhSach.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tbl_danhSach.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbl_danhSach.getTableHeader().setReorderingAllowed(false);
         tbl_danhSach.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_danhSachMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tbl_danhSach);
-        tbl_danhSach.setRowHeight(35);
-        // Chỉnh font cho header
-        JTableHeader header = tbl_danhSach.getTableHeader();
-        header.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-        // Căn lề cho header
-        TableCellRenderer rendererFromHeader = header.getDefaultRenderer();
-        JLabel headerLabel = (JLabel) rendererFromHeader;
-        headerLabel.setHorizontalAlignment(JLabel.CENTER);
 
         jPanel26.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         jPanel24.add(jPanel26, java.awt.BorderLayout.CENTER);
 
+        jPanel27.setBackground(new java.awt.Color(255, 255, 255));
         jPanel27.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         jPanel27.setPreferredSize(new java.awt.Dimension(1520, 80));
         jPanel27.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 15, 5));
 
-        btn_them.setBackground(new java.awt.Color(40, 77, 133));
+        btn_them.setBackground(new java.awt.Color(0, 153, 153));
         btn_them.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btn_them.setForeground(new java.awt.Color(255, 255, 255));
         btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_add30.png"))); // NOI18N
@@ -176,7 +182,7 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
         });
         jPanel27.add(btn_them);
 
-        btn_sua.setBackground(new java.awt.Color(40, 77, 133));
+        btn_sua.setBackground(new java.awt.Color(0, 153, 153));
         btn_sua.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btn_sua.setForeground(new java.awt.Color(255, 255, 255));
         btn_sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_edit30.png"))); // NOI18N
@@ -188,7 +194,7 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
         });
         jPanel27.add(btn_sua);
 
-        btn_luu.setBackground(new java.awt.Color(40, 77, 133));
+        btn_luu.setBackground(new java.awt.Color(0, 153, 153));
         btn_luu.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btn_luu.setForeground(new java.awt.Color(255, 255, 255));
         btn_luu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_save30.png"))); // NOI18N
@@ -201,7 +207,7 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
         });
         jPanel27.add(btn_luu);
 
-        btn_xoaTrang.setBackground(new java.awt.Color(40, 77, 133));
+        btn_xoaTrang.setBackground(new java.awt.Color(0, 153, 153));
         btn_xoaTrang.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btn_xoaTrang.setForeground(new java.awt.Color(255, 255, 255));
         btn_xoaTrang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_clear30.png"))); // NOI18N
@@ -244,14 +250,6 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tbl_danhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_danhSachMouseClicked
-        // TODO add your handling code here:
-        int i = tbl_danhSach.getSelectedRow();
-        if (i != -1) {
-            showDetailInput(jPanel11, model, i);
-        }
-    }//GEN-LAST:event_tbl_danhSachMouseClicked
 
     private void actionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actionPerformed
         // TODO add your handling code here:
@@ -325,9 +323,7 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
                         btn_sua.setEnabled(true);
                         btn_luu.setEnabled(false);
                         btn_xoaTrang.setEnabled(false);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Số điện thoại không được trùng", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                    }
+                    } 
                 }
             }
             if (btn_sua.getText().equals("Huỷ")) {
@@ -350,15 +346,21 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
                         btn_them.setEnabled(true);
                         btn_luu.setEnabled(false);
                         btn_xoaTrang.setEnabled(false);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Số điện thoại không được trùng", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                    }
+                    } 
                 }
             }
         } else if (o.equals(btn_xoaTrang)) {
             clearInput(jPanel11);
         }
     }//GEN-LAST:event_actionPerformed
+
+    private void tbl_danhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_danhSachMouseClicked
+        // TODO add your handling code here:
+        int i = tbl_danhSach.getSelectedRow();
+        if (i != -1) {
+           showDetailInput(jPanel11, model, i);
+        }
+    }//GEN-LAST:event_tbl_danhSachMouseClicked
     private boolean validateInput() {
         String ten = tf_ten.getText().trim();;
         String phone = tf_phone.getText().trim();
@@ -369,6 +371,13 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
         if (!phone.matches("^0[1-9]\\d{8}$")) {
             showRegexError(tf_phone, "Số điện thoại bắt đầu bằng chữ số 0 và có tối đa 10 chữ số");
             return false;
+        }
+        ArrayList<KhachHang> ds = daokh.getAll(KhachHang.class);
+        for (KhachHang k : ds) {
+            if (k.getSoDienThoai().equals(phone)) {
+                JOptionPane.showMessageDialog(null, "Số điện thoại không được trùng", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
         }
         if (ten.isEmpty()) {
             showRegexError(tf_ten, "Tên không được rỗng");
@@ -411,6 +420,8 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -419,7 +430,7 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
             }
         });
     }
-        private DAO_KhachHang daokh = new DAO_KhachHang();
+    private DAO_KhachHang daokh = new DAO_KhachHang();
     private ArrayList<KhachHang> dskh = daokh.getAll(KhachHang.class);
     private DefaultTableModel model;
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -440,7 +451,7 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
     private javax.swing.JPanel jPanel27;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tbl_danhSach;
+    private rojeru_san.complementos.RSTableMetro tbl_danhSach;
     private javax.swing.JTextField tf_phone;
     private javax.swing.JTextField tf_ten;
     // End of variables declaration//GEN-END:variables
