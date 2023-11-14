@@ -18,7 +18,6 @@ public class NhanVien {
     private String cmnd, diaChi, soDienThoai;
     private boolean trangThai;
     private String gmail;
-    private ChucVu chucVu;
     private Ca ca;
 
     public String getMaNhanVien() {
@@ -93,13 +92,7 @@ public class NhanVien {
         this.ca = ca;
     }
 
-    public ChucVu getChucVu() {
-        return chucVu;
-    }
-
-    public void setChucVu(ChucVu chucVu) {
-        this.chucVu = chucVu;
-    }
+    
 
     public String getGmail() {
         return gmail;
@@ -109,7 +102,7 @@ public class NhanVien {
         this.gmail = gmail;
     }
 
-    public NhanVien(String maNhanVien, String tenNhanVien, LocalDate ngaySinh, boolean gioiTinh, String cmnd, String diaChi, String soDienThoai, boolean trangThai, String gmail, ChucVu chucVu, Ca ca) {
+    public NhanVien(String maNhanVien, String tenNhanVien, LocalDate ngaySinh, boolean gioiTinh, String cmnd, String diaChi, String soDienThoai, boolean trangThai, String gmail, Ca ca) {
         this.maNhanVien = maNhanVien;
         this.tenNhanVien = tenNhanVien;
         this.ngaySinh = ngaySinh;
@@ -119,7 +112,6 @@ public class NhanVien {
         this.soDienThoai = soDienThoai;
         this.trangThai = trangThai;
         this.gmail = gmail;
-        this.chucVu = chucVu;
         this.ca = ca;
     }
 
@@ -156,7 +148,7 @@ public class NhanVien {
 
     @Override
     public String toString() {
-        return "NhanVien{" + "maNhanVien=" + maNhanVien + ", tenNhanVien=" + tenNhanVien + ", ngaySinh=" + ngaySinh + ", gioiTinh=" + gioiTinh + ", cmnd=" + cmnd + ", diaChi=" + diaChi + ", soDienThoai=" + soDienThoai + ", trangThai=" + trangThai + ", gmail=" + gmail + ", chucVu=" + chucVu + ", ca=" + ca + '}';
+        return "NhanVien{" + "maNhanVien=" + maNhanVien + ", tenNhanVien=" + tenNhanVien + ", ngaySinh=" + ngaySinh + ", gioiTinh=" + gioiTinh + ", cmnd=" + cmnd + ", diaChi=" + diaChi + ", soDienThoai=" + soDienThoai + ", trangThai=" + trangThai + ", gmail=" + gmail + ",  ca=" + ca + '}';
     }
 
     

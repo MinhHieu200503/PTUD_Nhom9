@@ -219,9 +219,11 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
          ArrayList<entity.Phong> listPhong = new ArrayList<entity.Phong>();
         ArrayList<entity.Phong> listPhong1 = new ArrayList<entity.Phong>();
                 listPhong = dao_phong.getAll(Phong.class);
+
                 listPhong1 = dao_phong.getPhongTheoTrangThai(0);
-                System.out.println("list Phong   "  + listPhong);
-                System.out.println("list Phong1111" + listPhong1);
+
+                
+
 //       
         
         danhSachPhong = new smallPanel.Panel_DanhSachPhongFullCol(listPhong1,GD_XuLy_DatPhongNgay.class);
@@ -232,7 +234,6 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         ContainerListPhong.getComponent(0).setBackground(Color.white);
         String test = danhSachPhong.codePhong;
         
-        System.out.println("gui.GD_XuLy_DatPhongNgay.<init>() " + test);
     }
     
     public void tuDongTimKiemKhachHang(){

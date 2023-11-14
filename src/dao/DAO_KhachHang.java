@@ -6,9 +6,12 @@ package dao;
 
 import connectDB.ConnectDB;
 import entity.KhachHang;
+import entity.LoaiPhong;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,15 +27,45 @@ public class DAO_KhachHang implements I_CRUD<KhachHang>{
         PreparedStatement pstm = null;
         int n = 0;
         try {
-            String sql = "update khachhang set soDienThoai = ? , tenKhachHang = ? where soDienThoai = " + oldPhone;
-            pstm = con.prepareStatement(sql);
-            pstm.setString(1, entity.getSoDienThoai());
-            pstm.setString(2, entity.getTenKhachHang());
-            n = pstm.executeUpdate();
+            if(entity.getSoDienThoai().equals(oldPhone)){
+                String sql = "update khachhang set tenKhachHang = ? where soDienThoai = " + oldPhone;
+                pstm = con.prepareStatement(sql);
+                pstm.setString(1, entity.getTenKhachHang());
+                n = pstm.executeUpdate();
+                return n > 0;
+            } else {
+                String sql = "update khachhang set soDienThoai = ? , tenKhachHang = ? where soDienThoai = " + oldPhone;
+                pstm = con.prepareStatement(sql);
+                pstm.setString(1, entity.getSoDienThoai());
+                pstm.setString(2, entity.getTenKhachHang());
+                n = pstm.executeUpdate();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_KhachHang.class.getName()).log(Level.SEVERE, null, ex);
         }
         return n > 0;
     }
+    
+    public ArrayList<entity.KhachHang> getAllKhachHang(){
+        ArrayList<entity.KhachHang> dsKhachHang =new ArrayList<entity.KhachHang>();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement pstm = null;
+        try {
+            String sql = "select * from KhachHang";
+            pstm = con.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+//			
+                dsKhachHang.add(new entity.KhachHang(rs.getString(1).trim(), rs.getString(2) ));
+            }
+        } catch (Exception e) {
+        } finally {
+        }
+        return dsKhachHang;
+    }
+    
+    
+    
     
 }
