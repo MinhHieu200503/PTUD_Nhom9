@@ -32,9 +32,6 @@ import java.util.logging.Logger;
  * @author quang
  */
 public class DAO_PhieuDatPhong implements I_CRUD<PhieuDatPhong>{
-    public PhieuDatPhong getPhieuDatPhongByMaPhong(String maPhong,String ngayNhan){
-       entity.PhieuDatPhong phieuDatPhong = new entity.PhieuDatPhong();
-
     public PhieuDatPhong getPhieuDatPhongByID(String id){
         PhieuDatPhong result = null;
         
@@ -55,7 +52,11 @@ public class DAO_PhieuDatPhong implements I_CRUD<PhieuDatPhong>{
             Logger.getLogger(DAO_PhieuDatPhong.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
- 
+    }
+        
+   public PhieuDatPhong getPhieuDatPhongByMaPhong(String maPhong,String ngayNhan){
+       entity.PhieuDatPhong phieuDatPhong = new entity.PhieuDatPhong();
+    
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         PreparedStatement statement = null;

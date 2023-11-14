@@ -457,7 +457,7 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
        if(result<0){
             isConfirm = JOptionPane.showConfirmDialog(null, "Xác nhận nhận phòng đặt vào lúc " +LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")));
             if(isConfirm == 0 ){
-                 ctPhongHD = new ChitTietPhongHoaDon(LocalDateTime.now(), null, "Đang sử dụng", hd, I_CRUD.findById(pdp.getPhong().getMaPhong().trim(), new Phong()));
+                 ctPhongHD = new ChitTietPhongHoaDon(LocalDateTime.now(), null, "MP000 Đang sử dụng", hd, I_CRUD.findById(pdp.getPhong().getMaPhong().trim(), new Phong()));
             }
        }
        else{

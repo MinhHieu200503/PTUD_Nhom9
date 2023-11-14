@@ -320,7 +320,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
 //        repaint();
         
         // Lấy danh sách phòng trống từ CSDL
-        ArrayList<entity.Phong> dspdsd = daop.getPhongTheoTrangThai(1); // 1 là ds phòng đang sử dụng
+        ArrayList<entity.Phong> dspdsd = daop.getPhongTheoTrangThai(2); // 1 là ds phòng đang sử dụng
         
         int tongPhong = dspdsd.size();
         int soDong;

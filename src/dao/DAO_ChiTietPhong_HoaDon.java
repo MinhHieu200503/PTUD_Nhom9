@@ -96,7 +96,7 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
         } catch (SQLException ex) {
             Logger.getLogger(DAO_PhieuDatPhong.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+    }
     
     public boolean capNhatGhiChu(String maPhong,String maHoaDon,String GhiChu) {
         
@@ -227,3 +227,4 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
 
     }
 }
+    

@@ -71,9 +71,11 @@ public class DAO_ChiTietDichVu_HoaDon implements I_CRUD<ChiTietDichVuHoaDon>{
             statement.setString(2, maHoaDon);
             statement.setString(3, maDichVu);
             ResultSet rs = statement.executeQuery();
-            rs.next();
+            while(rs.next()){
             cthd = new ChiTietDichVuHoaDon(rs.getInt("soLuong"), I_CRUD.findById(rs.getString("maDichVu"), new DichVu()), 
                         I_CRUD.findById(maHoaDon, new HoaDon()), I_CRUD.findById(maPhong, new Phong()));
+            }
+
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
