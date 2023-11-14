@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
 public class DAO_Phong implements I_CRUD<Phong>{
     
     public boolean capNhatTrangThaiPhong(String maPhong, int TrangThai) {
-        JOptionPane.showMessageDialog(null,TrangThai);
+//        JOptionPane.showMessageDialog(null,TrangThai);
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         PreparedStatement statement = null;

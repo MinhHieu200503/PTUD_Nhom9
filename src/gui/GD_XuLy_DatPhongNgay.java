@@ -151,22 +151,22 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         
        ////-------------
         ArrayList<HoaDon> lsHD = new ArrayList<>();
-        lsHD = daoHD.getAll(HoaDon.class);
-        ArrayList<String> dsId = new ArrayList<>();
-        for(HoaDon hd: lsHD){
-            dsId.add(hd.getMaHoaDon());
-        }
-        String newID ="";
-        if (dsId.size()!= 0){
-            String lastID = dsId.getLast().toString();
-                // tách chuỗi để lấy số thứ tự
-            int index = Integer.parseInt(lastID.substring(2)) + 1;
-            //tự động tạo mã hóa đơn mới
-            newID = "HD" + String.format("%03d", index);
-        }
-        else{
-             newID = "HD" + "000000000";
-        }
+//        lsHD = daoHD.getAll(HoaDon.class);
+//        ArrayList<String> dsId = new ArrayList<>();
+//        for(HoaDon hd: lsHD){
+//            dsId.add(hd.getMaHoaDon());
+//        }
+//        String newID ="";
+//        if (dsId.size()!= 0){
+//            String lastID = dsId.getLast().toString();
+//                // tách chuỗi để lấy số thứ tự
+//            int index = Integer.parseInt(lastID.substring(2)) + 1;
+//            //tự động tạo mã hóa đơn mới
+//            newID = "HD" + String.format("%03d", index);
+//        }
+//        else{
+//             newID = "HD" + "000000000";
+//        }
 
         //---Kiểm tra khách hàng 
         String sdtKhachHang = txt_SoDT.getEditor().getItem().toString();
@@ -186,7 +186,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         
         
         //---Tạo hóa đơn mới
-        HoaDon hd = new HoaDon(newID, LocalDateTime.now(), 1, khachHang , 
+        HoaDon hd = new HoaDon(I_TraCuu_QuanLi.createIdForHoaDon(daoHD.getDsIdTheoNgayHienTai(), "HD"), LocalDateTime.now(), 0, khachHang , 
                             txt_MaUuDai.getText().equals("")?I_CRUD.findById("UD001", new UuDai()):I_CRUD.findById(txt_MaUuDai.getText().trim(), new UuDai()), I_CRUD.findById("NV001", new NhanVien()));
         daoHD.create(hd);
         
