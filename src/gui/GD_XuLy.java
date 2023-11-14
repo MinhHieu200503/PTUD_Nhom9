@@ -380,6 +380,10 @@ public class GD_XuLy extends javax.swing.JFrame {
         }
         else if (evt.getSource().equals(itemNhanPhong)){
             setSelectedItem(itemNhanPhong);
+            rightPanel.removeAll();
+            rightPanel.add(new gui.GD_XuLy_NhanPhong().getContentPane());
+            pack();
+            repaint();
         }
         else if (evt.getSource().equals(itemTraPhong)){
             setSelectedItem(itemTraPhong);

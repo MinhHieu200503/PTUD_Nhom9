@@ -132,7 +132,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
         ContainerListPhong.setName(""); // NOI18N
         ContainerListPhong.setPreferredSize(new java.awt.Dimension(900, 964));
         ContainerListPhong.setVerifyInputWhenFocusTarget(false);
-        ContainerListPhong.setLayout(new java.awt.GridLayout());
+        ContainerListPhong.setLayout(new java.awt.GridLayout(1, 0));
         Container_DatPhongNgay.add(ContainerListPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 900, 964));
 
         Panel_ThongTinKhachHang.setBackground(new java.awt.Color(255, 255, 255));
@@ -423,85 +423,89 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
     }//GEN-LAST:event_ComboFilterOption1ActionPerformed
 
     private void click_DatPhong(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_click_DatPhong
-        JOptionPane.showMessageDialog(rootPane, "Bam Dat");
-        int soLuongHoaDon = 0;
-        dao.DAO_HoaDon DAOHoaDon = new DAO_HoaDon();
-        dao.DAO_KhachHang DAOKhachHang = new DAO_KhachHang();
-        soLuongHoaDon = DAOHoaDon.laySoLuongHoaDon()+1;
-        ArrayList<entity.KhachHang> listKH = DAOKhachHang.getAllKhachHang();
-        entity.HoaDon hoaDon = new HoaDon();
-        String maHoaDon = null;
-        if(soLuongHoaDon<10){
-            maHoaDon = ("HD00"+soLuongHoaDon);
-        }
-        else if(soLuongHoaDon<100){
-            maHoaDon=("HD0"+soLuongHoaDon);
-        }
-        else{
-            maHoaDon=("HD"+soLuongHoaDon);
-        }
-        hoaDon.setMaHoaDon(maHoaDon);
-        hoaDon.setNgayLapHoaDon( LocalDateTime.now());
-        hoaDon.setNhanVien(I_CRUD.findById("NV001",new NhanVien()));
-        hoaDon.setTrangThai(0);
-        hoaDon.setUuDai(I_CRUD.findById("UD001", new UuDai()));
-        boolean isHasKH = false;
-        for(int i = 0;i<listKH.size();i++){
-            if(listKH.get(i).getSoDienThoai().trim().equals( String.valueOf(txt_SoDT.getSelectedItem()).trim())){
-                hoaDon.setKhachHang(listKH.get(i));
-                isHasKH = true;
+        int isConfirm =  JOptionPane.showConfirmDialog(rootPane, "Xác nhận đặt phòng");
+        
+        if(isConfirm == 0){
+            int soLuongHoaDon = 0;
+            dao.DAO_HoaDon DAOHoaDon = new DAO_HoaDon();
+            dao.DAO_KhachHang DAOKhachHang = new DAO_KhachHang();
+            soLuongHoaDon = DAOHoaDon.laySoLuongHoaDon()+1;
+            ArrayList<entity.KhachHang> listKH = DAOKhachHang.getAllKhachHang();
+            entity.HoaDon hoaDon = new HoaDon();
+            String maHoaDon = null;
+            if(soLuongHoaDon<10){
+                maHoaDon = ("HD00"+soLuongHoaDon);
             }
-        }
-        if(isHasKH == false){
-            DAOKhachHang.create(new KhachHang( String.valueOf(txt_SoDT.getSelectedItem()).trim(),txt_khachHang.getText()));
-        }
+            else if(soLuongHoaDon<100){
+                maHoaDon=("HD0"+soLuongHoaDon);
+            }
+            else{
+                maHoaDon=("HD"+soLuongHoaDon);
+            }
+            hoaDon.setMaHoaDon(maHoaDon);
+            hoaDon.setNgayLapHoaDon( LocalDateTime.now());
+            hoaDon.setNhanVien(I_CRUD.findById("NV001",new NhanVien()));
+            hoaDon.setTrangThai(0);
+            hoaDon.setUuDai(I_CRUD.findById("UD001", new UuDai()));
+            boolean isHasKH = false;
+            for(int i = 0;i<listKH.size();i++){
+                if(listKH.get(i).getSoDienThoai().trim().equals( String.valueOf(txt_SoDT.getSelectedItem()).trim())){
+                    hoaDon.setKhachHang(listKH.get(i));
+                    isHasKH = true;
+                }
+            }
+            if(isHasKH == false){
+                DAOKhachHang.create(new KhachHang( String.valueOf(txt_SoDT.getSelectedItem()).trim(),txt_khachHang.getText()));
+            }
 
-        boolean taoHoaDonStatus = DAOHoaDon.create(hoaDon);
-        if(taoHoaDonStatus==true){
-            PhieuDatPhong pdp = new PhieuDatPhong();
-            
-            //tao ma phieu
-            ArrayList<PhieuDatPhong> lsPdp = new ArrayList<>();
-            dao.DAO_PhieuDatPhong daoPdp = new  dao.DAO_PhieuDatPhong();
-            lsPdp = daoPdp.getAll(PhieuDatPhong.class);
-            ArrayList<String> dsId = new ArrayList<>();
-            for(PhieuDatPhong PhieuDat: lsPdp){
-                dsId.add(PhieuDat.getMaPhieuDatPhong());
+            boolean taoHoaDonStatus = DAOHoaDon.create(hoaDon);
+            if(taoHoaDonStatus==true){
+                PhieuDatPhong pdp = new PhieuDatPhong();
+
+                //tao ma phieu
+                ArrayList<PhieuDatPhong> lsPdp = new ArrayList<>();
+                dao.DAO_PhieuDatPhong daoPdp = new  dao.DAO_PhieuDatPhong();
+                lsPdp = daoPdp.getAll(PhieuDatPhong.class);
+                ArrayList<String> dsId = new ArrayList<>();
+                for(PhieuDatPhong PhieuDat: lsPdp){
+                    dsId.add(PhieuDat.getMaPhieuDatPhong());
+                }
+                soLuongHoaDon = DAOHoaDon.laySoLuongHoaDon()+1;
+                    // tách chuỗi để lấy số thứ tự
+                int index = soLuongHoaDon + 1;
+                //tự động tạo mã hóa đơn mới
+                String newID = "DPT" + String.format("%03d", index);
+                // lay thoi gian nhan phong
+
+                String dateChooser = getDateChooser();
+                String[] date = dateChooser.split("/");
+                String cbtimetext = cb_GioNhanPhong.getSelectedItem().toString().trim();
+                int hour = Integer.parseInt(cbtimetext.split(":")[0]);
+                int minus = Integer.parseInt(cbtimetext.split(":")[1]);
+                int day = Integer.parseInt(date[0]);
+                int month = Integer.parseInt(date[1]);
+                int year = Integer.parseInt(date[2]);
+                int second = 0;
+                // tiep tuc insert8
+                pdp.setMaPhieuDatPhong(newID);
+                pdp.setThoiGianTaoPhieu(LocalDateTime.now());
+                pdp.setThoiGianNhanPhong( LocalDateTime.of(year, month, day, hour, minus,second));
+                pdp.setTrangThai(0);
+                pdp.setDatCoc(Double.valueOf(txt_TienCoc.getText()));
+                pdp.setHoaDon(I_CRUD.findById(maHoaDon, new HoaDon()));
+                pdp.setNhanVien(I_CRUD.findById("NV001",new NhanVien()));
+                pdp.setKhachHang(I_CRUD.findById(String.valueOf(txt_SoDT.getSelectedItem()).trim(), new KhachHang()));
+                pdp.setPhong(I_CRUD.findById(smallPanel.Panel_DanhSachPhongFullCol.codePhong, new Phong()));
+
+                daoPdp.create(pdp);
+                if(CheckDateNow()==true){
+                    dao.DAO_Phong daoPhong = new DAO_Phong();
+                    daoPhong.capNhatTrangThaiPhong(pdp.getPhong().getMaPhong(), 1);
+                }
             }
-            String lastID = dsId.get(lsPdp.size() - 1).toString();
-                // tách chuỗi để lấy số thứ tự
-            int index = Integer.parseInt(lastID.substring(3)) + 1;
-            //tự động tạo mã hóa đơn mới
-            String newID = "DPT" + String.format("%03d", index);
-            // lay thoi gian nhan phong
-            
-            String dateChooser = getDateChooser();
-            String[] date = dateChooser.split("/");
-            String cbtimetext = cb_GioNhanPhong.getSelectedItem().toString().trim();
-            int hour = Integer.parseInt(cbtimetext.split(":")[0]);
-            int minus = Integer.parseInt(cbtimetext.split(":")[1]);
-            int day = Integer.parseInt(date[0]);
-            int month = Integer.parseInt(date[1]);
-            int year = Integer.parseInt(date[2]);
-            int second = 0;
-            // tiep tuc insert8
-            pdp.setMaPhieuDatPhong(newID);
-            pdp.setThoiGianTaoPhieu(LocalDateTime.now());
-            pdp.setThoiGianNhanPhong( LocalDateTime.of(year, month, day, hour, minus,second));
-            pdp.setTrangThai(0);
-            pdp.setDatCoc(Double.valueOf(txt_TienCoc.getText()));
-            pdp.setHoaDon(I_CRUD.findById(maHoaDon, new HoaDon()));
-            pdp.setNhanVien(I_CRUD.findById("NV001",new NhanVien()));
-            pdp.setKhachHang(I_CRUD.findById(String.valueOf(txt_SoDT.getSelectedItem()).trim(), new KhachHang()));
-            pdp.setPhong(I_CRUD.findById(smallPanel.Panel_DanhSachPhongFullCol.codePhong, new Phong()));
-            
-            daoPdp.create(pdp);
-            if(CheckDateNow()==true){
-                dao.DAO_Phong daoPhong = new DAO_Phong();
-                daoPhong.capNhatTrangThaiPhong(pdp.getPhong().getMaPhong(), 1);
-            }
+            loadDSPhongTrong(null, 0,getDateChooser() );
         }
-        loadDSPhongTrong(null, 0,getDateChooser() );
+        
     }//GEN-LAST:event_click_DatPhong
 
     private void chooserDate(){
@@ -548,7 +552,6 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
         java.time.LocalDate nowLocalDate = now.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         java.time.LocalDate selectedLocalDate = selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         if (selectedLocalDate.equals(nowLocalDate)) {
-            JOptionPane.showMessageDialog(null, " ngày hiện tại");
             return true;
         }
         return false;

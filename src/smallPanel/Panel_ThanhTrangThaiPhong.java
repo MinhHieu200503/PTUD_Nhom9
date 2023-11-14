@@ -97,7 +97,7 @@ public class Panel_ThanhTrangThaiPhong extends javax.swing.JPanel {
         jPanel4.add(lb_Icon_UnAvailabel);
 
         lb_Available2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        lb_Available2.setText("Sẵn sàng");
+        lb_Available2.setText("Đang sử dụng ");
         jPanel4.add(lb_Available2);
 
         lb_Quantity_Available2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N

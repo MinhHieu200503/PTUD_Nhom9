@@ -59,6 +59,8 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
         }
     }
     
+    
+    
     public int laySoLuongHoaDon(){
             int soLuongHoaDon = 0;
             ConnectDB.getInstance();
@@ -86,4 +88,6 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
         }
         return soLuongHoaDon;
     }
+    
+    
 }
