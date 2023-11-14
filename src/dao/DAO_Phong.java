@@ -312,7 +312,6 @@ public class DAO_Phong implements I_CRUD<Phong>{
             while (rs.next()) {	
                 dsphong.add(new entity.Phong(rs.getString(1).trim(), rs.getString(2), rs.getInt(3), I_CRUD.findById(rs.getString(4), new LoaiPhong()), rs.getInt(5), rs.getDouble(6) ));
             }
-//             System.out.println(dsphong);
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
