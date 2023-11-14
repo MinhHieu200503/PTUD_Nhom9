@@ -27,11 +27,19 @@ public class DAO_KhachHang implements I_CRUD<KhachHang>{
         PreparedStatement pstm = null;
         int n = 0;
         try {
-            String sql = "update khachhang set soDienThoai = ? , tenKhachHang = ? where soDienThoai = " + oldPhone;
-            pstm = con.prepareStatement(sql);
-            pstm.setString(1, entity.getSoDienThoai());
-            pstm.setString(2, entity.getTenKhachHang());
-            n = pstm.executeUpdate();
+            if(entity.getSoDienThoai().equals(oldPhone)){
+                String sql = "update khachhang set tenKhachHang = ? where soDienThoai = " + oldPhone;
+                pstm = con.prepareStatement(sql);
+                pstm.setString(1, entity.getTenKhachHang());
+                n = pstm.executeUpdate();
+                return n > 0;
+            } else {
+                String sql = "update khachhang set soDienThoai = ? , tenKhachHang = ? where soDienThoai = " + oldPhone;
+                pstm = con.prepareStatement(sql);
+                pstm.setString(1, entity.getSoDienThoai());
+                pstm.setString(2, entity.getTenKhachHang());
+                n = pstm.executeUpdate();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_KhachHang.class.getName()).log(Level.SEVERE, null, ex);
         }

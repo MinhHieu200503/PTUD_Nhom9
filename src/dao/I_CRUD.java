@@ -69,10 +69,15 @@ public interface I_CRUD<T> {
                     case "LoaiPhong" -> pstm.setString(i, ((LoaiPhong) field.get(entity)).getMaLoaiPhong());
                     case "KhachHang" -> pstm.setString(i, ((KhachHang) field.get(entity)).getSoDienThoai());
                     case "NhanVien" -> pstm.setString(i, ((NhanVien) field.get(entity)).getMaNhanVien());
-                    case "ChucVu" -> pstm.setString(i, ((ChucVu) field.get(entity)).getMaChucVu());
+//                    case "ChucVu" -> pstm.setString(i, ((ChucVu) field.get(entity)).getMaChucVu());
                     case "Ca" -> pstm.setString(i, ((Ca) field.get(entity)).getMaCa());
                     case "TaiKhoan" -> pstm.setString(i, ((TaiKhoan) field.get(entity)).getTenTaiKhoan());
-                    case "UuDai" -> pstm.setString(i, ((UuDai) field.get(entity)).getMaUuDai());
+                    case "UuDai" -> {
+                        if (field.get(entity) == null)
+                            pstm.setString(i, null);
+                        else
+                            pstm.setString(i, ((UuDai) field.get(entity)).getMaUuDai());
+                    }
                     case "DichVu" -> pstm.setString(i, ((DichVu) field.get(entity)).getMaDichVu());
                     case "HoaDon" -> pstm.setString(i, ((HoaDon) field.get(entity)).getMaHoaDon());
                     case "int" -> pstm.setInt(i, (int) field.get(entity));
@@ -120,7 +125,7 @@ public interface I_CRUD<T> {
                             }
                         }
                         case "NhanVien" -> field.set(entity1, findById(rs.getString("maNhanVien"), new NhanVien()));
-                        case "ChucVu" -> field.set(entity1, findById(rs.getString("maChucVu"), new ChucVu()));
+//                        case "ChucVu" -> field.set(entity1, findById(rs.getString("maChucVu"), new ChucVu()));
                         case "Ca" -> field.set(entity1, findById(rs.getString("maCa"), new Ca()));
                         case "TaiKhoan" -> field.set(entity1, findById(rs.getString("tenTaiKhoan"), new TaiKhoan()));
                         case "UuDai" -> field.set(entity1, findById(rs.getString("maUuDai"), new UuDai()));
@@ -171,7 +176,7 @@ public interface I_CRUD<T> {
                 for (int i = 0; i < fields.length; i++) {
                     fields[i].setAccessible(true);
                   
-                    System.out.println(fields[i].getName());
+//                    System.out.println(fields[i].getName());
                     switch (fields[i].getType().getSimpleName()) {
                         case "Phong" -> fields[i].set(entity, findById(rs.getString("maPhong"), new Phong()));
                         case "LoaiPhong" -> fields[i].set(entity, findById(rs.getString("maLoaiPhong"), new LoaiPhong()));
@@ -183,7 +188,7 @@ public interface I_CRUD<T> {
                             }
                         }
                         case "NhanVien" -> fields[i].set(entity, findById(rs.getString("maNhanVien"), new NhanVien()));
-                        case "ChucVu" -> fields[i].set(entity, findById(rs.getString("maChucVu"), new ChucVu()));
+//                        case "ChucVu" -> fields[i].set(entity, findById(rs.getString("maChucVu"), new ChucVu()));
                         case "Ca" -> fields[i].set(entity, findById(rs.getString("maCa"), new Ca()));
                         case "TaiKhoan" -> fields[i].set(entity, findById(rs.getString("tenTaiKhoan"), new TaiKhoan()));
                         case "UuDai" -> fields[i].set(entity, findById(rs.getString("maUuDai"), new UuDai()));
@@ -214,7 +219,7 @@ public interface I_CRUD<T> {
     default boolean update(T entity) {
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
-        System.out.println(con);
+//        System.out.println(con);
         PreparedStatement pstm = null;
         int n = 0;
         try {    
@@ -233,7 +238,7 @@ public interface I_CRUD<T> {
             }
             sql = sql.substring(0, sql.length() - 1) + " WHERE ";
             sql += fields[0].getName() + " = ?";
-            System.out.println(sql);
+//            System.out.println(sql);
             pstm = con.prepareStatement(sql);
             for (int i = 1; i < fields.length ;i++) {
                 fields[i].setAccessible(true); // lấy quyền truy cập private trong class
@@ -242,7 +247,7 @@ public interface I_CRUD<T> {
                     case "LoaiPhong" -> pstm.setString(i, ((LoaiPhong) fields[i].get(entity)).getMaLoaiPhong());
                     case "KhachHang" -> pstm.setString(i, ((KhachHang) fields[i].get(entity)).getSoDienThoai());
                     case "NhanVien" -> pstm.setString(i, ((NhanVien) fields[i].get(entity)).getMaNhanVien());
-                    case "ChucVu" -> pstm.setString(i, ((ChucVu) fields[i].get(entity)).getMaChucVu());
+//                    case "ChucVu" -> pstm.setString(i, ((ChucVu) fields[i].get(entity)).getMaChucVu());
                     case "Ca" -> pstm.setString(i, ((Ca) fields[i].get(entity)).getMaCa());
                     case "TaiKhoan" -> pstm.setString(i, ((TaiKhoan) fields[i].get(entity)).getTenTaiKhoan());
                     case "UuDai" -> pstm.setString(i, ((UuDai) fields[i].get(entity)).getMaUuDai());
@@ -273,7 +278,7 @@ public interface I_CRUD<T> {
             ArrayList<T> ds = new ArrayList<>();
             ConnectDB.getInstance();
             Connection con = ConnectDB.getConnection();
-            System.out.println(con);
+//            System.out.println(con);
         try {
             Field[] fields = c.getDeclaredFields();
             int so = -1;
@@ -318,9 +323,10 @@ public interface I_CRUD<T> {
                 // nếu tên cột là số thì dùng = thay vì like
                 switch (fields[i].getName()) {
                     // nếu là thực thể thì lấy tên thực thể
-                    case "phong", "nhanVien", "khachHang", "chucVu", "ca", "taiKhoan", "uuDai", "dichVu" -> 
+                    case "phong", "nhanVien", "khachHang", "chucVu", "ca", "taiKhoan", "dichVu" -> 
                         // thêm ten vào và viết hoa chữ cái đầu
                         sql +=  "ten" + fields[i].getType().getSimpleName() + " LIKE N'%" + key + "%' OR ";
+                    case "uuDai" -> sql += "a.maUuDai IS NULL OR tenUuDai LIKE N'%" + key + "%' OR ";
                     case "hoaDon" -> sql += "a.maHoaDon LIKE N'%" + key + "%' OR ";
                     case "loaiPhong" -> sql += "loaiPhong LIKE N'%" + key + "%' OR ";
                     case "trangThai", "soLuong", "gia", "datCoc", "giamGia", "gioiTinh", "sucChuaToiDa" -> sql += "a." + fields[i].getName() + " = "+ so + " OR ";
@@ -328,7 +334,7 @@ public interface I_CRUD<T> {
                 }
             }
             sql = sql.substring(0, sql.length() - 4); // loại bỏ " OR " ở cuối
-            System.out.println(sql);
+//            System.out.println(sql);
             
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery(sql);
@@ -347,7 +353,7 @@ public interface I_CRUD<T> {
                             }
                         }
                         case "NhanVien" -> field.set(entity, findById(rs.getString("maNhanVien"), new NhanVien()));
-                        case "ChucVu" -> field.set(entity, findById(rs.getString("maChucVu"), new ChucVu()));
+//                        case "ChucVu" -> field.set(entity, findById(rs.getString("maChucVu"), new ChucVu()));
                         case "Ca" -> field.set(entity, findById(rs.getString("maCa"), new Ca()));
                         case "TaiKhoan" -> field.set(entity, findById(rs.getString("tenTaiKhoan"), new TaiKhoan()));
                         case "UuDai" -> field.set(entity, findById(rs.getString("maUuDai"), new UuDai()));
