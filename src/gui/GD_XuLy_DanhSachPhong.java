@@ -5,9 +5,32 @@
 package gui;
 
 
+import dao.DAO_ChiTietPhong_HoaDon;
+import dao.DAO_LoaiPhong;
+import dao.DAO_PhieuDatPhong;
 import dao.DAO_Phong;
+import dao.I_CRUD;
+import entity.ChitTietPhongHoaDon;
+import entity.HoaDon;
+import entity.PhieuDatPhong;
+import entity.Phong;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import static java.time.Instant.now;
+import static java.time.LocalDate.now;
+import java.time.LocalDateTime;
+import static java.time.LocalDateTime.now;
+import static java.time.Year.now;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import smallPanel.Panel_FullOptionDanhSachPhong;
 
@@ -21,61 +44,38 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
      * Creates new form GD_XuLyDanhSachPhong
      */
     public GD_XuLy_DanhSachPhong() {
-        
         initComponents();
         
-//        ========------ DELETE IMPORTANT FINAL PROJECT ------========
-//        ========------ DELETE IMPORTANT FINAL PROJECT ------========
-//        ========------ DELETE IMPORTANT FINAL PROJECT ------========
-
-                this.remove(panel_FullOptionDanhSachPhong1);
         
-//        ========------ DELETE IMPORTANT FINAL PROJECT ------========       
-//        ========------ DELETE IMPORTANT FINAL PROJECT ------========
-//        ========------ DELETE IMPORTANT FINAL PROJECT ------========
-
-//      DATE ENTITY.PHONG
-        ArrayList<entity.Phong> temp = new ArrayList<entity.Phong>();
-                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("002", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("003", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("004", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("005", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("007", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                        temp.add(new entity.Phong("003", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("004", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("005", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("007", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                        temp.add(new entity.Phong("003", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("004", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("005", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("007", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-           
-                
-        panel_FullOptionDanhSachPhong = new Panel_FullOptionDanhSachPhong();
-        this.add(panel_FullOptionDanhSachPhong, java.awt.BorderLayout.WEST );
+        loadDSPhongTrong(null,0,-1);
         
-        
-        //FUNCITON LOAD LIST 
-        panel_FullOptionDanhSachPhong.setListPhong(temp);
-        panel_FullOptionDanhSachPhong.load();
-
     }
-
+    
+    private void loadDSPhongTrong(String loaiPhong,int sucChua,int trangThai){
+        ContainerListPhong.removeAll();
+        
+         dao.DAO_Phong dao_phong = new DAO_Phong();
+         ArrayList<entity.Phong> listPhong = new ArrayList<entity.Phong>();
+         ArrayList<entity.Phong> listPhong1 = new ArrayList<entity.Phong>();
+         ArrayList<entity.Phong> listPhong2 = new ArrayList<entity.Phong>();
+         ArrayList<entity.Phong> listPhong3 = new ArrayList<entity.Phong>();
+         listPhong = dao_phong.getAll(Phong.class);
+        
+        if(loaiPhong == null && sucChua == 0&&trangThai == -1){
+            
+            listPhong1 = dao_phong.getPhongTheoDieuKien(loaiPhong,sucChua,trangThai);
+            danhSachPhong = new smallPanel.Panel_DanhSachPhongFullCol(listPhong1,GD_XuLy_DanhSachPhong.class);
+            
+        }
+        else{
+            listPhong1 = dao_phong.getPhongTheoDieuKien(loaiPhong,sucChua,trangThai);
+            danhSachPhong = new smallPanel.Panel_DanhSachPhongFullCol(listPhong1,GD_XuLy_DanhSachPhong.class);
+            
+        }
+        ContainerListPhong.add( danhSachPhong.getContentPane(), BorderLayout.WEST);
+        ContainerListPhong.getComponent(0).setBackground(Color.white);
+            
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -86,18 +86,622 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panel_FullOptionDanhSachPhong1 = new smallPanel.Panel_FullOptionDanhSachPhong();
-        jPanel1 = new javax.swing.JPanel();
+        Container_DatPhongNgay = new javax.swing.JPanel();
+        ContainerListPhong = new javax.swing.JPanel();
+        Panel_ThongTinKhachHang1 = new javax.swing.JPanel();
+        lb_HoaDon = new javax.swing.JLabel();
+        txtMaPhong = new app.bolivia.swing.JCTextField();
+        txtThoiGianNhanPhong = new app.bolivia.swing.JCTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txt_ThoiGianSuDung = new app.bolivia.swing.JCTextField();
+        lbThoiGianSuDung = new javax.swing.JLabel();
+        lbThoiGianNhanPhong = new javax.swing.JLabel();
+        txtMaHoaDon = new app.bolivia.swing.JCTextField();
+        locPanel = new javax.swing.JPanel();
+        locPanel1 = new javax.swing.JPanel();
+        lableFilterOption1 = new javax.swing.JLabel();
+        ComboFilterOption1 = new javax.swing.JComboBox<>();
+        locPanel2 = new javax.swing.JPanel();
+        lableFilterOption2 = new javax.swing.JLabel();
+        ComboFilterOption3 = new javax.swing.JComboBox<>();
+        locPanel3 = new javax.swing.JPanel();
+        lableFilterOption3 = new javax.swing.JLabel();
+        ComboFilterOption2 = new javax.swing.JComboBox<>();
+        panel_ThanhTrangThaiPhong1 = new smallPanel.Panel_ThanhTrangThaiPhong();
+        Panel_ThongTinKhachHang2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        txt_TenKhachHang = new app.bolivia.swing.JCTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txt_SDT = new javax.swing.JTextField();
+        panelContainDV = new javax.swing.JPanel();
+        srollTableDV = new javax.swing.JScrollPane();
+        tableDV = new rojeru_san.complementos.RSTableMetro();
+        lb_DichVuj = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1620, 964));
-        getContentPane().add(panel_FullOptionDanhSachPhong1, java.awt.BorderLayout.WEST);
-        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
+
+        Container_DatPhongNgay.setBackground(new java.awt.Color(255, 255, 255));
+        Container_DatPhongNgay.setMaximumSize(new java.awt.Dimension(1620, 964));
+        Container_DatPhongNgay.setMinimumSize(new java.awt.Dimension(1620, 964));
+        Container_DatPhongNgay.setPreferredSize(new java.awt.Dimension(1620, 964));
+        Container_DatPhongNgay.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ContainerListPhong.setBackground(new java.awt.Color(255, 255, 255));
+        ContainerListPhong.setMaximumSize(new java.awt.Dimension(900, 780));
+        ContainerListPhong.setMinimumSize(new java.awt.Dimension(900, 780));
+        ContainerListPhong.setName(""); // NOI18N
+        ContainerListPhong.setPreferredSize(new java.awt.Dimension(900, 780));
+        ContainerListPhong.setVerifyInputWhenFocusTarget(false);
+        ContainerListPhong.setLayout(new java.awt.GridLayout(1, 0));
+        Container_DatPhongNgay.add(ContainerListPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 900, 740));
+
+        Panel_ThongTinKhachHang1.setBackground(new java.awt.Color(255, 255, 255));
+        Panel_ThongTinKhachHang1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "THÔNG TIN PHÒNG", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 18))); // NOI18N
+
+        lb_HoaDon.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
+        lb_HoaDon.setText("MÃ HÓA ĐƠN:");
+
+        txtMaPhong.setEditable(false);
+        txtMaPhong.setEnabled(false);
+        txtMaPhong.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        txtThoiGianNhanPhong.setEditable(false);
+        txtThoiGianNhanPhong.setEnabled(false);
+        txtThoiGianNhanPhong.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        jLabel8.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
+        jLabel8.setText("MÃ PHÒNG: ");
+
+        txt_ThoiGianSuDung.setEditable(false);
+        txt_ThoiGianSuDung.setEnabled(false);
+        txt_ThoiGianSuDung.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        lbThoiGianSuDung.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
+        lbThoiGianSuDung.setText("THỜI GIAN ĐÃ SỬ DỤNG");
+
+        lbThoiGianNhanPhong.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
+        lbThoiGianNhanPhong.setText("THỜI GIAN NHẬN PHÒNG");
+
+        txtMaHoaDon.setEditable(false);
+        txtMaHoaDon.setEnabled(false);
+        txtMaHoaDon.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        javax.swing.GroupLayout Panel_ThongTinKhachHang1Layout = new javax.swing.GroupLayout(Panel_ThongTinKhachHang1);
+        Panel_ThongTinKhachHang1.setLayout(Panel_ThongTinKhachHang1Layout);
+        Panel_ThongTinKhachHang1Layout.setHorizontalGroup(
+            Panel_ThongTinKhachHang1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_ThongTinKhachHang1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Panel_ThongTinKhachHang1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Panel_ThongTinKhachHang1Layout.createSequentialGroup()
+                        .addGroup(Panel_ThongTinKhachHang1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMaPhong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addGroup(Panel_ThongTinKhachHang1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Panel_ThongTinKhachHang1Layout.createSequentialGroup()
+                                .addComponent(lb_HoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(86, 86, 86))
+                            .addGroup(Panel_ThongTinKhachHang1Layout.createSequentialGroup()
+                                .addComponent(txtMaHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                                .addContainerGap())))
+                    .addGroup(Panel_ThongTinKhachHang1Layout.createSequentialGroup()
+                        .addComponent(lbThoiGianSuDung, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_ThoiGianSuDung, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(6, 6, 6))
+                    .addGroup(Panel_ThongTinKhachHang1Layout.createSequentialGroup()
+                        .addComponent(lbThoiGianNhanPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtThoiGianNhanPhong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        Panel_ThongTinKhachHang1Layout.setVerticalGroup(
+            Panel_ThongTinKhachHang1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_ThongTinKhachHang1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Panel_ThongTinKhachHang1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_HoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(3, 3, 3)
+                .addGroup(Panel_ThongTinKhachHang1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtMaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMaHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(Panel_ThongTinKhachHang1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtThoiGianNhanPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbThoiGianNhanPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(Panel_ThongTinKhachHang1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_ThoiGianSuDung, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbThoiGianSuDung, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        Container_DatPhongNgay.add(Panel_ThongTinKhachHang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 10, 650, 260));
+
+        locPanel.setBackground(new java.awt.Color(255, 255, 255));
+        locPanel.setMaximumSize(new java.awt.Dimension(1080, 84));
+        locPanel.setMinimumSize(new java.awt.Dimension(1080, 84));
+
+        locPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        locPanel1.setMaximumSize(new java.awt.Dimension(330, 73));
+        locPanel1.setMinimumSize(new java.awt.Dimension(330, 73));
+
+        lableFilterOption1.setBackground(new java.awt.Color(255, 255, 255));
+        lableFilterOption1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        lableFilterOption1.setText("Lọc theo loại phòng:");
+
+        ComboFilterOption1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        ComboFilterOption1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Không", "Vip", "Thường" }));
+        ComboFilterOption1.setMaximumSize(new java.awt.Dimension(101, 32));
+        ComboFilterOption1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FilterLocLoaiPhong(evt);
+            }
+        });
+
+        javax.swing.GroupLayout locPanel1Layout = new javax.swing.GroupLayout(locPanel1);
+        locPanel1.setLayout(locPanel1Layout);
+        locPanel1Layout.setHorizontalGroup(
+            locPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(locPanel1Layout.createSequentialGroup()
+                .addGroup(locPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lableFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        locPanel1Layout.setVerticalGroup(
+            locPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(locPanel1Layout.createSequentialGroup()
+                .addComponent(lableFilterOption1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ComboFilterOption1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        locPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        locPanel2.setMaximumSize(new java.awt.Dimension(330, 73));
+        locPanel2.setMinimumSize(new java.awt.Dimension(330, 73));
+
+        lableFilterOption2.setBackground(new java.awt.Color(255, 255, 255));
+        lableFilterOption2.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        lableFilterOption2.setText("Lọc theo sức chứa tối đa :");
+
+        ComboFilterOption3.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        ComboFilterOption3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Không", "5", "10", "15", "20" }));
+        ComboFilterOption3.setMaximumSize(new java.awt.Dimension(101, 32));
+        ComboFilterOption3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterLocSucChhua(evt);
+            }
+        });
+
+        javax.swing.GroupLayout locPanel2Layout = new javax.swing.GroupLayout(locPanel2);
+        locPanel2.setLayout(locPanel2Layout);
+        locPanel2Layout.setHorizontalGroup(
+            locPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(locPanel2Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addGroup(locPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lableFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(79, Short.MAX_VALUE))
+        );
+        locPanel2Layout.setVerticalGroup(
+            locPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(locPanel2Layout.createSequentialGroup()
+                .addComponent(lableFilterOption2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ComboFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        locPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        locPanel3.setMaximumSize(new java.awt.Dimension(330, 73));
+        locPanel3.setMinimumSize(new java.awt.Dimension(330, 73));
+
+        lableFilterOption3.setBackground(new java.awt.Color(255, 255, 255));
+        lableFilterOption3.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        lableFilterOption3.setText("Lọc theo trạng thái:");
+
+        ComboFilterOption2.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        ComboFilterOption2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Không", "Trống", "Đang đợi", "Đang sử dụng" }));
+        ComboFilterOption2.setMaximumSize(new java.awt.Dimension(101, 32));
+        ComboFilterOption2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterLocTrangThai(evt);
+            }
+        });
+
+        javax.swing.GroupLayout locPanel3Layout = new javax.swing.GroupLayout(locPanel3);
+        locPanel3.setLayout(locPanel3Layout);
+        locPanel3Layout.setHorizontalGroup(
+            locPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(locPanel3Layout.createSequentialGroup()
+                .addGroup(locPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lableFilterOption3, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        locPanel3Layout.setVerticalGroup(
+            locPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(locPanel3Layout.createSequentialGroup()
+                .addComponent(lableFilterOption3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ComboFilterOption2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout locPanelLayout = new javax.swing.GroupLayout(locPanel);
+        locPanel.setLayout(locPanelLayout);
+        locPanelLayout.setHorizontalGroup(
+            locPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(locPanelLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(locPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(locPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(locPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        locPanelLayout.setVerticalGroup(
+            locPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(locPanelLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addGroup(locPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(locPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(locPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(locPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
+        Container_DatPhongNgay.add(locPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 910, -1));
+        Container_DatPhongNgay.add(panel_ThanhTrangThaiPhong1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 840, -1, -1));
+
+        Panel_ThongTinKhachHang2.setBackground(new java.awt.Color(255, 255, 255));
+        Panel_ThongTinKhachHang2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "THÔNG TIN KHÁCH HÀNG", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 18))); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
+        jLabel6.setText("SỐ ĐIỆN THOẠI");
+
+        txt_TenKhachHang.setEditable(false);
+        txt_TenKhachHang.setEnabled(false);
+        txt_TenKhachHang.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        jLabel7.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
+        jLabel7.setText("TÊN KHÁCH HÀNG:");
+
+        txt_SDT.setEditable(false);
+        txt_SDT.setEnabled(false);
+        txt_SDT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_SDTActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Panel_ThongTinKhachHang2Layout = new javax.swing.GroupLayout(Panel_ThongTinKhachHang2);
+        Panel_ThongTinKhachHang2.setLayout(Panel_ThongTinKhachHang2Layout);
+        Panel_ThongTinKhachHang2Layout.setHorizontalGroup(
+            Panel_ThongTinKhachHang2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_ThongTinKhachHang2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Panel_ThongTinKhachHang2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_SDT)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_ThongTinKhachHang2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txt_TenKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Panel_ThongTinKhachHang2Layout.createSequentialGroup()
+                        .addGroup(Panel_ThongTinKhachHang2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        Panel_ThongTinKhachHang2Layout.setVerticalGroup(
+            Panel_ThongTinKhachHang2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_ThongTinKhachHang2Layout.createSequentialGroup()
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_SDT, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_TenKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        Container_DatPhongNgay.add(Panel_ThongTinKhachHang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 290, -1, 210));
+
+        panelContainDV.setBackground(new java.awt.Color(255, 255, 255));
+
+        tableDV.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tên dịch vụ", "Giá", "Số lượng"
+            }
+        ));
+        tableDV.setColorBackgoundHead(new java.awt.Color(0, 153, 153));
+        tableDV.setColorBordeFilas(new java.awt.Color(0, 102, 102));
+        tableDV.setColorBordeHead(new java.awt.Color(0, 102, 102));
+        tableDV.setColorFilasBackgound2(new java.awt.Color(153, 255, 204));
+        tableDV.setColorFilasForeground1(new java.awt.Color(0, 0, 0));
+        tableDV.setColorFilasForeground2(new java.awt.Color(0, 0, 0));
+        tableDV.setColorSelBackgound(new java.awt.Color(0, 153, 153));
+        tableDV.setFuenteFilas(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tableDV.setFuenteFilasSelect(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tableDV.setRowHeight(30);
+        tableDV.setSelectionBackground(new java.awt.Color(0, 204, 204));
+        tableDV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableDVxoaMotDongTable(evt);
+            }
+        });
+        srollTableDV.setViewportView(tableDV);
+
+        lb_DichVuj.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
+        lb_DichVuj.setText("DỊCH VỤ PHÒNG SỬ DỤNG");
+
+        javax.swing.GroupLayout panelContainDVLayout = new javax.swing.GroupLayout(panelContainDV);
+        panelContainDV.setLayout(panelContainDVLayout);
+        panelContainDVLayout.setHorizontalGroup(
+            panelContainDVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelContainDVLayout.createSequentialGroup()
+                .addGap(189, 189, 189)
+                .addComponent(lb_DichVuj, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(211, Short.MAX_VALUE))
+            .addGroup(panelContainDVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelContainDVLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(srollTableDV, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        panelContainDVLayout.setVerticalGroup(
+            panelContainDVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelContainDVLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lb_DichVuj, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(328, Short.MAX_VALUE))
+            .addGroup(panelContainDVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelContainDVLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(srollTableDV, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        Container_DatPhongNgay.add(panelContainDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 520, 670, 360));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Container_DatPhongNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 1614, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Container_DatPhongNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void FilterLocLoaiPhong(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FilterLocLoaiPhong
+         String loaiPhong = ComboFilterOption1.getSelectedItem().toString();
+        if(loaiPhong.equalsIgnoreCase("Không")){
+            loaiPhong = null;
+        }
+        String sucChua = ComboFilterOption3.getSelectedItem().toString();
+
+        if(sucChua.equalsIgnoreCase("Không")){
+            sucChua = "0";
+        }
+        
+        String trangThai = ComboFilterOption2.getSelectedItem().toString();
+        int Status = -1;
+        if(trangThai.equalsIgnoreCase("Không")){
+            Status = -1;
+        }
+        else if(trangThai.trim().equalsIgnoreCase("Trống")){
+            Status = 0;
+        }
+        else if(trangThai.equalsIgnoreCase("Đang đợi")){
+             Status = 1;
+        }
+        else if(trangThai.equalsIgnoreCase("Đang sử dụng")){
+             Status = 2;
+        }
+
+        loadDSPhongTrong(loaiPhong,Integer.parseInt(sucChua),Status);
+    }//GEN-LAST:event_FilterLocLoaiPhong
+
+    private void filterLocTrangThai(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterLocTrangThai
+        String loaiPhong = ComboFilterOption1.getSelectedItem().toString();
+        if(loaiPhong.equalsIgnoreCase("Không")){
+            loaiPhong = null;
+        }
+        String sucChua = ComboFilterOption3.getSelectedItem().toString();
+
+        if(sucChua.equalsIgnoreCase("Không")){
+            sucChua = "0";
+        }
+        
+        String trangThai = ComboFilterOption2.getSelectedItem().toString();
+        
+        int Status = -1;
+        if(trangThai.equalsIgnoreCase("Không")){
+            Status = -1;
+        }
+        else if(trangThai.trim().equalsIgnoreCase("Trống")){
+            Status = 0;
+        }
+        else if(trangThai.equalsIgnoreCase("Đang đợi")){
+             Status = 1;
+        }
+        else if(trangThai.equalsIgnoreCase("Đang sử dụng")){
+             Status = 2;
+        }
+        loadDSPhongTrong(loaiPhong,Integer.parseInt(sucChua),Status);
+    }//GEN-LAST:event_filterLocTrangThai
+
+    private void filterLocSucChhua(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterLocSucChhua
+         String loaiPhong = ComboFilterOption1.getSelectedItem().toString();
+        if(loaiPhong.equalsIgnoreCase("Không")){
+            loaiPhong = null;
+        }
+        String sucChua = ComboFilterOption3.getSelectedItem().toString();
+
+        if(sucChua.equalsIgnoreCase("Không")){
+            sucChua = "0";
+        }
+        
+        String trangThai = ComboFilterOption2.getSelectedItem().toString();
+        int Status = -1;
+        if(trangThai.equalsIgnoreCase("Không")){
+            Status = -1;
+        }
+        else if(trangThai.trim().equalsIgnoreCase("Trống")){
+            Status = 0;
+        }
+        else if(trangThai.equalsIgnoreCase("Đang đợi")){
+             Status = 1;
+        }
+        else if(trangThai.equalsIgnoreCase("Đang sử dụng")){
+             Status = 2;
+        }
+
+        loadDSPhongTrong(loaiPhong,Integer.parseInt(sucChua),Status);
+    }//GEN-LAST:event_filterLocSucChhua
+
+    private void txt_SDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SDTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_SDTActionPerformed
+
+    private void tableDVxoaMotDongTable(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDVxoaMotDongTable
+        
+    }//GEN-LAST:event_tableDVxoaMotDongTable
+    
+                               
+
+    public static void clickPhong(String maPhong){
+        DAO_Phong daoPhong = new DAO_Phong();
+        entity.Phong phong = daoPhong.getPhongTheoOnlyMaPhong(maPhong);
+        resetPanelThongTin();
+
+        if(phong.getTrangThai()==0){
+            setTxtThongTinPhongTrong(maPhong);
+        }
+        else if(phong.getTrangThai() ==1){
+            setTxtThongTinPhongCho(maPhong);
+        }
+        else if(phong.getTrangThai()==2){
+            setTxtThongTinPhongDangSuDung(maPhong);
+        }
+    }
+    
+    
+    
+    
+   
+    
+    
+  
+    public static void resetPanelThongTin(){
+        lb_HoaDon.setText("MÃ HÓA ĐƠN");
+        lbThoiGianNhanPhong.setText("THỜI GIAN NHẬN PHÒNG");
+        lbThoiGianSuDung.setText("THỜI GIAN SỬ DỤNG");
+        txtMaHoaDon.setText("");
+        txtThoiGianNhanPhong.setText("");
+        txt_ThoiGianSuDung.setText("");
+        txtMaPhong.setText("");
+        Panel_ThongTinKhachHang2.setVisible(true);
+        txt_SDT.setText("");
+        txt_TenKhachHang.setText("");
+        panelContainDV.setVisible(true);
+    }
+    
+    
+    
+    public static void setTxtThongTinPhongTrong(String maPhong){
+        dao.DAO_Phong DAOphong = new  DAO_Phong();
+        dao.DAO_LoaiPhong daoLoaiPhong = new DAO_LoaiPhong();
+        entity.Phong phong=DAOphong.getPhongTheoOnlyMaPhong(maPhong);
+        txtMaPhong.setText(maPhong);
+        lb_HoaDon.setText("Loại phòng");
+        lbThoiGianNhanPhong.setText("Sức chứa");
+        lbThoiGianSuDung.setText("Giá theo giờ");
+        entity.LoaiPhong loaiPhong = DAOphong.getPhongTheoOnlyMaPhong(maPhong).getLoaiPhong();
+        txtMaHoaDon.setText(I_CRUD.findById(loaiPhong.getMaLoaiPhong(), new entity.LoaiPhong()).getLoaiPhong());
+        txtThoiGianNhanPhong.setText(phong.getSucChuaToiDa()+"");
+        txt_ThoiGianSuDung.setText(phong.getGiaPhongTheoGio()+"");
+        panelContainDV.setVisible(false);
+        Panel_ThongTinKhachHang2 .setVisible(false);
+        
+    }
+    
+    public static void setTxtThongTinPhongCho(String maPhong){
+        
+        dao.DAO_Phong DAOphong = new  DAO_Phong();
+        dao.DAO_PhieuDatPhong Daopdp = new DAO_PhieuDatPhong();
+        PhieuDatPhong pdp = Daopdp.getPhieuDatPhongByMaPhong(maPhong, getDateTimeNow());
+        lb_HoaDon.setText("MÃ HÓA ĐƠN");
+        lbThoiGianNhanPhong.setText("THỜI GIAN NHẬN PHÒNG");
+        lbThoiGianSuDung.setText("TIỀN CỌC");
+        
+        txtMaPhong.setText(maPhong);
+        txtMaHoaDon.setText(pdp.getHoaDon().getMaHoaDon());
+        txtThoiGianNhanPhong.setText(String.format("%02d",pdp.getThoiGianNhanPhong().getHour())+ ":"+String.format("%02d", pdp.getThoiGianNhanPhong().getMinute()));
+        txt_ThoiGianSuDung.setText(I_CRUD.findById(maPhong,new Phong()).getGiaPhongTheoGio()+"");
+
+        txt_SDT.setText(pdp.getKhachHang().getSoDienThoai());
+        txt_TenKhachHang.setText(pdp.getKhachHang().getTenKhachHang());
+        panelContainDV.setVisible(false);
+    }
+    
+    private static void setTxtThongTinPhongDangSuDung(String maPhong){
+        dao.DAO_Phong DAOphong = new  DAO_Phong();
+        dao.DAO_ChiTietPhong_HoaDon daoCtphd= new DAO_ChiTietPhong_HoaDon();
+        entity.ChitTietPhongHoaDon ctphd = daoCtphd.layChiTietPhongHoaDonDuaTrenMaPhong(maPhong);
+        txtMaPhong.setText(maPhong);
+        txtMaHoaDon.setText(ctphd.getHoaDon().getMaHoaDon());
+        
+        // localdate time => string
+        LocalDateTime localDateTime =ctphd.getThoiGianNhanPhong() ;
+
+        // Định dạng mẫu cho chuỗi ngày giờ
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+         String formattedDateTime = localDateTime.format(formatter);
+        txtThoiGianNhanPhong.setText(formattedDateTime);
+        txt_SDT.setText(I_CRUD.findById(ctphd.getHoaDon().getMaHoaDon(), new HoaDon()).getKhachHang().getSoDienThoai());
+        txt_TenKhachHang.setText(I_CRUD.findById(ctphd.getHoaDon().getMaHoaDon(), new HoaDon()).getKhachHang().getTenKhachHang());
+         Duration duration = Duration.between(ctphd.getThoiGianNhanPhong(), localDateTime.now());
+         txt_ThoiGianSuDung.setText(duration.toMinutes()+" Phút");
+    }
+    
+    private static String getDateTimeNow(){
+            sdf = new SimpleDateFormat("dd-MM-yyyy");
+            now = LocalDateTime.now();
+            formattedDate = sdf.format(Date.from(now.atZone(ZoneId.systemDefault()).toInstant()));
+            day = formattedDate.substring(0, 2);
+             month = formattedDate.substring(3, 5);
+             year = formattedDate.substring(6, 10);
+             
+            return day+"/"+month+"/"+year;
+    }
+    
+    
+    
+    
+    
+    
+
+    
     /**
      * @param args the command line arguments
      */
@@ -113,8 +717,47 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
     
     
      public Panel_FullOptionDanhSachPhong panel_FullOptionDanhSachPhong;
+     private Thread thread = null;
+private ArrayList<entity.Phong> listPhongLoc;
+
+private static String formattedDate ;
+private static String day ;
+private static String  month ;
+private static String  year ;
+private static SimpleDateFormat sdf;
+smallPanel.Panel_DanhSachPhongFullCol danhSachPhong;
+private static LocalDateTime now;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    private smallPanel.Panel_FullOptionDanhSachPhong panel_FullOptionDanhSachPhong1;
+    private javax.swing.JComboBox<String> ComboFilterOption1;
+    private javax.swing.JComboBox<String> ComboFilterOption2;
+    private javax.swing.JComboBox<String> ComboFilterOption3;
+    private javax.swing.JPanel ContainerListPhong;
+    private javax.swing.JPanel Container_DatPhongNgay;
+    private static javax.swing.JPanel Panel_ThongTinKhachHang1;
+    private static javax.swing.JPanel Panel_ThongTinKhachHang2;
+    private static javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel lableFilterOption1;
+    private javax.swing.JLabel lableFilterOption2;
+    private javax.swing.JLabel lableFilterOption3;
+    private static javax.swing.JLabel lbThoiGianNhanPhong;
+    private static javax.swing.JLabel lbThoiGianSuDung;
+    private static javax.swing.JLabel lb_DichVuj;
+    private static javax.swing.JLabel lb_HoaDon;
+    private javax.swing.JPanel locPanel;
+    private javax.swing.JPanel locPanel1;
+    private javax.swing.JPanel locPanel2;
+    private javax.swing.JPanel locPanel3;
+    private static javax.swing.JPanel panelContainDV;
+    private smallPanel.Panel_ThanhTrangThaiPhong panel_ThanhTrangThaiPhong1;
+    private javax.swing.JScrollPane srollTableDV;
+    public static rojeru_san.complementos.RSTableMetro tableDV;
+    private static app.bolivia.swing.JCTextField txtMaHoaDon;
+    private static app.bolivia.swing.JCTextField txtMaPhong;
+    private static app.bolivia.swing.JCTextField txtThoiGianNhanPhong;
+    private static javax.swing.JTextField txt_SDT;
+    private static app.bolivia.swing.JCTextField txt_TenKhachHang;
+    private static app.bolivia.swing.JCTextField txt_ThoiGianSuDung;
     // End of variables declaration//GEN-END:variables
 }

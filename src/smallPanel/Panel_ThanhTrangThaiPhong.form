@@ -158,7 +158,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI Black" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="S&#x1eb5;n s&#xe0;ng"/>
+                <Property name="text" type="java.lang.String" value="&#x110;ang s&#x1eed; d&#x1ee5;ng "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lb_Quantity_Available2">
