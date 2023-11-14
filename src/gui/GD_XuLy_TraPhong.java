@@ -58,7 +58,7 @@ public class GD_XuLy_TraPhong extends javax.swing.JFrame {
     }
     
     public void fullLoad(){
-         jPanel12.removeAll();
+        jPanel12.removeAll();
         model = new DefaultTableModel(new String[] {"Phòng"}, 0);
         rSTableMetro1.setModel(model);
         
@@ -66,9 +66,7 @@ public class GD_XuLy_TraPhong extends javax.swing.JFrame {
         dao.DAO_Phong dao_Phong = new DAO_Phong();
         ArrayList<entity.Phong> entity_Phong = dao_Phong.getPhongTheoTrangThai(2);
         ArrayList<Panel_Phong> temp = new ArrayList<>();
-        
-        
-        
+
         for (entity.Phong phong : entity_Phong) {
             temp.add(new Panel_Phong(phong));
         }   
@@ -82,6 +80,7 @@ public class GD_XuLy_TraPhong extends javax.swing.JFrame {
         jLabel16.setText("");
         jLabel18.setText("");
         loadData(temp);
+        repaint();
     }
     
     public void loadData(ArrayList<Panel_Phong> temp){
@@ -139,17 +138,17 @@ public class GD_XuLy_TraPhong extends javax.swing.JFrame {
         for (int i = 0; i < model.getRowCount(); i++) {
             result.add( new dao.DAO_HoaDon().getThongTinTraPhong(String.valueOf(model.getValueAt(i, 0))));
             if (i != model.getRowCount()-1){
-            jLabel4.setText(checkString(jLabel4, result.get(i).getMaPhong() + ", "));
-            jLabel6.setText(checkString(jLabel6, result.get(i).getTenKhachHang() + ", "));
-            jLabel8.setText(checkString(jLabel8, result.get(i).thoiGianNhanPhong() +", "));
-            jLabel10.setText(checkString(jLabel10, result.get(i).tongThoiGianSuDung() +"Phút, "));
-            jLabel16.setText(checkString(jLabel16, result.get(i).ghiChu()+ ", "));
+                jLabel4.setText(checkString(jLabel4, result.get(i).getMaPhong() + ", "));
+                jLabel6.setText(checkString(jLabel6, result.get(i).getTenKhachHang() + ", "));
+                jLabel8.setText(checkString(jLabel8, result.get(i).thoiGianNhanPhong() +", "));
+                jLabel10.setText(checkString(jLabel10, result.get(i).tongThoiGianSuDung() +"Phút, "));
+                jLabel16.setText(checkString(jLabel16, result.get(i).ghiChu()+ ", "));
             }else{
                 jLabel4.setText(checkString(jLabel4, result.get(i).getMaPhong()  ));
-            jLabel6.setText(checkString(jLabel6, result.get(i).getTenKhachHang() ));
-            jLabel8.setText(checkString(jLabel8, result.get(i).thoiGianNhanPhong() ));
-            jLabel10.setText(checkString(jLabel10, result.get(i).tongThoiGianSuDung() +"Phút"));
-            jLabel16.setText(checkString(jLabel16, result.get(i).ghiChu()));
+                jLabel6.setText(checkString(jLabel6, result.get(i).getTenKhachHang() ));
+                jLabel8.setText(checkString(jLabel8, result.get(i).thoiGianNhanPhong() ));
+                jLabel10.setText(checkString(jLabel10, result.get(i).tongThoiGianSuDung() +"Phút"));
+                jLabel16.setText(checkString(jLabel16, result.get(i).ghiChu()));
             }
             
            

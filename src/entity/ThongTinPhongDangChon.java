@@ -199,7 +199,13 @@ public class ThongTinPhongDangChon {
             result = result + phongVaDichVu.chiTietPhongHoaDon.getGhiChu().substring(0,5) + "<-";
             
         }
-        return result.substring(0, result.length()-2);
+        if (result.length()>0){
+            return result.substring(0, result.length()-2);
+        }
+        if (result.contains("000")){
+            return "";
+        }
+        return result;
     }
     
 }

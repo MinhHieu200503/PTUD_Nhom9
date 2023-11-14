@@ -204,7 +204,7 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
             entity.ChitTietPhongHoaDon phongDangChon = null;
             entity.HoaDon tempHoaDon = null;
             entity.Phong tempPhong = null;
-            
+
             while (rs.next()) {
                 
                 tempHoaDon = new HoaDon(maHD, rs.getTimestamp(2).toLocalDateTime(), rs.getInt(3), null, null, null);
@@ -215,17 +215,21 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
             }
 //            System.out.println("PhongDangChon: " + phongDangChon.toString());
             // có được chi tiết phòng đang chọn (Mã hóa đơn, mã phòng ) -> đi lấy các phòng chuyển của phòng đang được chọn cho vào ghi chú
-                
-                
+//            System.out.println("HoaDon: " + tempHoaDon.toString());
+//            System.out.println("HoaDon: " + tempPhong.toString());  
+//            System.out.println("HoaDon: " + phongDangChon.toString());
+            
             statement = con.prepareStatement("select * from HoaDon hd inner join PhieuDatPhong pdp on hd.maHoaDon = pdp.maHoaDon \n" +
-"\n" +
-"where hd.maHoaDon = ?");
+                                            "\n" +
+                                            "where hd.maHoaDon = ?");
             statement.setString(1, maHD);
             rs = statement.executeQuery();
             while (rs.next()) {                
                 result.setDatCoc(rs.getDouble(11));
                 result.setPhieuDatPhong(rs.getString("maPhieuDatPhong"));
             }     
+            
+            
                 Duration timeResult = Duration.between(LocalDateTime.now(), phongDangChon.getThoiGianNhanPhong());
                  long minutes = Math.abs(timeResult.toMinutes());
                 result.danhSachPhong.add(result.createPhongVaDichVu());
@@ -235,21 +239,25 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
                 statement = con.prepareStatement("SELECT * FROM ChiTietDichVuHoaDon  ct\n" +
                                                              "inner join DichVu dv on ct.maDichVu = dv.maDichVu\n" +
                                                              "WHERE maHoaDon = ? and maPhong = ?");
-                            statement.setString(1, maHD);
-                            statement.setString(2, maPhong);
-                            ResultSet rs2 = statement.executeQuery();
-                            int j = 0;
-                           
+                statement.setString(1, maHD);
+                statement.setString(2, maPhong);
+                ResultSet rs2 = statement.executeQuery();
+                int j = 0;
+
                             while(rs2.next()){
+
                                 result.danhSachPhong.get(0).dichVu.add(result.createPhongVaDichVu().createDichVu());
                                 result.danhSachPhong.get(0).dichVu.get(j).setChiTietDichVu(new ChiTietDichVuHoaDon(rs2.getInt(1), new DichVu(rs2.getString(5), rs2.getString(6), rs2.getDouble(7), 0, 0, null), null, null));
                                 j++;
+
                             }            
                 String pre = phongDangChon.getGhiChu().substring(0, 5);
                 String tempResult = "";  
                 int i = 0;
                 
-                do{
+                
+               if (!pre.contains("MP000")){
+                    do{
                     statement = con.prepareStatement("select * from HoaDon hd inner join ChiTietPhongHoaDon ctp on hd.maHoaDon = ctp.maHoaDon inner join Phong p on ctp.maPhong = p.maPhong where hd.maHoaDon = ? and ctp.maPhong = ?");
                     statement.setString(1, maHD);
                     statement.setString(2, pre);
@@ -257,6 +265,7 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
                     rs = statement.executeQuery();
                     while(rs.next()){
                         i++;
+//                        System.out.println(i);
                         result.danhSachPhong.add(result.createPhongVaDichVu());
                         tempPhong = new Phong(rs.getString(11), rs.getString(13), 2, null, rs.getInt(16), rs.getDouble(17));
                         result.danhSachPhong.get(i).setChiTietPhongHoaDon(new ChitTietPhongHoaDon(rs.getTimestamp(7).toLocalDateTime(), rs.getTimestamp(8).toLocalDateTime(), rs.getString(9) , tempHoaDon, tempPhong));
@@ -271,6 +280,7 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
                              rs2 = statement.executeQuery();
                             int k = 0;
                             while(rs2.next()){
+                                
                                 result.danhSachPhong.get(i).dichVu.add(result.createPhongVaDichVu().createDichVu());
                                 result.danhSachPhong.get(i).dichVu.get(k).setChiTietDichVu(new ChiTietDichVuHoaDon(rs2.getInt(1), new DichVu(rs2.getString(5), rs2.getString(6), rs2.getDouble(7), 0, 0, null), null, null));
                                 k++;
@@ -284,6 +294,9 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
                     }
                 }
                 while (tempResult.contains("MP000") == false);
+               }
+                       
+                       
                 return result;
                 
             

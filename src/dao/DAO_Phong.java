@@ -126,8 +126,7 @@ public class DAO_Phong implements I_CRUD<Phong>{
                      String sql = "select * from Phong JOIN LoaiPhong\n" +
 "                    on Phong.maLoaiPhong = LoaiPhong.maLoaiPhong \n" +
 "                    where " + sqlLoaiPhong + sqlSucChua +" phong.maPhong " + inOrNotin+ " (select maPhong from Phong \n" +
-"                    where Phong.maPhong in (select maPhong from PhieuDatPhong where CONVERT(VARCHAR, thoiGianNhanPhong, 103) = ?))";
-
+"                    where Phong.trangThai = 1 and Phong.maPhong in (select maPhong from PhieuDatPhong where CONVERT(VARCHAR, thoiGianNhanPhong, 103) = ?))";
                     statement = con.prepareStatement(sql);
                     
                     if(sqlLoaiPhong.trim().equals("")&&!sqlSucChua.trim().equals("")){

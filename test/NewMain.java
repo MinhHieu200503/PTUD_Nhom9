@@ -20,7 +20,7 @@ public class NewMain {
      */
     public static void main(String[] args) {
         dao.DAO_HoaDon tmp = new DAO_HoaDon();
-        ThongTinPhongDangChon temp =  tmp.getThongTinTraPhong("MP012");
+        ThongTinPhongDangChon temp =  tmp.getThongTinTraPhong("MP004");
         
         ArrayList<ThongTinPhongDangChon.PhongVaDichVu> temp2 = temp.danhSachPhong;
        
@@ -30,11 +30,10 @@ public class NewMain {
         for (ThongTinPhongDangChon.PhongVaDichVu phongVaDichVu : temp2) {
             System.out.println("");
             System.out.println("Phong" + phongVaDichVu.getChiTietPhongHoaDon());
-            ArrayList<ThongTinPhongDangChon.PhongVaDichVu.DichVu> temp3 = phongVaDichVu.dichVu;
-
             
+            ArrayList<ThongTinPhongDangChon.PhongVaDichVu.DichVu> temp3 = phongVaDichVu.dichVu;
             for (ThongTinPhongDangChon.PhongVaDichVu.DichVu dichVu : temp3) {
-//                System.out.println("    DichVu" + dichVu.toString());
+                System.out.println("    DichVu" + dichVu.toString());
             }
         }
         
