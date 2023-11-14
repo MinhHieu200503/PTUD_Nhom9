@@ -470,7 +470,8 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
             dao_ctP_HD.themCTHD_PMoi(ctPhongHD);
             
             daoPhong.capNhatTrangThaiPhong(smallPanel.Panel_DanhSachPhongFullCol.codePhong, 2);
-       
+            DAO_PhieuDatPhong daoPDP = new DAO_PhieuDatPhong();
+            daoPDP.updateTrangThaiPhieuDatPhongBangMaHoaDon(hd.getMaHoaDon(),1);
         }
        chooserDate();
     }//GEN-LAST:event_click_NhanPhong
