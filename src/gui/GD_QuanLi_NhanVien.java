@@ -34,10 +34,16 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         initComponents();
         model = (DefaultTableModel) tbl_danhSach.getModel();
         setEnableInput(false, jPanel2);
-        loadTable(daonv.getAll(NhanVien.class), model);
-        
+        loadTable(daonv.getAll(NhanVien.class), model);;
     }
-
+    public GD_QuanLi_NhanVien(String idNhanVien, int row) {
+        initComponents();
+        model = (DefaultTableModel) tbl_danhSach.getModel();
+        setEnableInput(false, jPanel2);
+        loadTable(daonv.getAll(NhanVien.class), model);
+        tbl_danhSach.setRowSelectionInterval(row, row);
+        showDetailInput(jPanel2, model, row);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -96,7 +102,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         btn_luu = new javax.swing.JButton();
         btn_xoaTrang = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -628,7 +634,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
             return false;
         }
         if (!pw.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#!%*?&])[A-Za-z\\d@$#!%*?&]{6,}$")) { // (?=...x) tìm chuỗi đứng trước x, "..." là định dạng khớp vs chuỗi cần tìm
-            showRegexError(pf_matKhau, "Mật khẩu có ít nhất 8 kí tự, bao gồm chữ Hoa, chữ thường, chữ số và kí tự đặc biệt");
+            showRegexError(pf_matKhau, "Mật khẩu có ít nhất 6 kí tự, bao gồm chữ Hoa, chữ thường, chữ số và kí tự đặc biệt");
             return false;
         }
         return true;

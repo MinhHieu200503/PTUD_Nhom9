@@ -323,9 +323,10 @@ public interface I_CRUD<T> {
                 // nếu tên cột là số thì dùng = thay vì like
                 switch (fields[i].getName()) {
                     // nếu là thực thể thì lấy tên thực thể
-                    case "phong", "nhanVien", "khachHang", "chucVu", "ca", "taiKhoan", "uuDai", "dichVu" -> 
+                    case "phong", "nhanVien", "khachHang", "chucVu", "ca", "taiKhoan", "dichVu" -> 
                         // thêm ten vào và viết hoa chữ cái đầu
                         sql +=  "ten" + fields[i].getType().getSimpleName() + " LIKE N'%" + key + "%' OR ";
+                    case "uuDai" -> sql += "a.maUuDai IS NULL OR tenUuDai LIKE N'%" + key + "%' OR ";
                     case "hoaDon" -> sql += "a.maHoaDon LIKE N'%" + key + "%' OR ";
                     case "loaiPhong" -> sql += "loaiPhong LIKE N'%" + key + "%' OR ";
                     case "trangThai", "soLuong", "gia", "datCoc", "giamGia", "gioiTinh", "sucChuaToiDa" -> sql += "a." + fields[i].getName() + " = "+ so + " OR ";

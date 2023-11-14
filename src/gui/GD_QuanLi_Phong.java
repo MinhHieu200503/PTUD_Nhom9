@@ -31,7 +31,14 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
         setEnableInput(false, jPanel2);
         loadTable(dsp, model);
     }
-
+    public GD_QuanLi_Phong(String idNhanVien, int row) {
+        initComponents();
+        model = (DefaultTableModel) tbl_danhSach.getModel();
+        setEnableInput(false, jPanel2);
+        loadTable(dsp, model);
+        tbl_danhSach.setRowSelectionInterval(row, row);
+        showDetailInput(jPanel2, model, row);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,7 +81,7 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
         btn_luu = new javax.swing.JButton();
         btn_xoaTrang = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -464,7 +471,7 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
             showRegexError(tf_gia, "Vui lòng nhập giá");
             return false;
         }
-        if (!gia.matches("^[1-9][0-9]*$")) {
+        if (!gia.matches("^[1-9][0-9]*\\.[0-9]+$") && !gia.matches("^[1-9][0-9]*$")) {
             showRegexError(tf_gia, "Giá phải > 0");
             return false;
         }

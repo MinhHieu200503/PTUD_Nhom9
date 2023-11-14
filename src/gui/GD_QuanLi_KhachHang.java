@@ -31,7 +31,14 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
         setEnableInput(false, jPanel11);
         loadTable(dskh, model);
     }
-
+    public GD_QuanLi_KhachHang(String idNhanVien, int row) {
+        initComponents();
+        model = (DefaultTableModel) tbl_danhSach.getModel();
+        setEnableInput(false, jPanel11);
+        loadTable(dskh, model);
+        tbl_danhSach.setRowSelectionInterval(row, row);
+        showDetailInput(jPanel11, model, row);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,7 +69,7 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
         btn_luu = new javax.swing.JButton();
         btn_xoaTrang = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel9.setBackground(new java.awt.Color(153, 255, 204));
         jPanel9.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -306,7 +313,7 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
             }
         } else if (o.equals(btn_luu)) {
             if (btn_them.getText().equals("Huỷ")) {
-                if (validateInput()) { // để nhét regex vào
+                if (validateInput(btn_luu)) { // để nhét regex vào
                     String phone = tf_phone.getText().trim();
                     String ten = tf_ten.getText().trim();
                     
@@ -327,7 +334,7 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
                 }
             }
             if (btn_sua.getText().equals("Huỷ")) {
-                if (validateInput()) {
+                if (validateInput(btn_sua)) {
                     String phone = tf_phone.getText().trim();
                     String ten = tf_ten.getText().trim();
                     int row = tbl_danhSach.getSelectedRow();
@@ -361,7 +368,7 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
            showDetailInput(jPanel11, model, i);
         }
     }//GEN-LAST:event_tbl_danhSachMouseClicked
-    private boolean validateInput() {
+    private boolean validateInput(Object o) {
         String ten = tf_ten.getText().trim();;
         String phone = tf_phone.getText().trim();
         if (phone.isEmpty()) {
@@ -372,11 +379,13 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
             showRegexError(tf_phone, "Số điện thoại bắt đầu bằng chữ số 0 và có tối đa 10 chữ số");
             return false;
         }
-        ArrayList<KhachHang> ds = daokh.getAll(KhachHang.class);
-        for (KhachHang k : ds) {
-            if (k.getSoDienThoai().equals(phone)) {
-                JOptionPane.showMessageDialog(null, "Số điện thoại không được trùng", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                return false;
+        if (!o.equals(btn_sua)) {
+            ArrayList<KhachHang> ds = daokh.getAll(KhachHang.class);
+            for (KhachHang k : ds) {
+                if (k.getSoDienThoai().equals(phone)) {
+                    JOptionPane.showMessageDialog(null, "Số điện thoại không được trùng", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
             }
         }
         if (ten.isEmpty()) {

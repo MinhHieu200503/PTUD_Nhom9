@@ -47,7 +47,6 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame implements I_TraCuu_Qua
         jScrollPane2 = new javax.swing.JScrollPane();
         table_traCuu = new rojeru_san.complementos.RSTableMetro();
         pnlBottom = new javax.swing.JPanel();
-        btn_xemChiTiet = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1650, 964));
@@ -179,19 +178,6 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame implements I_TraCuu_Qua
         pnlBottom.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 25, 10, 25));
         pnlBottom.setName(""); // NOI18N
         pnlBottom.setPreferredSize(new java.awt.Dimension(1650, 79));
-
-        btn_xemChiTiet.setBackground(new java.awt.Color(0, 153, 153));
-        btn_xemChiTiet.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btn_xemChiTiet.setForeground(new java.awt.Color(255, 255, 255));
-        btn_xemChiTiet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/quanLi_XemChiTiet30.png"))); // NOI18N
-        btn_xemChiTiet.setText("Xem chi tiết");
-        btn_xemChiTiet.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_xemChiTietActionPerformed(evt);
-            }
-        });
-        pnlBottom.add(btn_xemChiTiet);
-
         pnlMain.add(pnlBottom, java.awt.BorderLayout.SOUTH);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -208,14 +194,14 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame implements I_TraCuu_Qua
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_xemChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xemChiTietActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_xemChiTietActionPerformed
-
     private void tf_TraCuuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_TraCuuKeyReleased
         // TODO add your handling code here:
-        dshd = daohd.search(tf_TraCuu.getText().trim(), HoaDon.class);
-        loadTable(dshd, model);
+        if (tf_TraCuu.getText().trim().equals("")) {
+            loadTable(daohd.getAll(HoaDon.class), model);
+        } else {
+            dshd = daohd.search(tf_TraCuu.getText().trim(), HoaDon.class);
+            loadTable(dshd, model);
+        }
     }//GEN-LAST:event_tf_TraCuuKeyReleased
 
     /**
@@ -258,7 +244,6 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame implements I_TraCuu_Qua
     private ArrayList<HoaDon> dshd = daohd.getAll(HoaDon.class);
     private DefaultTableModel model;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_xemChiTiet;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbl_TraCuu;
     private javax.swing.JPanel pnlBottom;

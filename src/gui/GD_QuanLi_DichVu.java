@@ -29,7 +29,14 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         setEnableInput(false, jPanel2);
         loadTable(dsdv, model);
     }
-
+    public GD_QuanLi_DichVu(String idNhanVien, int row) {
+        initComponents();
+        model = (DefaultTableModel) tbl_danhSach.getModel();
+        setEnableInput(false, jPanel2);
+        loadTable(dsdv, model);
+        tbl_danhSach.setRowSelectionInterval(row, row);
+        showDetailInput(jPanel2, model, row);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,7 +80,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         btn_luu = new javax.swing.JButton();
         btn_xoaTrang = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -384,7 +391,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
                 if (validateInput()) { // để nhét regex vào
                     String id = tf_id.getText().trim();
                     String ten = tf_ten.getText().trim();
-                    Double gia = Double.parseDouble(tf_gia.getText().trim());
+                    Double gia = Double.valueOf(tf_gia.getText().trim());
                     int soluong = Integer.parseInt(tf_soLuong.getText().trim());
                     int trangthai = cb_trangThai.getSelectedIndex();
                     String mota = ta_moTa.getText().trim();
@@ -409,7 +416,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
                 if (validateInput()) {
                     String id = tf_id.getText().trim();
                     String ten = tf_ten.getText().trim();
-                    Double gia = Double.parseDouble(tf_gia.getText().trim());
+                    Double gia = Double.valueOf(tf_gia.getText().trim());
                     int soluong = Integer.parseInt(tf_soLuong.getText().trim());
                     int trangthai = cb_trangThai.getSelectedIndex();
                     String mota = ta_moTa.getText().trim();
@@ -465,7 +472,11 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
             showRegexError(tf_gia, "Vui lòng nhập giá");
             return false;
         }
-        if (!gia.matches("^[1-9][0-9]*$")) {
+//        if (!gia.matches("^[1-9][0-9]*$")) {
+//            showRegexError(tf_gia, "Giá phải > 0");
+//            return false;
+//        }
+        if (!gia.matches("^[1-9][0-9]*\\.[0-9]+$") && !gia.matches("^[1-9][0-9]*$")) {
             showRegexError(tf_gia, "Giá phải > 0");
             return false;
         }
@@ -481,7 +492,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
             showRegexError(ta_moTa, "Mô tả không được quá 50 kí tự");
             return false;
         }
-        return false;
+        return true;
     }
     /**
      * @param args the command line arguments
