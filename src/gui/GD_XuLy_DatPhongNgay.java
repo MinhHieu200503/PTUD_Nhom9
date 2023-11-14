@@ -95,24 +95,41 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                     tablePhongDatNgay.getCellEditor().stopCellEditing();
                 }
                 int selectedRow = tablePhongDatNgay.getSelectedRow();
-                    String maPhong = (String) tablePhongDatNgay.getValueAt(tablePhongDatNgay.getSelectedRow(), 0);
-                    System.out.println("maPhong" + maPhong);
-                    if (selectedRow != -1) { // Kiểm tra xem có dòng được chọn không
-                        // Xóa dòng được chọn từ mô hình
+                String maPhong = (String) tablePhongDatNgay.getValueAt(tablePhongDatNgay.getSelectedRow(), 0);
+                System.out.println("maPhong" + maPhong);
+                if (selectedRow != -1) { // Kiểm tra xem có dòng được chọn không
+                    // Xóa dòng được chọn từ mô hình
+
+                smallPanel.Panel_DanhSachPhongFullCol.setPhongDefault(maPhong);
+                model.removeRow(selectedRow);
                         
-                        smallPanel.Panel_DanhSachPhongFullCol.setPhongDefault(maPhong);
-                        model.removeRow(selectedRow);
-                        
-                        
-                    }
+                
+                }
             }
 
 //            @Override
 //            public void onView(int row) {
 //                System.out.println("View row : " + row);
 //            }
+
+            @Override
+            public void onSubtract(int row) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void onAdd(int row) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+  
         };
-        tablePhongDatNgay.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
+        
+        TableActionCellRender tableActionCellRender = new TableActionCellRender();
+        
+        
+        
+        tablePhongDatNgay.getColumnModel().getColumn(4).setCellRenderer( tableActionCellRender);
         tablePhongDatNgay.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
 //        tablePhongDatNgay.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer() {
 //            @Override
@@ -121,6 +138,8 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
 //                return super.getTableCellRendererComponent(jtable, o, bln, bln1, i, i1);
 //            }
 //        });
+
+    
     }
     
     public boolean datPhong(){
@@ -171,15 +190,17 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         model = (DefaultTableModel) tablePhongDatNgay.getModel();
           
         int count = model.getRowCount();
-        JOptionPane.showMessageDialog(null, "Count : "+ count);
+        
           
         for(int i=0; i<count; i++){ 
             String maPhong = (String) model.getValueAt(i, 0);
 //            JOptionPane.showMessageDialog(null, "Mã phòng lấy đc từ bảng chọn"+ maPhong);
             ChitTietPhongHoaDon ctPhongHD = new ChitTietPhongHoaDon(LocalDateTime.now(), null, "", hd, I_CRUD.findById(maPhong+"".trim(), new Phong()));
             dao_ctP_HD.themCTHD_PMoi(ctPhongHD);
-            daoPhong.capNhatTrangThaiPhong(maPhong, 3);
+            daoPhong.capNhatTrangThaiPhong(maPhong, 2); //Cập nhật trạng thái phòng
         }
+        
+        
         
         
         
@@ -198,8 +219,11 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
          ArrayList<entity.Phong> listPhong = new ArrayList<entity.Phong>();
         ArrayList<entity.Phong> listPhong1 = new ArrayList<entity.Phong>();
                 listPhong = dao_phong.getAll(Phong.class);
-                listPhong1 = dao_phong.getPhongTheoTrangThai(1);
+
+                listPhong1 = dao_phong.getPhongTheoTrangThai(0);
+
                 
+
 //       
         
         danhSachPhong = new smallPanel.Panel_DanhSachPhongFullCol(listPhong1,GD_XuLy_DatPhongNgay.class);
@@ -448,7 +472,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         tablePhongDatNgay.setColorSelBackgound(new java.awt.Color(0, 153, 153));
         tablePhongDatNgay.setFuenteFilas(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tablePhongDatNgay.setFuenteFilasSelect(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tablePhongDatNgay.setRowHeight(30);
+        tablePhongDatNgay.setRowHeight(36);
         tablePhongDatNgay.setSelectionBackground(new java.awt.Color(0, 204, 204));
         tablePhongDatNgay.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -549,7 +573,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
           
           for(int i=0; i<count; i++){
               if(model.getValueAt(i, 0).equals(ma)){
-                  JOptionPane.showMessageDialog(null, "Bà chọn rồi bà ơi");
+                  JOptionPane.showMessageDialog(null, "Phòng đã được chọn");
                  return;
               }
               

@@ -327,7 +327,43 @@ public class DAO_Phong implements I_CRUD<Phong>{
         }
         return dsphong;
     }
-    
+    @SuppressWarnings("empty-statement")
+    public String[] getThongTinDatPhong (String maPhong){
+        String[] thongTin = {"","","","", ""};
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+        try {
+            String sql = "select top 1 p.maPhong, thoiGianNhanPhong, kh.soDienThoai, tenKhachHang, hd.maHoaDon from ChiTietPhongHoaDon ct_p_hd \n" +
+                        "inner join Phong p on ct_p_hd.maPhong = p.maPhong  \n" +
+                        "inner join HoaDon hd on ct_p_hd.maHoaDon = hd.maHoaDon\n" +
+                        "inner join KhachHang kh on hd.maKhachHang = kh.soDienThoai\n" +
+                        "where p.maPhong = ?\n" +
+                        "order by thoiGianNhanPhong desc";
+            
+            statement = con.prepareStatement(sql);
+            statement.setString(1, maPhong);
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            thongTin[0] = rs.getString("maPhong");
+            thongTin[1] = rs.getString("thoiGianNhanPhong");
+            thongTin[2] = rs.getString("soDienThoai");
+            thongTin[3] = rs.getString("tenKhachHang");
+            thongTin[4] = rs.getString("maHoaDon");
+            } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+
+        } finally {
+            try {
+                statement.close();
+            } catch (Exception e2) {
+                // TODO: handle exception
+                e2.printStackTrace();
+            }
+        }
+        return thongTin;}
+        
     public entity.Phong getPhongTheoOnlyMaPhong(String maPhong) {
         
         entity.Phong phong = new entity.Phong();

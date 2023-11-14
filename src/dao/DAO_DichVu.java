@@ -18,5 +18,38 @@ import java.util.logging.Logger;
  */
 public class DAO_DichVu implements I_CRUD<DichVu>{
         
+    public static String timMatheoTenDV (String tenDV){
+        String maDV = "";
+        
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+        try {
+            System.out.println("đã làm tới đây trước select");
+            String sql = "select maDichVu from DichVu \n" +
+                "where tenDichVu = ?";
+            statement = con.prepareStatement(sql);
+            statement.setString(1, tenDV);
+            ResultSet rs = statement.executeQuery();
+            System.out.println("sau sql, trc rs.next");
+            rs.next();
+            maDV += rs.getString("maDichVu");
+            
+            
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+
+        } finally {
+            try {
+                statement.close();
+            } catch (Exception e2) {
+                // TODO: handle exception
+                e2.printStackTrace();
+            }
+        }
+        return maDV;
+    }
+    
     
 }
