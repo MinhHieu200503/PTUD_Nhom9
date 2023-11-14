@@ -130,7 +130,7 @@ public class DAO_Phong implements I_CRUD<Phong>{
                     
 
             }
-             System.out.println(dsphong);
+//             System.out.println(dsphong);
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();

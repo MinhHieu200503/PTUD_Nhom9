@@ -40,7 +40,7 @@ public interface I_CRUD<T> {
         if (java == null)
             return null;
         String datetime = java.toString();
-        System.out.println(datetime);
+//        System.out.println(datetime);
         return datetime.substring(0,   10) + " " + datetime.substring(11, 19);
     }
     /**
@@ -176,7 +176,7 @@ public interface I_CRUD<T> {
                 for (int i = 0; i < fields.length; i++) {
                     fields[i].setAccessible(true);
                   
-                    System.out.println(fields[i].getName());
+//                    System.out.println(fields[i].getName());
                     switch (fields[i].getType().getSimpleName()) {
                         case "Phong" -> fields[i].set(entity, findById(rs.getString("maPhong"), new Phong()));
                         case "LoaiPhong" -> fields[i].set(entity, findById(rs.getString("maLoaiPhong"), new LoaiPhong()));
@@ -219,7 +219,7 @@ public interface I_CRUD<T> {
     default boolean update(T entity) {
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
-        System.out.println(con);
+//        System.out.println(con);
         PreparedStatement pstm = null;
         int n = 0;
         try {    
@@ -238,7 +238,7 @@ public interface I_CRUD<T> {
             }
             sql = sql.substring(0, sql.length() - 1) + " WHERE ";
             sql += fields[0].getName() + " = ?";
-            System.out.println(sql);
+//            System.out.println(sql);
             pstm = con.prepareStatement(sql);
             for (int i = 1; i < fields.length ;i++) {
                 fields[i].setAccessible(true); // lấy quyền truy cập private trong class
@@ -278,7 +278,7 @@ public interface I_CRUD<T> {
             ArrayList<T> ds = new ArrayList<>();
             ConnectDB.getInstance();
             Connection con = ConnectDB.getConnection();
-            System.out.println(con);
+//            System.out.println(con);
         try {
             Field[] fields = c.getDeclaredFields();
             int so = -1;
@@ -334,7 +334,7 @@ public interface I_CRUD<T> {
                 }
             }
             sql = sql.substring(0, sql.length() - 4); // loại bỏ " OR " ở cuối
-            System.out.println(sql);
+//            System.out.println(sql);
             
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery(sql);
