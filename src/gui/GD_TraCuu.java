@@ -81,10 +81,10 @@ public class GD_TraCuu extends javax.swing.JFrame {
 
         pnlMain.setLayout(new java.awt.BorderLayout());
 
-        pnlLeft.setBackground(new java.awt.Color(40, 77, 133));
+        pnlLeft.setBackground(new java.awt.Color(0, 153, 153));
         pnlLeft.setPreferredSize(new java.awt.Dimension(270, 835));
 
-        pnlLeft_title.setBackground(new java.awt.Color(23, 45, 79));
+        pnlLeft_title.setBackground(new java.awt.Color(0, 102, 102));
         pnlLeft_title.setLayout(new java.awt.BorderLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -94,7 +94,7 @@ public class GD_TraCuu extends javax.swing.JFrame {
         jLabel1.setToolTipText("");
         pnlLeft_title.add(jLabel1, java.awt.BorderLayout.CENTER);
 
-        pnlLeft_1.setBackground(new java.awt.Color(44, 85, 180));
+        pnlLeft_1.setBackground(new java.awt.Color(0, 204, 204));
         pnlLeft_1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enterMenu(evt);
@@ -126,7 +126,7 @@ public class GD_TraCuu extends javax.swing.JFrame {
             .addComponent(pnlLeft_1_labelKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
         );
 
-        pnlLeft_2.setBackground(new java.awt.Color(40, 77, 133));
+        pnlLeft_2.setBackground(new java.awt.Color(0, 153, 153));
         pnlLeft_2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enterMenu(evt);
@@ -158,7 +158,7 @@ public class GD_TraCuu extends javax.swing.JFrame {
             .addComponent(pnlLeft_2_lableHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        pnlLeft_3.setBackground(new java.awt.Color(40, 77, 133));
+        pnlLeft_3.setBackground(new java.awt.Color(0, 153, 153));
         pnlLeft_3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enterMenu(evt);
@@ -190,7 +190,7 @@ public class GD_TraCuu extends javax.swing.JFrame {
             .addComponent(pnlLeft_3_labelPhong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        pnlLeft_4.setBackground(new java.awt.Color(40, 77, 133));
+        pnlLeft_4.setBackground(new java.awt.Color(0, 153, 153));
         pnlLeft_4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enterMenu(evt);
@@ -222,7 +222,7 @@ public class GD_TraCuu extends javax.swing.JFrame {
             .addComponent(pnlLeft_4_labelDichVu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        pnlLeft_5.setBackground(new java.awt.Color(40, 77, 133));
+        pnlLeft_5.setBackground(new java.awt.Color(0, 153, 153));
         pnlLeft_5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enterMenu(evt);
@@ -254,7 +254,7 @@ public class GD_TraCuu extends javax.swing.JFrame {
             .addComponent(pnlLeft_5_labelPhieuDatPhong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        pnlLeft_6.setBackground(new java.awt.Color(40, 77, 133));
+        pnlLeft_6.setBackground(new java.awt.Color(0, 153, 153));
         pnlLeft_6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 enterMenu(evt);
@@ -341,10 +341,10 @@ public class GD_TraCuu extends javax.swing.JFrame {
     }
     
     public void chinhMauKhiNhanVaoMenu(JPanel pnl) {
-        pnl.setBackground(new Color(44, 85, 180)); // Đánh dấu khi được chọn
+        pnl.setBackground(new Color(0,204,204)); // Đánh dấu khi được chọn
         for (Component com : pnlLeft.getComponents()) {
             if (com instanceof JPanel && !com.equals(pnl) &&!com.equals(pnlLeft_title)) {
-                com.setBackground(new Color(40, 77, 133)); // Chỉnh về màu mặc định                
+                com.setBackground(new Color(0,153,153)); // Chỉnh về màu mặc định                
             }
         }
         choice = pnl;
@@ -413,14 +413,14 @@ public class GD_TraCuu extends javax.swing.JFrame {
     }//GEN-LAST:event_enterMenu
     public void enteredMenu(javax.swing.JPanel panel){
         if (!choice.equals(panel)){
-           panel.setBackground(new Color(40,94,178));
+           panel.setBackground(new Color(0,204,153));
            repaint();
         }
     }
     
     public void exitedMenu(javax.swing.JPanel panel){
         if (!choice.equals(panel)){
-            panel.setBackground(new Color(40,77,133));
+            panel.setBackground(new Color(0,153,153));
             repaint();
         }
     }
@@ -452,6 +452,10 @@ public class GD_TraCuu extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(GD_TraCuu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

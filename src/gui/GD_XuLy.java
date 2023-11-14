@@ -53,6 +53,8 @@ public class GD_XuLy extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         itemGoiDichVu = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+        itemChuyenPhong = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
         itemTraPhong = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         rightPanel = new javax.swing.JPanel();
@@ -259,6 +261,46 @@ public class GD_XuLy extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        itemChuyenPhong.setBackground(new java.awt.Color(165, 241, 233));
+        itemChuyenPhong.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        itemChuyenPhong.setForeground(new java.awt.Color(51, 0, 102));
+        itemChuyenPhong.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
+        itemChuyenPhong.setPreferredSize(new java.awt.Dimension(300, 76));
+        itemChuyenPhong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                enteredMenu(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                exitedMenu(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                itemSelectItem(evt);
+            }
+        });
+
+        jLabel13.setBackground(new java.awt.Color(102, 0, 255));
+        jLabel13.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(51, 0, 102));
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-transfer-40.png"))); // NOI18N
+        jLabel13.setText("Chuyển phòng");
+
+        javax.swing.GroupLayout itemChuyenPhongLayout = new javax.swing.GroupLayout(itemChuyenPhong);
+        itemChuyenPhong.setLayout(itemChuyenPhongLayout);
+        itemChuyenPhongLayout.setHorizontalGroup(
+            itemChuyenPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(itemChuyenPhongLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+        itemChuyenPhongLayout.setVerticalGroup(
+            itemChuyenPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemChuyenPhongLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         itemTraPhong.setBackground(new java.awt.Color(165, 241, 233));
         itemTraPhong.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         itemTraPhong.setForeground(new java.awt.Color(51, 0, 102));
@@ -308,6 +350,7 @@ public class GD_XuLy extends javax.swing.JFrame {
             .addComponent(itemNhanPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(itemGoiDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(itemTraPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(itemChuyenPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         leftPanelLayout.setVerticalGroup(
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,6 +364,8 @@ public class GD_XuLy extends javax.swing.JFrame {
                 .addComponent(itemNhanPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(itemGoiDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(itemChuyenPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(itemTraPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -392,6 +437,13 @@ public class GD_XuLy extends javax.swing.JFrame {
             setSelectedItem(itemGoiDichVu);
             rightPanel.removeAll();
             rightPanel.add(new gui.GD_XuLy_GoiDichVu().getContentPane());
+            pack();
+            repaint();
+        }
+        else if (evt.getSource().equals(itemChuyenPhong)){
+            setSelectedItem(itemChuyenPhong);
+            rightPanel.removeAll();
+            rightPanel.add(new GD_XuLy_ChuyenPhong().getContentPane());
             pack();
             repaint();
         }
@@ -481,6 +533,7 @@ public class GD_XuLy extends javax.swing.JFrame {
     
     private javax.swing.JPanel choice_Panel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel itemChuyenPhong;
     private javax.swing.JPanel itemDanhSachPhong;
     private javax.swing.JPanel itemDatPhongNgay;
     private javax.swing.JPanel itemDatPhongTruoc;
@@ -491,6 +544,7 @@ public class GD_XuLy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
