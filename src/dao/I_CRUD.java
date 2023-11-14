@@ -69,10 +69,15 @@ public interface I_CRUD<T> {
                     case "LoaiPhong" -> pstm.setString(i, ((LoaiPhong) field.get(entity)).getMaLoaiPhong());
                     case "KhachHang" -> pstm.setString(i, ((KhachHang) field.get(entity)).getSoDienThoai());
                     case "NhanVien" -> pstm.setString(i, ((NhanVien) field.get(entity)).getMaNhanVien());
-                    case "ChucVu" -> pstm.setString(i, ((ChucVu) field.get(entity)).getMaChucVu());
+//                    case "ChucVu" -> pstm.setString(i, ((ChucVu) field.get(entity)).getMaChucVu());
                     case "Ca" -> pstm.setString(i, ((Ca) field.get(entity)).getMaCa());
                     case "TaiKhoan" -> pstm.setString(i, ((TaiKhoan) field.get(entity)).getTenTaiKhoan());
-                    case "UuDai" -> pstm.setString(i, ((UuDai) field.get(entity)).getMaUuDai());
+                    case "UuDai" -> {
+                        if (field.get(entity) == null)
+                            pstm.setString(i, null);
+                        else
+                            pstm.setString(i, ((UuDai) field.get(entity)).getMaUuDai());
+                    }
                     case "DichVu" -> pstm.setString(i, ((DichVu) field.get(entity)).getMaDichVu());
                     case "HoaDon" -> pstm.setString(i, ((HoaDon) field.get(entity)).getMaHoaDon());
                     case "int" -> pstm.setInt(i, (int) field.get(entity));
@@ -120,7 +125,7 @@ public interface I_CRUD<T> {
                             }
                         }
                         case "NhanVien" -> field.set(entity1, findById(rs.getString("maNhanVien"), new NhanVien()));
-                        case "ChucVu" -> field.set(entity1, findById(rs.getString("maChucVu"), new ChucVu()));
+//                        case "ChucVu" -> field.set(entity1, findById(rs.getString("maChucVu"), new ChucVu()));
                         case "Ca" -> field.set(entity1, findById(rs.getString("maCa"), new Ca()));
                         case "TaiKhoan" -> field.set(entity1, findById(rs.getString("tenTaiKhoan"), new TaiKhoan()));
                         case "UuDai" -> field.set(entity1, findById(rs.getString("maUuDai"), new UuDai()));
@@ -183,7 +188,7 @@ public interface I_CRUD<T> {
                             }
                         }
                         case "NhanVien" -> fields[i].set(entity, findById(rs.getString("maNhanVien"), new NhanVien()));
-                        case "ChucVu" -> fields[i].set(entity, findById(rs.getString("maChucVu"), new ChucVu()));
+//                        case "ChucVu" -> fields[i].set(entity, findById(rs.getString("maChucVu"), new ChucVu()));
                         case "Ca" -> fields[i].set(entity, findById(rs.getString("maCa"), new Ca()));
                         case "TaiKhoan" -> fields[i].set(entity, findById(rs.getString("tenTaiKhoan"), new TaiKhoan()));
                         case "UuDai" -> fields[i].set(entity, findById(rs.getString("maUuDai"), new UuDai()));
@@ -242,7 +247,7 @@ public interface I_CRUD<T> {
                     case "LoaiPhong" -> pstm.setString(i, ((LoaiPhong) fields[i].get(entity)).getMaLoaiPhong());
                     case "KhachHang" -> pstm.setString(i, ((KhachHang) fields[i].get(entity)).getSoDienThoai());
                     case "NhanVien" -> pstm.setString(i, ((NhanVien) fields[i].get(entity)).getMaNhanVien());
-                    case "ChucVu" -> pstm.setString(i, ((ChucVu) fields[i].get(entity)).getMaChucVu());
+//                    case "ChucVu" -> pstm.setString(i, ((ChucVu) fields[i].get(entity)).getMaChucVu());
                     case "Ca" -> pstm.setString(i, ((Ca) fields[i].get(entity)).getMaCa());
                     case "TaiKhoan" -> pstm.setString(i, ((TaiKhoan) fields[i].get(entity)).getTenTaiKhoan());
                     case "UuDai" -> pstm.setString(i, ((UuDai) fields[i].get(entity)).getMaUuDai());
@@ -347,7 +352,7 @@ public interface I_CRUD<T> {
                             }
                         }
                         case "NhanVien" -> field.set(entity, findById(rs.getString("maNhanVien"), new NhanVien()));
-                        case "ChucVu" -> field.set(entity, findById(rs.getString("maChucVu"), new ChucVu()));
+//                        case "ChucVu" -> field.set(entity, findById(rs.getString("maChucVu"), new ChucVu()));
                         case "Ca" -> field.set(entity, findById(rs.getString("maCa"), new Ca()));
                         case "TaiKhoan" -> field.set(entity, findById(rs.getString("tenTaiKhoan"), new TaiKhoan()));
                         case "UuDai" -> field.set(entity, findById(rs.getString("maUuDai"), new UuDai()));

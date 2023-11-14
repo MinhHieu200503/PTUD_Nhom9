@@ -90,4 +90,21 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
         }
         return n > 0;
     }
+    public ArrayList<String> getDsIdTheoMaHoaDon(String idhoadon) {
+        ArrayList<String> dsidphong = new ArrayList<>();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement pstm = null;
+        try {
+            pstm = con.prepareStatement("select maphong from chitietphonghoadon where maHoaDon = ?");
+            pstm.setString(1, idhoadon);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                dsidphong.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_ChiTietPhong_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return dsidphong;
+    }
 }

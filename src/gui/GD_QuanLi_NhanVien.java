@@ -5,11 +5,9 @@
 package gui;
 
 import dao.DAO_Ca;
-import dao.DAO_ChucVu;
 import dao.DAO_NhanVien;
 import dao.DAO_TaiKhoan;
 import entity.Ca;
-import entity.ChucVu;
 import entity.NhanVien;
 import entity.TaiKhoan;
 import java.awt.Font;
@@ -79,9 +77,6 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         jPanel12 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         tf_gmail = new javax.swing.JTextField();
-        jPanel14 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        cb_chucVu = new javax.swing.JComboBox<>();
         jPanel15 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         cb_ca = new javax.swing.JComboBox<>();
@@ -246,24 +241,6 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         jPanel12.add(tf_gmail, java.awt.BorderLayout.CENTER);
 
         jPanel2.add(jPanel12);
-
-        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel14.setPreferredSize(new java.awt.Dimension(281, 38));
-        jPanel14.setLayout(new java.awt.BorderLayout(0, 5));
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel10.setText("Chức vụ:");
-        jPanel14.add(jLabel10, java.awt.BorderLayout.WEST);
-
-        cb_chucVu.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        cb_chucVu.setPreferredSize(new java.awt.Dimension(161, 38));
-        jPanel14.add(cb_chucVu, java.awt.BorderLayout.EAST);
-        ArrayList<ChucVu> dscv = daocv.getAll(ChucVu.class);
-        dscv.forEach(e -> {
-            cb_chucVu.addItem(e.getTenChucVu());
-        });
-
-        jPanel2.add(jPanel14);
 
         jPanel15.setBackground(new java.awt.Color(255, 255, 255));
         jPanel15.setPreferredSize(new java.awt.Dimension(281, 38));
@@ -520,11 +497,11 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
                     String sdt = tf_phone.getText().trim();
                     boolean trangThai = cb_trangThai.getSelectedItem().toString().equals("Đang làm");
                     String gmail = tf_gmail.getText().trim();
-                    ChucVu chucVu = daocv.getChucVuTheoTen(cb_chucVu.getSelectedItem().toString());
+//                    ChucVu chucVu = daocv.getChucVuTheoTen(cb_chucVu.getSelectedItem().toString());
                     Ca ca = daoca.getCaTheoTen(cb_ca.getSelectedItem().toString());
                     
-                    NhanVien nv = new NhanVien(id, ten, ngaySinh, gioiTinh, cmnd, diaChi, sdt, trangThai, gmail,chucVu, ca);
-                    TaiKhoan tk = new TaiKhoan(sdt, String.valueOf(pf_matKhau.getPassword()), cb_chucVu.getSelectedItem().toString().equals("Quản lí"), nv);
+                    NhanVien nv = new NhanVien(id, ten, ngaySinh, gioiTinh, cmnd, diaChi, sdt, trangThai, gmail, ca);
+                    TaiKhoan tk = new TaiKhoan(sdt, String.valueOf(pf_matKhau.getPassword()), false, nv);
                     if (daonv.create(nv)&& daotk.create(tk)) {
                         JOptionPane.showMessageDialog(this, "Thêm thành công");
                         loadTable(daonv.getAll(NhanVien.class), model);
@@ -553,11 +530,11 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
                     String sdt = tf_phone.getText().trim();
                     boolean trangThai = cb_trangThai.getSelectedItem().toString().equals("Đang làm");
                     String gmail = tf_gmail.getText().trim();
-                    ChucVu chucVu = daocv.getChucVuTheoTen(cb_chucVu.getSelectedItem().toString());
+//                    ChucVu chucVu = daocv.getChucVuTheoTen(cb_chucVu.getSelectedItem().toString());
                     Ca ca = daoca.getCaTheoTen(cb_ca.getSelectedItem().toString());
                     
-                    NhanVien nv = new NhanVien(id, ten, ngaySinh, gioiTinh, cmnd, diaChi, sdt, trangThai, gmail,chucVu, ca);
-                    TaiKhoan tk = new TaiKhoan(sdt, String.valueOf(pf_matKhau.getPassword()), cb_chucVu.getSelectedItem().toString().equals("Quản lí"), nv);
+                    NhanVien nv = new NhanVien(id, ten, ngaySinh, gioiTinh, cmnd, diaChi, sdt, trangThai, gmail, ca);
+                    TaiKhoan tk = new TaiKhoan(sdt, String.valueOf(pf_matKhau.getPassword()), false, nv);
                     if (daonv.update(nv) && daotk.update(tk)) {
                         JOptionPane.showMessageDialog(this, "Sửa thành công");
                         loadTable(daonv.getAll(NhanVien.class), model);
@@ -694,7 +671,6 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         });
     }
     private DAO_NhanVien daonv = new DAO_NhanVien();
-    private DAO_ChucVu daocv = new DAO_ChucVu();
     private DAO_Ca daoca = new DAO_Ca();
     private DAO_TaiKhoan daotk = new DAO_TaiKhoan();
     private ArrayList<NhanVien> dsnv = daonv.getAll(NhanVien.class);
@@ -706,12 +682,10 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
     private javax.swing.JButton btn_them;
     private javax.swing.JButton btn_xoaTrang;
     private javax.swing.JComboBox<String> cb_ca;
-    private javax.swing.JComboBox<String> cb_chucVu;
     private javax.swing.JComboBox<String> cb_gioiTinh;
     private javax.swing.JComboBox<String> cb_trangThai;
     private com.toedter.calendar.JDateChooser datechooser_ngaySinh;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -728,7 +702,6 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;

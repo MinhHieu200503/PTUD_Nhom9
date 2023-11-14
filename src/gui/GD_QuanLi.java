@@ -5,7 +5,6 @@
 package gui;
 
 import gui.GD_QuanLi_Ca;
-import gui.GD_QuanLi_ChucVu;
 import gui.GD_QuanLi_DichVu;
 import gui.GD_QuanLi_KhachHang;
 import gui.GD_QuanLi_LoaiPhong;
@@ -24,7 +23,6 @@ public class GD_QuanLi extends javax.swing.JFrame {
     GD_QuanLi_KhachHang kh = new GD_QuanLi_KhachHang();
     GD_QuanLi_DichVu dv = new GD_QuanLi_DichVu();
     GD_QuanLi_NhanVien nv = new GD_QuanLi_NhanVien();
-    GD_QuanLi_ChucVu cv = new GD_QuanLi_ChucVu();
     GD_QuanLi_Ca ca = new GD_QuanLi_Ca();
     GD_QuanLi_UuDai ud = new GD_QuanLi_UuDai();
     /**
@@ -38,7 +36,6 @@ public class GD_QuanLi extends javax.swing.JFrame {
         jTabbedPane1.addTab("Quản lí Ưu đãi", ud.getContentPane());
         jTabbedPane1.addTab("Quản lí Khách hàng", kh.getContentPane());
         jTabbedPane1.addTab("Quản lí Nhân viên", nv.getContentPane());
-        jTabbedPane1.addTab("Quản lí Chức vụ", cv.getContentPane());
         jTabbedPane1.addTab("Quản lí Ca", ca.getContentPane());
     }
 

@@ -42,7 +42,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
         model = (DefaultTableModel) tbl_phongTrong.getModel();
         
         loadDSPhongDangSuDung();
-        loadDSPhongTrong();
+//        loadDSPhongTrong();
     }
 
     /**
@@ -272,7 +272,8 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Chuyển phòng thành công");
 //            dsP_fullCol.getPanel_Container_ListPhong().removeAll();
             loadDSPhongDangSuDung();
-            loadDSPhongTrong();
+//            loadDSPhongTrong();
+             model.setRowCount(0);
             
         } else {
 //            JOptionPane.showMessageDialog(null, "Chuyển phòng thất bại");
@@ -288,7 +289,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
         } else {
             // Phòng cũ là phòng đang sử dụng. Phòng mới là phòng sẽ chuyển. Đang sử dụng đồng nghĩa vs mới nhất luôn.
             ArrayList<ChitTietPhongHoaDon> dsctpTheoMa = daoctp.getDStheoMaPhong(idSelectedPhongCu); // Lấy all chi tiết phòng theo phòng
-            HoaDon hdPhongDSD_MoiNhat = dsctpTheoMa.getLast().getHoaDon(); // Lấy Hoá đơn mới nhất của chi tiết phòng theo mã phòng. Hoá đơn mới nhất là hoá đơn chứa các phòng đang dc sử dụng.
+            hdPhongDSD_MoiNhat = dsctpTheoMa.getLast().getHoaDon(); // Lấy Hoá đơn mới nhất của chi tiết phòng theo mã phòng. Hoá đơn mới nhất là hoá đơn chứa các phòng đang dc sử dụng.
             LocalDateTime now = LocalDateTime.now(); // Thòi gian trả phòng | nhận phòng
 
             // Ghi chú chi tiết phòng cũ: mã phòng trước đó mã phòng mới. VD: MP001 MP002. cắt lấy MP001
@@ -297,6 +298,14 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
             // Nếu chuyển sang phòng mới thì cập nhật lại ghi chú của node phía trước là MP000 MP003 
             // Chi tiết phòng mới: ghi chú là MP003 Đang sử dụng
             
+            // Chặn vòng lặp khi chuyển từ phòng cũ sang mới rồi lại về cũ
+            for (String i : daoctp.getDsIdTheoMaHoaDon(hdPhongDSD_MoiNhat.getMaHoaDon())) {
+                if (idSelectedPhongMoi.equals(i.trim())) {
+                    JOptionPane.showMessageDialog(null, "Không được chuyển lại phòng cũ");
+                    return false;
+                }
+                    
+            }
             // Lấy chi tiết phòng cũ
             ChitTietPhongHoaDon ctPhongCu = dsctpTheoMa.get(dsctpTheoMa.size() - 1); 
             String ghiChuPhongCu = ctPhongCu.getGhiChu().substring(0, 5) + " " + idSelectedPhongMoi;
@@ -344,10 +353,10 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
         for (int i = 0; i < dspdsd.size(); i++) {
             Panel_Phong p = new Panel_Phong(dspdsd.get(i));
             pnlData.add(p);
-            if (p.getMouseListeners().length > 0) 
-                System.out.println("Đã xoá dc");
-            else
-                System.out.println("chưa dc");
+//            if (p.getMouseListeners().length > 0) 
+//                System.out.println("Đã xoá dc");
+//            else
+//                System.out.println("chưa dc");
             p.addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -365,6 +374,9 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
                     p.setBorder(border); // Cập nhật viền cho phần tử mới
                     previousSelectedRoom = p; 
                     idSelectedPhongCu = p.getId();
+                    ArrayList<ChitTietPhongHoaDon> dsctpTheoMa = daoctp.getDStheoMaPhong(idSelectedPhongCu);
+                    hdPhongDSD_MoiNhat = dsctpTheoMa.getLast().getHoaDon();
+                    loadDSPhongTrong();
                 }
             });
 //            repaint();
@@ -375,14 +387,17 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
         idSelectedPhongMoi = null;
         int row = tbl_phongTrong.getSelectedRow();
         ArrayList<Phong> dspt = daop.getPhongTheoTrangThai(0);
+        ArrayList<String> dsid_phong = daoctp.getDsIdTheoMaHoaDon(hdPhongDSD_MoiNhat.getMaHoaDon());
         for (Phong i : dspt) {
-            String maphong = i.getMaPhong();
-            String loaiphong = (i.getLoaiPhong()).getLoaiPhong();
-            System.out.println(i.getLoaiPhong());
-            String succhua = String.valueOf(i.getSucChuaToiDa());
-            String gia = String.valueOf(i.getGiaPhongTheoGio());
-            Object[] rowData = {maphong, loaiphong, succhua, gia};
-            model.addRow(rowData);
+            if (!dsid_phong.contains(i.getMaPhong())) {
+                String maphong = i.getMaPhong();
+                String loaiphong = (i.getLoaiPhong()).getLoaiPhong();
+                System.out.println(i.getLoaiPhong());
+                String succhua = String.valueOf(i.getSucChuaToiDa());
+                String gia = String.valueOf(i.getGiaPhongTheoGio());
+                Object[] rowData = {maphong, loaiphong, succhua, gia};
+                model.addRow(rowData);
+            }
         }
     } 
     /**
@@ -427,6 +442,7 @@ private String  idSelectedPhongCu = null;
 private String idSelectedPhongMoi = null;
 private Panel_Phong previousSelectedRoom = null;
 private DefaultTableModel model;
+private HoaDon hdPhongDSD_MoiNhat;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

@@ -55,9 +55,9 @@ public interface I_TraCuu_QuanLi<T> {
                             case "NhanVien":
                                 row[i] = ((NhanVien) fields[i].get(e)).getTenNhanVien();
                                 break;
-                            case "ChucVu":
-                                row[i] = ((ChucVu) fields[i].get(e)).getTenChucVu();
-                                break;
+//                            case "ChucVu":
+//                                row[i] = ((ChucVu) fields[i].get(e)).getTenChucVu();
+//                                break;
                             case "Ca":
                                 row[i] = ((Ca) fields[i].get(e)).getTenCa();
                                 break;
@@ -120,7 +120,7 @@ public interface I_TraCuu_QuanLi<T> {
                                                 row[i] = "Đã nhận";
                                                 break;
                                             default:
-                                                row[i] = "Đang huỷ";
+                                                row[i] = "Đã huỷ";
                                                 break;
                                         }
                                         break;
@@ -250,12 +250,34 @@ public interface I_TraCuu_QuanLi<T> {
             tf.setText(prefix + "001");
         } else {
             // lấy mã cuối cùng trong ds
-            String lastID = dsid.get(dsid.size() - 1).toString();
+            String lastID = dsid.get(dsid.size() - 1);
             // tách chuỗi để lấy số thứ tự
             int index = Integer.parseInt(lastID.substring(prefix.length())) + 1;
             // tạo mã mới
             String newID = prefix + String.format("%03d", index);
-            tf.setText(newID);
+            tf.setText(newID); 
         }
+    }
+
+    /**
+     *
+     * @param dsid là danh sách các id 
+     * @param prefix như HDddMMyyyy001 thì prefix là HD. 
+     */
+    public static String createIdForHoaDon(ArrayList<String> dsidTheoNgay, String prefix) {
+        // Kiểm tra xem ds có rỗng hay không nếu rỗng thì mã là prefix + '001' không thì lấy mã cuối cùng trong ds + 1
+        if (dsidTheoNgay.isEmpty()) {
+            prefix += LocalDate.now().format(DateTimeFormatter.ofPattern("ddMMyyyy"));
+            prefix += "001";
+        } else {
+            // lấy mã cuối cùng trong ds
+            String lastID = dsidTheoNgay.get(dsidTheoNgay.size() - 1);
+            // tách chuỗi để lấy số thứ tự
+            int index = Integer.parseInt(lastID.substring(prefix.length() + 8)) + 1;
+            // tạo mã mới
+            prefix += LocalDate.now().format(DateTimeFormatter.ofPattern("ddMMyyyy"));
+            prefix += String.format("%03d", index);
+        }
+        return prefix;
     }
 }
