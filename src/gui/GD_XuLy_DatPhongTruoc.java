@@ -432,16 +432,16 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
             soLuongHoaDon = DAOHoaDon.laySoLuongHoaDon()+1;
             ArrayList<entity.KhachHang> listKH = DAOKhachHang.getAllKhachHang();
             entity.HoaDon hoaDon = new HoaDon();
-            String maHoaDon = null;
-            if(soLuongHoaDon<10){
-                maHoaDon = ("HD00"+soLuongHoaDon);
-            }
-            else if(soLuongHoaDon<100){
-                maHoaDon=("HD0"+soLuongHoaDon);
-            }
-            else{
-                maHoaDon=("HD"+soLuongHoaDon);
-            }
+            String maHoaDon = I_TraCuu_QuanLi.createIdForHoaDon(DAOHoaDon.getDsIdTheoNgayHienTai(), "HD");
+//            if(soLuongHoaDon<10){
+//                maHoaDon = ("HD00"+soLuongHoaDon);
+//            }
+//            else if(soLuongHoaDon<100){
+//                maHoaDon=("HD0"+soLuongHoaDon);
+//            }
+//            else{
+//                maHoaDon=("HD"+soLuongHoaDon);
+//            }
             hoaDon.setMaHoaDon(maHoaDon);
             hoaDon.setNgayLapHoaDon( LocalDateTime.now());
             hoaDon.setNhanVien(I_CRUD.findById("NV001",new NhanVien()));
@@ -474,7 +474,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
                     // tách chuỗi để lấy số thứ tự
                 int index = soLuongHoaDon + 1;
                 //tự động tạo mã hóa đơn mới
-                String newID = "DPT" + String.format("%03d", index);
+                String newID = "DPP" + String.format("%03d", index);
                 // lay thoi gian nhan phong
 
                 String dateChooser = getDateChooser();

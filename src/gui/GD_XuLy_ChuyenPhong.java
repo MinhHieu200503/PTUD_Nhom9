@@ -169,10 +169,12 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jScrollPane2)))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,7 +310,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
                 return false;
             }
             // update trạng thái phòng mới
-            if (!daop.capNhatTrangThaiPhong(idSelectedPhongMoi, 1)) {
+            if (!daop.capNhatTrangThaiPhong(idSelectedPhongMoi, 2)) {
                 return false;
             }
         }
@@ -355,6 +357,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
                     previousSelectedRoom = p; 
                     idSelectedPhongCu = p.getId();
                     ArrayList<ChitTietPhongHoaDon> dsctpTheoMa = daoctp.getDStheoMaPhong(idSelectedPhongCu);
+                    hdPhongDSD_MoiNhat = dsctpTheoMa.getLast().getHoaDon();
                     if (hdPhongDSD_MoiNhat != null)
                         hdPhongDSD_MoiNhat = dsctpTheoMa.getLast().getHoaDon();
                     loadDSPhongTrong();
