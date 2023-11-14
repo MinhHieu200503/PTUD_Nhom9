@@ -58,7 +58,6 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         pnl = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        pnlKhung = new javax.swing.JPanel();
         pnlData = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -84,26 +83,9 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách phòng đang sử dụng:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 24))); // NOI18N
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        pnlKhung.setBackground(new java.awt.Color(255, 255, 255));
-
-        pnlData.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 20));
-
-        javax.swing.GroupLayout pnlKhungLayout = new javax.swing.GroupLayout(pnlKhung);
-        pnlKhung.setLayout(pnlKhungLayout);
-        pnlKhungLayout.setHorizontalGroup(
-            pnlKhungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlKhungLayout.createSequentialGroup()
-                .addComponent(pnlData, javax.swing.GroupLayout.PREFERRED_SIZE, 886, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        pnlKhungLayout.setVerticalGroup(
-            pnlKhungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlKhungLayout.createSequentialGroup()
-                .addComponent(pnlData, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                .addGap(700, 700, 700))
-        );
-
-        jScrollPane1.setViewportView(pnlKhung);
+        pnlData.setBackground(new java.awt.Color(255, 255, 255));
+        pnlData.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 20));
+        jScrollPane1.setViewportView(pnlData);
 
         javax.swing.GroupLayout pnlLayout = new javax.swing.GroupLayout(pnl);
         pnl.setLayout(pnlLayout);
@@ -114,7 +96,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
         pnlLayout.setVerticalGroup(
             pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 873, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -272,6 +254,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Chuyển phòng thành công");
 //            dsP_fullCol.getPanel_Container_ListPhong().removeAll();
             loadDSPhongDangSuDung();
+            idSelectedPhongCu = null;
 //            loadDSPhongTrong();
              model.setRowCount(0);
             
@@ -335,8 +318,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
     public void loadDSPhongDangSuDung(){
         // Xóa danh sách phòng trống cũ
         pnlData.removeAll();
-        
-        idSelectedPhongCu = null;
+//        repaint();
         
         // Lấy danh sách phòng trống từ CSDL
         ArrayList<entity.Phong> dspdsd = daop.getPhongTheoTrangThai(1); // 1 là ds phòng đang sử dụng
@@ -348,8 +330,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
         } else {
             soDong = tongPhong / 3 + 1; // cộng 1 vì số dư <= 2 và 1 dòng thì chứa dc 3 phòng
         }
-        pnlKhung.setPreferredSize(new Dimension(890, soDong * 135 + (soDong + 1) * 20 )); // 20 là gap, 135 là chiều cao 1 phòng
-        pnlData.setPreferredSize(new Dimension(890, soDong * 135 + (soDong + 1) * 20 )); 
+        pnlData.setPreferredSize(new Dimension(890, soDong * 135 + (soDong + 1) * 20 )); // 20 là gap, 135 là chiều cao 1 phòng
         for (int i = 0; i < dspdsd.size(); i++) {
             Panel_Phong p = new Panel_Phong(dspdsd.get(i));
             pnlData.add(p);
@@ -375,11 +356,13 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
                     previousSelectedRoom = p; 
                     idSelectedPhongCu = p.getId();
                     ArrayList<ChitTietPhongHoaDon> dsctpTheoMa = daoctp.getDStheoMaPhong(idSelectedPhongCu);
-                    hdPhongDSD_MoiNhat = dsctpTheoMa.getLast().getHoaDon();
+                    if (hdPhongDSD_MoiNhat != null)
+                        hdPhongDSD_MoiNhat = dsctpTheoMa.getLast().getHoaDon();
                     loadDSPhongTrong();
                 }
             });
-//            repaint();
+            pnlData.revalidate();
+            pnlData.repaint();
         }
     }
     public void loadDSPhongTrong() {
@@ -387,9 +370,21 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
         idSelectedPhongMoi = null;
         int row = tbl_phongTrong.getSelectedRow();
         ArrayList<Phong> dspt = daop.getPhongTheoTrangThai(0);
-        ArrayList<String> dsid_phong = daoctp.getDsIdTheoMaHoaDon(hdPhongDSD_MoiNhat.getMaHoaDon());
-        for (Phong i : dspt) {
-            if (!dsid_phong.contains(i.getMaPhong())) {
+        if (hdPhongDSD_MoiNhat != null) {
+            ArrayList<String> dsid_phong = daoctp.getDsIdTheoMaHoaDon(hdPhongDSD_MoiNhat.getMaHoaDon());
+            for (Phong i : dspt) {
+                if (!dsid_phong.contains(i.getMaPhong())) {
+                    String maphong = i.getMaPhong();
+                    String loaiphong = (i.getLoaiPhong()).getLoaiPhong();
+                    System.out.println(i.getLoaiPhong());
+                    String succhua = String.valueOf(i.getSucChuaToiDa());
+                    String gia = String.valueOf(i.getGiaPhongTheoGio());
+                    Object[] rowData = {maphong, loaiphong, succhua, gia};
+                    model.addRow(rowData);
+                }
+            }
+        } else {
+            for (Phong i : dspt) {
                 String maphong = i.getMaPhong();
                 String loaiphong = (i.getLoaiPhong()).getLoaiPhong();
                 System.out.println(i.getLoaiPhong());
@@ -399,6 +394,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
                 model.addRow(rowData);
             }
         }
+        
     } 
     /**
      * @param args the command line arguments
@@ -456,7 +452,6 @@ private HoaDon hdPhongDSD_MoiNhat;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel pnl;
     private javax.swing.JPanel pnlData;
-    private javax.swing.JPanel pnlKhung;
     private rojeru_san.complementos.RSTableMetro tbl_phongTrong;
     // End of variables declaration//GEN-END:variables
 }

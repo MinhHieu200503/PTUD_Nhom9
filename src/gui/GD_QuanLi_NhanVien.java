@@ -305,14 +305,14 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
 
             },
             new String [] {
-                "Mã nhân viên", "Tên nhân viên", "Ngày sinh", "Giới tính", "CMND", "Địa chỉ", "Số điện thoại", "Trạng thái", "Gmail", "Chức vụ", "Ca"
+                "Mã nhân viên", "Tên nhân viên", "Ngày sinh", "Giới tính", "CMND", "Địa chỉ", "Số điện thoại", "Trạng thái", "Gmail", "Ca"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -627,8 +627,8 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
             showRegexError(pf_matKhau, "Vui lòng nhập mật khẩu");
             return false;
         }
-        if (!pw.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#!%*?&])[A-Za-z\\d@$#!%*?&]{8,}$")) { // (?=...x) tìm chuỗi đứng trước x, "..." là định dạng khớp vs chuỗi cần tìm
-            showRegexError(pf_matKhau, "Mật khẩu có ít nhất 8 kí tự, bao gồm chữ Hoa, chữ thường, chữ số và kí tự đặc biết");
+        if (!pw.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#!%*?&])[A-Za-z\\d@$#!%*?&]{6,}$")) { // (?=...x) tìm chuỗi đứng trước x, "..." là định dạng khớp vs chuỗi cần tìm
+            showRegexError(pf_matKhau, "Mật khẩu có ít nhất 8 kí tự, bao gồm chữ Hoa, chữ thường, chữ số và kí tự đặc biệt");
             return false;
         }
         return true;
