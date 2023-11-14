@@ -3,13 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/gui/GD_QuanLi_KhachHang.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/gui/I_TraCuu_QuanLi.java</file>
+            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/entity/ChitTietPhongHoaDon.java</file>
+            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/dao/DAO_DichVu.java</file>
+            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/dao/DAO_PhieuDatPhong.java</file>
+            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/smallPanel/Panel_DanhSachPhongFullColMini.java</file>
             <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/gui/GD_XuLy_DatPhongNgay.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/dao/DAO_TaiKhoan.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/dao/I_CRUD.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/main/main.java</file>
-            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/dao/DAO_LoaiPhong.java</file>
+            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/gui/GD_XuLy_GoiDichVu.java</file>
+            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/entity/ChiTietDichVuHoaDon.java</file>
+            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/dao/DAO_ChiTietDichVu_HoaDon.java</file>
+            <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/smallPanel/Panel_DanhSachPhongFullCol.java</file>
             <file>file:/D:/HkI-2023-2023/PTUD/QuanLyKaraoke/PTUD_Nhom9/src/dao/DAO_Phong.java</file>
         </group>
     </open-files>

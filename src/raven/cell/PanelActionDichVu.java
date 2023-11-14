@@ -7,12 +7,12 @@ import java.awt.event.ActionListener;
  *
  * @author RAVEN
  */
-public class PanelAction extends javax.swing.JPanel {
+public class PanelActionDichVu extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelAction
      */
-    public PanelAction() {
+    public PanelActionDichVu() {
         initComponents();
     }
 
@@ -50,10 +50,10 @@ public class PanelAction extends javax.swing.JPanel {
         cmdView = new raven.cell.ActionButton();
         cmdDelete = new raven.cell.ActionButton();
 
-        cmdEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/raven/cell/edit.png"))); // NOI18N
+        cmdEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-minus-20.png"))); // NOI18N
         add(cmdEdit);
 
-        cmdView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/raven/cell/view.png"))); // NOI18N
+        cmdView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-add-20.png"))); // NOI18N
         add(cmdView);
 
         cmdDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/raven/cell/delete.png"))); // NOI18N
