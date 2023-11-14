@@ -8,8 +8,13 @@ import connectDB.ConnectDB;
 import entity.ChitTietPhongHoaDon;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -43,4 +48,37 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
 		}
 		return n > 0;
 	}
+    
+    public void updateBill(String ghiChu, String maHD, String maPhong, String maUuDai){
+               ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+     
+        try {
+ 
+            statement = con.prepareStatement("update HoaDon set trangThai = 1, maUuDai = ? where maHoaDon = ?");
+            statement.setString(1, maUuDai);
+            statement.setString(2, maHD);
+            statement.executeUpdate();
+            
+            
+            
+            statement = con.prepareStatement("update ChiTietPhongHoaDon set thoiGianTraPhong = ?, ghiChu = ? where maHoaDon = ? and maPhong = ?");
+            statement.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
+            statement.setString(2, ghiChu);
+            statement.setString(3, maHD);
+            statement.setString(4, maPhong);
+            statement.executeUpdate();
+            
+            statement = con.prepareStatement("update Phong set trangThai = 0 where maPhong = ?");
+            statement.setString(1, maPhong);
+            statement.executeUpdate();
+            
+            
+
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_PhieuDatPhong.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
