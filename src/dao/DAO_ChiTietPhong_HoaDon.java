@@ -6,15 +6,31 @@ package dao;
 
 import connectDB.ConnectDB;
 import entity.ChitTietPhongHoaDon;
+
+import entity.LoaiPhong;
+
+import entity.HoaDon;
+import entity.Phong;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
+
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -80,5 +96,134 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
         } catch (SQLException ex) {
             Logger.getLogger(DAO_PhieuDatPhong.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+    
+    public boolean capNhatGhiChu(String maPhong,String maHoaDon,String GhiChu) {
+        
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+        int n = 0;
+        try {
+
+            statement = con.prepareStatement("update ChiTietPhongHoaDon\n" +
+                                                "set ghiChu = ?" +
+                                                "where maPhong = ? and maHoaDon = ?    ");
+
+            statement.setString(1, GhiChu);
+
+            statement.setString(2, maPhong);
+             statement.setString(3, maHoaDon);
+            n = statement.executeUpdate();
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+
+        } finally {
+            try {
+                statement.close();
+            } catch (Exception e2) {
+                // TODO: handle exception
+                e2.printStackTrace();
+            }
+        }
+        return n > 0;
+    }
+    
+    public entity.ChitTietPhongHoaDon layChiTietPhongHoaDonDuaTrenMaPhong(String maPhong){
+        entity.ChitTietPhongHoaDon ctphd = null;
+
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+        try {
+            String sql = "select * from ChiTietPhongHoaDon \n" +
+                        "where maPhong = ? and  ghiChu like N'%Đang sử dụng%'";
+            statement = con.prepareStatement(sql);
+            statement.setString(1, maPhong);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {	
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+                LocalDateTime thoiGianNhanPhong = LocalDateTime.parse(rs.getString(1),formatter);
+                
+                ctphd = new ChitTietPhongHoaDon(thoiGianNhanPhong, null, rs.getString(3), I_CRUD.findById(rs.getString(4), new entity.HoaDon()), I_CRUD.findById(rs.getString(5),new entity.Phong()));
+            }
+             
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+
+        } finally {
+            try {
+                statement.close();
+            } catch (Exception e2) {
+                // TODO: handle exception
+                e2.printStackTrace();
+            }
+        }
+        return ctphd;
+    }
+        
+
+    public ArrayList<ChitTietPhongHoaDon> getDStheoMaPhong(String maphong) {
+        ConnectDB.getInstance();
+        Connection con = (Connection) ConnectDB.getInstance().getConnection();
+        PreparedStatement pstm = null;
+        ArrayList<ChitTietPhongHoaDon> ds = new ArrayList<>();
+        try {
+            pstm = con.prepareStatement("select * from chitietphonghoadon where maphong = ?");
+            pstm.setString(1, maphong);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                HoaDon hd = I_CRUD.findById(rs.getString("maHoaDon"), new HoaDon());
+                Phong p = I_CRUD.findById(rs.getString("maPhong"), new Phong());
+                LocalDateTime in = I_CRUD.SQLtoJava(rs.getString(1));
+                LocalDateTime out = I_CRUD.SQLtoJava(rs.getString(2));
+                String ghichu = rs.getString(3);
+                ChitTietPhongHoaDon ctp = new ChitTietPhongHoaDon(in, out, ghichu, hd, p);
+                ds.add(ctp);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_ChiTietPhong_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return ds;
+    }
+    public boolean updateGioRa(String map, String mahd, LocalDateTime giora, String ghiChu) {
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement pstm = null;
+        int n = 0;
+        try {
+            pstm = con.prepareStatement("update chitietphonghoadon set thoigiantraphong = ?, ghichu = ? where maphong = ? and mahoadon = ?");
+            pstm.setString(1, I_CRUD.JavaToSQL(giora));
+            pstm.setString(2, ghiChu);
+            pstm.setString(3, map);
+            pstm.setString(4, mahd);
+            n = pstm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_ChiTietPhong_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return n > 0;
+    }
+    public ArrayList<String> getDsIdTheoMaHoaDon(String idhoadon) {
+        ArrayList<String> dsidphong = new ArrayList<>();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement pstm = null;
+        try {
+            pstm = con.prepareStatement("select maphong from chitietphonghoadon where maHoaDon = ?");
+            pstm.setString(1, idhoadon);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                dsidphong.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_ChiTietPhong_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return dsidphong;
+
     }
 }

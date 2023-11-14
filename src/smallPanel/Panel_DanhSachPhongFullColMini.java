@@ -23,7 +23,7 @@ import javax.swing.border.LineBorder;
  *
  * @author Admin
  */
-public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
+public class Panel_DanhSachPhongFullColMini extends javax.swing.JFrame {
 
     /**
      * Creates new form Panel_DanhSachPhong
@@ -48,7 +48,7 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
 //        return;
 //    }
     
-    public Panel_DanhSachPhongFullCol(ArrayList<entity.Phong> data, Class typeClass) {
+    public Panel_DanhSachPhongFullColMini(ArrayList<entity.Phong> data, Class typeClass) {
         typeInterface = typeClass;
         FlatMacLightLaf.setup();
         UIManager.put( "Button.arc", 10 );
@@ -85,20 +85,21 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMinimumSize(new java.awt.Dimension(900, 964));
+        setMaximumSize(new java.awt.Dimension(900, 400));
+        setMinimumSize(new java.awt.Dimension(900, 400));
+        setPreferredSize(new java.awt.Dimension(900, 400));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setMaximumSize(new java.awt.Dimension(900, 964));
-        jPanel1.setMinimumSize(new java.awt.Dimension(900, 964));
+        jPanel1.setMaximumSize(new java.awt.Dimension(900, 400));
+        jPanel1.setMinimumSize(new java.awt.Dimension(900, 400));
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 964));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setMaximumSize(new java.awt.Dimension(900, 750));
-        jScrollPane1.setMinimumSize(new java.awt.Dimension(900, 750));
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(900, 750));
-        jScrollPane1.setRequestFocusEnabled(false);
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(900, 400));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(900, 400));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(900, 400));
 
         panel_Container_ListPhong.setBackground(new java.awt.Color(255, 255, 255));
         panel_Container_ListPhong.setMaximumSize(new java.awt.Dimension(900, 964));
@@ -130,8 +131,8 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(592, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -201,6 +202,12 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                 temp.add(new entity.Phong("004", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
                 temp.add(new entity.Phong("005", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
                 temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+               temp.add(new entity.Phong("002", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("003", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("004", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("005", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                temp.add(new entity.Phong("007", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
@@ -224,7 +231,7 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
 //                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //           
 //                
-                new Panel_DanhSachPhongFullCol(temp,GD_XuLy_DatPhongNgay.class).setVisible(true);
+                new Panel_DanhSachPhongFullColMini(temp,GD_XuLy_DatPhongNgay.class).setVisible(true);
             }
         });
     }
@@ -290,15 +297,6 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                     else if(classUse.equalsIgnoreCase("GoiDichVu")){
                         gui.GD_XuLy_GoiDichVu.fillData(tmp.getCode());
                     }
-                    else if(classUse.equalsIgnoreCase("DatPhongTruoc")){
-                        DatPhongTruoc(evt);
-                    }
-                    else if(classUse.equalsIgnoreCase("DatPhongTruoc")){
-                       DatPhongTruoc(evt);
-                    }
-                    else if(classUse.equalsIgnoreCase("NhanPhong")){
-                        NhanPhong(evt);
-                    }
                         
                
                 }
@@ -345,22 +343,11 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                     tmp.setFlag(true);
                 }
 
-                    String classUse = typeInterface.getName().substring(12);
-                        System.out.println(".mouseClicked() =>>>> " + classUse);
-                    if(classUse.equalsIgnoreCase("DatPhongNgay")){
-                        clickPanel(evt);
-                    }
-                    else if(classUse.equalsIgnoreCase("DatPhongTruoc")){
-                        DatPhongTruoc(evt);
-                    }
-                    else if(classUse.equalsIgnoreCase("DanhSachPhong")){
-                        DanhSachPhong(evt);
-                    }
+                    clickPanel(evt);
             }
 
                 private void setBorder(Panel_Phong.RoundedBorder roundedBorder) {
                      
-                    
                 }
             
         });
@@ -514,31 +501,6 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                 }
             return 1;
 
-            }
-            
-            public void DatPhongTruoc(MouseEvent evt){
-                evt.consume();
-                smallPanel.Panel_Phong temp = (smallPanel.Panel_Phong) evt.getSource();
-                gui.GD_XuLy_DatPhongTruoc.setTienCoc(temp.getCode().substring(temp.getCode().length() - 5));
-                codePhong =temp.getCode().substring(temp.getCode().length() - 5);
-                    
-            }
-            
-            public void NhanPhong(MouseEvent evt){
-                evt.consume();
-                smallPanel.Panel_Phong temp = (smallPanel.Panel_Phong) evt.getSource();
-                gui.GD_XuLy_NhanPhong.setTienCoc(temp.getCode().substring(temp.getCode().length() - 5));
-                gui.GD_XuLy_NhanPhong.setTxtThongTinDatPhong(temp.getCode().substring(temp.getCode().length() - 5));             
-                codePhong =temp.getCode().substring(temp.getCode().length() - 5);
-   
-            }
-            
-           public void DanhSachPhong(MouseEvent evt){
-                evt.consume();
-                smallPanel.Panel_Phong temp = (smallPanel.Panel_Phong) evt.getSource();
-                gui.GD_XuLy_DanhSachPhong.clickPhong(temp.getCode().substring(temp.getCode().length() - 5));
-                codePhong =temp.getCode().substring(temp.getCode().length() - 5);
-   
             }
             
     public static String codePhong = "Chua nhan sk click dau";

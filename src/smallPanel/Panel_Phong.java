@@ -128,6 +128,7 @@ public class Panel_Phong extends javax.swing.JPanel {
         lb_TenPhong.setText(data.getTenPhong() + " - " + data.getMaPhong());
         lb_SucChua.setText("Sức chứa: " + String.valueOf(data.getSucChuaToiDa()));
         lb_Gia.setText("Giá: "+ String.valueOf(data.getGiaPhongTheoGio()));
+        this.setId(data.getMaPhong());
         this.setTenPhong(data.getTenPhong());
         this.setSucChua(data.getSucChuaToiDa());
         this.setGia(data.getGiaPhongTheoGio());
@@ -138,7 +139,7 @@ public class Panel_Phong extends javax.swing.JPanel {
             this.logoVip.setIcon(null);
         }
         if(this.trangThai==2){
-            lb_Icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Available123.png")));
+            lb_Icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Unvailable123.png")));
         }
         else if(this.trangThai == 1){
             lb_Icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_Status_Wating.png")));
