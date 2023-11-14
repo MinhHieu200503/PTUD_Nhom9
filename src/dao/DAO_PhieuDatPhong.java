@@ -61,4 +61,37 @@ public class DAO_PhieuDatPhong implements I_CRUD<PhieuDatPhong>{
         return phieuDatPhong;
     }
     
+    public boolean updateTrangThaiPhieuDatPhongBangMaHoaDon(String maHoaDon, int TrangThai) {
+        
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+        int n = 0;
+        try {
+
+            statement = con.prepareStatement("update PhieuDatPhong\n" +
+                                                "set trangThai = ? \n" +
+                                                "where maHoaDon = ?");
+
+            statement.setInt(1, TrangThai);
+
+            statement.setString(2, maHoaDon);
+            
+            n = statement.executeUpdate();
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+
+        } finally {
+            try {
+                statement.close();
+            } catch (Exception e2) {
+                // TODO: handle exception
+                e2.printStackTrace();
+            }
+        }
+        return n > 0;
+    }
+    
 }

@@ -308,7 +308,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
                 return false;
             }
             // update trạng thái phòng mới
-            if (!daop.capNhatTrangThaiPhong(idSelectedPhongMoi, 1)) {
+            if (!daop.capNhatTrangThaiPhong(idSelectedPhongMoi, 2)) {
                 return false;
             }
         }
@@ -320,7 +320,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
 //        repaint();
         
         // Lấy danh sách phòng trống từ CSDL
-        ArrayList<entity.Phong> dspdsd = daop.getPhongTheoTrangThai(1); // 1 là ds phòng đang sử dụng
+        ArrayList<entity.Phong> dspdsd = daop.getPhongTheoTrangThai(2); // 1 là ds phòng đang sử dụng
         
         int tongPhong = dspdsd.size();
         int soDong;
@@ -355,6 +355,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
                     previousSelectedRoom = p; 
                     idSelectedPhongCu = p.getId();
                     ArrayList<ChitTietPhongHoaDon> dsctpTheoMa = daoctp.getDStheoMaPhong(idSelectedPhongCu);
+                    hdPhongDSD_MoiNhat = dsctpTheoMa.getLast().getHoaDon();
                     if (hdPhongDSD_MoiNhat != null)
                         hdPhongDSD_MoiNhat = dsctpTheoMa.getLast().getHoaDon();
                     loadDSPhongTrong();

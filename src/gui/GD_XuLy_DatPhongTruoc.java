@@ -432,17 +432,9 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
             soLuongHoaDon = DAOHoaDon.laySoLuongHoaDon()+1;
             ArrayList<entity.KhachHang> listKH = DAOKhachHang.getAllKhachHang();
             entity.HoaDon hoaDon = new HoaDon();
-            String maHoaDon = null;
-            if(soLuongHoaDon<10){
-                maHoaDon = ("HD00"+soLuongHoaDon);
-            }
-            else if(soLuongHoaDon<100){
-                maHoaDon=("HD0"+soLuongHoaDon);
-            }
-            else{
-                maHoaDon=("HD"+soLuongHoaDon);
-            }
-            hoaDon.setMaHoaDon(maHoaDon);
+            String maHoaDon = I_TraCuu_QuanLi.createIdForHoaDon(DAOHoaDon.getDsIdTheoNgayHienTai(), "HD");
+            
+            hoaDon.setMaHoaDon(I_TraCuu_QuanLi.createIdForHoaDon(DAOHoaDon.getDsIdTheoNgayHienTai(), "HD"));
             hoaDon.setNgayLapHoaDon( LocalDateTime.now());
             hoaDon.setNhanVien(I_CRUD.findById("NV001",new NhanVien()));
             hoaDon.setTrangThai(0);

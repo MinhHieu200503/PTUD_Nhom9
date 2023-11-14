@@ -472,6 +472,7 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
             daoPhong.capNhatTrangThaiPhong(smallPanel.Panel_DanhSachPhongFullCol.codePhong, 2);
        
         }
+        
        chooserDate();
     }//GEN-LAST:event_click_NhanPhong
 

@@ -587,7 +587,7 @@ public class GD_XuLy_GoiDichVu extends javax.swing.JFrame {
 //       
        for(String ten: listXoa){
            dao_ctdv.xoaMotCTDV(DAO_DichVu.timMatheoTenDV(ten), maHD, maPhong);
-             JOptionPane.showMessageDialog(null, ten);
+             
        }
        
         JOptionPane.showMessageDialog(null, "Cập nhật dịch vụ thành công");
@@ -652,14 +652,12 @@ public class GD_XuLy_GoiDichVu extends javax.swing.JFrame {
 //          
             
         String maPhongDangChon = smallPanel.Panel_DanhSachPhongFullCol.maPhongGoiDVduocChon;
-//        JOptionPane.showMessageDialog(null, "Phong dang chon: "+maPhongDangChon);
         
         String ma = codePhong.substring(codePhong.length() - 5);
         
         DAO_Phong dao_phong = new DAO_Phong();
         
         String[] thongTin = dao_phong.getThongTinDatPhong(ma);
-        JOptionPane.showMessageDialog(null, "Vy"+thongTin);
 
         
        

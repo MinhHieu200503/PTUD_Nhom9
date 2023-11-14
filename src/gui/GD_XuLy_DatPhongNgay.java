@@ -152,27 +152,25 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
        ////-------------
         ArrayList<HoaDon> lsHD = new ArrayList<>();
         lsHD = daoHD.getAll(HoaDon.class);
-        ArrayList<String> dsId = new ArrayList<>();
-        for(HoaDon hd: lsHD){
-            dsId.add(hd.getMaHoaDon());
-        }
-        String lastID = dsId.get(lsHD.size() - 1).toString();
-            // tách chuỗi để lấy số thứ tự
-        int index = Integer.parseInt(lastID.substring(2)) + 1;
-        //tự động tạo mã hóa đơn mới
-        String newID = "HD" + String.format("%03d", index);
-        
+//        ArrayList<String> dsId = new ArrayList<>();
+//        for(HoaDon hd: lsHD){
+//            dsId.add(hd.getMaHoaDon());
+//        }
+//        String lastID = dsId.get(lsHD.size() - 1).toString();
+//            // tách chuỗi để lấy số thứ tự
+//        int index = Integer.parseInt(lastID.substring(2)) + 1;
+//        //tự động tạo mã hóa đơn mới
+//        String newID = "HD" + String.format("%03d", index);
+//        
         
         //---Kiểm tra khách hàng 
         String sdtKhachHang = txt_SoDT.getEditor().getItem().toString();
         KhachHang khachHang = new KhachHang();
         
         if(I_CRUD.findById(sdtKhachHang, new KhachHang()).getSoDienThoai() != null){
-            JOptionPane.showMessageDialog(null, "Khách hàng có rồi");
             khachHang = I_CRUD.findById(txt_SoDT.getSelectedItem().toString().trim(), new KhachHang());
         }
         else {
-            JOptionPane.showMessageDialog(null, "Đã thêm khách hàng mới");
             khachHang = new KhachHang(sdtKhachHang, txt_khachHang.getText());
             dao_khachHang.create(khachHang);
         }
@@ -181,7 +179,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         
         
         //---Tạo hóa đơn mới
-        HoaDon hd = new HoaDon(newID, LocalDateTime.now(), 1, khachHang , 
+        HoaDon hd = new HoaDon(I_TraCuu_QuanLi.createIdForHoaDon(daoHD.getDsIdTheoNgayHienTai(), "HD"), LocalDateTime.now(), 1, khachHang , 
                             txt_MaUuDai.getText().equals("")?I_CRUD.findById("UD001", new UuDai()):I_CRUD.findById(txt_MaUuDai.getText().trim(), new UuDai()), I_CRUD.findById("NV001", new NhanVien()));
         daoHD.create(hd);
         
@@ -194,8 +192,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
           
         for(int i=0; i<count; i++){ 
             String maPhong = (String) model.getValueAt(i, 0);
-//            JOptionPane.showMessageDialog(null, "Mã phòng lấy đc từ bảng chọn"+ maPhong);
-            ChitTietPhongHoaDon ctPhongHD = new ChitTietPhongHoaDon(LocalDateTime.now(), null, "", hd, I_CRUD.findById(maPhong+"".trim(), new Phong()));
+            ChitTietPhongHoaDon ctPhongHD = new ChitTietPhongHoaDon(LocalDateTime.now(), null, "MP000 Đang sử dụng", hd, I_CRUD.findById(maPhong+"".trim(), new Phong()));
             dao_ctP_HD.themCTHD_PMoi(ctPhongHD);
             daoPhong.capNhatTrangThaiPhong(maPhong, 2); //Cập nhật trạng thái phòng
         }

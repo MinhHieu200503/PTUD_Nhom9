@@ -5,15 +5,18 @@
 package gui;
 
 
+import dao.DAO_ChiTietDichVu_HoaDon;
 import dao.DAO_ChiTietPhong_HoaDon;
 import dao.DAO_LoaiPhong;
 import dao.DAO_PhieuDatPhong;
 import dao.DAO_Phong;
 import dao.I_CRUD;
+import entity.ChiTietDichVuHoaDon;
 import entity.ChitTietPhongHoaDon;
 import entity.HoaDon;
 import entity.PhieuDatPhong;
 import entity.Phong;
+import static gui.GD_XuLy_GoiDichVu.table_dvPhongDangSuDung;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.beans.PropertyChangeEvent;
@@ -32,6 +35,7 @@ import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import smallPanel.Panel_FullOptionDanhSachPhong;
 
 /**
@@ -144,18 +148,18 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
         lb_HoaDon.setText("MÃ HÓA ĐƠN:");
 
         txtMaPhong.setEditable(false);
-        txtMaPhong.setEnabled(false);
+        txtMaPhong.setFocusable(false);
         txtMaPhong.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         txtThoiGianNhanPhong.setEditable(false);
-        txtThoiGianNhanPhong.setEnabled(false);
+        txtThoiGianNhanPhong.setFocusable(false);
         txtThoiGianNhanPhong.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         jLabel8.setText("MÃ PHÒNG: ");
 
         txt_ThoiGianSuDung.setEditable(false);
-        txt_ThoiGianSuDung.setEnabled(false);
+        txt_ThoiGianSuDung.setFocusable(false);
         txt_ThoiGianSuDung.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         lbThoiGianSuDung.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
@@ -165,7 +169,7 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
         lbThoiGianNhanPhong.setText("THỜI GIAN NHẬN PHÒNG");
 
         txtMaHoaDon.setEditable(false);
-        txtMaHoaDon.setEnabled(false);
+        txtMaHoaDon.setFocusable(false);
         txtMaHoaDon.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout Panel_ThongTinKhachHang1Layout = new javax.swing.GroupLayout(Panel_ThongTinKhachHang1);
@@ -367,14 +371,14 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
         jLabel6.setText("SỐ ĐIỆN THOẠI");
 
         txt_TenKhachHang.setEditable(false);
-        txt_TenKhachHang.setEnabled(false);
+        txt_TenKhachHang.setFocusable(false);
         txt_TenKhachHang.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         jLabel7.setText("TÊN KHÁCH HÀNG:");
 
         txt_SDT.setEditable(false);
-        txt_SDT.setEnabled(false);
+        txt_SDT.setFocusable(false);
         txt_SDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_SDTActionPerformed(evt);
@@ -682,6 +686,17 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
         txt_TenKhachHang.setText(I_CRUD.findById(ctphd.getHoaDon().getMaHoaDon(), new HoaDon()).getKhachHang().getTenKhachHang());
          Duration duration = Duration.between(ctphd.getThoiGianNhanPhong(), localDateTime.now());
          txt_ThoiGianSuDung.setText(duration.toMinutes()+" Phút");
+         DAO_ChiTietDichVu_HoaDon dao_ctdv = new DAO_ChiTietDichVu_HoaDon();
+        // them data vao table
+        ArrayList<ChiTietDichVuHoaDon> dsCTDV_dangSuDung = new ArrayList<>();
+        dsCTDV_dangSuDung = dao_ctdv.getDSDVdangSuDung(maPhong,ctphd.getHoaDon().getMaHoaDon() );
+        DefaultTableModel model_dv_dangSuDung = (DefaultTableModel) tableDV.getModel();
+        
+        model_dv_dangSuDung.setRowCount(0);
+        for(ChiTietDichVuHoaDon ctdv: dsCTDV_dangSuDung){
+            String[] row = { ctdv.getDichVu().getTenDichVu(), ctdv.getDichVu().getGia()+"", ctdv.getSoLuong()+""};
+            model_dv_dangSuDung.addRow(row);
+        }
     }
     
     private static String getDateTimeNow(){
