@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
 public class DAO_Phong implements I_CRUD<Phong>{
     
     public boolean capNhatTrangThaiPhong(String maPhong, int TrangThai) {
-        JOptionPane.showMessageDialog(null,TrangThai);
+//        JOptionPane.showMessageDialog(null,TrangThai);
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         PreparedStatement statement = null;
@@ -63,7 +63,7 @@ public class DAO_Phong implements I_CRUD<Phong>{
         PreparedStatement statement = null;
         String sqlLoaiPhong = " ";
         String sqlSucChua = " ";
-        String inOrNotin = "not in";
+        String inOrNotin = "phong.maPhong not in";
         // khoi tao new date
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Date newDate = new Date();
@@ -72,6 +72,7 @@ public class DAO_Phong implements I_CRUD<Phong>{
         String month = formattedDate.substring(3, 5);
         String year = formattedDate.substring(6, 10);
         String selectedDate = day+"/"+month+"/"+year;
+        String sqlPDP = " ";
         // if else
         boolean dateNow = true;
         if(loaiPhong != null){
@@ -81,8 +82,10 @@ public class DAO_Phong implements I_CRUD<Phong>{
             sqlSucChua = "  and sucChuaToiDa = ? ";
         }
         if(trangThai == 1){
-            inOrNotin = "in";
+            inOrNotin = "phong.maPhong in ";
         }
+        
+        
         
         
         if(!selectedDate.trim().equalsIgnoreCase(date.trim())){
@@ -95,8 +98,10 @@ public class DAO_Phong implements I_CRUD<Phong>{
                  sqlSucChua = "   sucChuaToiDa = ? and  ";
                 }
         }
+        if(trangThai == 1 && dateNow == false){
+            sqlPDP = "and PhieuDatPhong.trangThai = 0 ";
+        }
         
-//        
         try {
             
                 if(dateNow == true){
@@ -125,8 +130,9 @@ public class DAO_Phong implements I_CRUD<Phong>{
                 else{
                      String sql = "select * from Phong JOIN LoaiPhong\n" +
 "                    on Phong.maLoaiPhong = LoaiPhong.maLoaiPhong \n" +
-"                    where " + sqlLoaiPhong + sqlSucChua +" phong.maPhong " + inOrNotin+ " (select maPhong from Phong \n" +
-"                    where Phong.trangThai = 1 and Phong.maPhong in (select maPhong from PhieuDatPhong where CONVERT(VARCHAR, thoiGianNhanPhong, 103) = ?))";
+"                    where  " + sqlLoaiPhong + sqlSucChua + inOrNotin+ " (select maPhong from Phong \n" +
+"                    where  Phong.maPhong in (select maPhong from PhieuDatPhong where CONVERT(VARCHAR, thoiGianNhanPhong, 103) = ? " +sqlPDP +"))";
+
                     statement = con.prepareStatement(sql);
                     
                     if(sqlLoaiPhong.trim().equals("")&&!sqlSucChua.trim().equals("")){

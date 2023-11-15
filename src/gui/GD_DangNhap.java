@@ -26,7 +26,6 @@ public class GD_DangNhap extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         FormSignIn form = new FormSignIn();
         add(form);
-        
         form.lblForgotPass.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -55,6 +54,8 @@ public class GD_DangNhap extends javax.swing.JFrame {
                 
             }
         });
+        
+        
     }
 
     /**
