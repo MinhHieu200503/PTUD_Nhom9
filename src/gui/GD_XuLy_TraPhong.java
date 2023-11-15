@@ -785,7 +785,7 @@ public class GD_XuLy_TraPhong extends javax.swing.JFrame {
               long minutes = Math.abs(timeResult.toMinutes());              
                 String soLuong = String.valueOf(minutes);
                 double tong = minutes * (phongVaDichVu.getChiTietPhongHoaDon().getPhong().getGiaPhongTheoGio() / 60);
-                model.addRow(new String[] {tenPhong, giaPhong, String.valueOf(minutes), String.format("%,.3f ", tong) + "Đ","Chuyển phòng "+ phongVaDichVu.getChiTietPhongHoaDon().getGhiChu().substring(2,5)});
+                model.addRow(new String[] {tenPhong, giaPhong, String.valueOf(minutes), String.format("%,.3f ", tong) + "Đ",phongVaDichVu.getChiTietPhongHoaDon().getGhiChu().contains("MP000")? "":( "Chuyển phòng "+ phongVaDichVu.getChiTietPhongHoaDon().getGhiChu().substring(2,5))});
 
                 for (ThongTinPhongDangChon.PhongVaDichVu.DichVu dichVu : phongVaDichVu.dichVu) {
                     String tenDichVu = dichVu.getChiTietDichVu().getDichVu().getTenDichVu();
