@@ -23,11 +23,13 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import static smallPanel.Panel_DanhSachPhongFullCol.codePhong;
@@ -44,6 +46,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
 //        thread = new Thread((Runnable) this);
 //        thread.start();
         initComponents();
+        
         FilterDate.setDate(new Date());
         FilterDate.getDateEditor().addPropertyChangeListener(
         new PropertyChangeListener() {
@@ -52,14 +55,36 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
                 if ("date".equals(e.getPropertyName())) {
                     chooserDate();
                     
+                    removeCbItemNotValid();
                 }
 
                 
             }
         });
-        
+        removeCbItemNotValid();
         loadDSPhongTrong(null,0,null);
         tuDongTimKiemKhachHang();
+    }
+    
+     private boolean isValidTenKhachHang() {
+        String ten = txt_khachHang.getText().trim();
+        if (ten.isEmpty()) {
+            txt_khachHang.setText("Tên không được để trống");
+            txt_khachHang.setForeground(Color.RED);
+            return false;
+        } else if (!ten.matches("^(?!.*[\\d!@#$%^&*()_+={}\\[\\]:;\"'<>,.?/~\\\\|]).{1,50}$")) {
+            txt_khachHang.setText("Không chứa kí tự đặc biệt và số ");
+            txt_khachHang.setForeground(Color.RED);
+            return false;
+        } else if (!ten.matches("^(?:[A-ZÀ-ỸẠ-Ỵ][a-zà-ỹạ-ỵ]*\\s?)+$")) {
+            txt_khachHang.setText("Viết hoa chữ cái đầu ");
+            txt_khachHang.setForeground(Color.RED);
+            return false;
+        } else {
+            txt_khachHang.setForeground(Color.BLACK);
+            return true;
+        }
+        
     }
     
     private void loadDSPhongTrong(String loaiPhong,int sucChua,String date){
@@ -141,7 +166,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         jLabel2.setText("Giờ nhận phòng:");
 
-        cb_GioNhanPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", " ", " " }));
+        cb_GioNhanPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00" }));
 
         txt_TienCoc.setEditable(false);
         txt_TienCoc.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -419,13 +444,29 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
              sucChua = "0";
          }
          String date = getDateChooser();
+         
          loadDSPhongTrong(loaiPhong,Integer.parseInt(sucChua),date);
     }//GEN-LAST:event_ComboFilterOption1ActionPerformed
 
     private void click_DatPhong(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_click_DatPhong
+        checkValidDatPhong();
+    }//GEN-LAST:event_click_DatPhong
+
+    private boolean checkValidDatPhong(){
+        isValidSDT = isValidSoDienThoai();
+        if(isValidSDT == false) return false;
+        isValidTenKH = isValidTenKhachHang();
+        if(isValidTenKH == false) return false;
+        
+        boolean isChoosePhong = true;
+        if(txt_TienCoc.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn phòng trước khi đặt");
+            isChoosePhong = false;
+        }
+        if(isChoosePhong == false) return false;
         int isConfirm =  JOptionPane.showConfirmDialog(rootPane, "Xác nhận đặt phòng");
         
-        if(isConfirm == 0){
+        if(isConfirm == 0 && isValidTenKH == true&&isValidSDT && isChoosePhong ==true){
             int soLuongHoaDon = 0;
             dao.DAO_HoaDon DAOHoaDon = new DAO_HoaDon();
             dao.DAO_KhachHang DAOKhachHang = new DAO_KhachHang();
@@ -433,15 +474,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
             ArrayList<entity.KhachHang> listKH = DAOKhachHang.getAllKhachHang();
             entity.HoaDon hoaDon = new HoaDon();
             String maHoaDon = I_TraCuu_QuanLi.createIdForHoaDon(DAOHoaDon.getDsIdTheoNgayHienTai(), "HD");
-//            if(soLuongHoaDon<10){
-//                maHoaDon = ("HD00"+soLuongHoaDon);
-//            }
-//            else if(soLuongHoaDon<100){
-//                maHoaDon=("HD0"+soLuongHoaDon);
-//            }
-//            else{
-//                maHoaDon=("HD"+soLuongHoaDon);
-//            }
+//            
             hoaDon.setMaHoaDon(maHoaDon);
             hoaDon.setNgayLapHoaDon( LocalDateTime.now());
             hoaDon.setNhanVien(I_CRUD.findById("NV001",new NhanVien()));
@@ -504,10 +537,15 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
                 }
             }
             loadDSPhongTrong(null, 0,getDateChooser() );
+            JOptionPane.showMessageDialog(null,"Đặt phòng thành công");
+            txt_SoDT.setSelectedItem("");
+            txt_khachHang.setText("");
+            txt_TienCoc.setText("");
+            cb_GioNhanPhong.setSelectedIndex(0);
         }
-        
-    }//GEN-LAST:event_click_DatPhong
-
+        return true;
+    }
+    
     private void chooserDate(){
         // Lấy ngày hiện tại
         Date now = new Date();
@@ -539,6 +577,32 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
           String selectDate = getDateChooser();
           loadDSPhongTrong(loaiPhong,Integer.parseInt(sucChua),selectDate);
         }  
+    }
+    
+    public void removeCbItemNotValid(){
+        if(CheckDateNow() == true){
+            int itemCb = cb_GioNhanPhong.getItemCount();
+            JComboBox tmpCb = cb_GioNhanPhong;
+            for(int i = itemCb-1 ;i >=0;i--){
+                String[] txtTime = cb_GioNhanPhong.getItemAt(i).trim().split(":");
+                int hour = Integer.parseInt(txtTime[0]);
+                int minus = Integer.parseInt(txtTime[1]);
+                String[] date  = getDateChooser().split("/");
+                int day = Integer.parseInt(date[0]);
+                int month = Integer.parseInt(date[1]);
+                int year = Integer.parseInt(date[2]);
+                
+                Duration duration = Duration.between(LocalDateTime.of(year, month, day, hour, minus), LocalDateTime.now());
+                if(duration.isPositive()){
+                    
+                    tmpCb.removeItemAt(i);
+                }
+            }
+            cb_GioNhanPhong = tmpCb;
+        }
+        else{
+            cb_GioNhanPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00" }));
+        }
     }
     
     public boolean CheckDateNow(){
@@ -628,6 +692,41 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
         }
     }
     
+     private boolean isValidSoDienThoai() {                                      
+        // TODO add your handling code here:
+        String sdt = txt_SoDT.getSelectedItem().toString().trim();
+        
+        if (!sdt.isEmpty()) {
+            boolean validSDT = sdt.matches("^[0-9]{10}$");
+            boolean hasNoChar = sdt.matches(".*\\D.*");
+
+            if (validSDT && !hasNoChar) {
+                if (sdt.startsWith("09") || sdt.startsWith("03") || sdt.startsWith("08") || sdt.startsWith("05") || sdt.startsWith("07")) {
+//                    
+                    txt_SoDT.setForeground(Color.BLACK);
+                    return true;
+                } else {
+                    txt_SoDT.setSelectedItem("Bắt đầu là '09', '03', '08', '05', '07'");
+                    txt_SoDT.setForeground(Color.RED);
+                    return true;
+                }
+            } else {
+                if (!validSDT) {
+                    txt_SoDT.setSelectedItem("Số điện thoại gồm 10 số");
+                    txt_SoDT.setForeground(Color.RED);
+                } else if (hasNoChar) {
+                    txt_SoDT.setSelectedItem("Số điện thoại không chứa chữ");
+                    txt_SoDT.setForeground(Color.RED);
+                }
+                return true;
+            }
+        } else {
+            txt_SoDT.setSelectedItem("Không để trống");
+            txt_SoDT.setForeground(Color.RED);
+            return false;
+        }
+    }
+    
      public boolean kiemTraSDT(String soDT) {
             
 		KhachHang khachHang = I_CRUD.findById(soDT, new KhachHang());
@@ -645,6 +744,8 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
     
 private Thread thread = null;
 private ArrayList<entity.Phong> listPhongLoc;
+private boolean isValidTenKH ;
+private boolean isValidSDT ;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboFilterOption1;
