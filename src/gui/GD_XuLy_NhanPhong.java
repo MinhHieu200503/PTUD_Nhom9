@@ -4,12 +4,14 @@
  */
 package gui;
 
+import dao.DAO_ChiTietDichVu_HoaDon;
 import dao.DAO_ChiTietPhong_HoaDon;
 import dao.DAO_HoaDon;
 import dao.DAO_KhachHang;
 import dao.DAO_PhieuDatPhong;
 import dao.DAO_Phong;
 import dao.I_CRUD;
+import entity.ChiTietDichVuHoaDon;
 import entity.ChitTietPhongHoaDon;
 import entity.HoaDon;
 import entity.KhachHang;
@@ -17,6 +19,7 @@ import entity.NhanVien;
 import entity.PhieuDatPhong;
 import entity.Phong;
 import entity.UuDai;
+import static gui.GD_XuLy_DanhSachPhong.tableDV;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -30,6 +33,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
@@ -58,7 +62,7 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
         });
         
         loadDSPhongTrong(null,0,null);
-        
+        setTablePDP();
     }
     
     private void loadDSPhongTrong(String loaiPhong,int sucChua,String date){
@@ -111,6 +115,9 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
         locPanel3 = new javax.swing.JPanel();
         lableFilterOption3 = new javax.swing.JLabel();
         FilterDate = new com.toedter.calendar.JDateChooser();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tablePDP = new rojeru_san.complementos.RSTableMetro();
+        lb_DichVuj = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -126,7 +133,7 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
         ContainerListPhong.setName(""); // NOI18N
         ContainerListPhong.setPreferredSize(new java.awt.Dimension(900, 964));
         ContainerListPhong.setVerifyInputWhenFocusTarget(false);
-        ContainerListPhong.setLayout(new java.awt.GridLayout());
+        ContainerListPhong.setLayout(new java.awt.GridLayout(1, 0));
         Container_DatPhongNgay.add(ContainerListPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 900, 964));
 
         Panel_ThongTinKhachHang.setBackground(new java.awt.Color(255, 255, 255));
@@ -247,7 +254,7 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
                 click_NhanPhong(evt);
             }
         });
-        Container_DatPhongNgay.add(btn_HuyDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 480, 420, 60));
+        Container_DatPhongNgay.add(btn_HuyDat, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 460, 420, 60));
 
         locPanel.setBackground(new java.awt.Color(255, 255, 255));
         locPanel.setMaximumSize(new java.awt.Dimension(1080, 84));
@@ -382,6 +389,38 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
 
         Container_DatPhongNgay.add(locPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 910, -1));
 
+        tablePDP.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Số điện thoại", "Tên khách hàng", "Phòng ", "Thời gian nhận"
+            }
+        ));
+        tablePDP.setColorBackgoundHead(new java.awt.Color(0, 153, 153));
+        tablePDP.setColorBordeFilas(new java.awt.Color(0, 102, 102));
+        tablePDP.setColorBordeHead(new java.awt.Color(0, 102, 102));
+        tablePDP.setColorFilasBackgound2(new java.awt.Color(153, 255, 204));
+        tablePDP.setColorFilasForeground1(new java.awt.Color(0, 0, 0));
+        tablePDP.setColorFilasForeground2(new java.awt.Color(0, 0, 0));
+        tablePDP.setColorSelBackgound(new java.awt.Color(0, 153, 153));
+        tablePDP.setFuenteFilas(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tablePDP.setFuenteFilasSelect(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tablePDP.setRowHeight(36);
+        tablePDP.setSelectionBackground(new java.awt.Color(0, 204, 204));
+        tablePDP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablePDPxoaMotDongTable(evt);
+            }
+        });
+        jScrollPane5.setViewportView(tablePDP);
+
+        Container_DatPhongNgay.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 580, 690, 280));
+
+        lb_DichVuj.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
+        lb_DichVuj.setText("DANH SÁCH LỊCH ĐẶT PHÒNG ");
+        Container_DatPhongNgay.add(lb_DichVuj, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 550, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -454,10 +493,25 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
        hd =  I_CRUD.findById(pdp.getHoaDon().getMaHoaDon(), new HoaDon());
        ChitTietPhongHoaDon ctPhongHD = null;
        int isConfirm;
-       if(result<0){
+       boolean isValid = false;
+       Phong phongNhan = I_CRUD.findById(smallPanel.Panel_DanhSachPhongFullCol.codePhong, new Phong());
+       if(phongNhan.getTrangThai() != 2){
+           if(phongNhan.getTrangThai() == 1){
+               if(CheckDateNow() == true){
+                   isValid = true;
+               }
+           }
+           else if(phongNhan.getTrangThai() == 0){
+               isValid = true;
+           }
+                
+       }
+       if(isValid == true){
+           if(result<0){
             isConfirm = JOptionPane.showConfirmDialog(null, "Xác nhận nhận phòng đặt vào lúc " +LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")));
             if(isConfirm == 0 ){
                  ctPhongHD = new ChitTietPhongHoaDon(LocalDateTime.now(), null, "MP000 Đang sử dụng", hd, I_CRUD.findById(pdp.getPhong().getMaPhong().trim(), new Phong()));
+                 
             }
        }
        else{
@@ -472,9 +526,33 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
             daoPhong.capNhatTrangThaiPhong(smallPanel.Panel_DanhSachPhongFullCol.codePhong, 2);
             DAO_PhieuDatPhong daoPDP = new DAO_PhieuDatPhong();
             daoPDP.updateTrangThaiPhieuDatPhongBangMaHoaDon(hd.getMaHoaDon(),1);
+            setTablePDP();
         }
-       chooserDate();
+         chooserDate();
+       }
+       else{
+           JOptionPane.showMessageDialog(null, "Không được nhận trước vì phòng đang đợi hoặc đang sử dụng");
+       }
     }//GEN-LAST:event_click_NhanPhong
+
+    
+    
+    private void tablePDPxoaMotDongTable(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePDPxoaMotDongTable
+        //        if (evt.getClickCount() == 2) { // Kiểm tra xem là double click
+            //                    int selectedRow = tablePhongDatNgay.getSelectedRow();
+            //                    String maPhong = (String) tablePhongDatNgay.getValueAt(tablePhongDatNgay.getSelectedRow(), 0);
+            //                    System.out.println("maPhong" + maPhong);
+            //                    if (selectedRow != -1) { // Kiểm tra xem có dòng được chọn không
+                //                        // Xóa dòng được chọn từ mô hình
+                //
+                //                        smallPanel.Panel_DanhSachPhongFullCol.setPhongDefault(maPhong);
+                //                        model.removeRow(selectedRow);
+                //
+                //
+                //                    }
+            //
+            //        }
+    }//GEN-LAST:event_tablePDPxoaMotDongTable
 
     /**
      * @param args the command line arguments
@@ -509,6 +587,22 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
                 new GD_XuLy_NhanPhong().setVisible(true);
             }
         });
+    }
+    
+    public boolean CheckDateNow(){
+        // Lấy ngày hiện tại
+        Date now = new Date();
+
+        // Lấy ngày từ FilterDate (assumed to be a JDateChooser)
+        Date selectedDate = FilterDate.getDate();
+
+        // Chuyển đổi thành LocalDate
+        java.time.LocalDate nowLocalDate = now.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        java.time.LocalDate selectedLocalDate = selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        if (selectedLocalDate.equals(nowLocalDate)) {
+            return true;
+        }
+        return false;
     }
                                
 
@@ -545,20 +639,22 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
         }  
     }
     
-    public boolean CheckDateNow(){
-        // Lấy ngày hiện tại
-        Date now = new Date();
-
-        // Lấy ngày từ FilterDate (assumed to be a JDateChooser)
-        Date selectedDate = FilterDate.getDate();
-        // Chuyển đổi thành LocalDate
-        java.time.LocalDate nowLocalDate = now.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        java.time.LocalDate selectedLocalDate = selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        if (selectedLocalDate.equals(nowLocalDate)) {
-            return true;
+    public void setTablePDP(){
+        DAO_PhieuDatPhong daopdp = new DAO_PhieuDatPhong();
+//        
+        ArrayList<PhieuDatPhong> dsPDP = new ArrayList<>();
+        dsPDP = daopdp.getAllPDPTheoTrangThai(0);
+        
+        DefaultTableModel model_tablePDP = (DefaultTableModel) tablePDP.getModel();
+        
+        model_tablePDP.setRowCount(0);
+        for(PhieuDatPhong pdp: dsPDP){
+            String[] row = {pdp.getKhachHang().getSoDienThoai(),pdp.getKhachHang().getTenKhachHang(),pdp.getPhong().getMaPhong(),pdp.getThoiGianNhanPhong().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))};
+            model_tablePDP.addRow(row);
         }
-        return false;
     }
+    
+    
     
     private static String getDateChooser(){
         
@@ -623,13 +719,16 @@ private static SimpleDateFormat sdf;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel lableFilterOption1;
     private javax.swing.JLabel lableFilterOption2;
     private javax.swing.JLabel lableFilterOption3;
+    private static javax.swing.JLabel lb_DichVuj;
     private javax.swing.JPanel locPanel;
     private javax.swing.JPanel locPanel1;
     private javax.swing.JPanel locPanel2;
     private javax.swing.JPanel locPanel3;
+    public static rojeru_san.complementos.RSTableMetro tablePDP;
     private static javax.swing.JTextField txt_GioNhanPhong;
     private static app.bolivia.swing.JCTextField txt_SoDT;
     private static app.bolivia.swing.JCTextField txt_TienCoc;

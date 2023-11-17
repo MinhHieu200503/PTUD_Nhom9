@@ -293,8 +293,8 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                     else if(classUse.equalsIgnoreCase("DatPhongTruoc")){
                         DatPhongTruoc(evt);
                     }
-                    else if(classUse.equalsIgnoreCase("DatPhongTruoc")){
-                       DatPhongTruoc(evt);
+                    else if(classUse.equalsIgnoreCase("DanhSachPhong")){
+                        DanhSachPhong(evt);
                     }
                     else if(classUse.equalsIgnoreCase("NhanPhong")){
                         NhanPhong(evt);
@@ -349,12 +349,19 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                         System.out.println(".mouseClicked() =>>>> " + classUse);
                     if(classUse.equalsIgnoreCase("DatPhongNgay")){
                         clickPanel(evt);
+                        
+                    }
+                    else if(classUse.equalsIgnoreCase("GoiDichVu")){
+                        gui.GD_XuLy_GoiDichVu.fillData(tmp.getCode());
                     }
                     else if(classUse.equalsIgnoreCase("DatPhongTruoc")){
                         DatPhongTruoc(evt);
                     }
                     else if(classUse.equalsIgnoreCase("DanhSachPhong")){
                         DanhSachPhong(evt);
+                    }
+                    else if(classUse.equalsIgnoreCase("NhanPhong")){
+                        NhanPhong(evt);
                     }
             }
 

@@ -5,15 +5,18 @@
 package gui;
 
 
+import dao.DAO_ChiTietDichVu_HoaDon;
 import dao.DAO_ChiTietPhong_HoaDon;
 import dao.DAO_LoaiPhong;
 import dao.DAO_PhieuDatPhong;
 import dao.DAO_Phong;
 import dao.I_CRUD;
+import entity.ChiTietDichVuHoaDon;
 import entity.ChitTietPhongHoaDon;
 import entity.HoaDon;
 import entity.PhieuDatPhong;
 import entity.Phong;
+import static gui.GD_XuLy_GoiDichVu.table_dvPhongDangSuDung;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.beans.PropertyChangeEvent;
@@ -32,6 +35,7 @@ import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import smallPanel.Panel_FullOptionDanhSachPhong;
 
 /**
@@ -682,6 +686,19 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
         txt_TenKhachHang.setText(I_CRUD.findById(ctphd.getHoaDon().getMaHoaDon(), new HoaDon()).getKhachHang().getTenKhachHang());
          Duration duration = Duration.between(ctphd.getThoiGianNhanPhong(), localDateTime.now());
          txt_ThoiGianSuDung.setText(duration.toMinutes()+" Phút");
+        
+        DAO_ChiTietDichVu_HoaDon dao_ctdv = new DAO_ChiTietDichVu_HoaDon();
+        
+        ArrayList<ChiTietDichVuHoaDon> dsCTDV_dangSuDung = new ArrayList<>();
+        dsCTDV_dangSuDung = dao_ctdv.getDSDVdangSuDung(maPhong, ctphd.getHoaDon().getMaHoaDon());
+        
+        DefaultTableModel model_dv_dangSuDung = (DefaultTableModel) tableDV.getModel();
+        
+        model_dv_dangSuDung.setRowCount(0);
+        for(ChiTietDichVuHoaDon ctdv: dsCTDV_dangSuDung){
+            String[] row = { ctdv.getDichVu().getTenDichVu(), ctdv.getDichVu().getGia()+"", ctdv.getSoLuong()+""};
+            model_dv_dangSuDung.addRow(row);
+        }
     }
     
     private static String getDateTimeNow(){

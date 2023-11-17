@@ -40,7 +40,6 @@ public class DAO_PhieuDatPhong implements I_CRUD<PhieuDatPhong>{
         PreparedStatement statement = null;
      
         try {
- 
             statement = con.prepareStatement("SELECT * FROM PhieuDatPhong Where maPhieuDatPhong = ?");
             statement.setString(1, id);
             ResultSet rs = statement.executeQuery();
@@ -52,6 +51,38 @@ public class DAO_PhieuDatPhong implements I_CRUD<PhieuDatPhong>{
             Logger.getLogger(DAO_PhieuDatPhong.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
+    }
+    
+    public ArrayList<entity.PhieuDatPhong> getAllPDPTheoTrangThai(int trangThai){
+        ArrayList<entity.PhieuDatPhong> dsPDP = new ArrayList<>();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+        try {
+
+              statement = con.prepareStatement("select * from PhieuDatPhong\n" +
+                                                "where trangThai = ? order by thoiGianNhanPhong asc");
+              
+              statement.setInt(1, trangThai);
+              ResultSet rs = statement.executeQuery();
+              while(rs.next()){
+                 dsPDP.add(new PhieuDatPhong(rs.getString(1), rs.getTimestamp(2).toLocalDateTime(), rs.getTimestamp(3).toLocalDateTime(), rs.getInt(4), rs.getDouble(5), I_CRUD.findById(rs.getString(6),new NhanVien()), I_CRUD.findById(rs.getString(7),new KhachHang()),I_CRUD.findById(rs.getString(8),new Phong()), I_CRUD.findById(rs.getString(9), new HoaDon())));
+              }
+              
+
+          } catch (Exception e) {
+              // TODO: handle exception
+              e.printStackTrace();
+
+          } finally {
+              try {
+                  statement.close();
+              } catch (Exception e2) {
+                  // TODO: handle exception
+                  e2.printStackTrace();
+              }
+          }
+        return dsPDP;
     }
     
     public boolean updateTrangThaiPhieuDatPhongBangMaHoaDon(String maHoaDon, int TrangThai) {
