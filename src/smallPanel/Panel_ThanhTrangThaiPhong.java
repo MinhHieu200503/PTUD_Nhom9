@@ -121,9 +121,9 @@ public class Panel_ThanhTrangThaiPhong extends javax.swing.JPanel {
     private javax.swing.JLabel lb_Icon_Availabel;
     private javax.swing.JLabel lb_Icon_UnAvailabel;
     private javax.swing.JLabel lb_Icon_Waiting;
-    private javax.swing.JLabel lb_Quantity_Available;
-    private javax.swing.JLabel lb_Quantity_Available1;
-    private javax.swing.JLabel lb_Quantity_Available2;
+    public static javax.swing.JLabel lb_Quantity_Available;
+    public static javax.swing.JLabel lb_Quantity_Available1;
+    public static javax.swing.JLabel lb_Quantity_Available2;
     // End of variables declaration//GEN-END:variables
 
 

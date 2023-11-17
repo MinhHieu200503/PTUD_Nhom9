@@ -52,7 +52,25 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
         
         
         loadDSPhongTrong(null,0,-1);
-        
+        setCountLoaiPhong();
+    }
+    
+    private void setCountLoaiPhong(){
+       ArrayList<entity.Phong> dsPhong = new ArrayList<>();
+       DAO_Phong daoPhong = new DAO_Phong();
+       dsPhong = daoPhong.getAll(Phong.class);
+       int pTrong = 0;
+       int pDoi = 0;
+       int pSD = 0;
+       for(int i = 0;i<dsPhong.size();i++){
+           if(dsPhong.get(i).getTrangThai() == 2) ++pSD;
+           else if(dsPhong.get(i).getTrangThai() == 1) ++pDoi;
+           else if(dsPhong.get(i).getTrangThai() ==0 ) ++pTrong;
+       }
+       smallPanel.Panel_ThanhTrangThaiPhong.lb_Quantity_Available.setText(pTrong+""); 
+       smallPanel.Panel_ThanhTrangThaiPhong.lb_Quantity_Available1.setText(pDoi+""); 
+       smallPanel.Panel_ThanhTrangThaiPhong.lb_Quantity_Available2.setText(pSD+""); 
+       
     }
     
     private void loadDSPhongTrong(String loaiPhong,int sucChua,int trangThai){

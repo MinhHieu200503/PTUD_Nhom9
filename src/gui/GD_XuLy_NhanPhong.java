@@ -56,8 +56,6 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
                     chooserDate();
                     
                 }
-
-                
             }
         });
         
