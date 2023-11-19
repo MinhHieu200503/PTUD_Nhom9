@@ -186,7 +186,8 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         
         
         //---Tạo hóa đơn mới
-        HoaDon hd = new HoaDon(I_TraCuu_QuanLi.createIdForHoaDon(daoHD.getDsIdTheoNgayHienTai(), "HD"), LocalDateTime.now(), 0, khachHang , 
+        // Quang: tui có tác động vào thêm tham số ghiChu = ""
+        HoaDon hd = new HoaDon(I_TraCuu_QuanLi.createIdForHoaDon(daoHD.getDsIdTheoNgayHienTai(), "HD"), LocalDateTime.now(), 0, "", khachHang , 
                             txt_MaUuDai.getText().equals("")?I_CRUD.findById("UD001", new UuDai()):I_CRUD.findById(txt_MaUuDai.getText().trim(), new UuDai()), I_CRUD.findById("NV001", new NhanVien()));
         daoHD.create(hd);
         

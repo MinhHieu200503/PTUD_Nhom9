@@ -43,8 +43,8 @@ public class GD_TraCuu extends javax.swing.JFrame {
         pnlRight.add(gdnv.getContentPane(), BorderLayout.CENTER);
         
         
-        choice= pnlLeft_1;
-        chuyenPanel(gdp);
+        choice= pnlLeft_1; // gán nó vào pnlTitle
+        chuyenPanel(gdkh);
         pack();
     }
 
@@ -347,27 +347,20 @@ public class GD_TraCuu extends javax.swing.JFrame {
                 com.setBackground(new Color(0,153,153)); // Chỉnh về màu mặc định                
             }
         }
-        choice = pnl;
+        choice = pnl; // Lưu để xử lí về sau
     }
     public void chuyenPanel(JFrame fr)   {
-//        pnlRight.remove(0);
+//        pnlRight.removeAll();
 //        pnlRight.add(fr.getContentPane(), BorderLayout.CENTER);
 //        repaint();
 //
-        int choice_int = -1;
+       
+        for (int i = 0 ; i<pnlRight.getComponentCount(); i++){
+            pnlRight.getComponent(i).setVisible(false);
 
-        for (int i = 0; i<pnlLeft.getComponentCount(); i++){
-            if (pnlLeft.getComponent(i).equals(choice)){
-                choice_int = i-1;
-            }
         }
-       
-       for (int i = 0 ; i<pnlRight.getComponentCount(); i++){
-           pnlRight.getComponent(i).setVisible(false);
-       }
-       pnlRight.getComponent(choice_int).setVisible(true);
-       
-       repaint();
+        fr.getContentPane().setVisible(true);
+        repaint();
 
         
     }
@@ -412,7 +405,7 @@ public class GD_TraCuu extends javax.swing.JFrame {
         enteredMenu((JPanel) a);
     }//GEN-LAST:event_enterMenu
     public void enteredMenu(javax.swing.JPanel panel){
-        if (!choice.equals(panel)){
+        if (!choice.equals(panel)){ // Nếu không phải là panel đang được chọn thì set màu lại
            panel.setBackground(new Color(0,204,153));
            repaint();
         }
