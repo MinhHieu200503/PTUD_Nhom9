@@ -50,7 +50,7 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        pnlMain2.setPreferredSize(new java.awt.Dimension(1650, 964));
+        pnlMain2.setPreferredSize(new java.awt.Dimension(1650, 925));
         pnlMain2.setLayout(new java.awt.BorderLayout());
 
         pnlTop2.setBackground(new java.awt.Color(255, 255, 255));
@@ -154,8 +154,8 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
         pnlDataLayout.setVerticalGroup(
             pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDataLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 753, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 50, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlCenter2Layout = new javax.swing.GroupLayout(pnlCenter2);
