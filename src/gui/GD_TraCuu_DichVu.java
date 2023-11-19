@@ -68,7 +68,7 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        pnlMain.setPreferredSize(new java.awt.Dimension(1650, 964));
+        pnlMain.setPreferredSize(new java.awt.Dimension(1650, 925));
         pnlMain.setLayout(new java.awt.BorderLayout());
 
         pnlTop.setBackground(new java.awt.Color(255, 255, 255));
@@ -171,7 +171,9 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         );
         pnlDataLayout.setVerticalGroup(
             pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+            .addGroup(pnlDataLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
@@ -295,7 +297,6 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
     private javax.swing.JButton btn_edit;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_TraCuu;
     private javax.swing.JPanel pnlBottom;
