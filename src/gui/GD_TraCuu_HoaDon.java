@@ -116,14 +116,14 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame implements I_TraCuu_Qua
 
             },
             new String [] {
-                "Mã hoá đơn", "Ngày lập hoá đơn", "Trạng thái", "Khách hàng", "Ưu đãi", "Nhân viên"
+                "Mã hoá đơn", "Ngày lập hoá đơn", "Trạng thái", "Ghi chú", "Khách hàng", "Ưu đãi", "Nhân viên"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
