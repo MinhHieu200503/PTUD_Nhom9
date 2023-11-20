@@ -186,7 +186,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x110;&#x1eb6;T PH&#xd2;NG NGAY"/>
+            <Property name="text" type="java.lang.String" value="X&#xc1;C NH&#x1eac;N &#x110;&#x1eb6;T PH&#xd2;NG"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="datPhongNgay"/>

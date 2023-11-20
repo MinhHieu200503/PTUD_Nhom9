@@ -471,7 +471,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         btn_DatPhongNgay.setBackground(new java.awt.Color(0, 204, 204));
         btn_DatPhongNgay.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         btn_DatPhongNgay.setForeground(new java.awt.Color(255, 255, 255));
-        btn_DatPhongNgay.setText("ĐẶT PHÒNG NGAY");
+        btn_DatPhongNgay.setText("XÁC NHẬN ĐẶT PHÒNG");
         btn_DatPhongNgay.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 datPhongNgay(evt);
