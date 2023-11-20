@@ -238,8 +238,8 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
             entity.Phong tempPhong = null;
 
             while (rs.next()) {
-                // Quang: tui chỉnh lại entity hoá đơn, có tác động vào thêm tham số ghi chú là null
-                tempHoaDon = new HoaDon(maHD, rs.getTimestamp(2).toLocalDateTime(), rs.getInt(3),null, null, null, null); 
+                // Quang: tui chỉnh lại entity hoá đơn, có tác động vào thêm tham số ghi chú là ""
+                tempHoaDon = new HoaDon(maHD, rs.getTimestamp(2).toLocalDateTime(), rs.getInt(3),"", null, null, null); 
                 tempPhong = new Phong(maPhong, rs.getString(13), 2, null, rs.getInt(16), rs.getDouble(17));
                 
                 

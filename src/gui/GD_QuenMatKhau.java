@@ -212,7 +212,12 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
         // TODO add your handling code here:
         dao.DAO_TaiKhoan taiKhoan = new DAO_TaiKhoan();
         OTP = taiKhoan.sendEmail(txtNhapMail.getText());
-        btnXacNhanOTP.setEnabled(true);
+        if(OTP == -1){
+            JOptionPane.showMessageDialog(null,"Gmail không hợp lệ !!! Vui lòng nhập lại");
+        }
+        else{
+            btnXacNhanOTP.setEnabled(true);
+        }
         
     }//GEN-LAST:event_btnNhanOTPMouseClicked
 
@@ -245,6 +250,8 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
                 txtNhapMail.setText("");
                 txtNhapMatKhauMoi.setText("");
                 txtOPT.setText("");
+                btnXacNhan.setEnabled(false);
+                btnXacNhanOTP.setEnabled(false);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Không có nhân viên có gmail như trên, Vui lòng kiểm tra và thử lại");
