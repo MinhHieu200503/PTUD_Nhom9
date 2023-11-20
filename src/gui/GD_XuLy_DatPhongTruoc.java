@@ -12,6 +12,7 @@ import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JDateChooserCellEditor;
 import dao.DAO_HoaDon;
 import dao.DAO_KhachHang;
+import dao.DAO_PhieuDatPhong;
 import dao.I_CRUD;
 import entity.HoaDon;
 import entity.KhachHang;
@@ -29,6 +30,9 @@ import java.time.Month;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
@@ -87,7 +91,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
         
     }
     
-    private void loadDSPhongTrong(String loaiPhong,int sucChua,String date){
+    private static void loadDSPhongTrong(String loaiPhong,int sucChua,String date){
         ContainerListPhong.removeAll();
         
          dao.DAO_Phong dao_phong = new DAO_Phong();
@@ -109,6 +113,8 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
         }
             
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -520,6 +526,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
                 int year = Integer.parseInt(date[2]);
                 int second = 0;
                 // tiep tuc insert8
+                entity.Phong phong = I_CRUD.findById(smallPanel.Panel_DanhSachPhongFullCol.codePhong, new Phong());
                 pdp.setMaPhieuDatPhong(newID);
                 pdp.setThoiGianTaoPhieu(LocalDateTime.now());
                 pdp.setThoiGianNhanPhong( LocalDateTime.of(year, month, day, hour, minus,second));
@@ -528,13 +535,16 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
                 pdp.setHoaDon(I_CRUD.findById(maHoaDon, new HoaDon()));
                 pdp.setNhanVien(I_CRUD.findById("NV001",new NhanVien()));
                 pdp.setKhachHang(I_CRUD.findById(String.valueOf(txt_SoDT.getSelectedItem()).trim(), new KhachHang()));
-                pdp.setPhong(I_CRUD.findById(smallPanel.Panel_DanhSachPhongFullCol.codePhong, new Phong()));
+                pdp.setPhong(phong);
 
                 daoPdp.create(pdp);
+                quaGioNhanPhong(maHoaDon,LocalDateTime.of(year, month, day, hour, minus,second),phong.getMaPhong(),newID);
                 if(CheckDateNow()==true){
                     dao.DAO_Phong daoPhong = new DAO_Phong();
                     daoPhong.capNhatTrangThaiPhong(pdp.getPhong().getMaPhong(), 1);
                 }
+                // set thoiGian huy nhan phong
+                
             }
             loadDSPhongTrong(null, 0,getDateChooser() );
             JOptionPane.showMessageDialog(null,"Đặt phòng thành công");
@@ -542,9 +552,47 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
             txt_khachHang.setText("");
             txt_TienCoc.setText("");
             cb_GioNhanPhong.setSelectedIndex(0);
+            
+            
         }
         return true;
     }
+    public void quaGioNhanPhong(String maHoaDon,LocalDateTime thoiGianNhanPhong,String maPhong,String maPdp){
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        
+        
+        LocalDateTime checkInTime = thoiGianNhanPhong; 
+
+        long initialDelay = Duration.between(LocalDateTime.now(), checkInTime.plusHours(2)).toMillis();
+
+        scheduler.schedule(() -> {
+            DAO_PhieuDatPhong daoPdp = new DAO_PhieuDatPhong();
+            entity.PhieuDatPhong pdp = I_CRUD.findById(maPdp, new PhieuDatPhong());
+            
+            if(pdp.getTrangThai() == 0){
+                updateHoaDonAndPhieuDatPhongKhongNhan(maHoaDon,maPhong,maPdp);
+            }
+            
+        }, initialDelay, TimeUnit.MILLISECONDS);
+
+        scheduler.shutdown();
+    }
+    
+    
+    private static void updateHoaDonAndPhieuDatPhongKhongNhan(String maHoaDon,String maPhong,String maPdp) {
+        // update status phieu dat phong;
+        dao.DAO_PhieuDatPhong daoPdp = new DAO_PhieuDatPhong();
+        daoPdp.updateTrangThaiPhieuDatPhongBangMaHoaDon(maHoaDon, 2);
+        // update status phong
+        dao.DAO_Phong daoPhong = new DAO_Phong();
+        daoPhong.capNhatTrangThaiPhong(maPhong,0);
+        // update status hoa don =>>> đợi sửa script
+        dao.DAO_HoaDon daoHd = new DAO_HoaDon();
+        daoHd.updateTrangThaiHoaDonBangMaHoaDon(maHoaDon, 1);
+        JOptionPane.showMessageDialog(null, "Cập nhật trạng thái không nhận phòng đặt trước của phòng"+maPhong);
+        loadDSPhongTrong(null,0,null);
+    }
+    
     
     private void chooserDate(){
         // Lấy ngày hiện tại
@@ -665,7 +713,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
             }
         });
     }
-    smallPanel.Panel_DanhSachPhongFullCol danhSachPhong;
+   static smallPanel.Panel_DanhSachPhongFullCol danhSachPhong;
   
     public static void setTienCoc(String maPhong){
         dao.DAO_Phong DAOphong = new  DAO_Phong();
@@ -750,7 +798,7 @@ private boolean isValidSDT ;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboFilterOption1;
     private javax.swing.JComboBox<String> ComboFilterOption2;
-    private javax.swing.JPanel ContainerListPhong;
+    private static javax.swing.JPanel ContainerListPhong;
     private javax.swing.JPanel Container_DatPhongNgay;
     private com.toedter.calendar.JDateChooser FilterDate;
     private javax.swing.JPanel Panel_ThongTinKhachHang;

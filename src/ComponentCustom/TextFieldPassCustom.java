@@ -20,7 +20,7 @@ public class TextFieldPassCustom extends JPanel {
         setBackground(null);
         FontCustom cus = new FontCustom();
         setBorder(new MatteBorder(0,0,1,0, Color.BLACK));
-
+        
         // 340 60
         lbltitle = new JLabel(title);
         lbltitle.setFont(cus.customFont17);
