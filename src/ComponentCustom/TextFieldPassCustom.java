@@ -42,7 +42,7 @@ public class TextFieldPassCustom extends JPanel {
         add(lblicon);
         
         
-         lblicon.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblicon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 if(!flag){
                     flag=true;
