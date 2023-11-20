@@ -208,6 +208,7 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
         }
         return n > 0;
     }
+    
     public ArrayList<String> getDsIdTheoMaHoaDon(String idhoadon) {
         ArrayList<String> dsidphong = new ArrayList<>();
         ConnectDB.getInstance();
@@ -225,6 +226,40 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
         }
         return dsidphong;
 
+    }
+    
+     public ArrayList<ChitTietPhongHoaDon> getThongCTPhongbyKhachHang(String sdt){
+        ArrayList<ChitTietPhongHoaDon> ls = new ArrayList<>();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+        try {
+            String sql ="select  thoiGianNhanPhong, thoiGianTraPhong, ct.ghiChu, h.maHoaDon, maPhong from HoaDon h \n" +
+                        "inner join ChiTietPhongHoaDon ct on h.maHoaDon = ct.maHoaDon\n" +
+                        "where trangThai = 0 and ct.ghiChu != N'Đã hoàn thành' and maKhachHang= ? order by thoiGianNhanPhong";
+            
+            statement = con.prepareStatement(sql);
+            statement.setString(1, sdt);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+               
+                ls.add(new ChitTietPhongHoaDon(I_CRUD.SQLtoJava(rs.getString("thoiGianNhanPhong")), I_CRUD.SQLtoJava(rs.getString("thoiGianTraPhong")), 
+                        rs.getString("ghiChu"), I_CRUD.findById(rs.getString("maHoaDon"), new HoaDon()) , I_CRUD.findById(rs.getString("maPhong"), new Phong())));
+            }
+           
+            } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+
+        } finally {
+            try {
+                statement.close();
+            } catch (Exception e2) {
+                // TODO: handle exception
+                e2.printStackTrace();
+            }
+        }
+        return ls;
     }
 }
     
