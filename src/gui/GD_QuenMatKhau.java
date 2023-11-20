@@ -228,9 +228,31 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
 
     private void btnXacNhanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXacNhanMouseClicked
         // TODO add your handling code here:
+        boolean valid = true;
         if(txtNhapMatKhauMoi.getText().trim().equals("")){
             JOptionPane.showMessageDialog(rootPane, "Vui lòng không để trống mật khẩu !!!!");
+            valid = false;
         }
+        if (!txtNhapMatKhauMoi.getText().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#!%*?&])[A-Za-z\\d@$#!%*?&]{6,}$")) {
+           JOptionPane.showMessageDialog(null, "Mật khẩu có ít nhất 6 kí tự, bao gồm chữ Hoa, chữ thường, chữ số và kí tự đặc biệt");
+            valid = false;
+        }
+        if(valid == true){
+            DAO_TaiKhoan daoTK = new DAO_TaiKhoan();
+            int result = daoTK.capNhatMatKhau(txtNhapMail.getText(), txtNhapMatKhauMoi.getText());
+            if(result>0){
+                JOptionPane.showMessageDialog(null,"Cập nhật mật khẩu thành công !!!");
+                txtNhapMail.setText("");
+                txtNhapMatKhauMoi.setText("");
+                txtOPT.setText("");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Không có nhân viên có gmail như trên, Vui lòng kiểm tra và thử lại");
+                txtNhapMatKhauMoi.setText("");
+                txtOPT.setText("");
+            }
+        }
+        
     }//GEN-LAST:event_btnXacNhanMouseClicked
 
     /**
