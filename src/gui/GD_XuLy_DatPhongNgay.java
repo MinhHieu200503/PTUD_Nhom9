@@ -293,6 +293,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                 @Override
                 public void actionPerformed(ActionEvent e) {
                         if (txt_SoDT.getSelectedItem() != null) {
+                                loadDSPhongTrong();
                                 model.setRowCount(0);
                                 String soDT = txt_SoDT.getSelectedItem().toString().trim();
                                 kiemTraSDT(soDT);
@@ -597,6 +598,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
             model.setRowCount(0);
             txt_SoDT.setSelectedIndex(0);
             txt_khachHang.setText("");
+            
         }
     }//GEN-LAST:event_datPhongNgay
 

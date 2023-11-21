@@ -262,7 +262,8 @@ public class GD_DangNhap extends javax.swing.JFrame {
 
     private void dangNhap(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dangNhap
         
-        taiKhoan = I_CRUD.findById(txt_taiKhoan.getText(), new TaiKhoan());
+        this.taiKhoan = I_CRUD.findById(txt_taiKhoan.getText(), new TaiKhoan());
+        JOptionPane.showMessageDialog(null,taiKhoan);
         
         if(txt_taiKhoan.getText().equals("") || txt_matKhau.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Vui long nhập đầy đủ thông tin");

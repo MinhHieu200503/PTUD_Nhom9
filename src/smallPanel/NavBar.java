@@ -4,6 +4,7 @@
  */
 package smallPanel;
 
+import gui.GD_DangNhap;
 import gui.GD_XuLy;
 import gui.GD_QuanLi;
 import gui.GD_TraCuu;
@@ -37,9 +38,12 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
         clickMenuUnderline(home);
         this.remove(1);
         this.add(new GD_TrangChu().getContentPane());
+        name_Account.setText(GD_DangNhap.taiKhoan.getNhanVien().getTenNhanVien());
+        
     }
     public  void run(){
         try {
+                        
 			Date thoiGianHienTai = new Date();
 			SimpleDateFormat sdf_Gio = new SimpleDateFormat("HH:mm:ss");
 			SimpleDateFormat sdf_Ngay = new SimpleDateFormat("dd/MM/yyyy");
@@ -56,6 +60,7 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
                                         sdf_Gio.format(thoiGianHienTai) + " " + ngayTrongTuan +
                                         sdf_Ngay.format(thoiGianHienTai)
                                         );
+                                
                                 
 			}
 		} catch (InterruptedException e) {
@@ -546,7 +551,7 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
     private javax.swing.JLabel label_XuLy;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel manage;
-    private javax.swing.JLabel name_Account;
+    public static javax.swing.JLabel name_Account;
     private javax.swing.JPanel rightPanel;
     private javax.swing.JPanel room;
     private javax.swing.JPanel search;

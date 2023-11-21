@@ -6,6 +6,7 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -30,7 +31,8 @@ public class GD_XuLy extends javax.swing.JFrame {
         
         rightPanel.add(new gui.GD_XuLy_DanhSachPhong().getContentPane(),0);
         repaint();
-
+        
+        
     }
 
     /**
