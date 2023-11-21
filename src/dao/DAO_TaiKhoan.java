@@ -17,6 +17,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -73,6 +74,7 @@ public class DAO_TaiKhoan implements I_CRUD<TaiKhoan>{
             Transport.send(msg);
             return OTP;
         } catch (Exception e) {
+            
             e.printStackTrace();
             return -1;
         }
@@ -98,6 +100,7 @@ public class DAO_TaiKhoan implements I_CRUD<TaiKhoan>{
             n = statement.executeUpdate();
 
         } catch (Exception e) {
+            
             e.printStackTrace();
         } finally {
             return n;
