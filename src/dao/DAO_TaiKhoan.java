@@ -17,6 +17,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -64,7 +65,8 @@ public class DAO_TaiKhoan implements I_CRUD<TaiKhoan>{
             msg.setSentDate(new java.util.Date());
             // nội dung
             Random generator = new Random();
-            int OTP = generator.nextInt();
+            int OTP =  100000 + generator.nextInt(900000);
+           
             if(OTP<0) OTP = OTP * (-1);
             msg.setText(String.valueOf(OTP),"UTF-8");
             
@@ -72,11 +74,36 @@ public class DAO_TaiKhoan implements I_CRUD<TaiKhoan>{
             Transport.send(msg);
             return OTP;
         } catch (Exception e) {
+            
             e.printStackTrace();
             return -1;
         }
         
     }
 
-    
+    public int capNhatMatKhau(String gmail, String newPassword){
+        
+            ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+        int n = 0;
+        try {
+
+            statement = con.prepareStatement("update TaiKhoan\n" +
+                                            "set matKhau = ?\n" +
+                                            "where  maNhanVien in  (select t.maNhanVien from TaiKhoan t join NhanVien n\n" +
+                                            "on t.maNhanVien = n.maNhanVien where gmail = ?)");
+
+            statement.setString(1, newPassword);
+            statement.setString(2, gmail);
+            
+            n = statement.executeUpdate();
+
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+        } finally {
+            return n;
+        }
+    }
 }
