@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -260,6 +261,41 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
             }
         }
         return ls;
+    }
+      public ArrayList<String> getMaKHtheoPhongDangSuDung() {
+        ArrayList<String> dsid = new ArrayList<>();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        try {
+            Statement stm = con.createStatement();
+            String sql = "select distinct maKhachHang " +
+                        " from HoaDon h inner join chiTietphonghoadon c on h.maHoaDon = c.maHoaDon" +
+                        " where thoiGianTraPhong is null";
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                dsid.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_ChiTietPhong_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return dsid;
+    }
+    public ArrayList<String> getMaPhongTheoKH(String makh) { // phòng đang sử dụng
+        ArrayList<String> dsid = new ArrayList<>();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement pstm = null;
+        try {
+            pstm = con.prepareStatement("select maphong from chitietphonghoadon c inner join hoadon h on c.mahoadon = h.mahoadon where thoigiantraphong is null and makhachhang = ?");
+            pstm.setString(1, makh);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                dsid.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_ChiTietPhong_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return dsid;
     }
 }
     
