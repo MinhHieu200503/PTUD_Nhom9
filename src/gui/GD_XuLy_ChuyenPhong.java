@@ -45,6 +45,11 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
         
         loadDSPhongDangSuDung();
 //        loadDSPhongTrong();
+        ArrayList<String> dsidKH = daoctp.getMaKHtheoPhongDangSuDung(); 
+        cb_phone.addItem("");
+        dsidKH.forEach(e -> {
+            cb_phone.addItem(e);
+        });
     }
 
     /**
@@ -61,6 +66,8 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
         pnl = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pnlData = new javax.swing.JPanel();
+        cb_phone = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -114,9 +121,19 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
         pnlLayout.setVerticalGroup(
             pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 873, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 839, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
+
+        cb_phone.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        cb_phone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_phoneActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setText("Lọc theo số điện thoại:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -125,14 +142,24 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(447, 447, 447)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cb_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cb_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -399,10 +426,57 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
             tf_tenPhong.setText("");
             tf_ngayNhanPhong.setText("");
             tf_maHD.setText("");
+            
+            // reset combobox
+            cb_phone.removeAllItems(); // xoá là nó kích hoạt sự kiện của combobox
+//            cb_phone.addItem("");
+//            ArrayList<String> dsidKH = daoctp.getMaKHtheoPhongDangSuDung(); 
+//            dsidKH.forEach(e -> {
+//                cb_phone.addItem(e);
+//                System.out.println(e);
+//            });
+//            cb_phone.repaint();
         } else {
 //            JOptionPane.showMessageDialog(null, "Chuyển phòng thất bại");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cb_phoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_phoneActionPerformed
+        // TODO add your handling code here:
+        if (cb_phone.getSelectedItem() != null) {
+            String id = cb_phone.getSelectedItem().toString();
+
+            if (id.equals("")) {
+                ArrayList<String> dsIdPhongDsdTheoMaKH = daoctp.getMaPhongTheoKH(id);
+                pnlData.removeAll();
+
+                for (Panel_Phong i : dsPnlPhong) {
+                    pnlData.add(i);
+                }
+                pnlData.revalidate();
+                pnlData.repaint();
+            } else {
+                ArrayList<String> dsIdPhongDsdTheoMaKH = daoctp.getMaPhongTheoKH(id);
+                pnlData.removeAll();
+
+                for (Panel_Phong i : dsPnlPhong) {
+                    if (dsIdPhongDsdTheoMaKH.contains(i.getId())) {
+                        pnlData.add(i);
+                    }
+                }
+                pnlData.revalidate();
+                pnlData.repaint();
+            }
+        }  else { // load lại combobox khi được xoá ở sự kiện chuyển phòng
+            cb_phone.addItem("");
+            ArrayList<String> dsidKH = daoctp.getMaKHtheoPhongDangSuDung(); 
+            dsidKH.forEach(e -> {
+                cb_phone.addItem(e);
+                System.out.println(e);
+            });
+        }
+        
+    }//GEN-LAST:event_cb_phoneActionPerformed
     public boolean chuyenPhong() {
         if (idSelectedPhongCu == null) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn phòng đang sử dụng");
@@ -472,6 +546,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
             soDong = tongPhong / 3 + 1; // cộng 1 vì số dư <= 2 và 1 dòng thì chứa dc 3 phòng
         }
         pnlData.setPreferredSize(new Dimension(890, soDong * 135 + (soDong + 1) * 20 )); // 20 là gap, 135 là chiều cao 1 phòng
+        dsPnlPhong.clear();
         for (int i = 0; i < dspdsd.size(); i++) {
             Panel_Phong p = new Panel_Phong(dspdsd.get(i));
             pnlData.add(p);
@@ -510,6 +585,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
                     tf_maHD.setText(hdPhongDSD_MoiNhat.getMaHoaDon());
                 }
             });
+            dsPnlPhong.add(p);
             pnlData.revalidate();
             pnlData.repaint();
         }
@@ -545,10 +621,6 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
         }
         
     } 
-    public void showDeltail(Panel_Phong p) {
-        tf_tenPhong.setText(p.getTenPhong());
-        
-    }
     /**
      * @param args the command line arguments
      */
@@ -593,10 +665,13 @@ private Panel_Phong previousSelectedRoom = null;
 private DefaultTableModel model;
 private ArrayList<ChitTietPhongHoaDon> dsctpTheoMa = new ArrayList<>();
 private HoaDon hdPhongDSD_MoiNhat;
+private ArrayList<Panel_Phong> dsPnlPhong = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cb_phone;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
