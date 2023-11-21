@@ -464,7 +464,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
             showRegexError(tf_ten, "Tên không được quá 30 kí tự");
             return false;
         }
-        if (!ten.matches("^[A-ZÀ-Ỹ]([a-zà-ỹ\\d]*\\s?)+$")) {
+        if (!ten.matches("^[A-ZÀ-Ỹ\\d]([A-ZÀ-Ỹa-zà-ỹ\\d]*\\s?)+$")) { // riêng dịch vụ được bắt đầu bằng số
             showRegexError(tf_ten, "Viết hoa kí tự đầu, không bao gồm kí tự đặc biệt");
             return false;
         }
