@@ -18,11 +18,17 @@ import java.time.LocalDateTime;
  */
 public class NewClass {
     public static void main(String[] args) {
-        DAO_HoaDon daohd = new DAO_HoaDon();
-        HoaDon a = new HoaDon(I_TraCuu_QuanLi.createIdForHoaDon(daohd.getDsIdTheoNgayHienTai(), "HD"), LocalDateTime.now(), 1, null, 
-                I_CRUD.findById("0398242144", new KhachHang()), 
-                null, 
-                I_CRUD.findById("NV001", new NhanVien()));
-        daohd.update(a);
+//        DAO_HoaDon daohd = new DAO_HoaDon();
+//        HoaDon a = new HoaDon(I_TraCuu_QuanLi.createIdForHoaDon(daohd.getDsIdTheoNgayHienTai(), "HD"), LocalDateTime.now(), 1, null, 
+//                I_CRUD.findById("0398242144", new KhachHang()), 
+//                null, 
+//                I_CRUD.findById("NV001", new NhanVien()));
+//        daohd.update(a);
+        String s = "Nguyễn Thanh Tùng";
+        if (s.contains("Ca")) {
+            System.out.println("Có");
+        } else {
+            System.out.println("ko có");
+        }
     }
 }

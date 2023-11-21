@@ -26,8 +26,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
 
 public interface I_TraCuu_QuanLi<T> {
-
-    // viết hàm loadData() để add dữ liệu vào bảng từ model
+    // Viết hàm search trên model của table
+    
+    // loadData() để add dữ liệu vào bảng từ model
     default void loadTable(ArrayList<T> ds, DefaultTableModel model) {
         model.setRowCount(0);
         ds.forEach(e -> {
@@ -241,7 +242,7 @@ public interface I_TraCuu_QuanLi<T> {
             }
         }
     } 
-    // viết hàm show Lỗi regex
+    // Show Lỗi regex
     default void showRegexError(JTextComponent tf, String message) {
         tf.requestFocus();
         tf.setText("");
