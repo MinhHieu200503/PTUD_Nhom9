@@ -26,6 +26,16 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame implements I_TraCuu_Qua
         initComponents();
         model = (DefaultTableModel) table_traCuu.getModel();
         loadTable(dshd, model);
+        for (int i = 0; i<model.getRowCount(); i++) {
+            ArrayList<String> row = new ArrayList<>();
+            for (int j = 0; j < model.getColumnCount(); j++) {
+                if (model.getValueAt(i, j) == null)
+                    row.add("");
+                else
+                    row.add(model.getValueAt(i, j).toString());
+            }
+            list.add(row);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -199,11 +209,42 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame implements I_TraCuu_Qua
         if (tf_TraCuu.getText().trim().equals("")) {
             loadTable(daohd.getAll(HoaDon.class), model);
         } else {
-            dshd = daohd.search(tf_TraCuu.getText().trim(), HoaDon.class);
-            loadTable(dshd, model);
+//            dshd = daohd.search(tf_TraCuu.getText().trim(), HoaDon.class);
+//            loadTable(dshd, model);
+            ArrayList<ArrayList<String>> ds = search(tf_TraCuu.getText().trim(), list);
+            load(ds, model);
         }
     }//GEN-LAST:event_tf_TraCuuKeyReleased
-
+//    public void load(ArrayList<ArrayList<String>> ds) {
+//        model.setRowCount(0);
+//        ds.forEach(e -> {
+//            model.addRow(e.toArray());
+//        });
+//    }
+//    public ArrayList<ArrayList<String>> search(String text, DefaultTableModel model) {
+//        // tạo mảng chứa các đối tượng được tìm thấy
+//        ArrayList<ArrayList<String>> ds = new ArrayList<>();
+//        // duyệt qua các dòng của mod el
+//        for (int i = 0; i < list.size(); i++) {
+//            // duyệt qua các cột của model
+////            System.out.println("gui.GD_TraCuu_HoaDon.search()");
+//            for (int j = 0; j < list.get(i).size(); j++) {
+//                // nếu tìm thấy text trong model thì thêm vào ds
+//                if (list.get(i).get(j) == null) {
+//                    continue;
+//                } else {
+//                    if (list.get(i).get(j).toLowerCase().contains(text.toLowerCase())) {
+////                        if (list.get(i).get(j).equals("Tùng")) {
+//                        // thêm dòng vào ds
+//                        ds.add(list.get(i));
+////                        System.out.println(i + " " + j);
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//        return ds;
+//    }
     /**
      * @param args the command line arguments
      */
@@ -238,11 +279,13 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame implements I_TraCuu_Qua
                 new GD_TraCuu_HoaDon().setVisible(true);
             }
         });
+        
     }
     
     private DAO_HoaDon daohd = new DAO_HoaDon();
     private ArrayList<HoaDon> dshd = daohd.getAll(HoaDon.class);
     private DefaultTableModel model;
+    private ArrayList<ArrayList<String>> list = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbl_TraCuu;

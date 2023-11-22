@@ -661,7 +661,7 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
         entity.LoaiPhong loaiPhong = DAOphong.getPhongTheoOnlyMaPhong(maPhong).getLoaiPhong();
         txtMaHoaDon.setText(I_CRUD.findById(loaiPhong.getMaLoaiPhong(), new entity.LoaiPhong()).getLoaiPhong());
         txtThoiGianNhanPhong.setText(phong.getSucChuaToiDa()+"");
-        txt_ThoiGianSuDung.setText(phong.getGiaPhongTheoGio()+"");
+        txt_ThoiGianSuDung.setText(phong.getGia()+"");
         panelContainDV.setVisible(false);
         Panel_ThongTinKhachHang2 .setVisible(false);
         
@@ -679,7 +679,7 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
         txtMaPhong.setText(maPhong);
         txtMaHoaDon.setText(pdp.getHoaDon().getMaHoaDon());
         txtThoiGianNhanPhong.setText(String.format("%02d",pdp.getThoiGianNhanPhong().getHour())+ ":"+String.format("%02d", pdp.getThoiGianNhanPhong().getMinute()));
-        txt_ThoiGianSuDung.setText(I_CRUD.findById(maPhong,new Phong()).getGiaPhongTheoGio()+"");
+        txt_ThoiGianSuDung.setText(I_CRUD.findById(maPhong,new Phong()).getGia()+"");
 
         txt_SDT.setText(pdp.getKhachHang().getSoDienThoai());
         txt_TenKhachHang.setText(pdp.getKhachHang().getTenKhachHang());

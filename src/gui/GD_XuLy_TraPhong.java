@@ -850,7 +850,7 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
             boolean flagMain = false;
             for (ThongTinPhongDangChon.PhongVaDichVu phongVaDichVu : thongTinPhongDangChon.danhSachPhong) {
                 String tenPhong = phongVaDichVu.getChiTietPhongHoaDon().getPhong().getTenPhong();
-                String giaPhong = String.format("%,.3f ",  Double.valueOf(phongVaDichVu.getChiTietPhongHoaDon().getPhong().getGiaPhongTheoGio() / 60 )) +"Đ/p";
+                String giaPhong = String.format("%,.3f ",  Double.valueOf(phongVaDichVu.getChiTietPhongHoaDon().getPhong().getGia() / 60 )) +"Đ/p";
                 
                 Duration timeResult = Duration.between(phongVaDichVu.getChiTietPhongHoaDon().getThoiGianTraPhong(), phongVaDichVu.getChiTietPhongHoaDon().getThoiGianNhanPhong());
                 long minutes = Math.abs(timeResult.toMinutes());              

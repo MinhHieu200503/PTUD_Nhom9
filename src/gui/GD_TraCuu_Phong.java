@@ -27,6 +27,16 @@ public class GD_TraCuu_Phong extends javax.swing.JFrame implements  I_TraCuu_Qua
         initComponents();
         model = (DefaultTableModel) table_traCuu.getModel();
         loadTable(dsp, model);
+        for (int i = 0; i<model.getRowCount(); i++) {
+            ArrayList<String> row = new ArrayList<>();
+            for (int j = 0; j < model.getColumnCount(); j++) {
+                if (model.getValueAt(i, j) == null)
+                    row.add("");
+                else
+                    row.add(model.getValueAt(i, j).toString());
+            }
+            list.add(row);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -220,8 +230,12 @@ public class GD_TraCuu_Phong extends javax.swing.JFrame implements  I_TraCuu_Qua
 
     private void tf_TraCuuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_TraCuuKeyReleased
         // TODO add your handling code here:
-        dsp = daop.search(tf_TraCuu.getText().trim(), Phong.class);
-        loadTable(dsp, model);
+        if (tf_TraCuu.getText().trim().equals("")) {
+            loadTable(daop.getAll(Phong.class), model);
+        } else {
+            ArrayList<ArrayList<String>> ds = search(tf_TraCuu.getText().trim(), list);
+            load(ds, model);
+        }
     }//GEN-LAST:event_tf_TraCuuKeyReleased
 
     /**
@@ -263,6 +277,7 @@ public class GD_TraCuu_Phong extends javax.swing.JFrame implements  I_TraCuu_Qua
     private DAO_Phong daop = new DAO_Phong();
     private ArrayList<Phong> dsp = daop.getAll(Phong.class);
     private DefaultTableModel model;
+    private ArrayList<ArrayList<String>> list = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_edit;
     private javax.swing.JScrollPane jScrollPane2;

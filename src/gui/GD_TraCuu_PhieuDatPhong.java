@@ -25,7 +25,17 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
     public GD_TraCuu_PhieuDatPhong() {
         initComponents();
         model = (DefaultTableModel) table_traCuu.getModel();
-        loadTable(daopdp.getAll(PhieuDatPhong.class), model);
+        loadTable(dspdp, model);
+        for (int i = 0; i<model.getRowCount(); i++) {
+            ArrayList<String> row = new ArrayList<>();
+            for (int j = 0; j < model.getColumnCount(); j++) {
+                if (model.getValueAt(i, j) == null)
+                    row.add("");
+                else
+                    row.add(model.getValueAt(i, j).toString());
+            }
+            list.add(row);
+        }
     }
 
     /**
@@ -43,7 +53,7 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
         pnlCenter2 = new javax.swing.JPanel();
         pnlThongTinTraCuu2 = new javax.swing.JPanel();
         lbl_TraCuu2 = new javax.swing.JLabel();
-        tf_TraCuu2 = new javax.swing.JTextField();
+        tf_TraCuu = new javax.swing.JTextField();
         pnlData = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         table_traCuu = new rojeru_san.complementos.RSTableMetro();
@@ -74,13 +84,13 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
         lbl_TraCuu2.setForeground(new java.awt.Color(40, 77, 133));
         lbl_TraCuu2.setText("Nhập thông tin tra cứu:");
 
-        tf_TraCuu2.setBackground(new java.awt.Color(153, 255, 204));
-        tf_TraCuu2.setFont(new java.awt.Font("Segoe UI", 0, 27)); // NOI18N
-        tf_TraCuu2.setToolTipText("");
-        tf_TraCuu2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153), 2, true));
-        tf_TraCuu2.addKeyListener(new java.awt.event.KeyAdapter() {
+        tf_TraCuu.setBackground(new java.awt.Color(153, 255, 204));
+        tf_TraCuu.setFont(new java.awt.Font("Segoe UI", 0, 27)); // NOI18N
+        tf_TraCuu.setToolTipText("");
+        tf_TraCuu.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 51, 153), 2, true));
+        tf_TraCuu.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                tf_TraCuu2KeyReleased(evt);
+                tf_TraCuuKeyReleased(evt);
             }
         });
 
@@ -92,7 +102,7 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
                 .addGap(253, 253, 253)
                 .addComponent(lbl_TraCuu2)
                 .addGap(18, 18, 18)
-                .addComponent(tf_TraCuu2, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tf_TraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlThongTinTraCuu2Layout.setVerticalGroup(
@@ -101,7 +111,7 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
                 .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(pnlThongTinTraCuu2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lbl_TraCuu2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tf_TraCuu2))
+                    .addComponent(tf_TraCuu))
                 .addGap(20, 20, 20))
         );
 
@@ -189,11 +199,15 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tf_TraCuu2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_TraCuu2KeyReleased
+    private void tf_TraCuuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_TraCuuKeyReleased
         // TODO add your handling code here:
-        dspdp = daopdp.search(tf_TraCuu2.getText().trim(), PhieuDatPhong.class);
-        loadTable(dspdp, model);
-    }//GEN-LAST:event_tf_TraCuu2KeyReleased
+        if (tf_TraCuu.getText().trim().equals("")) {
+            loadTable(daopdp.getAll(PhieuDatPhong.class), model);
+        } else {
+            ArrayList<ArrayList<String>> ds = search(tf_TraCuu.getText().trim(), list);
+            load(ds, model);
+        }
+    }//GEN-LAST:event_tf_TraCuuKeyReleased
 
     /**
      * @param args the command line arguments
@@ -234,6 +248,7 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
     private DAO_PhieuDatPhong daopdp = new DAO_PhieuDatPhong();
     private ArrayList<PhieuDatPhong> dspdp = daopdp.getAll(PhieuDatPhong.class);
     private DefaultTableModel model;
+    private ArrayList<ArrayList<String>> list = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbl_TraCuu2;
@@ -244,6 +259,6 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
     private javax.swing.JPanel pnlTop2;
     private javax.swing.JLabel pnlTop_title2;
     private rojeru_san.complementos.RSTableMetro table_traCuu;
-    private javax.swing.JTextField tf_TraCuu2;
+    private javax.swing.JTextField tf_TraCuu;
     // End of variables declaration//GEN-END:variables
 }

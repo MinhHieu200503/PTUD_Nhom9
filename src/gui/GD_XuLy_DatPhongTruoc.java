@@ -717,7 +717,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
   
     public static void setTienCoc(String maPhong){
         dao.DAO_Phong DAOphong = new  DAO_Phong();
-        txt_TienCoc.setText(String.valueOf(DAOphong.getPhongTheoOnlyMaPhong(maPhong).getGiaPhongTheoGio()));
+        txt_TienCoc.setText(String.valueOf(DAOphong.getPhongTheoOnlyMaPhong(maPhong).getGia()));
     }
     
     public void tuDongTimKiemKhachHang(){

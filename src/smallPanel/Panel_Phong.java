@@ -132,7 +132,7 @@ public class Panel_Phong extends javax.swing.JPanel {
         this.setId(data.getMaPhong());
         this.setTenPhong(data.getTenPhong());
         this.setSucChua(data.getSucChuaToiDa());
-        this.setGia(data.getGiaPhongTheoGio());
+        this.setGia(data.getGia());
         this.setTrangThai(data.getTrangThai());
         String loaiPhong = getMaLoaiPhong(data);
 
