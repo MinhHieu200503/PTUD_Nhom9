@@ -61,7 +61,7 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame implements I_TraCuu_Qua
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1650, 964));
 
-        pnlMain.setPreferredSize(new java.awt.Dimension(1650, 964));
+        pnlMain.setPreferredSize(new java.awt.Dimension(1650, 950));
         pnlMain.setLayout(new java.awt.BorderLayout());
 
         pnlTop.setBackground(new java.awt.Color(255, 255, 255));

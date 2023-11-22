@@ -78,7 +78,7 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        pnlMain.setPreferredSize(new java.awt.Dimension(1650, 925));
+        pnlMain.setPreferredSize(new java.awt.Dimension(1650, 890));
         pnlMain.setLayout(new java.awt.BorderLayout());
 
         pnlTop.setBackground(new java.awt.Color(255, 255, 255));

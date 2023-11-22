@@ -705,7 +705,7 @@ public class GD_XuLy_TraPhong extends javax.swing.JFrame {
     public void setData(entity.Phong data){
         lb_TenPhong.setText(data.getTenPhong() + " - " + data.getMaPhong());
         lb_SucChua.setText("Sức chứa: " + String.valueOf(data.getSucChuaToiDa()));
-        lb_Gia.setText("Giá: "+ String.format("%,.3f", data.getGiaPhongTheoGio()) + "Đ");
+        lb_Gia.setText("Giá: "+ String.format("%,.3f", data.getGia()) + "Đ");
     }
     
     public boolean getFlag(){
@@ -855,7 +855,7 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
                 Duration timeResult = Duration.between(phongVaDichVu.getChiTietPhongHoaDon().getThoiGianTraPhong(), phongVaDichVu.getChiTietPhongHoaDon().getThoiGianNhanPhong());
                 long minutes = Math.abs(timeResult.toMinutes());              
                 String soLuong = String.valueOf(minutes);
-                double tong2 = minutes * (phongVaDichVu.getChiTietPhongHoaDon().getPhong().getGiaPhongTheoGio() / 60);
+                double tong2 = minutes * (phongVaDichVu.getChiTietPhongHoaDon().getPhong().getGia()/ 60);
                 model.addRow(new String[] {tenPhong, giaPhong, String.valueOf(minutes), String.format("%,.3f ", tong2) + "Đ",
                             phongVaDichVu.getChiTietPhongHoaDon().getGhiChu().contains("MP000")?
                             (thongTinPhongDangChon.getMaUuDai()==null?"":"Đã áp mã giảm giá"):
