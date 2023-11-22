@@ -28,6 +28,16 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
         initComponents();
         model = (DefaultTableModel) table_traCuu.getModel();
         loadTable(dskh, model);
+        for (int i = 0; i<model.getRowCount(); i++) {
+            ArrayList<String> row = new ArrayList<>();
+            for (int j = 0; j < model.getColumnCount(); j++) {
+                if (model.getValueAt(i, j) == null)
+                    row.add("");
+                else
+                    row.add(model.getValueAt(i, j).toString());
+            }
+            list.add(row);
+        }
     }
 
     /**
@@ -222,8 +232,12 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
 
     private void tf_TraCuuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_TraCuuKeyReleased
         // TODO add your handling code here:
-        dskh = daokh.search(tf_TraCuu.getText().trim(), KhachHang.class);
-        loadTable(dskh, model);
+        if (tf_TraCuu.getText().trim().equals("")) {
+            loadTable(daokh.getAll(KhachHang.class), model);
+        } else {
+            ArrayList<ArrayList<String>> ds = search(tf_TraCuu.getText().trim(), list);
+            load(ds, model);
+        }
     }//GEN-LAST:event_tf_TraCuuKeyReleased
 
     /**
@@ -265,6 +279,7 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
     private DAO_KhachHang daokh = new DAO_KhachHang();
     private ArrayList<KhachHang> dskh = daokh.getAll(KhachHang.class);
     private DefaultTableModel model;
+    private ArrayList<ArrayList<String>> list = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_edit;
     private javax.swing.JScrollPane jScrollPane2;

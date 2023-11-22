@@ -10,6 +10,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import entity.*;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -26,7 +27,38 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
 
 public interface I_TraCuu_QuanLi<T> {
-    // Viết hàm search trên model của table
+    DecimalFormat df = new DecimalFormat("#,###.###");
+
+    // Loadtbale for tra cứu
+    default void load(ArrayList<ArrayList<String>> ds, DefaultTableModel model) {
+        model.setRowCount(0);
+        ds.forEach(e -> {
+            model.addRow(e.toArray());
+        });
+    }
+    // Hàm search trên model
+    // list là danh sách đầu tiên (chứa đầy đủ các dòng)
+    default ArrayList<ArrayList<String>> search(String text, ArrayList<ArrayList<String>> list) {
+        // ds là danh sách chứa các dòng có trường khớp vs text
+        ArrayList<ArrayList<String>> ds = new ArrayList<>();
+        // duyệt qua các dòng của list
+        for (int i = 0; i < list.size(); i++) {
+            // duyệt qua các cột của list
+            for (int j = 0; j < list.get(i).size(); j++) {
+                // nếu tìm thấy text trong list thì thêm vào ds
+                if (list.get(i).get(j) == null) {
+                    continue;
+                } else {
+                    if (list.get(i).get(j).toLowerCase().contains(text.toLowerCase())) {
+                        // thêm dòng vào ds
+                        ds.add(list.get(i));
+                        break;
+                    }
+                }
+            }
+        }
+        return ds;
+    }
     
     // loadData() để add dữ liệu vào bảng từ model
     default void loadTable(ArrayList<T> ds, DefaultTableModel model) {
@@ -88,6 +120,13 @@ public interface I_TraCuu_QuanLi<T> {
                             case "LocalDateTime":
                                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                                 row[i] = formatter.format((LocalDateTime) fields[i].get(e));
+                                break;
+                            case "double":
+                                if (fields[i].getName().equals("gia") || fields[i].getName().equals("datCoc")) {
+                                    row[i] = df.format((Double) fields[i].get(e)) + "Đ";
+                                } else {
+                                    row[i] = fields[i].get(e);
+                                }
                                 break;
                             case "int":
                                 // nếu fields[i] là trạng thái

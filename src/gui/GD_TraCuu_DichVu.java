@@ -26,7 +26,17 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
     public GD_TraCuu_DichVu() {
         initComponents();
         model = (DefaultTableModel) table_traCuu.getModel();
-        loadTable(daodv.getAll(DichVu.class), model);
+        loadTable(dsdv, model);
+        for (int i = 0; i<model.getRowCount(); i++) {
+            ArrayList<String> row = new ArrayList<>();
+            for (int j = 0; j < model.getColumnCount(); j++) {
+                if (model.getValueAt(i, j) == null)
+                    row.add("");
+                else
+                    row.add(model.getValueAt(i, j).toString());
+            }
+            list.add(row);
+        }
     }
 
     /**
@@ -238,8 +248,12 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
 
     private void tf_TraCuuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_TraCuuKeyReleased
         // TODO add your handling code here:
-        dsdv = daodv.search(tf_TraCuu.getText().trim(), DichVu.class);
-        loadTable(dsdv, model);
+        if (tf_TraCuu.getText().trim().equals("")) {
+            loadTable(daodv.getAll(DichVu.class), model);
+        } else {
+            ArrayList<ArrayList<String>> ds = search(tf_TraCuu.getText().trim(), list);
+            load(ds, model);
+        }
     }//GEN-LAST:event_tf_TraCuuKeyReleased
 
     /**
@@ -293,6 +307,7 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
     private DAO_DichVu daodv = new DAO_DichVu();
     private ArrayList<DichVu> dsdv = daodv.getAll(DichVu.class);
     private DefaultTableModel model;
+    private ArrayList<ArrayList<String>> list = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_edit;
     private javax.swing.JScrollPane jScrollPane1;

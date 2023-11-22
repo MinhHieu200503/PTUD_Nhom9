@@ -305,7 +305,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                                     int i = 0;
                                     for(ChitTietPhongHoaDon ct: lsCT)
                                     {
-                                        String[] row = {ct.getPhong().getMaPhong(), ct.getPhong().getLoaiPhong().getLoaiPhong(), ct.getPhong().getSucChuaToiDa() +"", ct.getPhong().getGiaPhongTheoGio()+""};
+                                        String[] row = {ct.getPhong().getMaPhong(), ct.getPhong().getLoaiPhong().getLoaiPhong(), ct.getPhong().getSucChuaToiDa() +"", ct.getPhong().getGia()+""};
                                         model.addRow(row);
                                         
                                     }
@@ -659,7 +659,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
           Phong p = new Phong();
             
                     p = I_CRUD.findById(ma, new Phong());
-                   String[] row = {ma, p.getLoaiPhong().getLoaiPhong(), p.getSucChuaToiDa()+"", p.getGiaPhongTheoGio()+""};
+                   String[] row = {ma, p.getLoaiPhong().getLoaiPhong(), p.getSucChuaToiDa()+"", p.getGia()+""};
            
            
            

@@ -66,12 +66,12 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
             thoiGianSuDung = thoiGianSuDung + Integer.valueOf((int) thongTinPhongDangChon.tongThoiGianSuDung());
             for (ThongTinPhongDangChon.PhongVaDichVu phongVaDichVu : thongTinPhongDangChon.danhSachPhong) {
                 String tenPhong = phongVaDichVu.getChiTietPhongHoaDon().getPhong().getTenPhong();
-                String giaPhong = String.format("%,.3f ",  Double.valueOf(phongVaDichVu.getChiTietPhongHoaDon().getPhong().getGiaPhongTheoGio() / 60 )) +"Đ/p";
+                String giaPhong = String.format("%,.3f ",  Double.valueOf(phongVaDichVu.getChiTietPhongHoaDon().getPhong().getGia() / 60 )) +"Đ/p";
                 
               Duration timeResult = Duration.between(phongVaDichVu.getChiTietPhongHoaDon().getThoiGianTraPhong(), phongVaDichVu.getChiTietPhongHoaDon().getThoiGianNhanPhong());
               long minutes = Math.abs(timeResult.toMinutes());              
                 String soLuong = String.valueOf(minutes);
-                double tong = minutes * (phongVaDichVu.getChiTietPhongHoaDon().getPhong().getGiaPhongTheoGio() / 60);
+                double tong = minutes * (phongVaDichVu.getChiTietPhongHoaDon().getPhong().getGia() / 60);
                 model.addRow(new String[] {tenPhong, giaPhong, String.valueOf(minutes), String.format("%,.3f ", tong) + "Đ",phongVaDichVu.getChiTietPhongHoaDon().getGhiChu().contains("MP000")? "":( "Chuyển phòng "+ phongVaDichVu.getChiTietPhongHoaDon().getGhiChu().substring(2,5))});
 
                 for (ThongTinPhongDangChon.PhongVaDichVu.DichVu dichVu : phongVaDichVu.dichVu) {

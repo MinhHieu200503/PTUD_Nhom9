@@ -611,7 +611,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
                     String loaiphong = (i.getLoaiPhong()).getLoaiPhong();
 //                    System.out.println(i.getLoaiPhong());
                     String succhua = String.valueOf(i.getSucChuaToiDa());
-                    String gia = String.valueOf(i.getGiaPhongTheoGio());
+                    String gia = String.valueOf(i.getGia());
                     Object[] rowData = {maphong, loaiphong, succhua, gia};
                     model.addRow(rowData);
                 }
@@ -622,7 +622,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
                 String loaiphong = (i.getLoaiPhong()).getLoaiPhong();
 //                System.out.println(i.getLoaiPhong());
                 String succhua = String.valueOf(i.getSucChuaToiDa());
-                String gia = String.valueOf(i.getGiaPhongTheoGio());
+                String gia = String.valueOf(i.getGia());
                 Object[] rowData = {maphong, loaiphong, succhua, gia};
                 model.addRow(rowData);
             }
