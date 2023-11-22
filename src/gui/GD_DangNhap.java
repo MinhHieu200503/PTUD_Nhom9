@@ -5,6 +5,11 @@
 package gui;
 
 import ComponentCustom.FormSignIn;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.geom.RoundRectangle2D;
+import javax.swing.UIManager;
 import dao.I_CRUD;
 import entity.TaiKhoan;
 import java.awt.event.ActionEvent;
@@ -30,7 +35,12 @@ public class GD_DangNhap extends javax.swing.JFrame {
     public static TaiKhoan taiKhoan  = new TaiKhoan();
     
     public GD_DangNhap() {
-//         setUndecorated(true);
+//        FlatMacLightLaf.setup();
+//        UIManager.put( "Button.arc", 10 );
+//        UIManager.put( "Component.arc", 10 );
+//        UIManager.put( "ProgressBar.arc", 10 );
+//        UIManager.put( "TextComponent.arc", 10 );
+//        setUndecorated(true);
 //        setSize(400, 470);
 //        setShape(new RoundRectangle2D.Double(0,0, 400, 470, 40, 40));
 //        setLocationRelativeTo(null);
@@ -42,28 +52,62 @@ public class GD_DangNhap extends javax.swing.JFrame {
 //                gdQuenMK = new GD_QuenMatKhau();
 //                setVisible(false);
 //                gdQuenMK.setVisible(true);
-//            }
+////         setUndecorated(true);
+////        setSize(400, 470);
+////        setShape(new RoundRectangle2D.Double(0,0, 400, 470, 40, 40));
+////        setLocationRelativeTo(null);
+////        FormSignIn form = new FormSignIn();
+////        add(form);
+////        form.lblForgotPass.addMouseListener(new MouseListener() {
+////            @Override
+////            public void mouseClicked(MouseEvent e) {
+////                gdQuenMK = new GD_QuenMatKhau();
+////                setVisible(false);
+////                gdQuenMK.setVisible(true);
+////            }
+////
+////            @Override
+////            public void mousePressed(MouseEvent e) {
+////
+////            }
+////
+////            @Override
+////            public void mouseReleased(MouseEvent e) {
+////
+////            }
+////
+////            @Override
+////            public void mouseEntered(MouseEvent e) {
+////                
+////            }
+////
+////            @Override
+////            public void mouseExited(MouseEvent e) {
+////                
+////            }
+//}
 //
 //            @Override
 //            public void mousePressed(MouseEvent e) {
-//
+//                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 //            }
 //
 //            @Override
 //            public void mouseReleased(MouseEvent e) {
-//
+//                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 //            }
 //
 //            @Override
 //            public void mouseEntered(MouseEvent e) {
-//                
+//                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 //            }
 //
 //            @Override
 //            public void mouseExited(MouseEvent e) {
-//                
+//                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 //            }
 //        });
+
             initComponents();
             setLocationRelativeTo(null);
             
@@ -262,7 +306,8 @@ public class GD_DangNhap extends javax.swing.JFrame {
 
     private void dangNhap(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dangNhap
         
-        taiKhoan = I_CRUD.findById(txt_taiKhoan.getText(), new TaiKhoan());
+        this.taiKhoan = I_CRUD.findById(txt_taiKhoan.getText(), new TaiKhoan());
+        JOptionPane.showMessageDialog(null,taiKhoan);
         
         if(txt_taiKhoan.getText().equals("") || txt_matKhau.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Vui long nhập đầy đủ thông tin");

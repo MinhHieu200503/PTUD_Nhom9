@@ -45,6 +45,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Panel;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import javax.swing.JFrame;
@@ -69,17 +70,13 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         thread = new Thread(this);
         thread.start();
         initComponents();
-
+        
         
         loadDSPhongTrong();
         
         tuDongTimKiemKhachHang();
         
-        editTable();
-        
-        
-
-		
+        editTable();	
     }
     
     
@@ -211,6 +208,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         
         
         //---Tạo hóa đơn mới
+        
         // Quang: tui có tác động vào thêm tham số ghiChu = ""
         
         
@@ -236,8 +234,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         else{
             
             JOptionPane.showMessageDialog(null, "Là khách hàng đang không có hóa đơn");
-            HoaDon hd = new HoaDon(I_TraCuu_QuanLi.createIdForHoaDon(daoHD.getDsIdTheoNgayHienTai(), "HD"), LocalDateTime.now(), 0, "", khachHang , 
-                            null, I_CRUD.findById("NV001", new NhanVien()));
+            entity.HoaDon hd = new HoaDon(I_TraCuu_QuanLi.createIdForHoaDon(daoHD.getDsIdTheoNgayHienTai(), "HD"), LocalDateTime.now(), 0, "", khachHang ,null, I_CRUD.findById("NV001", new NhanVien()));
         daoHD.create(hd);
             for(int i=0; i<count; i++){ 
                 String maPhong = (String) model.getValueAt(i, 0);
@@ -277,6 +274,8 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         ContainerListPhong.getComponent(0).setBackground(Color.white);
         String test = danhSachPhong.codePhong;
         
+        
+        
     }
     
     public void tuDongTimKiemKhachHang(){
@@ -293,6 +292,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                 @Override
                 public void actionPerformed(ActionEvent e) {
                         if (txt_SoDT.getSelectedItem() != null) {
+                                loadDSPhongTrong();
                                 model.setRowCount(0);
                                 String soDT = txt_SoDT.getSelectedItem().toString().trim();
                                 kiemTraSDT(soDT);
@@ -597,6 +597,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
             model.setRowCount(0);
             txt_SoDT.setSelectedIndex(0);
             txt_khachHang.setText("");
+            
         }
     }//GEN-LAST:event_datPhongNgay
 
@@ -673,6 +674,11 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
 //        tablePhongDatNgay = new JTable();
 //        tablePhongDatNgay.setModel(model);
        
+    }
+    
+    public void setTableDataNull(){
+          DefaultTableModel temp = (DefaultTableModel) tablePhongDatNgay.getModel();
+          temp.setRowCount(0);
     }
     
     

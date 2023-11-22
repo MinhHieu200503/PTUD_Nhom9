@@ -31,6 +31,8 @@ public class ThongTinPhongDangChon {
     private String tenKhachHang;
     private Double datCoc = 0.0;
     private String phieuDatPhong = null;
+    private int thoiGianSuDungTichLuy;
+    private String maUuDai;
     public ArrayList<PhongVaDichVu> danhSachPhong;
     
     public PhongVaDichVu createPhongVaDichVu(){
@@ -80,6 +82,23 @@ public class ThongTinPhongDangChon {
     public void setDatCoc(Double datCoc) {
         this.datCoc = datCoc;
     }
+
+    public int getThoiGianSuDungTichLuy() {
+        return thoiGianSuDungTichLuy;
+    }
+
+    public void setThoiGianSuDungTichLuy(int thoiGianSuDungTichLuy) {
+        this.thoiGianSuDungTichLuy = thoiGianSuDungTichLuy;
+    }
+
+    public String getMaUuDai() {
+        return maUuDai;
+    }
+
+    public void setMaUuDai(String maUuDai) {
+        this.maUuDai = maUuDai;
+    }
+    
     
     
     
