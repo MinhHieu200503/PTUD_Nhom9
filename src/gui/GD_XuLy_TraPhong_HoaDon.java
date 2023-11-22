@@ -625,7 +625,7 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
                new dao.DAO_PhieuDatPhong().updateBill(thongTinPhongDangChon.getPhieuDatPhong());
             }
                 ThongTinPhongDangChon.PhongVaDichVu phongVaDichVu = thongTinPhongDangChon.getDanhSachPhong().getFirst();
-                new dao.DAO_ChiTietPhong_HoaDon().updateBill(phongVaDichVu.getChiTietPhongHoaDon().getGhiChu().substring(0, 5)+" Đã hoàn thành", phongVaDichVu.getChiTietPhongHoaDon().getHoaDon().getMaHoaDon(), phongVaDichVu.getChiTietPhongHoaDon().getPhong().getMaPhong(), this.uuDai.getMaUuDai());
+//                new dao.DAO_ChiTietPhong_HoaDon().updateBill(phongVaDichVu.getChiTietPhongHoaDon().getGhiChu().substring(0, 5)+" Đã hoàn thành", phongVaDichVu.getChiTietPhongHoaDon().getHoaDon().getMaHoaDon(), phongVaDichVu.getChiTietPhongHoaDon().getPhong().getMaPhong(), this.uuDai.getMaUuDai());
             
         }
     }

@@ -60,10 +60,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
 //        quanLi.setVisible(false);
         
         navBarChoice(0);
-        this.remove(1);
-        this.add(new GD_TrangChu().getContentPane());
         name_Account.setText(GD_DangNhap.taiKhoan.getNhanVien().getTenNhanVien());
-        
     }
     
     public void navBarChoice(int index){
@@ -78,7 +75,6 @@ private GD_TrangChu trangChu = new GD_TrangChu();
     
     public void run(){
         try {
-                        
 			Date thoiGianHienTai = new Date();
 			SimpleDateFormat sdf_Gio = new SimpleDateFormat("HH:mm:ss");
 			SimpleDateFormat sdf_Ngay = new SimpleDateFormat("dd/MM/yyyy");
@@ -95,8 +91,6 @@ private GD_TrangChu trangChu = new GD_TrangChu();
                                         sdf_Gio.format(thoiGianHienTai) + " " + ngayTrongTuan +
                                         sdf_Ngay.format(thoiGianHienTai)
                                         );
-                                repaint();
-                                
                                 
 			}
                         
@@ -723,7 +717,10 @@ private GD_TrangChu trangChu = new GD_TrangChu();
     private javax.swing.JPanel layout;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel manage;
-    public static javax.swing.JLabel name_Account;
+    private javax.swing.JLabel name_Account;
+    private rojerusan.RSButtonMetro rSButtonMetro2;
+    private rojerusan.RSButtonMetro rSButtonMetro3;
+    private rojerusan.RSButtonMetro rSButtonMetro4;
     private javax.swing.JPanel rightPanel;
     private javax.swing.JPanel room;
     private javax.swing.JPanel search;

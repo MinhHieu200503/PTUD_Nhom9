@@ -258,10 +258,10 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
             while (rs.next()) {
                 // Quang: tui chỉnh lại entity hoá đơn, có tác động vào thêm tham số ghi chú là ""
                 tempHoaDon = new HoaDon(maHD, rs.getTimestamp(2).toLocalDateTime(), rs.getInt(3),"", null, null, null); 
-                tempPhong = new Phong(maPhong, rs.getString(13), 2, null, rs.getInt(16), rs.getDouble(17));
+                tempPhong = new Phong(maPhong, rs.getString("tenPhong"), 2, null, rs.getInt("sucChuaToiDa"), rs.getDouble("giaPhongTheoGio"));
                 
                 
-                phongDangChon = new ChitTietPhongHoaDon(rs.getTimestamp(7).toLocalDateTime(), LocalDateTime.now(), rs.getString(9) , tempHoaDon, tempPhong);
+                phongDangChon = new ChitTietPhongHoaDon(rs.getTimestamp("thoiGianNhanPhong").toLocalDateTime(), LocalDateTime.now(), rs.getString(10) , tempHoaDon, tempPhong);
             }
 //            System.out.println("PhongDangChon: " + phongDangChon.toString());
             // có được chi tiết phòng đang chọn (Mã hóa đơn, mã phòng ) -> đi lấy các phòng chuyển của phòng đang được chọn cho vào ghi chú

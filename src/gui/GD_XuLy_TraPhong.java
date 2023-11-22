@@ -1399,6 +1399,13 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
 
     public void updateBill(){
         ArrayList<ThongTinPhongDangChon> result = this.data;
+        ArrayList<int[]> fileSetting = null;
+        try {
+            fileSetting = loadFileTextField();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GD_XuLy_TraPhong.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
         for (ThongTinPhongDangChon thongTinPhongDangChon : result) {
             if (thongTinPhongDangChon.getPhieuDatPhong() != null){
@@ -1409,7 +1416,7 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
                         phongVaDichVu.getChiTietPhongHoaDon().getGhiChu().substring(0, 5)+" Đã hoàn thành",
                         phongVaDichVu.getChiTietPhongHoaDon().getHoaDon().getMaHoaDon(), 
                         phongVaDichVu.getChiTietPhongHoaDon().getPhong().getMaPhong(),
-                        thongTinPhongDangChon.getMaUuDai()==null?this.uuDai.getMaUuDai():thongTinPhongDangChon.getMaUuDai());
+                        thongTinPhongDangChon.getMaUuDai()==null?this.uuDai.getMaUuDai():thongTinPhongDangChon.getMaUuDai(), fileSetting);
             
         }
     }

@@ -208,10 +208,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         
         
         //---Tạo hóa đơn mới
-        HoaDon hd = new HoaDon(I_TraCuu_QuanLi.createIdForHoaDon(daoHD.getDsIdTheoNgayHienTai(), "HD"), LocalDateTime.now(), 0, khachHang , 
-                            txt_MaUuDai.getText().equals("")?(new UuDai(null, "", 0.0, null, null)):I_CRUD.findById(txt_MaUuDai.getText().trim(), new UuDai()),
-                     I_CRUD.findById("NV001", new NhanVien()));
-        daoHD.create(hd);
+        
         // Quang: tui có tác động vào thêm tham số ghiChu = ""
         
         
@@ -237,8 +234,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         else{
             
             JOptionPane.showMessageDialog(null, "Là khách hàng đang không có hóa đơn");
-            HoaDon hd = new HoaDon(I_TraCuu_QuanLi.createIdForHoaDon(daoHD.getDsIdTheoNgayHienTai(), "HD"), LocalDateTime.now(), 0, "", khachHang , 
-                            null, I_CRUD.findById("NV001", new NhanVien()));
+            entity.HoaDon hd = new HoaDon(I_TraCuu_QuanLi.createIdForHoaDon(daoHD.getDsIdTheoNgayHienTai(), "HD"), LocalDateTime.now(), 0, "", khachHang ,null, I_CRUD.findById("NV001", new NhanVien()));
         daoHD.create(hd);
             for(int i=0; i<count; i++){ 
                 String maPhong = (String) model.getValueAt(i, 0);
