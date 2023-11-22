@@ -79,7 +79,7 @@ public class GD_TraCuu extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(1920, 964));
         setMinimumSize(new java.awt.Dimension(1920, 964));
 
-        pnlMain.setLayout(new java.awt.BorderLayout());
+        pnlMain.setLayout(new javax.swing.BoxLayout(pnlMain, javax.swing.BoxLayout.X_AXIS));
 
         pnlLeft.setBackground(new java.awt.Color(0, 153, 153));
         pnlLeft.setPreferredSize(new java.awt.Dimension(270, 835));
@@ -317,10 +317,11 @@ public class GD_TraCuu extends javax.swing.JFrame {
                 .addContainerGap(486, Short.MAX_VALUE))
         );
 
-        pnlMain.add(pnlLeft, java.awt.BorderLayout.WEST);
+        pnlMain.add(pnlLeft);
 
+        pnlRight.setBackground(new java.awt.Color(255, 255, 255));
         pnlRight.setLayout(new java.awt.BorderLayout());
-        pnlMain.add(pnlRight, java.awt.BorderLayout.CENTER);
+        pnlMain.add(pnlRight);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

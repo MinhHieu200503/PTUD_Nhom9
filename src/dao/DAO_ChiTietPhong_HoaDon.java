@@ -66,20 +66,14 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
 		return n > 0;
 	}
     
-    public void updateBill(String ghiChu, String maHD, String maPhong, String maUuDai){
-               ConnectDB.getInstance();
+    public void updateBill(String ghiChu, String maHD, String maPhong, String maUuDai, ArrayList<int[]> fileSetting){
+        ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         PreparedStatement statement = null;
      
-        try {
- 
-            statement = con.prepareStatement("update HoaDon set trangThai = 1, maUuDai = ? where maHoaDon = ?");
-            statement.setString(1, maUuDai);
-            statement.setString(2, maHD);
-            statement.executeUpdate();
+        try{
             
-            
-            
+                        
             statement = con.prepareStatement("update ChiTietPhongHoaDon set thoiGianTraPhong = ?, ghiChu = ? where maHoaDon = ? and maPhong = ?");
             statement.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
             statement.setString(2, ghiChu);
@@ -90,6 +84,52 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
             statement = con.prepareStatement("update Phong set trangThai = 0 where maPhong = ?");
             statement.setString(1, maPhong);
             statement.executeUpdate();
+ 
+            statement = con.prepareStatement("select * from ChiTietPhongHoaDon ctphd inner join HoaDon hd on ctphd.maHoaDon = hd.maHoaDon where ctphd.ghiChu like N'%Đang sử dụng'\n" +
+                                             "and hd.maHoaDon = ?");
+            statement.setString(1, maHD);
+            ResultSet rs = statement.executeQuery();
+            
+            boolean flag = false;
+            
+            while (rs.next()){
+                flag = true;
+            }
+            
+            if (maUuDai.trim().equals("")){
+                maUuDai = null;
+            }
+            
+            statement = con.prepareStatement("Select * From HoaDon where maHoaDon = ?");
+            statement.setString(1, maHD);
+            rs = statement.executeQuery();
+            
+            String ghiChuHoaDon = "";
+            while (rs.next()){
+                ghiChuHoaDon = rs.getString("ghiChu");
+            }
+
+             ghiChuHoaDon += ", "+ maPhong + " " + fileSetting.get(0)[0];
+            
+            if (flag == false){
+                statement = con.prepareStatement("update HoaDon set trangThai = 1, maUuDai = ?, ghiChu = ? where maHoaDon = ?");
+                statement.setString(1, maUuDai);
+                statement.setString(2, ghiChuHoaDon);
+                statement.setString(3, maHD);
+                
+                statement.executeUpdate();
+            }
+            else{
+                statement = con.prepareStatement("update HoaDon set trangThai = 0, maUuDai = ?, ghiChu = ? where maHoaDon = ?");
+                statement.setString(1, maUuDai);
+                statement.setString(2, ghiChuHoaDon);
+                statement.setString(3, maHD);
+                statement.executeUpdate();
+            }
+
+            
+            
+
             
             
 
