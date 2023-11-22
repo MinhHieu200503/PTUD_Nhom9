@@ -45,6 +45,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Panel;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import javax.swing.JFrame;
@@ -68,17 +69,13 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         thread = new Thread(this);
         thread.start();
         initComponents();
-
+        
         
         loadDSPhongTrong();
         
         tuDongTimKiemKhachHang();
         
-        editTable();
-        
-        
-
-		
+        editTable();	
     }
     
     
@@ -187,7 +184,8 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         
         //---Tạo hóa đơn mới
         HoaDon hd = new HoaDon(I_TraCuu_QuanLi.createIdForHoaDon(daoHD.getDsIdTheoNgayHienTai(), "HD"), LocalDateTime.now(), 0, khachHang , 
-                            txt_MaUuDai.getText().equals("")?I_CRUD.findById("UD001", new UuDai()):I_CRUD.findById(txt_MaUuDai.getText().trim(), new UuDai()), I_CRUD.findById("NV001", new NhanVien()));
+                            txt_MaUuDai.getText().equals("")?(new UuDai(null, "", 0.0, null, null)):I_CRUD.findById(txt_MaUuDai.getText().trim(), new UuDai()),
+                     I_CRUD.findById("NV001", new NhanVien()));
         daoHD.create(hd);
         
         
@@ -238,6 +236,8 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         ContainerListPhong.add( danhSachPhong.getContentPane(), BorderLayout.WEST);
         ContainerListPhong.getComponent(0).setBackground(Color.white);
         String test = danhSachPhong.codePhong;
+        
+        
         
     }
     
@@ -601,6 +601,11 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
 //        tablePhongDatNgay = new JTable();
 //        tablePhongDatNgay.setModel(model);
        
+    }
+    
+    public void setTableDataNull(){
+          DefaultTableModel temp = (DefaultTableModel) tablePhongDatNgay.getModel();
+          temp.setRowCount(0);
     }
     
     

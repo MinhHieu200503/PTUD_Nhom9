@@ -9,15 +9,19 @@ import gui.GD_QuanLi;
 import gui.GD_TraCuu;
 import gui.GD_TrangChu;
 import gui.GD_Thongke;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Panel;
+import java.awt.Window;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -25,6 +29,12 @@ import javax.swing.JPanel;
  */
 public class NavBar extends javax.swing.JPanel implements Runnable{
 
+private GD_TrangChu trangChu = new GD_TrangChu();
+    private GD_XuLy xuLy = new GD_XuLy();
+    private GD_TraCuu traCuu = new GD_TraCuu();
+    private GD_Thongke thongKe = new GD_Thongke();
+    private GD_QuanLi quanLi = new GD_QuanLi();
+    
     /**
      * Creates new form navBar
      */
@@ -35,10 +45,33 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
         thread.start();
         initComponents();
         clickMenuUnderline(home);
-        this.remove(1);
-        this.add(new GD_TrangChu().getContentPane());
+        this.add.add(new GD_TrangChu().getContentPane());
+        jPanel7.setVisible(false);
+        this.add.add(trangChu.getContentPane());
+        this.add.add(xuLy.getContentPane());
+        this.add.add(traCuu.getContentPane());
+        this.add.add(thongKe.getContentPane());
+        this.add.add(quanLi.getContentPane());
+        
+//        xuLy.setVisible(false);
+//        traCuu.setVisible(false);
+//        thongKe.setVisible(false);
+//        quanLi.setVisible(false);
+        
+        navBarChoice(0);
     }
-    public  void run(){
+    
+    public void navBarChoice(int index){
+        this.add.getComponent(index).setVisible(true);
+        for (int i = 0 ; i< this.add.getComponentCount(); i++){
+            if (i != index){
+                this.add.getComponent(i).setVisible(false);
+            }
+        }
+    }
+    
+    
+    public void run(){
         try {
 			Date thoiGianHienTai = new Date();
 			SimpleDateFormat sdf_Gio = new SimpleDateFormat("HH:mm:ss");
@@ -56,8 +89,9 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
                                         sdf_Gio.format(thoiGianHienTai) + " " + ngayTrongTuan +
                                         sdf_Ngay.format(thoiGianHienTai)
                                         );
-                                
+                                repaint();
 			}
+                        
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -74,8 +108,10 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jPanel8 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         leftPanel = new javax.swing.JPanel();
+        layout = new javax.swing.JPanel();
         icon_Account = new javax.swing.JLabel();
         userPanel = new javax.swing.JPanel();
         name_Account = new javax.swing.JLabel();
@@ -97,13 +133,17 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
         label_QuanLy = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         add = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        rSButtonMetro2 = new rojerusan.RSButtonMetro();
+        rSButtonMetro3 = new rojerusan.RSButtonMetro();
+        rSButtonMetro4 = new rojerusan.RSButtonMetro();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setAlignmentX(0.0F);
         setMaximumSize(new java.awt.Dimension(1920, 1030));
         setMinimumSize(new java.awt.Dimension(1920, 1030));
         setPreferredSize(new java.awt.Dimension(1920, 1030));
-        setLayout(new java.awt.BorderLayout());
+        setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(40, 77, 133));
         jPanel1.setMaximumSize(new java.awt.Dimension(1920, 66));
@@ -115,36 +155,38 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
         leftPanel.setMaximumSize(new java.awt.Dimension(423, 66));
         leftPanel.setMinimumSize(new java.awt.Dimension(423, 66));
         leftPanel.setPreferredSize(new java.awt.Dimension(423, 66));
-        leftPanel.setLayout(new java.awt.GridBagLayout());
+        leftPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 30, 5));
 
+        layout.setBackground(new java.awt.Color(0, 153, 153));
+        layout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pressMenu(evt);
+            }
+        });
+        layout.setLayout(new java.awt.BorderLayout(10, 0));
+
+        icon_Account.setBackground(new java.awt.Color(0, 0, 0));
         icon_Account.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-account-60.png"))); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.insets = new java.awt.Insets(0, 14, 0, 0);
-        leftPanel.add(icon_Account, gridBagConstraints);
+        layout.add(icon_Account, java.awt.BorderLayout.WEST);
 
         userPanel.setBackground(new java.awt.Color(0, 153, 153));
         userPanel.setLayout(new javax.swing.BoxLayout(userPanel, javax.swing.BoxLayout.PAGE_AXIS));
 
         name_Account.setBackground(new java.awt.Color(0, 0, 0));
         name_Account.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        name_Account.setForeground(new java.awt.Color(255, 255, 255));
         name_Account.setText("Loading...");
         userPanel.add(name_Account);
 
         time_Account.setBackground(new java.awt.Color(0, 0, 0));
         time_Account.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        time_Account.setForeground(new java.awt.Color(255, 255, 255));
         time_Account.setText("Loading...");
         userPanel.add(time_Account);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        gridBagConstraints.insets = new java.awt.Insets(0, 84, 0, 0);
-        leftPanel.add(userPanel, gridBagConstraints);
+        layout.add(userPanel, java.awt.BorderLayout.EAST);
+
+        leftPanel.add(layout);
 
         jPanel1.add(leftPanel);
 
@@ -176,6 +218,7 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
 
         label_TrangChu.setBackground(new java.awt.Color(204, 255, 51));
         label_TrangChu.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        label_TrangChu.setForeground(new java.awt.Color(255, 255, 255));
         label_TrangChu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_TrangChu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-home-40.png"))); // NOI18N
         label_TrangChu.setText("TRANG CHỦ");
@@ -236,6 +279,7 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
         room.setLayout(new java.awt.GridBagLayout());
 
         label_XuLy.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        label_XuLy.setForeground(new java.awt.Color(255, 255, 255));
         label_XuLy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_XuLy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-micro-40.png"))); // NOI18N
         label_XuLy.setText("XỬ LÝ");
@@ -295,6 +339,7 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
         search.setLayout(new java.awt.GridBagLayout());
 
         label_TraCuu.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        label_TraCuu.setForeground(new java.awt.Color(255, 255, 255));
         label_TraCuu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_TraCuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-find-40.png"))); // NOI18N
         label_TraCuu.setText("TRA CỨU");
@@ -350,6 +395,7 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
         statistical.setLayout(new java.awt.GridBagLayout());
 
         label_ThongKe.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        label_ThongKe.setForeground(new java.awt.Color(255, 255, 255));
         label_ThongKe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_ThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-statistics-40.png"))); // NOI18N
         label_ThongKe.setText("THỐNG KÊ");
@@ -405,6 +451,7 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
         manage.setLayout(new java.awt.GridBagLayout());
 
         label_QuanLy.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        label_QuanLy.setForeground(new java.awt.Color(255, 255, 255));
         label_QuanLy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_QuanLy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-manage-40.png"))); // NOI18N
         label_QuanLy.setText("QUẢN LÝ");
@@ -444,23 +491,97 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
 
         jPanel1.add(rightPanel);
 
-        add(jPanel1, java.awt.BorderLayout.NORTH);
-
         add.setMaximumSize(new java.awt.Dimension(1920, 964));
         add.setMinimumSize(new java.awt.Dimension(1920, 964));
+        add.setLayout(new javax.swing.BoxLayout(add, javax.swing.BoxLayout.Y_AXIS));
 
-        javax.swing.GroupLayout addLayout = new javax.swing.GroupLayout(add);
-        add.setLayout(addLayout);
-        addLayout.setHorizontalGroup(
-            addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1920, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 1920, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-        addLayout.setVerticalGroup(
-            addLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 964, Short.MAX_VALUE)
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(add, javax.swing.GroupLayout.PREFERRED_SIZE, 964, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        add(add, java.awt.BorderLayout.CENTER);
+        add(jPanel8);
+        jPanel8.setBounds(0, 0, 1920, 1030);
+
+        jPanel7.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel7.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                moveMenu(evt);
+            }
+        });
+
+        rSButtonMetro2.setBackground(new java.awt.Color(0, 153, 153));
+        rSButtonMetro2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-setting-50.png"))); // NOI18N
+        rSButtonMetro2.setText("Cài đặt thanh toán");
+        rSButtonMetro2.setAlignmentX(0.5F);
+        rSButtonMetro2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        rSButtonMetro2.setIconTextGap(30);
+        rSButtonMetro2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pressThanhToan(evt);
+            }
+        });
+
+        rSButtonMetro3.setBackground(new java.awt.Color(0, 153, 153));
+        rSButtonMetro3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-book-50.png"))); // NOI18N
+        rSButtonMetro3.setText("Hướng dẫn sử dụng");
+        rSButtonMetro3.setAlignmentX(0.5F);
+        rSButtonMetro3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        rSButtonMetro3.setIconTextGap(30);
+        rSButtonMetro3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonMetro3ActionPerformed(evt);
+            }
+        });
+
+        rSButtonMetro4.setBackground(new java.awt.Color(0, 153, 153));
+        rSButtonMetro4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-log-out-50.png"))); // NOI18N
+        rSButtonMetro4.setText("Thoát");
+        rSButtonMetro4.setAlignmentX(0.5F);
+        rSButtonMetro4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        rSButtonMetro4.setIconTextGap(30);
+        rSButtonMetro4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                exitApp(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rSButtonMetro2, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
+                    .addComponent(rSButtonMetro3, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
+                    .addComponent(rSButtonMetro4, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rSButtonMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rSButtonMetro3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rSButtonMetro4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(10, Short.MAX_VALUE))
+        );
+
+        add(jPanel7);
+        jPanel7.setBounds(0, 67, 470, 190);
     }// </editor-fold>//GEN-END:initComponents
 
     private void enteredMenu(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enteredMenu
@@ -489,33 +610,78 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
         Object a = evt.getSource();
         clickMenuUnderline((JPanel) a);
         if (a.equals(home)){
-
             clickMenuUnderline((JPanel) a);
-            this.remove(1);
-            this.add(new GD_TrangChu().getContentPane());
+            navBarChoice(1);
         }
         else if (a.equals(room)){
             clickMenuUnderline((JPanel) a);
-            this.remove(1);
-            this.add(new GD_XuLy().getContentPane());
+            navBarChoice(2);
+
         }
         else if (a.equals(search)){
             clickMenuUnderline((JPanel) a);
-            this.remove(1);
-            this.add(new GD_TraCuu().getContentPane());
+            navBarChoice(3);
         }
         else if (a.equals(statistical)){
-            this.remove(1);
-            this.add(new GD_Thongke().getContentPane());
+            navBarChoice(4);
+
         }
         else if (a.equals(manage)){
             clickMenuUnderline((JPanel) a);
-            this.remove(1);
-            this.add(new GD_QuanLi().getContentPane());
+            navBarChoice(5);
+
         }
         repaint();
     }//GEN-LAST:event_clickedMenu
 
+    
+    private void pressMenu(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pressMenu
+        if(visibleMenu == false){
+            jPanel7.setVisible(true);
+            visibleMenu = true;
+        }
+        else{
+            jPanel7.setVisible(false);
+            visibleMenu = false;
+        }
+        
+    }//GEN-LAST:event_pressMenu
+
+    private void moveMenu(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moveMenu
+        jPanel7.repaint();
+    }//GEN-LAST:event_moveMenu
+
+    private void exitApp(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitApp
+        String[] options = {"Thoát chương trình", "Đăng xuất", "Hủy"};
+        int x = JOptionPane.showOptionDialog(null, "Returns the position of your choice on the array",
+            "Click a button",
+            JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+        if (x == 0){
+            System.exit(0);
+        }
+        else if (x == 1){
+            Window win = SwingUtilities.getWindowAncestor(this);
+            win.dispose();
+            new gui.GD_DangNhap().setVisible(true);
+        }
+        else{
+
+        }
+
+    }//GEN-LAST:event_exitApp
+
+    private void rSButtonMetro3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rSButtonMetro3ActionPerformed
+
+    private void pressThanhToan(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pressThanhToan
+        try {
+            new gui.GD_CaiDat().setVisible(true);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_pressThanhToan
+
+    
     public void clickMenuUnderline(JPanel panel){
         panel.getComponent(1).setVisible(true);
         
@@ -539,14 +705,20 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JLabel label_QuanLy;
     private javax.swing.JLabel label_ThongKe;
     private javax.swing.JLabel label_TraCuu;
     private javax.swing.JLabel label_TrangChu;
     private javax.swing.JLabel label_XuLy;
+    private javax.swing.JPanel layout;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel manage;
     private javax.swing.JLabel name_Account;
+    private rojerusan.RSButtonMetro rSButtonMetro2;
+    private rojerusan.RSButtonMetro rSButtonMetro3;
+    private rojerusan.RSButtonMetro rSButtonMetro4;
     private javax.swing.JPanel rightPanel;
     private javax.swing.JPanel room;
     private javax.swing.JPanel search;
@@ -556,5 +728,5 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
     // End of variables declaration//GEN-END:variables
     private Thread thread = null; // khởi tạo luồng
     private Color mainColor = new Color(40,77,133);
-    
+    private boolean visibleMenu = false;
 }

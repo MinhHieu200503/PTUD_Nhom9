@@ -5,9 +5,11 @@
 package gui;
 
 import ComponentCustom.FormSignIn;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.RoundRectangle2D;
+import javax.swing.UIManager;
 import mainFrame.mainFrame;
 
 /**
@@ -20,7 +22,12 @@ public class GD_DangNhap extends javax.swing.JFrame {
      * Creates new form GD_DangNhap
      */
     public GD_DangNhap() {
-         setUndecorated(true);
+        FlatMacLightLaf.setup();
+        UIManager.put( "Button.arc", 10 );
+        UIManager.put( "Component.arc", 10 );
+        UIManager.put( "ProgressBar.arc", 10 );
+        UIManager.put( "TextComponent.arc", 10 );
+        setUndecorated(true);
         setSize(400, 470);
         setShape(new RoundRectangle2D.Double(0,0, 400, 470, 40, 40));
         setLocationRelativeTo(null);

@@ -300,7 +300,7 @@ public class GD_Thongke extends javax.swing.JFrame {
 
         chart.setBackground(new java.awt.Color(255, 255, 255));
         chart.setMaximumSize(new java.awt.Dimension(1427, 440));
-        chart.setMinimumSize(new java.awt.Dimension(1427, 440));
+        chart.setMinimumSize(new java.awt.Dimension(0, 0));
         chart.setPreferredSize(new java.awt.Dimension(0, 0));
         chart.setLayout(new java.awt.BorderLayout());
 
@@ -359,7 +359,7 @@ public class GD_Thongke extends javax.swing.JFrame {
         );
         panel_Chart_SoSanhLayout.setVerticalGroup(
             panel_Chart_SoSanhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 273, Short.MAX_VALUE)
+            .addGap(0, 212, Short.MAX_VALUE)
         );
 
         line4.setBackground(new java.awt.Color(102, 102, 102));
@@ -409,9 +409,6 @@ public class GD_Thongke extends javax.swing.JFrame {
         panel_doanhThuSoSanhPhong.add(textDoanhThuSoSanhPhong, new java.awt.GridBagConstraints());
 
         iconDoanhThuSoSanhPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-up-20.png"))); // NOI18N
-        iconDoanhThuSoSanhPhong.setMaximumSize(new java.awt.Dimension(20, 20));
-        iconDoanhThuSoSanhPhong.setMinimumSize(new java.awt.Dimension(20, 20));
-        iconDoanhThuSoSanhPhong.setPreferredSize(new java.awt.Dimension(20, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(0, 6, 0, 0);
         panel_doanhThuSoSanhPhong.add(iconDoanhThuSoSanhPhong, gridBagConstraints);
@@ -446,9 +443,6 @@ public class GD_Thongke extends javax.swing.JFrame {
         panel_doanhThuSoSanhPhong2.add(textDoanhThuSoSanhPhong2, new java.awt.GridBagConstraints());
 
         iconDoanhThuSoSanhPhong2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-down-20.png"))); // NOI18N
-        iconDoanhThuSoSanhPhong2.setMaximumSize(new java.awt.Dimension(20, 20));
-        iconDoanhThuSoSanhPhong2.setMinimumSize(new java.awt.Dimension(20, 20));
-        iconDoanhThuSoSanhPhong2.setPreferredSize(new java.awt.Dimension(20, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(0, 6, 0, 0);
         panel_doanhThuSoSanhPhong2.add(iconDoanhThuSoSanhPhong2, gridBagConstraints);
@@ -534,11 +528,11 @@ public class GD_Thongke extends javax.swing.JFrame {
                 .addComponent(line3, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panel_Chart_SoSanh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(line4, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(soSanh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(soSanh, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(153, 0, 0));
@@ -594,15 +588,19 @@ public class GD_Thongke extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel_TongDoanhThu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panel_TongDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
-                    .addComponent(panel_SoSanh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 466, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panel_SoSanh, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();

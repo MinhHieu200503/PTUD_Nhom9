@@ -7,10 +7,16 @@ import entity.ThongTinPhongDangChon;
 import entity.UuDai;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Formatter;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,11 +37,11 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
      * Creates new form GD_XuLy_TraPhong_TinhTien
      */
     DefaultTableModel model =  new DefaultTableModel(new String [] {"Tên hàng và dịch vụ", "Đơn giá", "Số lượng", "Tổng", "Ghi chú"}, 0);
-    double tongTienCanThanhToan;
+    double tongTienCanThanhToan = 3000;
     ArrayList<entity.ThongTinPhongDangChon> data;
     entity.UuDai uuDai = null;
     
-    public GD_XuLy_TraPhong_HoaDon(ArrayList<entity.ThongTinPhongDangChon> data) {
+    public GD_XuLy_TraPhong_HoaDon(ArrayList<entity.ThongTinPhongDangChon> data) throws FileNotFoundException {
         initComponents();
         this.data = data;
         this.setBackground(Color.WHITE);
@@ -50,7 +56,45 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
         jCheckBox1.setVisible(false);
     }
     
-    public void loadData(ArrayList<entity.ThongTinPhongDangChon> data){
+     public ArrayList<int[]> loadFileTextField() throws FileNotFoundException{
+        File file = new File("src\\SettingVoucher.txt");
+
+        ArrayList<int[]> diemTichLuy = new ArrayList<>();
+        // file tồn tại -> đọc
+        if (file.exists()){   
+            Scanner sc = new Scanner(file);
+            
+            while (sc.hasNextLine()){
+                String[] temp = sc.nextLine().split(";");
+                diemTichLuy.add(new int[]{Integer.valueOf(temp[0]), Integer.valueOf(temp[1])});
+            }
+        }
+        // file không tồn tại-> tạo
+        else{
+            Formatter createFile = new Formatter(file);
+            //DATA TEMP
+            diemTichLuy = new ArrayList<>();
+            diemTichLuy.add(new int[]{0, 0});
+            diemTichLuy.add(new int[]{0, 0});
+            diemTichLuy.add(new int[]{0, 0});
+            diemTichLuy.add(new int[]{0, 0});
+            
+            
+            writeFile(diemTichLuy);
+            createFile.close();
+        }
+        return diemTichLuy;
+     }
+     
+    public void writeFile(ArrayList<int[]> data) throws FileNotFoundException{
+        File file = new File("src\\SettingVoucher.txt");
+        Formatter f = new Formatter(file);
+        for (int[] is : data) {
+            f.format("%d;%d\n", is[0], is[1]);
+        }
+        f.close();
+    }
+    public void loadData(ArrayList<entity.ThongTinPhongDangChon> data) throws FileNotFoundException{
         LocalDateTime resultTGDP = LocalDateTime.now();
         
         double tongDichVu = 0.0;
@@ -92,19 +136,28 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
             tongDichVu = tongDichVu + thongTinPhongDangChon.tongTienDichVu();
             tongTienPhong = tongTienPhong + thongTinPhongDangChon.tongTienPhong();
         }
+        
+        
+        
         jLabel4.setText(resultTGDP.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         jLabel6.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-        jLabel8.setText(thoiGianSuDung + " Phút");
+
+        ArrayList<int[]> chuongTrinhKhuyenMai = loadFileTextField();
+
+        double tongTien = tongDichVu + tongTienPhong;
+
+        jLabel27.setText(String.format("%,.3f", tongDichVu+tongTienPhong) + "Đ");
         
-        jLabel16.setText(String.format("%,.3f", tongTienPhong) + "Đ");
-        jLabel18.setText(String.format("%,.3f", tongDichVu) + "Đ");
-        jLabel24.setText("- "+String.format("%,.3f", datCoc) + "Đ");
+        coc.setText("- "+String.format("%,.3f", datCoc) + "Đ");
         
-        tongTienCanThanhToan = (tongDichVu + tongTienPhong) - datCoc + (tongDichVu + tongTienPhong)*0.15;
+        thue.setText(String.format("(%d", (chuongTrinhKhuyenMai.get(0)[0])) + "%) " + "- " + String.format("%,.3fĐ", (chuongTrinhKhuyenMai.get(0)[0]/100.0)*tongTien));
+        chuongTrinh.setText(String.format("(%d", (chuongTrinhKhuyenMai.get(0)[1])) + "%) " + "- " + String.format("%,.3fĐ", (chuongTrinhKhuyenMai.get(0)[1]/100.0)*tongTien));
+
+                
+        tongTienCanThanhToan = tongTien - datCoc - (chuongTrinhKhuyenMai.get(0)[0]/100*tongTien);
         
         jLabel22.setText(String.format("%,.3f", tongTienCanThanhToan) + "Đ");
-        
-        
+         
     }
 
     /**
@@ -133,18 +186,21 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
         jScrollPane1 = new javax.swing.JScrollPane();
         rSTableMetro1 = new rojeru_san.complementos.RSTableMetro();
         jPanel6 = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        thue = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
+        chuongTrinh = new javax.swing.JLabel();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        coc = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jPanel15 = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
         jPanel16 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -267,7 +323,15 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
             new String [] {
                 "Tên hàng và dịch vụ", "Đơn giá", "Số lượng", "Tổng", "Ghi chú"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         rSTableMetro1.setAltoHead(35);
         rSTableMetro1.setColorBackgoundHead(new java.awt.Color(0, 204, 0));
         rSTableMetro1.setColorBordeFilas(new java.awt.Color(204, 204, 204));
@@ -284,17 +348,39 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
         jScrollPane1.setViewportView(rSTableMetro1);
         rSTableMetro1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         if (rSTableMetro1.getColumnModel().getColumnCount() > 0) {
+            rSTableMetro1.getColumnModel().getColumn(0).setResizable(false);
             rSTableMetro1.getColumnModel().getColumn(0).setPreferredWidth(200);
-            rSTableMetro1.getColumnModel().getColumn(1).setPreferredWidth(100);
+            rSTableMetro1.getColumnModel().getColumn(1).setResizable(false);
+            rSTableMetro1.getColumnModel().getColumn(1).setPreferredWidth(10);
+            rSTableMetro1.getColumnModel().getColumn(2).setResizable(false);
             rSTableMetro1.getColumnModel().getColumn(2).setPreferredWidth(30);
+            rSTableMetro1.getColumnModel().getColumn(3).setResizable(false);
             rSTableMetro1.getColumnModel().getColumn(3).setPreferredWidth(100);
-            rSTableMetro1.getColumnModel().getColumn(4).setPreferredWidth(200);
+            rSTableMetro1.getColumnModel().getColumn(4).setResizable(false);
+            rSTableMetro1.getColumnModel().getColumn(4).setPreferredWidth(300);
         }
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setMaximumSize(new java.awt.Dimension(975, 184));
         jPanel6.setMinimumSize(new java.awt.Dimension(975, 184));
         jPanel6.setPreferredSize(new java.awt.Dimension(975, 184));
+
+        jPanel17.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel17.setMaximumSize(new java.awt.Dimension(957, 33));
+        jPanel17.setMinimumSize(new java.awt.Dimension(957, 33));
+        jPanel17.setName(""); // NOI18N
+        jPanel17.setPreferredSize(new java.awt.Dimension(957, 33));
+        jPanel17.setLayout(new java.awt.BorderLayout());
+
+        jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel26.setText("Tổng tiền:");
+        jPanel17.add(jLabel26, java.awt.BorderLayout.WEST);
+
+        jLabel27.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel27.setText("300.000Đ");
+        jPanel17.add(jLabel27, java.awt.BorderLayout.EAST);
+
+        jPanel6.add(jPanel17);
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setMaximumSize(new java.awt.Dimension(957, 33));
@@ -304,12 +390,12 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
         jPanel11.setLayout(new java.awt.BorderLayout());
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel15.setText("Tổng tiền phòng:");
+        jLabel15.setText("Thuế (Vat):");
         jPanel11.add(jLabel15, java.awt.BorderLayout.WEST);
 
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel16.setText("300.000Đ");
-        jPanel11.add(jLabel16, java.awt.BorderLayout.EAST);
+        thue.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        thue.setText("null");
+        jPanel11.add(thue, java.awt.BorderLayout.EAST);
 
         jPanel6.add(jPanel11);
 
@@ -320,30 +406,14 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
         jPanel12.setLayout(new java.awt.BorderLayout());
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel17.setText("Tổng tiền dịch vụ:");
+        jLabel17.setText("Chương trình:");
         jPanel12.add(jLabel17, java.awt.BorderLayout.WEST);
 
-        jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel18.setText("150.000Đ");
-        jPanel12.add(jLabel18, java.awt.BorderLayout.EAST);
+        chuongTrinh.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        chuongTrinh.setText("null");
+        jPanel12.add(chuongTrinh, java.awt.BorderLayout.EAST);
 
         jPanel6.add(jPanel12);
-
-        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel13.setMaximumSize(new java.awt.Dimension(957, 33));
-        jPanel13.setMinimumSize(new java.awt.Dimension(957, 33));
-        jPanel13.setPreferredSize(new java.awt.Dimension(957, 33));
-        jPanel13.setLayout(new java.awt.BorderLayout());
-
-        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel19.setText("Chiết khấu:");
-        jPanel13.add(jLabel19, java.awt.BorderLayout.WEST);
-
-        jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel20.setText("15%");
-        jPanel13.add(jLabel20, java.awt.BorderLayout.EAST);
-
-        jPanel6.add(jPanel13);
 
         jPanel15.setBackground(new java.awt.Color(255, 255, 255));
         jPanel15.setMaximumSize(new java.awt.Dimension(957, 33));
@@ -355,11 +425,27 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
         jLabel23.setText("Đặt cọc:");
         jPanel15.add(jLabel23, java.awt.BorderLayout.WEST);
 
-        jLabel24.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel24.setText("-350.000Đ");
-        jPanel15.add(jLabel24, java.awt.BorderLayout.EAST);
+        coc.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        coc.setText("-350.000Đ");
+        jPanel15.add(coc, java.awt.BorderLayout.EAST);
 
         jPanel6.add(jPanel15);
+
+        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel13.setMaximumSize(new java.awt.Dimension(957, 33));
+        jPanel13.setMinimumSize(new java.awt.Dimension(957, 33));
+        jPanel13.setPreferredSize(new java.awt.Dimension(957, 33));
+        jPanel13.setLayout(new java.awt.BorderLayout());
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel19.setText("Hội viên:");
+        jPanel13.add(jLabel19, java.awt.BorderLayout.WEST);
+
+        jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel20.setText("null");
+        jPanel13.add(jLabel20, java.awt.BorderLayout.EAST);
+
+        jPanel6.add(jPanel13);
 
         jPanel16.setBackground(new java.awt.Color(255, 255, 255));
         jPanel16.setMaximumSize(new java.awt.Dimension(957, 53));
@@ -496,9 +582,9 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
                 .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -552,18 +638,19 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
                     rSMetroTextPlaceHolder1.setBorderColor(new Color(0,204,0));
                     rSMetroTextPlaceHolder1.setBackground(new Color(204,204,204));
                     rSMetroTextPlaceHolder1.setEditable(false);
+                    double value = (tongTienCanThanhToan * uuDai.getGiamGia());
+                    rSMetroTextPlaceHolder1.setText(String.valueOf("- " + String.format("%,.3f", value)));
                     if (check == false){
-                                            tongTienCanThanhToan = tongTienCanThanhToan - uuDai.getGiamGia();
+                                            tongTienCanThanhToan = tongTienCanThanhToan - (tongTienCanThanhToan * uuDai.getGiamGia());
                                             jLabel22.setText(String.format("%,.3f", tongTienCanThanhToan) + "Đ");
                                             check = true;
                                             this.uuDai = uuDai;
+                                            
                     }
 
                     
                     return;
                 }
-            
-                 
         }
         rSMetroTextPlaceHolder1.setBorderColor(new Color(255,0,0));
         return;
@@ -604,26 +691,31 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GD_XuLy_TraPhong_HoaDon(null).setVisible(true);
+                try  {
+                    new GD_XuLy_TraPhong_HoaDon(null).setVisible(true);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(GD_XuLy_TraPhong_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel chuongTrinh;
+    private javax.swing.JLabel coc;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -638,6 +730,7 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -650,5 +743,6 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle2;
     private rojerusan.RSMetroTextPlaceHolder rSMetroTextPlaceHolder1;
     private rojeru_san.complementos.RSTableMetro rSTableMetro1;
+    private javax.swing.JLabel thue;
     // End of variables declaration//GEN-END:variables
 }

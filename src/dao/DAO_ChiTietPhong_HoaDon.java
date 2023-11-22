@@ -66,19 +66,13 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
 	}
     
     public void updateBill(String ghiChu, String maHD, String maPhong, String maUuDai){
-               ConnectDB.getInstance();
+        ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         PreparedStatement statement = null;
      
-        try {
- 
-            statement = con.prepareStatement("update HoaDon set trangThai = 1, maUuDai = ? where maHoaDon = ?");
-            statement.setString(1, maUuDai);
-            statement.setString(2, maHD);
-            statement.executeUpdate();
+        try{
             
-            
-            
+                        
             statement = con.prepareStatement("update ChiTietPhongHoaDon set thoiGianTraPhong = ?, ghiChu = ? where maHoaDon = ? and maPhong = ?");
             statement.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
             statement.setString(2, ghiChu);
@@ -89,6 +83,38 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
             statement = con.prepareStatement("update Phong set trangThai = 0 where maPhong = ?");
             statement.setString(1, maPhong);
             statement.executeUpdate();
+ 
+            statement = con.prepareStatement("select * from ChiTietPhongHoaDon ctphd inner join HoaDon hd on ctphd.maHoaDon = hd.maHoaDon where ctphd.ghiChu like N'%Đang sử dụng'\n" +
+                                             "and hd.maHoaDon = ?");
+            statement.setString(1, maHD);
+            ResultSet rs = statement.executeQuery();
+            
+            boolean flag = false;
+            
+            while (rs.next()){
+                flag = true;
+            }
+            
+            if (maUuDai.trim().equals("")){
+                maUuDai = null;
+            }
+            
+            if (flag == false){
+                statement = con.prepareStatement("update HoaDon set trangThai = 1, maUuDai = ? where maHoaDon = ?");
+                statement.setString(1, maUuDai);
+                statement.setString(2, maHD);
+                statement.executeUpdate();
+            }
+            else{
+                statement = con.prepareStatement("update HoaDon set trangThai = 0, maUuDai = ? where maHoaDon = ?");
+                statement.setString(1, maUuDai);
+                statement.setString(2, maHD);
+                statement.executeUpdate();
+            }
+
+            
+            
+
             
             
 

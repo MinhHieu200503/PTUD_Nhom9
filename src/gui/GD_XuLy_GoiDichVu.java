@@ -202,6 +202,8 @@ public class GD_XuLy_GoiDichVu extends javax.swing.JFrame {
     public void loadDSTatCaDichVu(){
         DefaultTableModel model_allDV= (DefaultTableModel) tableTatCaDV.getModel();
         
+        model_allDV.setRowCount(0);
+        
         DAO_DichVu dao_dichvu = new DAO_DichVu();
         ArrayList<DichVu> listAllDV = new ArrayList<>();
         listAllDV = dao_dichvu.getAll(DichVu.class);

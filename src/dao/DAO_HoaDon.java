@@ -175,6 +175,7 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
             //7: tổng tiền
             //Lấy Mã Hóa Đơn
             String maHD = getHoaDonByPhongDangSuDung(maPhong);
+            String soDienThoai = "";
 //           System.out.println("MaHoaDon: " + maHD);
             
 //0 mã phòng
@@ -187,12 +188,29 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
             rs = statement.executeQuery();
             
             
-            
+            result.setMaUuDai(null);
             
             while (rs.next()) {
 //1 tên khách hàng
                 result.setTenKhachHang(rs.getString(8));
+                soDienThoai = rs.getString(7);
+                result.setMaUuDai(rs.getString("maUuDai"));
 //                System.out.println("TenKhachHang: " + result.getTenKhachHang());
+            }
+            
+            statement = con.prepareStatement("select tongThoiGian = sum((datediff(minute, thoiGianNhanPhong, thoiGianTraPhong))) from ChiTietPhongHoaDon ctphd inner join HoaDon hd on ctphd.maHoaDon = hd.maHoaDon\n" +
+                                             "inner join KhachHang kh on kh.soDienThoai = hd.maKhachHang\n" +
+                                             "where trangThai = 1 and kh.soDienThoai = ?");
+            statement.setString(1, soDienThoai);
+            rs = statement.executeQuery();
+            
+            while(rs.next()){
+                if (rs.getString(1) != null){
+                    result.setThoiGianSuDungTichLuy(rs.getInt(1));
+                }
+                else{
+                    result.setThoiGianSuDungTichLuy(0);
+                }
             }
 
 //2 3 6  Thời gian nhận, thời gian sử dụng tạm tính, ghi chú

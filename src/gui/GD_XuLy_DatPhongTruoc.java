@@ -87,7 +87,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
         
     }
     
-    private void loadDSPhongTrong(String loaiPhong,int sucChua,String date){
+    public void loadDSPhongTrong(String loaiPhong,int sucChua,String date){
         ContainerListPhong.removeAll();
         
          dao.DAO_Phong dao_phong = new DAO_Phong();
