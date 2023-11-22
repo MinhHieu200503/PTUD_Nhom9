@@ -59,7 +59,7 @@
     <Container class="javax.swing.JPanel" name="pnlMain">
       <Properties>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[1650, 925]"/>
+          <Dimension value="[1650, 890]"/>
         </Property>
       </Properties>
 
