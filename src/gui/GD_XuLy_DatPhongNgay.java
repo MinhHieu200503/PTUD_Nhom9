@@ -51,6 +51,7 @@ import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 import raven.cell.TableActionCellEditor;
 import raven.cell.TableActionCellRender;
 import raven.cell.TableActionEvent;
@@ -96,10 +97,22 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                 System.out.println("maPhong" + maPhong);
                 if (selectedRow != -1) { // Kiểm tra xem có dòng được chọn không
                     // Xóa dòng được chọn từ mô hình
-
-                smallPanel.Panel_DanhSachPhongFullCol.setPhongDefault(maPhong);
-                model.removeRow(selectedRow);
+                
+                model = (DefaultTableModel) tablePhongDatNgay.getModel();
+                
+                    
+                
+                    if(isChuaDat(model.getValueAt(row, 0).toString())){
+                        smallPanel.Panel_DanhSachPhongFullCol.setPhongDefault(maPhong);
+                        model.removeRow(selectedRow);
+                    }
+                    else{
                         
+                        JOptionPane.showMessageDialog(null, "Phòng đã được đặt nên không thể xóa");
+                    }
+               
+                
+                
                 
                 }
             }
@@ -139,6 +152,18 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
     
     }
     
+    public boolean isChuaDat(String maPhong){
+        
+        lsCT = dao_cthd.getThongCTPhongbyKhachHang(txt_SoDT.getEditor().getItem().toString());
+        
+        for(ChitTietPhongHoaDon ct: lsCT){
+            if(maPhong.equals(ct.getPhong().getMaPhong())){
+                return false;
+            }
+        }
+        return true;
+    }
+    
     public boolean datPhong(){
         DAO_HoaDon daoHD = new DAO_HoaDon();
         DAO_ChiTietPhong_HoaDon dao_ctP_HD = new DAO_ChiTietPhong_HoaDon();
@@ -170,11 +195,11 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         KhachHang khachHang = new KhachHang();
         
         if(I_CRUD.findById(sdtKhachHang, new KhachHang()).getSoDienThoai() != null){
-            JOptionPane.showMessageDialog(null, "Khách hàng có rồi");
+            
             khachHang = I_CRUD.findById(txt_SoDT.getSelectedItem().toString().trim(), new KhachHang());
         }
         else {
-            JOptionPane.showMessageDialog(null, "Đã thêm khách hàng mới");
+            
             khachHang = new KhachHang(sdtKhachHang, txt_khachHang.getText());
             dao_khachHang.create(khachHang);
         }
@@ -187,6 +212,8 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                             txt_MaUuDai.getText().equals("")?(new UuDai(null, "", 0.0, null, null)):I_CRUD.findById(txt_MaUuDai.getText().trim(), new UuDai()),
                      I_CRUD.findById("NV001", new NhanVien()));
         daoHD.create(hd);
+        // Quang: tui có tác động vào thêm tham số ghiChu = ""
+        
         
         
         
@@ -194,21 +221,35 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
           
         int count = model.getRowCount();
         
-          
-        for(int i=0; i<count; i++){ 
-            String maPhong = (String) model.getValueAt(i, 0);
-//            JOptionPane.showMessageDialog(null, "Mã phòng lấy đc từ bảng chọn"+ maPhong);
-            ChitTietPhongHoaDon ctPhongHD = new ChitTietPhongHoaDon(LocalDateTime.now(), null, "MP000 Đang sử dụng", hd, I_CRUD.findById(maPhong+"".trim(), new Phong()));
-            dao_ctP_HD.themCTHD_PMoi(ctPhongHD);
-            daoPhong.capNhatTrangThaiPhong(maPhong, 2); //Cập nhật trạng thái phòng
+        if(isKhDangCoHD(khachHang.getSoDienThoai())){
+            for(int i=0; i<count; i++){ 
+                JOptionPane.showMessageDialog(null, "Là khách hàng đang  có hóa đơn");
+                String maPhong = (String) model.getValueAt(i, 0);
+                if(isChuaDat(maPhong)){
+                    String maHDcu = daoHD.getHoaDonByPhongDangSuDung((String) model.getValueAt(0, 0));
+                    ChitTietPhongHoaDon ctPhongHD = new ChitTietPhongHoaDon(LocalDateTime.now(), null, "MP000 Đang sử dụng", I_CRUD.findById(maHDcu, new HoaDon()), I_CRUD.findById(maPhong+"".trim(), new Phong()));
+                    dao_ctP_HD.themCTHD_PMoi(ctPhongHD);
+                    daoPhong.capNhatTrangThaiPhong(maPhong, 2);
+                }   
+            }
+            
         }
-        
-        
-        
-        
-        
-        
-        
+        else{
+            
+            JOptionPane.showMessageDialog(null, "Là khách hàng đang không có hóa đơn");
+            HoaDon hd = new HoaDon(I_TraCuu_QuanLi.createIdForHoaDon(daoHD.getDsIdTheoNgayHienTai(), "HD"), LocalDateTime.now(), 0, "", khachHang , 
+                            null, I_CRUD.findById("NV001", new NhanVien()));
+        daoHD.create(hd);
+            for(int i=0; i<count; i++){ 
+                String maPhong = (String) model.getValueAt(i, 0);
+                
+                    
+                    ChitTietPhongHoaDon ctPhongHD = new ChitTietPhongHoaDon(LocalDateTime.now(), null, "MP000 Đang sử dụng", hd, I_CRUD.findById(maPhong+"".trim(), new Phong()));
+                    dao_ctP_HD.themCTHD_PMoi(ctPhongHD);
+                    daoPhong.capNhatTrangThaiPhong(maPhong, 2);
+                 
+            }
+        }
         
         
           
@@ -242,8 +283,12 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
     }
     
     public void tuDongTimKiemKhachHang(){
+         
         txt_SoDT.removeAllItems();
         txt_SoDT.addItem("");
+        txt_SoDT.setSelectedIndex(0);
+        model = (DefaultTableModel) tablePhongDatNgay.getModel();
+        
         DAO_KhachHang dao_KhachHang = new DAO_KhachHang();
 		// tự động kiểm tra
         AutoCompleteDecorator.decorate(txt_SoDT);
@@ -251,15 +296,51 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                 @Override
                 public void actionPerformed(ActionEvent e) {
                         if (txt_SoDT.getSelectedItem() != null) {
+                                loadDSPhongTrong();
+                                model.setRowCount(0);
                                 String soDT = txt_SoDT.getSelectedItem().toString().trim();
                                 kiemTraSDT(soDT);
+                                
+                                
+                                if(isKhDangCoHD(soDT)){
+                                    model.setRowCount(0);
+                                    lsCT = dao_cthd.getThongCTPhongbyKhachHang(soDT);
+                                     
+                                    int i = 0;
+                                    for(ChitTietPhongHoaDon ct: lsCT)
+                                    {
+                                        String[] row = {ct.getPhong().getMaPhong(), ct.getPhong().getLoaiPhong().getLoaiPhong(), ct.getPhong().getSucChuaToiDa() +"", ct.getPhong().getGiaPhongTheoGio()+""};
+                                        model.addRow(row);
+                                        
+                                    }
+                                }
+                                
+                                
                         }
                 }
         });
+        
         for (KhachHang kH : dao_KhachHang.getAll(KhachHang.class)) {
                 txt_SoDT.addItem(kH.getSoDienThoai());
         }
     }
+    
+        
+    
+            
+        public boolean isKhDangCoHD(String sdt){
+            DAO_HoaDon dao_hd = new DAO_HoaDon();
+            
+            for(HoaDon hd: dao_hd.getAll(HoaDon.class)){
+                if(hd.getKhachHang().getSoDienThoai().equals(sdt) && hd.getTrangThai() == 0){
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        
+        
     public boolean kiemTraSDT(String soDT) {
             
 		KhachHang khachHang = I_CRUD.findById(soDT, new KhachHang());
@@ -322,8 +403,6 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         ContainerListPhong = new javax.swing.JPanel();
         Panel_ThongTinKhachHang = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txt_MaUuDai = new app.bolivia.swing.JCTextField();
         txt_GioNhanPhong = new app.bolivia.swing.JCTextField();
         jLabel1 = new javax.swing.JLabel();
         btn_DatPhongNgay = new javax.swing.JButton();
@@ -361,11 +440,6 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         jLabel2.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         jLabel2.setText("Giờ nhận phòng:");
 
-        jLabel3.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
-        jLabel3.setText("Mã ưu đãi:");
-
-        txt_MaUuDai.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
         txt_GioNhanPhong.setEditable(false);
         txt_GioNhanPhong.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
@@ -377,14 +451,10 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                 .addGap(28, 28, 28)
                 .addGroup(Panel_ThongTinKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Panel_ThongTinKhachHangLayout.createSequentialGroup()
-                        .addGroup(Panel_ThongTinKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_MaUuDai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_GioNhanPhong, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE))
+                        .addComponent(txt_GioNhanPhong, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
                         .addGap(45, 45, 45))
                     .addGroup(Panel_ThongTinKhachHangLayout.createSequentialGroup()
-                        .addGroup(Panel_ThongTinKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         Panel_ThongTinKhachHangLayout.setVerticalGroup(
@@ -393,11 +463,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_GioNhanPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
-                .addComponent(txt_MaUuDai, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(94, 94, 94))
         );
 
         Container_DatPhongNgay.add(Panel_ThongTinKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 250, 670, 200));
@@ -409,7 +475,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         btn_DatPhongNgay.setBackground(new java.awt.Color(0, 204, 204));
         btn_DatPhongNgay.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         btn_DatPhongNgay.setForeground(new java.awt.Color(255, 255, 255));
-        btn_DatPhongNgay.setText("ĐẶT PHÒNG NGAY");
+        btn_DatPhongNgay.setText("XÁC NHẬN ĐẶT PHÒNG");
         btn_DatPhongNgay.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 datPhongNgay(evt);
@@ -429,6 +495,11 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         txt_SoDT.setEditable(true);
         txt_SoDT.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txt_SoDT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ", " " }));
+        txt_SoDT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_SoDTActionPerformed(evt);
+            }
+        });
 
         txt_khachHang.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -530,8 +601,14 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
             model.setRowCount(0);
             txt_SoDT.setSelectedIndex(0);
             txt_khachHang.setText("");
+            
         }
     }//GEN-LAST:event_datPhongNgay
+
+    private void txt_SoDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SoDTActionPerformed
+//            String selectedOption = (String) txt_SoDT.getEditor().getItem();
+//            JOptionPane.showMessageDialog(null, "Bạn vừa chọn");
+    }//GEN-LAST:event_txt_SoDTActionPerformed
 
     /**
      * @param args the command line arguments
@@ -558,17 +635,17 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
     private javax.swing.JButton btn_DatPhongNgay;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane2;
     public static rojeru_san.complementos.RSTableMetro tablePhongDatNgay;
     private app.bolivia.swing.JCTextField txt_GioNhanPhong;
-    private app.bolivia.swing.JCTextField txt_MaUuDai;
     private javax.swing.JComboBox<String> txt_SoDT;
     private app.bolivia.swing.JCTextField txt_khachHang;
     // End of variables declaration//GEN-END:variables
     public static DefaultTableModel model  =new DefaultTableModel();
+    DAO_ChiTietPhong_HoaDon dao_cthd = new DAO_ChiTietPhong_HoaDon();
+         ArrayList<ChitTietPhongHoaDon> lsCT = new ArrayList();
     private Thread thread = null;
     public static void setTableData(String codePhong){
           model = (DefaultTableModel) tablePhongDatNgay.getModel();

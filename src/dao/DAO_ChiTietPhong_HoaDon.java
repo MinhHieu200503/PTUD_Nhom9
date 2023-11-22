@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -234,6 +235,7 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
         }
         return n > 0;
     }
+    
     public ArrayList<String> getDsIdTheoMaHoaDon(String idhoadon) {
         ArrayList<String> dsidphong = new ArrayList<>();
         ConnectDB.getInstance();
@@ -251,6 +253,75 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
         }
         return dsidphong;
 
+    }
+    
+     public ArrayList<ChitTietPhongHoaDon> getThongCTPhongbyKhachHang(String sdt){
+        ArrayList<ChitTietPhongHoaDon> ls = new ArrayList<>();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+        try {
+            String sql ="select  thoiGianNhanPhong, thoiGianTraPhong, ct.ghiChu, h.maHoaDon, maPhong from HoaDon h \n" +
+                        "inner join ChiTietPhongHoaDon ct on h.maHoaDon = ct.maHoaDon\n" +
+                        "where trangThai = 0 and ct.ghiChu != N'Đã hoàn thành' and maKhachHang= ? order by thoiGianNhanPhong";
+            
+            statement = con.prepareStatement(sql);
+            statement.setString(1, sdt);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+               
+                ls.add(new ChitTietPhongHoaDon(I_CRUD.SQLtoJava(rs.getString("thoiGianNhanPhong")), I_CRUD.SQLtoJava(rs.getString("thoiGianTraPhong")), 
+                        rs.getString("ghiChu"), I_CRUD.findById(rs.getString("maHoaDon"), new HoaDon()) , I_CRUD.findById(rs.getString("maPhong"), new Phong())));
+            }
+           
+            } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+
+        } finally {
+            try {
+                statement.close();
+            } catch (Exception e2) {
+                // TODO: handle exception
+                e2.printStackTrace();
+            }
+        }
+        return ls;
+    }
+      public ArrayList<String> getMaKHtheoPhongDangSuDung() {
+        ArrayList<String> dsid = new ArrayList<>();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        try {
+            Statement stm = con.createStatement();
+            String sql = "select distinct maKhachHang " +
+                        " from HoaDon h inner join chiTietphonghoadon c on h.maHoaDon = c.maHoaDon" +
+                        " where thoiGianTraPhong is null";
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                dsid.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_ChiTietPhong_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return dsid;
+    }
+    public ArrayList<String> getMaPhongTheoKH(String makh) { // phòng đang sử dụng
+        ArrayList<String> dsid = new ArrayList<>();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement pstm = null;
+        try {
+            pstm = con.prepareStatement("select maphong from chitietphonghoadon c inner join hoadon h on c.mahoadon = h.mahoadon where thoigiantraphong is null and makhachhang = ?");
+            pstm.setString(1, makh);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                dsid.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_ChiTietPhong_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return dsid;
     }
 }
     

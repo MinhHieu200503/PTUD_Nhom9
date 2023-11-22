@@ -27,18 +27,18 @@ public class FormSignIn extends JPanel {
         btnExit = new ExitButton();
         btnExit.setBounds( (400 - 35) , 0, 35, 35);
         add(btnExit);
-
+        
         title = new JLabel("Karaoke - Echo");
         title.setFont(cus.customFont23);
         title.setBounds(0, 40, 400, 40);
         title.setHorizontalAlignment((int) CENTER_ALIGNMENT);
         add(title);
-
+        
         pUserName = new TextFieldCustom("Username");
         pUserName.setBounds(30, 100, (400 - 30 * 2), 60);
         add(pUserName);
 
-
+          
         pPassWord = new TextFieldPassCustom("Password");
         pPassWord.setBounds(30, 180, (400 - 30 * 2), 60);
         

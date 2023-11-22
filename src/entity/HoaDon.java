@@ -15,6 +15,7 @@ public class HoaDon {
     private String maHoaDon;
     private LocalDateTime ngayLapHoaDon;
     private int trangThai;
+    private String ghiChu;
     private KhachHang khachHang;
     private UuDai uuDai;
     private NhanVien nhanVien;
@@ -67,10 +68,19 @@ public class HoaDon {
         this.nhanVien = nhanVien;
     }
 
-    public HoaDon(String maHoaDon, LocalDateTime ngayLapHoaDon, int trangThai, KhachHang khachHang, UuDai uuDai, NhanVien nhanVien) {
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
+    
+    public HoaDon(String maHoaDon, LocalDateTime ngayLapHoaDon, int trangThai, String ghiChu, KhachHang khachHang, UuDai uuDai, NhanVien nhanVien) {
         this.maHoaDon = maHoaDon;
         this.ngayLapHoaDon = ngayLapHoaDon;
         this.trangThai = trangThai;
+        this.ghiChu = ghiChu;
         this.khachHang = khachHang;
         this.uuDai = uuDai;
         this.nhanVien = nhanVien;
@@ -104,10 +114,6 @@ public class HoaDon {
     @Override
     public String toString() {
         return "HoaDon{" + "maHoaDon=" + maHoaDon + ", ngayLapHoaDon=" + ngayLapHoaDon + ", trangThai=" + trangThai + ", khachHang=" + khachHang + ", uuDai=" + uuDai + ", nhanVien=" + nhanVien + '}';
-    }
-
-    public void create(HoaDon hd) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

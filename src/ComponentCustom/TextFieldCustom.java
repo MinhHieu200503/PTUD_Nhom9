@@ -25,7 +25,6 @@ public class TextFieldCustom extends JPanel {
         lbltitle.setFont(cus.customFont17);
         lbltitle.setBounds(0, yLocate, 150, 30);
         add(lbltitle);
-
         txttitle = new JTextField();
         txttitle.setFont(cus.customFont17);
         txttitle.setBounds(0, 30, 310, 30);
@@ -33,6 +32,7 @@ public class TextFieldCustom extends JPanel {
         txttitle.setBackground(null);
         txttitle.setBorder(null);
         add(txttitle);
+        
 
 //        lblicon = new JLabel();
 //        lblicon.setIcon(new ImageIconCustom(url, 30, 30));

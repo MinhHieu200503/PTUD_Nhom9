@@ -155,6 +155,38 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
         }
         return result;
     }
+    
+    public boolean updateTrangThaiHoaDonBangMaHoaDon(String maHoaDon, int TrangThai) {
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+        int n = 0;
+          try {
+
+              statement = con.prepareStatement("update HoaDon\n" +
+                                                "set trangThai = ? \n" +
+                                                "where maHoaDon = ? ");
+
+              statement.setInt(1, TrangThai);
+
+              statement.setString(2, maHoaDon);
+
+              n = statement.executeUpdate();
+
+          } catch (Exception e) {
+              // TODO: handle exception
+              e.printStackTrace();
+
+          } finally {
+              try {
+                  statement.close();
+              } catch (Exception e2) {
+                  // TODO: handle exception
+                  e2.printStackTrace();
+              }
+          }
+          return n > 0;
+      }
 
     public ThongTinPhongDangChon getThongTinTraPhong(String maPhong){
         ThongTinPhongDangChon result = new ThongTinPhongDangChon();
@@ -224,8 +256,8 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
             entity.Phong tempPhong = null;
 
             while (rs.next()) {
-                
-                tempHoaDon = new HoaDon(maHD, rs.getTimestamp(2).toLocalDateTime(), rs.getInt(3), null, null, null);
+                // Quang: tui chỉnh lại entity hoá đơn, có tác động vào thêm tham số ghi chú là ""
+                tempHoaDon = new HoaDon(maHD, rs.getTimestamp(2).toLocalDateTime(), rs.getInt(3),"", null, null, null); 
                 tempPhong = new Phong(maPhong, rs.getString(13), 2, null, rs.getInt(16), rs.getDouble(17));
                 
                 

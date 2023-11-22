@@ -29,7 +29,8 @@ public class Button extends JButton {
             public void mouseClicked(MouseEvent e) {
                 mainFrame main = new mainFrame();
                 
-                setVisible(false);
+                getParent().getParent().getParent().setVisible(false);
+               
                 main.setVisible(true);
             }
 

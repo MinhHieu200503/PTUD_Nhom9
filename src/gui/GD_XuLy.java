@@ -6,6 +6,7 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -46,7 +47,8 @@ public class GD_XuLy extends javax.swing.JFrame {
         
         navBarChoice(0);
         repaint();
-
+        
+        
     }
     
     public void navBarChoice(int index){
