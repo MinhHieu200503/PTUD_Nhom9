@@ -36,16 +36,21 @@ public class GD_TraCuu extends javax.swing.JFrame {
 //        setExtendedState(6);
         
         pnlRight.add(gdkh.getContentPane(), BorderLayout.CENTER);
+        pack();
         pnlRight.add(gdhd.getContentPane(), BorderLayout.CENTER);
+        pack();
         pnlRight.add(gdp.getContentPane(), BorderLayout.CENTER);
+        pack();
         pnlRight.add(gddv.getContentPane(), BorderLayout.CENTER);
+        pack();
         pnlRight.add(gdpdp.getContentPane(), BorderLayout.CENTER);
+        pack();
         pnlRight.add(gdnv.getContentPane(), BorderLayout.CENTER);
-        
+        pack();
         
         choice= pnlLeft_1; // gán nó vào pnlTitle
         chuyenPanel(gdkh);
-        pack();
+        
     }
 
     /**

@@ -37,6 +37,9 @@ public class GD_TraCuu_Phong extends javax.swing.JFrame implements  I_TraCuu_Qua
             }
             list.add(row);
         }
+        if (!GD_DangNhap.taiKhoan.getVaiTro()) { // nhân viên thì ko hiển thị button edit
+            btn_edit.setVisible(false);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -165,7 +168,7 @@ public class GD_TraCuu_Phong extends javax.swing.JFrame implements  I_TraCuu_Qua
         );
         pnlDataLayout.setVerticalGroup(
             pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
@@ -212,7 +215,7 @@ public class GD_TraCuu_Phong extends javax.swing.JFrame implements  I_TraCuu_Qua
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, 890, Short.MAX_VALUE)
+            .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

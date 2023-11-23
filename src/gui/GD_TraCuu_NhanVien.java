@@ -37,6 +37,9 @@ public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
             }
             list.add(row);
         }
+        if (!GD_DangNhap.taiKhoan.getVaiTro()) { // nhân viên thì ko hiển thị button edit
+            btn_edit.setVisible(false);
+        }
     }
 
     /**

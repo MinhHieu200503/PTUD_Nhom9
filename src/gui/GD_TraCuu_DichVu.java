@@ -37,6 +37,9 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
             }
             list.add(row);
         }
+        if (!GD_DangNhap.taiKhoan.getVaiTro()) { // nhân viên thì ko hiển thị button edit
+            btn_edit.setVisible(false);
+        }
     }
 
     /**
@@ -230,7 +233,7 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
