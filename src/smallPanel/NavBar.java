@@ -60,7 +60,10 @@ private GD_TrangChu trangChu = new GD_TrangChu();
 //        quanLi.setVisible(false);
         
         navBarChoice(0);
-        name_Account.setText(GD_DangNhap.taiKhoan.getNhanVien().getTenNhanVien());
+//        name_Account.setText(GD_DangNhap.taiKhoan.getNhanVien().getTenNhanVien());
+        if (GD_DangNhap.taiKhoan.getNhanVien() != null){
+            name_Account.setText(GD_DangNhap.taiKhoan.getNhanVien().getTenNhanVien());
+        }
     }
     
     public void navBarChoice(int index){
@@ -495,7 +498,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
 
         add.setMaximumSize(new java.awt.Dimension(1920, 964));
         add.setMinimumSize(new java.awt.Dimension(1920, 964));
-        add.setLayout(new javax.swing.BoxLayout(add, javax.swing.BoxLayout.Y_AXIS));
+        add.setLayout(new org.jdesktop.swingx.HorizontalLayout());
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);

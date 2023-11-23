@@ -188,9 +188,10 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
         pnlMain.add(pnlCenter, java.awt.BorderLayout.CENTER);
 
         pnlBottom.setBackground(new java.awt.Color(255, 255, 255));
-        pnlBottom.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 25, 10, 25));
+        pnlBottom.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 25, 10, 25));
         pnlBottom.setName(""); // NOI18N
         pnlBottom.setPreferredSize(new java.awt.Dimension(1650, 79));
+        pnlBottom.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 7, 5));
 
         btn_edit.setBackground(new java.awt.Color(0, 153, 153));
         btn_edit.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
