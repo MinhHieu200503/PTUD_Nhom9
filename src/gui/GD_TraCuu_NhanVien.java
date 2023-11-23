@@ -37,6 +37,9 @@ public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
             }
             list.add(row);
         }
+        if (!GD_DangNhap.taiKhoan.getVaiTro()) { // nhân viên thì ko hiển thị button edit
+            btn_edit.setVisible(false);
+        }
     }
 
     /**
@@ -51,6 +54,7 @@ public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         pnlMain = new javax.swing.JPanel();
         pnlTop = new javax.swing.JPanel();
         pnlTop_title = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         pnlCenter = new javax.swing.JPanel();
         pnlThongTinTraCuu = new javax.swing.JPanel();
         lbl_TraCuu = new javax.swing.JLabel();
@@ -67,7 +71,7 @@ public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         pnlMain.setLayout(new java.awt.BorderLayout());
 
         pnlTop.setBackground(new java.awt.Color(255, 255, 255));
-        pnlTop.setPreferredSize(new java.awt.Dimension(828, 100));
+        pnlTop.setPreferredSize(new java.awt.Dimension(828, 135));
         pnlTop.setLayout(new java.awt.BorderLayout());
 
         pnlTop_title.setBackground(new java.awt.Color(255, 255, 255));
@@ -76,6 +80,22 @@ public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         pnlTop_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         pnlTop_title.setText("TRA CỨU NHÂN VIÊN");
         pnlTop.add(pnlTop_title, java.awt.BorderLayout.CENTER);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1650, 25));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1650, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 25, Short.MAX_VALUE)
+        );
+
+        pnlTop.add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         pnlMain.add(pnlTop, java.awt.BorderLayout.NORTH);
 
@@ -166,7 +186,7 @@ public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         );
         pnlDataLayout.setVerticalGroup(
             pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
@@ -187,7 +207,7 @@ public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         pnlMain.add(pnlCenter, java.awt.BorderLayout.CENTER);
 
         pnlBottom.setBackground(new java.awt.Color(255, 255, 255));
-        pnlBottom.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 25, 10, 25));
+        pnlBottom.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 25, 10, 25));
         pnlBottom.setName(""); // NOI18N
         pnlBottom.setPreferredSize(new java.awt.Dimension(1650, 79));
 
@@ -213,7 +233,7 @@ public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, 919, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -281,6 +301,7 @@ public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
     private ArrayList<ArrayList<String>> list = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_edit;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbl_TraCuu;
     private javax.swing.JPanel pnlBottom;

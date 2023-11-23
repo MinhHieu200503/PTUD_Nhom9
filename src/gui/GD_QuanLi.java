@@ -30,15 +30,18 @@ public class GD_QuanLi extends javax.swing.JFrame {
      */
     public GD_QuanLi() {
         initComponents();
-        jTabbedPane1.addTab("Quản lí Phòng", p.getContentPane());
-        jTabbedPane1.addTab("Quản lí Loại phòng", lp.getContentPane());
-        jTabbedPane1.addTab("Quản lí Dịch vụ", dv.getContentPane());
-        jTabbedPane1.addTab("Quản lí Ưu đãi", ud.getContentPane());
-        jTabbedPane1.addTab("Quản lí Khách hàng", kh.getContentPane());
-        jTabbedPane1.addTab("Quản lí Nhân viên", nv.getContentPane());
-        jTabbedPane1.addTab("Quản lí Ca", ca.getContentPane());
+        if (GD_DangNhap.taiKhoan.getVaiTro()) { // quản lí
+            jTabbedPane1.addTab("Quản lí Phòng", p.getContentPane());
+            jTabbedPane1.addTab("Quản lí Loại phòng", lp.getContentPane());
+            jTabbedPane1.addTab("Quản lí Dịch vụ", dv.getContentPane());
+            jTabbedPane1.addTab("Quản lí Ưu đãi", ud.getContentPane());
+            jTabbedPane1.addTab("Quản lí Khách hàng", kh.getContentPane());
+            jTabbedPane1.addTab("Quản lí Nhân viên", nv.getContentPane());
+            jTabbedPane1.addTab("Quản lí Ca", ca.getContentPane());
+        } else { // nhân viên
+            jTabbedPane1.addTab("Quản lí Khách hàng", kh.getContentPane());
+        }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

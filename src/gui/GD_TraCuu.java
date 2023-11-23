@@ -11,8 +11,10 @@ import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.Toolkit;
 import java.awt.Window;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -34,18 +36,21 @@ public class GD_TraCuu extends javax.swing.JFrame {
     public GD_TraCuu() {
         initComponents();
 //        setExtendedState(6);
-        
         pnlRight.add(gdkh.getContentPane(), BorderLayout.CENTER);
+//        pack();
         pnlRight.add(gdhd.getContentPane(), BorderLayout.CENTER);
+//        pack();
         pnlRight.add(gdp.getContentPane(), BorderLayout.CENTER);
+//        pack();
         pnlRight.add(gddv.getContentPane(), BorderLayout.CENTER);
+//        pack();
         pnlRight.add(gdpdp.getContentPane(), BorderLayout.CENTER);
+//        pack();
         pnlRight.add(gdnv.getContentPane(), BorderLayout.CENTER);
-        
+        pack();
         
         choice= pnlLeft_1; // gán nó vào pnlTitle
         chuyenPanel(gdkh);
-        pack();
     }
 
     /**
@@ -355,13 +360,12 @@ public class GD_TraCuu extends javax.swing.JFrame {
 //        pnlRight.add(fr.getContentPane(), BorderLayout.CENTER);
 //        repaint();
 //
-       
         for (int i = 0 ; i<pnlRight.getComponentCount(); i++){
             pnlRight.getComponent(i).setVisible(false);
 
         }
         fr.getContentPane().setVisible(true);
-        repaint();
+//        repaint();
 
         
     }
