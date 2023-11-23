@@ -86,9 +86,12 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         jPanel15 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         cb_ca = new javax.swing.JComboBox<>();
-        jSeparator1 = new javax.swing.JSeparator();
-        jPanel17 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
+        jPanel16 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        cb_vaiTro = new javax.swing.JComboBox<>();
+        jSeparator2 = new javax.swing.JSeparator();
+        jPanel21 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
         pf_matKhau = new javax.swing.JPasswordField();
         jPanel5 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
@@ -266,24 +269,39 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
 
         jPanel2.add(jPanel15);
 
-        jSeparator1.setBackground(new java.awt.Color(0, 0, 204));
-        jSeparator1.setForeground(new java.awt.Color(0, 0, 204));
-        jSeparator1.setPreferredSize(new java.awt.Dimension(281, 3));
-        jPanel2.add(jSeparator1);
+        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel16.setPreferredSize(new java.awt.Dimension(281, 38));
+        jPanel16.setLayout(new java.awt.BorderLayout(0, 5));
 
-        jPanel17.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel17.setPreferredSize(new java.awt.Dimension(283, 83));
-        jPanel17.setLayout(new java.awt.BorderLayout(0, 5));
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel12.setText("Vai trò:");
+        jPanel16.add(jLabel12, java.awt.BorderLayout.WEST);
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel13.setText("Mật khẩu:");
-        jPanel17.add(jLabel13, java.awt.BorderLayout.PAGE_START);
+        cb_vaiTro.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        cb_vaiTro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân viên", "Quản lí" }));
+        cb_vaiTro.setPreferredSize(new java.awt.Dimension(160, 38));
+        jPanel16.add(cb_vaiTro, java.awt.BorderLayout.EAST);
+
+        jPanel2.add(jPanel16);
+
+        jSeparator2.setBackground(new java.awt.Color(0, 0, 204));
+        jSeparator2.setForeground(new java.awt.Color(0, 0, 204));
+        jSeparator2.setPreferredSize(new java.awt.Dimension(281, 3));
+        jPanel2.add(jSeparator2);
+
+        jPanel21.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel21.setPreferredSize(new java.awt.Dimension(283, 83));
+        jPanel21.setLayout(new java.awt.BorderLayout(0, 5));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel15.setText("Mật khẩu:");
+        jPanel21.add(jLabel15, java.awt.BorderLayout.PAGE_START);
 
         pf_matKhau.setBackground(new java.awt.Color(153, 255, 204));
         pf_matKhau.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jPanel17.add(pf_matKhau, java.awt.BorderLayout.PAGE_END);
+        jPanel21.add(pf_matKhau, java.awt.BorderLayout.PAGE_END);
 
-        jPanel2.add(jPanel17);
+        jPanel2.add(jPanel21);
 
         jPanel4.add(jPanel2);
 
@@ -507,7 +525,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
                     Ca ca = daoca.getCaTheoTen(cb_ca.getSelectedItem().toString());
                     
                     NhanVien nv = new NhanVien(id, ten, ngaySinh, gioiTinh, cmnd, diaChi, sdt, trangThai, gmail, ca);
-                    TaiKhoan tk = new TaiKhoan(sdt, String.valueOf(pf_matKhau.getPassword()), false, nv);
+                    TaiKhoan tk = new TaiKhoan(sdt, String.valueOf(pf_matKhau.getPassword()), cb_vaiTro.getSelectedItem().equals("Quản lí"), nv);
                     if (daonv.create(nv)&& daotk.create(tk)) {
                         JOptionPane.showMessageDialog(this, "Thêm thành công");
                         loadTable(daonv.getAll(NhanVien.class), model);
@@ -540,7 +558,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
                     Ca ca = daoca.getCaTheoTen(cb_ca.getSelectedItem().toString());
                     
                     NhanVien nv = new NhanVien(id, ten, ngaySinh, gioiTinh, cmnd, diaChi, sdt, trangThai, gmail, ca);
-                    TaiKhoan tk = new TaiKhoan(sdt, String.valueOf(pf_matKhau.getPassword()), false, nv);
+                    TaiKhoan tk = new TaiKhoan(sdt, String.valueOf(pf_matKhau.getPassword()), cb_vaiTro.getSelectedItem().equals("Quản lí"), nv);
                     if (daonv.update(nv) && daotk.update(tk)) {
                         JOptionPane.showMessageDialog(this, "Sửa thành công");
                         loadTable(daonv.getAll(NhanVien.class), model);
@@ -690,11 +708,13 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
     private javax.swing.JComboBox<String> cb_ca;
     private javax.swing.JComboBox<String> cb_gioiTinh;
     private javax.swing.JComboBox<String> cb_trangThai;
+    private javax.swing.JComboBox<String> cb_vaiTro;
     private com.toedter.calendar.JDateChooser datechooser_ngaySinh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -709,11 +729,12 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -722,7 +743,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPasswordField pf_matKhau;
     private rojeru_san.complementos.RSTableMetro tbl_danhSach;
     private javax.swing.JTextField tf_cmnd;

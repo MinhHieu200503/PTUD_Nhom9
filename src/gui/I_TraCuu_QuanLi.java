@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
@@ -237,7 +238,7 @@ public interface I_TraCuu_QuanLi<T> {
         }
     }
     default void showDetailInput(JPanel pnlInput, DefaultTableModel model, int index) {
-        int i = 0;
+        int i = 0; // i là chỉ mục của component bên detail
         for (Component c : pnlInput.getComponents()) {
             if (c instanceof JPanel) {
                 Component c1 = ((JPanel) c).getComponent(1);
@@ -264,9 +265,15 @@ public interface I_TraCuu_QuanLi<T> {
                         
 //                    }
                 } else if (c1 instanceof JComboBox) {
-//                    if (i < model.getColumnCount()) {
+                    if (i < model.getColumnCount()) {
                         ((JComboBox) c1).setSelectedItem(model.getValueAt(index, i++));
-//                    }
+                    } else {
+                        Component c2 = ((JPanel) c).getComponent(0);
+                        if (((JLabel) c2).getText().equals("Vai trò:")){
+                            ((JComboBox) c1).setSelectedItem(I_CRUD.findById(model.getValueAt(index, 6).toString(), new TaiKhoan()).getVaiTro() ? "Quản lí": "Nhân viên");
+                            i++;
+                        }
+                    }
                 }
 //                } else if (c1 instanceof JPasswordField) { // chả hiểu sao jpasswordfield mà nó lại tính luôn là jtextfield
 //                    // Dùng hàm finbyid lấy ra mật khẩu dựa vào số điện thoại
