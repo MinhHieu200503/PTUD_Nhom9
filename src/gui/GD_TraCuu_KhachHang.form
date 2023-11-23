@@ -268,7 +268,7 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                <EmptyBorder bottom="10" left="25" right="25" top="10"/>
+                <EmptyBorder bottom="10" left="25" right="25" top="15"/>
               </Border>
             </Property>
             <Property name="name" type="java.lang.String" value="" noResource="true"/>
@@ -282,7 +282,9 @@
             </Constraint>
           </Constraints>
 
-          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+            <Property name="horizontalGap" type="int" value="7"/>
+          </Layout>
           <SubComponents>
             <Component class="javax.swing.JButton" name="btn_edit">
               <Properties>
