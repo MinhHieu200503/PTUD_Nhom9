@@ -25,6 +25,11 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
      */
     public GD_TraCuu_DichVu() {
         initComponents();
+        /*
+            lấy model
+            load dữ liêu từ SQL và model
+            tạo 1 list (mảng 2 chiều) từ model để xử lí tìm kiếm sau
+        */
         model = (DefaultTableModel) table_traCuu.getModel();
         loadTable(dsdv, model);
         for (int i = 0; i<model.getRowCount(); i++) {
@@ -37,6 +42,7 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
             }
             list.add(row);
         }
+        // PHÂN QUYỀN
         if (!GD_DangNhap.taiKhoan.getVaiTro()) { // nhân viên thì ko hiển thị button edit
             btn_edit.setVisible(false);
         }
@@ -251,6 +257,7 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
 
     private void tf_TraCuuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_TraCuuKeyReleased
         // TODO add your handling code here:
+        // Nếu key rỗng thì load lại toàn bộ bảng từ csdl, ko thì load lại từ việc tìm kiếm trên list
         if (tf_TraCuu.getText().trim().equals("")) {
             loadTable(daodv.getAll(DichVu.class), model);
         } else {

@@ -28,9 +28,11 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
 
 public interface I_TraCuu_QuanLi<T> {
-    DecimalFormat df = new DecimalFormat("#,###.###");
+    DecimalFormat df = new DecimalFormat("#,###.###"); // Định dạng cho tiền tệ
+    
+    // Thường bên model, nhập liệu xử lí LocalDate dùng SimpleDateFormat. Còn LocalDateTime dùng DateTimeFormatter
 
-    // Loadtbale for tra cứu
+    // Loadtbale cho tra cứu
     default void load(ArrayList<ArrayList<String>> ds, DefaultTableModel model) {
         model.setRowCount(0);
         ds.forEach(e -> {
@@ -38,7 +40,7 @@ public interface I_TraCuu_QuanLi<T> {
         });
     }
     // Hàm search trên model
-    // list là danh sách đầu tiên (chứa đầy đủ các dòng)
+    // list là danh sách đầu tiên (chứa đầy đủ các dòng), mảng 2 chiều
     default ArrayList<ArrayList<String>> search(String text, ArrayList<ArrayList<String>> list) {
         // ds là danh sách chứa các dòng có trường khớp vs text
         ArrayList<ArrayList<String>> ds = new ArrayList<>();
@@ -46,10 +48,10 @@ public interface I_TraCuu_QuanLi<T> {
         for (int i = 0; i < list.size(); i++) {
             // duyệt qua các cột của list
             for (int j = 0; j < list.get(i).size(); j++) {
-                // nếu tìm thấy text trong list thì thêm vào ds
-                if (list.get(i).get(j) == null) {
+               
+                if (list.get(i).get(j) == null) { // giá trị cell là null 
                     continue;
-                } else {
+                } else {  // nếu tìm thấy text trong list thì thêm vào ds
                     if (list.get(i).get(j).toLowerCase().contains(text.toLowerCase())) {
                         // thêm dòng vào ds
                         ds.add(list.get(i));
@@ -61,7 +63,7 @@ public interface I_TraCuu_QuanLi<T> {
         return ds;
     }
     
-    // loadData() để add dữ liệu vào bảng từ model
+    // ds là danh sách cần load vào model
     default void loadTable(ArrayList<T> ds, DefaultTableModel model) {
         model.setRowCount(0);
         ds.forEach(e -> {
@@ -191,30 +193,32 @@ public interface I_TraCuu_QuanLi<T> {
             model.addRow(row);
         });
     }
-    default void setEnableInput(boolean b, JPanel pnlInput) {
-        int i = 0;
+    default void setEnableInput(boolean b, JPanel pnlInput) { // cái này phải nhìn design mới hiểu được
+        int i = 0; // để xử lí panel đầu
         // Trong pnlInput là các panel con chứa các control nhập liệu
         for (Component c : pnlInput.getComponents()) {
             if (c instanceof JPanel) { // bỏ cái này bị dính lỗi JSeparator
-                Component c1 = ((JPanel) c).getComponent(1);
+                Component c1 = ((JPanel) c).getComponent(1); // lấy component thứ 2 trong panel
                 // nếu là panel con đầu tiên thì không cho chỉnh
                 if (i++ == 0) {
-                    ((JTextField) c1).setEditable(false);
+                    ((JTextField) c1).setEditable(false); // id không cho chỉnh 
                     continue;
                 }
-                if (c1 instanceof JScrollPane) { 
+                if (c1 instanceof JScrollPane) {  // xử lí Text Area
                     JViewport viewport = ((JScrollPane) c1).getViewport();
                     JTextArea tmp = (JTextArea) viewport.getView();
                     tmp.setEditable(b);
-                } else if (c1 instanceof JTextField || c1 instanceof JPasswordField) {
+                } else if (c1 instanceof JTextField || c1 instanceof JPasswordField) { // xử lí Text fild vs password
                     ((JTextComponent) c1).setEditable(b);
             
-                } else {
-                    c1.setEnabled(b);
+                } else { // Còn lại là Combobox
+                    c1.setEnabled(b); // cb không chỉnh edit dc phải enable
                 }
             }
         }
     }
+    
+    // Tương tự enableInput trên
     default void clearInput(JPanel pnlInput) {
         int i = 0;
         for (Component c : pnlInput.getComponents()) {
@@ -237,20 +241,23 @@ public interface I_TraCuu_QuanLi<T> {
             }
         }
     }
+    // Load từ model lên chỗ nhập liệu
+    // index là số dòng
     default void showDetailInput(JPanel pnlInput, DefaultTableModel model, int index) {
         int i = 0; // i là chỉ mục của component bên detail
         for (Component c : pnlInput.getComponents()) {
             if (c instanceof JPanel) {
                 Component c1 = ((JPanel) c).getComponent(1);
-                if (c1 instanceof JScrollPane) { 
+                if (c1 instanceof JScrollPane) { // Text Area
                     JViewport viewport = ((JScrollPane) c1).getViewport();
                     JTextArea tmp = (JTextArea) viewport.getView();
+                    // Thường mấy cột dùng Text Area nó null
                     tmp.setText(model.getValueAt(index, i) == null ? "" :model.getValueAt(index, i++).toString());
                 } else if (c1 instanceof JTextField) {
-                    if (i < model.getColumnCount()) { // khắc phục lỗi indexOutOfBound của Array
+                    if (i < model.getColumnCount()) { // khắc phục lỗi indexOutOfBound của Array, để chặn lại xử lí trường nhập liệu nằm ngoài model như pw, vai trò của nhân viên
                         ((JTextComponent) c1).setText(model.getValueAt(index, i++).toString());
               
-                    } else {
+                    } else { // password nó ko có nằm bên model phải truy vấn bên SQL
                         ((JPasswordField) c1).setText(I_CRUD.findById(model.getValueAt(index, 6).toString(), new TaiKhoan()).getMatKhau());
                     }
                 } else if (c1 instanceof JDateChooser) {
@@ -267,8 +274,8 @@ public interface I_TraCuu_QuanLi<T> {
                 } else if (c1 instanceof JComboBox) {
                     if (i < model.getColumnCount()) {
                         ((JComboBox) c1).setSelectedItem(model.getValueAt(index, i++));
-                    } else {
-                        Component c2 = ((JPanel) c).getComponent(0);
+                    } else { // Xử lí vai trò, nó ko nằm trong model, truy vấn SQL
+                        Component c2 = ((JPanel) c).getComponent(0); 
                         if (((JLabel) c2).getText().equals("Vai trò:")){
                             ((JComboBox) c1).setSelectedItem(I_CRUD.findById(model.getValueAt(index, 6).toString(), new TaiKhoan()).getVaiTro() ? "Quản lí": "Nhân viên");
                             i++;
@@ -301,10 +308,10 @@ public interface I_TraCuu_QuanLi<T> {
         } else {
             // lấy mã cuối cùng trong ds
             String lastID = dsid.get(dsid.size() - 1);
-            // tách chuỗi để lấy số thứ tự
+            // tách chuỗi để lấy số thứ tự. Tách prefix
             int index = Integer.parseInt(lastID.substring(prefix.length())) + 1;
             // tạo mã mới
-            String newID = prefix + String.format("%03d", index);
+            String newID = prefix + String.format("%03d", index); // 0: thêm số 0 bên lề trái nếu ko đủ 3 chữ số. d là định dạng số nguyên
             tf.setText(newID); 
         }
     }
@@ -315,7 +322,7 @@ public interface I_TraCuu_QuanLi<T> {
      * @param prefix như HDddMMyyyy001 thì prefix là HD. 
      */
     public static String createIdForHoaDon(ArrayList<String> dsidTheoNgay, String prefix) {
-        // Kiểm tra xem ds có rỗng hay không nếu rỗng thì mã là prefix + '001' không thì lấy mã cuối cùng trong ds + 1
+        // Kiểm tra xem ds có rỗng hay không nếu rỗng thì mã là prefix + ngày hiện tại + '001' không thì lấy mã cuối cùng trong ds + 1
         if (dsidTheoNgay.isEmpty()) {
             prefix += LocalDate.now().format(DateTimeFormatter.ofPattern("ddMMyyyy"));
             prefix += "001";
