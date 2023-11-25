@@ -5,11 +5,13 @@
 package mainFrame;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.UIManager;
+import smallPanel.NavBar;
 
 /**
  *
@@ -20,8 +22,12 @@ public class mainFrame extends javax.swing.JFrame{
     /**
      * Creates new form mainFrame
      */
+    
+    public NavBar nav;
     public mainFrame() {
         initComponents();
+        nav = new NavBar();
+        this.add(nav, BorderLayout.CENTER);
     }
 
     /**
@@ -33,8 +39,6 @@ public class mainFrame extends javax.swing.JFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        navBar2 = new smallPanel.NavBar();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1920, 1030));
         setResizable(false);
@@ -43,7 +47,7 @@ public class mainFrame extends javax.swing.JFrame{
                 mouse(evt);
             }
         });
-        getContentPane().add(navBar2, java.awt.BorderLayout.CENTER);
+
     }// </editor-fold>//GEN-END:initComponents
 
     private void mouse(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouse
@@ -81,6 +85,8 @@ public class mainFrame extends javax.swing.JFrame{
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         
         /* Create and display the form */
                 new mainFrame().setVisible(true);
@@ -89,7 +95,7 @@ public class mainFrame extends javax.swing.JFrame{
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private smallPanel.NavBar navBar2;
+
     // End of variables declaration//GEN-END:variables
 
     

@@ -12,6 +12,7 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.UIManager;
 import dao.I_CRUD;
 import entity.TaiKhoan;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -20,6 +21,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import mainFrame.mainFrame;
 
@@ -32,6 +34,7 @@ public class GD_DangNhap extends javax.swing.JFrame {
     /**
      * Creates new form GD_DangNhap
      */
+    public mainFrame main;
     public static TaiKhoan taiKhoan  = new TaiKhoan();
     
     public GD_DangNhap() {
@@ -138,9 +141,20 @@ public class GD_DangNhap extends javax.swing.JFrame {
                 
             }
         });
-
-       
-        
+        btn_dangNhap.setBackground(new Color(204, 204, 204));      
+        btn_dangNhap.setText("Vui lòng đợi...");
+        Thread thread2 = new Thread(() -> {
+        try {
+                Thread.sleep(0);
+                main = new mainFrame();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            btn_dangNhap.setBackground(new Color(0,102,102));
+            btn_dangNhap.setText("Đăng nhập");
+        });
+                
+        thread2.start();
     }
     
     
@@ -305,26 +319,26 @@ public class GD_DangNhap extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void dangNhap(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dangNhap
-        
-        this.taiKhoan = I_CRUD.findById(txt_taiKhoan.getText(), new TaiKhoan());
-        JOptionPane.showMessageDialog(null,taiKhoan);
-        
-        if(txt_taiKhoan.getText().equals("") || txt_matKhau.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Vui long nhập đầy đủ thông tin");
+        if (btn_dangNhap.getBackground().equals(new Color(0,102,102))){
+             this.taiKhoan = I_CRUD.findById(txt_taiKhoan.getText(), new TaiKhoan());
+                if(txt_taiKhoan.getText().equals("") || txt_matKhau.getText().equals("")){
+                    JOptionPane.showMessageDialog(null, "Vui long nhập đầy đủ thông tin");
+                }
+                else if(taiKhoan.getTenTaiKhoan() != null){
+                    if(txt_matKhau.getText().equals(taiKhoan.getMatKhau())){
+                        main.nav.loadNameUser();
+                        this.dispose();
+                        main.setVisible(true);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Sai mật khẩu");
+                    }
+                }
+                else JOptionPane.showMessageDialog(null, "Tài khoản không tồn tại");
         }
-        
-        else if(taiKhoan.getTenTaiKhoan() != null){
-            if(txt_matKhau.getText().equals(taiKhoan.getMatKhau())){
-                this.setVisible(false);
-                mainFrame main = new mainFrame();
-                main.setVisible(true);
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Sai mật khẩu");
-            }
+        else{
+           
         }
-        else JOptionPane.showMessageDialog(null, "Tài khoản không tồn tại");
-       
     }//GEN-LAST:event_dangNhap
 
     /**

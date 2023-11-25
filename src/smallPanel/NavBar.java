@@ -61,6 +61,10 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         
         navBarChoice(0);
 //        name_Account.setText(GD_DangNhap.taiKhoan.getNhanVien().getTenNhanVien());
+
+    }
+    
+    public void loadNameUser(){
         if (GD_DangNhap.taiKhoan.getNhanVien() != null){
             name_Account.setText(GD_DangNhap.taiKhoan.getNhanVien().getTenNhanVien());
         }
