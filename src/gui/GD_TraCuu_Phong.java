@@ -37,6 +37,9 @@ public class GD_TraCuu_Phong extends javax.swing.JFrame implements  I_TraCuu_Qua
             }
             list.add(row);
         }
+        if (!GD_DangNhap.taiKhoan.getVaiTro()) { // nhân viên thì ko hiển thị button edit
+            btn_edit.setVisible(false);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -186,7 +189,7 @@ public class GD_TraCuu_Phong extends javax.swing.JFrame implements  I_TraCuu_Qua
         pnlMain.add(pnlCenter, java.awt.BorderLayout.CENTER);
 
         pnlBottom.setBackground(new java.awt.Color(255, 255, 255));
-        pnlBottom.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 25, 10, 25));
+        pnlBottom.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 25, 10, 25));
         pnlBottom.setName(""); // NOI18N
         pnlBottom.setPreferredSize(new java.awt.Dimension(1650, 79));
 
@@ -212,7 +215,7 @@ public class GD_TraCuu_Phong extends javax.swing.JFrame implements  I_TraCuu_Qua
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, 890, Short.MAX_VALUE)
+            .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, 890, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -224,7 +227,7 @@ public class GD_TraCuu_Phong extends javax.swing.JFrame implements  I_TraCuu_Qua
         if (row == -1) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn dòng");
         } else {
-            new GD_QuanLi_Phong("NV001", row).setVisible(true);
+            new GD_QuanLi_Phong( row).setVisible(true);
         }
     }//GEN-LAST:event_btn_editActionPerformed
 
@@ -276,7 +279,7 @@ public class GD_TraCuu_Phong extends javax.swing.JFrame implements  I_TraCuu_Qua
     
     private DAO_Phong daop = new DAO_Phong();
     private ArrayList<Phong> dsp = daop.getAll(Phong.class);
-    private DefaultTableModel model;
+    public static DefaultTableModel model;
     private ArrayList<ArrayList<String>> list = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_edit;

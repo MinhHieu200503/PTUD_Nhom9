@@ -31,7 +31,7 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
         setEnableInput(false, jPanel2);
         loadTable(dsp, model);
     }
-    public GD_QuanLi_Phong(String idNhanVien, int row) {
+    public GD_QuanLi_Phong(int row) {
         initComponents();
         model = (DefaultTableModel) tbl_danhSach.getModel();
         setEnableInput(false, jPanel2);
@@ -82,6 +82,11 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
         btn_xoaTrang = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -451,6 +456,11 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
             showDetailInput(jPanel2, model, i);
         }
     }//GEN-LAST:event_tbl_danhSachMouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        loadTable(daop.getAll(Phong.class), GD_TraCuu_Phong.model);
+    }//GEN-LAST:event_formWindowClosing
     
     private boolean validateInput() {
         String ten = tf_ten.getText().trim();

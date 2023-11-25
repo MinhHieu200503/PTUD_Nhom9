@@ -11,8 +11,10 @@ import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.Toolkit;
 import java.awt.Window;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -34,18 +36,21 @@ public class GD_TraCuu extends javax.swing.JFrame {
     public GD_TraCuu() {
         initComponents();
 //        setExtendedState(6);
-        
         pnlRight.add(gdkh.getContentPane(), BorderLayout.CENTER);
+//        pack();
         pnlRight.add(gdhd.getContentPane(), BorderLayout.CENTER);
+//        pack();
         pnlRight.add(gdp.getContentPane(), BorderLayout.CENTER);
+//        pack();
         pnlRight.add(gddv.getContentPane(), BorderLayout.CENTER);
+//        pack();
         pnlRight.add(gdpdp.getContentPane(), BorderLayout.CENTER);
+//        pack();
         pnlRight.add(gdnv.getContentPane(), BorderLayout.CENTER);
-        
+        pack();
         
         choice= pnlLeft_1; // gán nó vào pnlTitle
         chuyenPanel(gdkh);
-        pack();
     }
 
     /**
@@ -340,7 +345,11 @@ public class GD_TraCuu extends javax.swing.JFrame {
     public void setVisibleFrame(JFrame fr){
  
     }
-    
+    /*
+        Tạo biến choice lưu pnl được chọn
+        setBackground cho pnl dc chọn
+        setBakcground cho các pnl còn lại bằng vòng for
+    */
     public void chinhMauKhiNhanVaoMenu(JPanel pnl) {
         pnl.setBackground(new Color(0,204,204)); // Đánh dấu khi được chọn
         for (Component com : pnlLeft.getComponents()) {
@@ -350,18 +359,20 @@ public class GD_TraCuu extends javax.swing.JFrame {
         }
         choice = pnl; // Lưu để xử lí về sau
     }
+    /*
+        panel được chọn sẽ chỉnh visible true. còn lại false
+    */
     public void chuyenPanel(JFrame fr)   {
 //        pnlRight.removeAll();
 //        pnlRight.add(fr.getContentPane(), BorderLayout.CENTER);
 //        repaint();
 //
-       
         for (int i = 0 ; i<pnlRight.getComponentCount(); i++){
             pnlRight.getComponent(i).setVisible(false);
 
         }
         fr.getContentPane().setVisible(true);
-        repaint();
+//        repaint();
 
         
     }
@@ -405,6 +416,7 @@ public class GD_TraCuu extends javax.swing.JFrame {
         Object a = evt.getSource();
         enteredMenu((JPanel) a);
     }//GEN-LAST:event_enterMenu
+    
     public void enteredMenu(javax.swing.JPanel panel){
         if (!choice.equals(panel)){ // Nếu không phải là panel đang được chọn thì set màu lại
            panel.setBackground(new Color(0,204,153));
