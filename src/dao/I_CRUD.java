@@ -27,22 +27,41 @@ import java.util.logging.Logger;
  * @author quang
  */
 public interface I_CRUD<T> {
+    // Xử lí LocalDateTime
     public static LocalDateTime SQLtoJava(String sql) {
         if (sql == null)
-			return null;
-		String dateSQL = sql.substring(0, 10);
-		String timeSQL = sql.substring(11, 19);
-		LocalDate date = LocalDate.parse(dateSQL);
-		LocalTime time = LocalTime.parse(timeSQL);
-		return LocalDateTime.of(date, time);
+            return null;
+        String dateSQL = sql.substring(0, 10);
+        String timeSQL = sql.substring(11, 19);
+        LocalDate date = LocalDate.parse(dateSQL);
+        LocalTime time = LocalTime.parse(timeSQL);
+        return LocalDateTime.of(date, time);
     }
-    public static String JavaToSQL(LocalDateTime java) {
+    public static String JavaToSQL(LocalDateTime java) { // Từ java to sql có thể dùng datetimeformatter
         if (java == null)
             return null;
         String datetime = java.toString();
         System.out.println(datetime);
         return datetime.substring(0,   10) + " " + datetime.substring(11, 16);
     }
+    // Xử lí LocalDate
+    /*
+        Từ java to SQL: Date.valueOf(ép kiểu Localdate thành string)
+        Từ SQL to Java: LocalDate.parse( String )
+    */
+    
+    /* 
+        T entity;
+        entity.getClass().getSimpleName(): lấy tên class
+        entity.getClass().getDeclaredFields(): lấy các trường của class
+        Kiểu_dữ_liệu tên_trường = giá_trị_trường
+        fields[i].setAccessible(true) Lấy quyền truy cập private trong class
+        fields[i].getName() Lấy tên của trường
+        fields[i].getType().getSimpleName() Lấy kiểu dữ liệu của trường
+        fields[i].get( entity ) Lấy giá trị của trường
+        fields[i].set( entity, giá trị ) Gán giá trị cho trường
+    */
+    
     /**
      * @param entity
      * @return
@@ -54,13 +73,16 @@ public interface I_CRUD<T> {
         PreparedStatement pstm = null;
         int n = 0; // trả về số dòng ảnh hưởng
         try { 
+            // Tạo câu truy vấn
             String sql = "INSERT INTO " + entity.getClass().getSimpleName() + " VALUES (";
             Field[] fields = entity.getClass().getDeclaredFields();
             for (int j = 0; j < fields.length; j++) {
                 sql += "?,";
             }
             pstm = con.prepareStatement(sql.substring(0, sql.length() - 1) + ")");
+            // i là chỉ mục để set giá trị
             int i = 1;
+            // Duyệt qua các trường và gán giá trị cho từng trường
             for (Field field : fields) {
                 field.setAccessible(true); // lấy quyền truy cập private trong class
                 // System.out.println(field.getName());
@@ -72,7 +94,7 @@ public interface I_CRUD<T> {
 //                    case "ChucVu" -> pstm.setString(i, ((ChucVu) field.get(entity)).getMaChucVu());
                     case "Ca" -> pstm.setString(i, ((Ca) field.get(entity)).getMaCa());
                     case "TaiKhoan" -> pstm.setString(i, ((TaiKhoan) field.get(entity)).getTenTaiKhoan());
-                    case "UuDai" -> {
+                    case "UuDai" -> { // cho phép ưu đãi null
                         if (field.get(entity) == null)
                             pstm.setString(i, null);
                         else
@@ -85,7 +107,7 @@ public interface I_CRUD<T> {
                     case "float" -> pstm.setFloat(i, (float) field.get(entity));
                     case "long" -> pstm.setLong(i, (long) field.get(entity));
                     case "boolean" -> pstm.setBoolean(i, (boolean) field.get(entity));
-                    case "LocalDate" -> pstm.setDate(i, (Date.valueOf(field.get(entity).toString())));
+                    case "LocalDate" -> pstm.setDate(i, (Date.valueOf(field.get(entity).toString()))); // xử lí localdate -> sql
                     case "LocalDateTime" -> pstm.setString(i, JavaToSQL((LocalDateTime) field.get(entity)));
                     default -> pstm.setString(i, (String) field.get(entity));
                 }
@@ -97,6 +119,8 @@ public interface I_CRUD<T> {
         }
         return n > 0;
     }    
+    // Dùng Class<T> để tạo đối tượng mới, sau đó gán giá trị cho nó.
+    // Còn T entity thì không tạo được đối tượng mới
     default ArrayList<T> getAll(Class<T> clazz) {
         ArrayList<T> ds = new ArrayList<T>();
         ConnectDB.getInstance();
@@ -110,7 +134,8 @@ public interface I_CRUD<T> {
             stm = con.createStatement();
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
-                T entity1 = clazz.getDeclaredConstructor().newInstance(); // Tạo đối tượng mới
+                T entity1 = clazz.getDeclaredConstructor().newInstance(); // Tạo đối tượng mới. Dùng Class<T> chủ yếu vì chỗ này
+                // Gán giá trị từ sql cho đối tượng
                 for (Field field : fields) {
                     field.setAccessible(true);
                     switch (field.getType().getSimpleName()) {
@@ -147,13 +172,14 @@ public interface I_CRUD<T> {
                         }
                     }
                 }
-                ds.add(entity1);
+                ds.add(entity1); // thêm đối tượng vừa được gán giá trị vào danh sách
             }
         } catch (SQLException | IllegalArgumentException | IllegalAccessException | NoSuchMethodException | SecurityException | InstantiationException | InvocationTargetException ex) {
             Logger.getLogger(I_CRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ds;
     }
+    // Cần T entity để lấy được các trường của Class cần tìm
     static <T> T findById(String id, T entity) {
         if (id == null || id.isEmpty()) {
             return null;
@@ -165,10 +191,10 @@ public interface I_CRUD<T> {
         try {   
             String sql = "SELECT * FROM " + entity.getClass().getSimpleName() + " WHERE ";
             Field[] fields = entity.getClass().getDeclaredFields();
-            sql += fields[0].getName() + " = ?"; // lấy tên cột đầu tiên
+            sql += fields[0].getName() + " = ?"; // lấy tên cột đầu tiên (Khoá chính)
             
             pstm = con.prepareStatement(sql);
-            pstm.setString(1, id);
+            pstm.setString(1, id); // gán id cần tìm cho câu lệnh truy vấn
             ResultSet rs = pstm.executeQuery();
             // Gán từng field trong entity với các giá trị nhận được từ csdl
             // int i = 0;
@@ -229,15 +255,15 @@ public interface I_CRUD<T> {
                 // nếu là thực thể thì lấy mã thực thể
                 switch (fields[j].getType().getSimpleName()) {
                     case "Phong", "LoaiPhong", "KhachHang", "NhanVien", "ChucVu", "Ca", "TaiKhoan", "UuDai", "DichVu", "HoaDon" -> 
-                        // Lấy mã của thực thể phòng
+                        // Lấy mã của thực thể
                         // viết hoa chữ cái đầu
                         sql += "ma" + fields[j].getName().substring(0, 1).toUpperCase() + fields[j].getName().substring(1) + " = ?,";
                     default -> sql += fields[j].getName() + " = ?,";
                 }
                 
             }
-            sql = sql.substring(0, sql.length() - 1) + " WHERE ";
-            sql += fields[0].getName() + " = ?";
+            sql = sql.substring(0, sql.length() - 1) + " WHERE "; // loại bỏ dấu "," ở cuối
+            sql += fields[0].getName() + " = ?"; // Dựa vào cột đầu tiên để update
 //            System.out.println(sql);
             pstm = con.prepareStatement(sql);
             for (int i = 1; i < fields.length ;i++) {
@@ -270,7 +296,7 @@ public interface I_CRUD<T> {
             }
             // Set giá trị cho cột đầu tiên
             fields[0].setAccessible(true);
-            pstm.setString(fields.length, fields[0].get(entity).toString());
+            pstm.setString(fields.length, fields[0].get(entity).toString()); // set giá trị cho cột đầu tiên, sau where
             n = pstm.executeUpdate();       
         } catch (SQLException | IllegalArgumentException | IllegalAccessException ex) {
             Logger.getLogger(I_CRUD.class.getName()).log(Level.SEVERE, null, ex);
@@ -287,14 +313,14 @@ public interface I_CRUD<T> {
         try {
             Field[] fields = c.getDeclaredFields();
             int so = -1;
-            if (key.matches("^\\d+$"))
+            if (key.matches("^\\d+$")) // nếu key là số 
                 so = Integer.parseInt(key);
             // Tạo câu truy vấn để lấy tất cả bản ghi trong bảng
             String sql = "SELECT";
             for (Field f : fields) {
                 switch (f.getType().getSimpleName()) {
                     case "NhanVien", "Phong", "LoaiPhong", "KhachHang", "ChucVu", "Ca", "TaiKhoan", "UuDai", "DichVu", "HoaDon":
-                        // lấy mã
+                        // lấy mã. maNhanVien
                         sql += " a.ma" + f.getName().substring(0, 1).toUpperCase() + f.getName().substring(1) + ",";
                         break;
                     default:
@@ -307,12 +333,14 @@ public interface I_CRUD<T> {
             sql += " FROM " + c.getSimpleName() + " a";
             for (Field f : fields) {
                 switch (f.getType().getSimpleName()) {
+                    // là thực thể thì lấy mã để kết
                     case "Phong", "LoaiPhong", "NhanVien", "ChucVu", "Ca", "TaiKhoan", "UuDai", "DichVu", "HoaDon":
                     
                         sql += " INNER JOIN " + f.getType().getSimpleName() 
                         + " ON " + "a.ma" + f.getName().substring(0, 1).toUpperCase() + f.getName().substring(1) 
                         + " = " + f.getType().getSimpleName() + ".ma" + f.getName().substring(0, 1).toUpperCase() + f.getName().substring(1);
                         break;
+                    // riêng khách hàng dùng số điện thoại
                     case "KhachHang": // soDienThoai
                         sql += " INNER JOIN " + f.getType().getSimpleName() 
                         + " ON " + "a.ma" + f.getName().substring(0, 1) + f.getName().substring(1) 

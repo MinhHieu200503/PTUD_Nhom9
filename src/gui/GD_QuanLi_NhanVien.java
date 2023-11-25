@@ -36,7 +36,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         setEnableInput(false, jPanel2);
         loadTable(daonv.getAll(NhanVien.class), model);;
     }
-    public GD_QuanLi_NhanVien(String idNhanVien, int row) {
+    public GD_QuanLi_NhanVien( int row) {
         initComponents();
         model = (DefaultTableModel) tbl_danhSach.getModel();
         setEnableInput(false, jPanel2);
@@ -106,6 +106,11 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         btn_xoaTrang = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -279,7 +284,6 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
 
         cb_vaiTro.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         cb_vaiTro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân viên", "Quản lí" }));
-        cb_vaiTro.setPreferredSize(new java.awt.Dimension(160, 38));
         jPanel16.add(cb_vaiTro, java.awt.BorderLayout.EAST);
 
         jPanel2.add(jPanel16);
@@ -588,6 +592,11 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
             showDetailInput(jPanel2, model, i);
         }
     }//GEN-LAST:event_tbl_danhSachMouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        loadTable(daonv.getAll(NhanVien.class), GD_TraCuu_NhanVien.model);
+    }//GEN-LAST:event_formWindowClosing
     private boolean validateInput() {
         String ten = tf_ten.getText().trim();
         Date ngaysinh = datechooser_ngaySinh.getDate();

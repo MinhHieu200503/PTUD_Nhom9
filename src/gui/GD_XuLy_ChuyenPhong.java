@@ -45,6 +45,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
         
         loadDSPhongDangSuDung();
 //        loadDSPhongTrong();
+        // Đổ dữ liệu vào combobox 
         ArrayList<String> dsidKH = daoctp.getMaKHtheoPhongDangSuDung(); 
         cb_phone.addItem("");
         dsidKH.forEach(e -> {
@@ -413,7 +414,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
     private void tbl_phongTrongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_phongTrongMouseClicked
         // TODO add your handling code here:
         int row = tbl_phongTrong.getSelectedRow(); 
-        idSelectedPhongMoi = model.getValueAt(row, 0).toString();
+        idSelectedPhongMoi = model.getValueAt(row, 0).toString(); // lấy id phòng mới (phóng trống)
     }//GEN-LAST:event_tbl_phongTrongMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -422,9 +423,11 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Chuyển phòng thành công");
 //            dsP_fullCol.getPanel_Container_ListPhong().removeAll();
             loadDSPhongDangSuDung();
-            idSelectedPhongCu = null;
+            idSelectedPhongCu = null; // phòng cũ (phòng đang sử dụng)
 //            loadDSPhongTrong();
-             model.setRowCount(0);
+            // clear bảng phòng trống
+            model.setRowCount(0); 
+            // clear thông tin phòng cùng khách hàng
             tf_phone.setText("");
             tf_tenKH.setText("");
             tf_tenPhong.setText("");
@@ -450,7 +453,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
         if (cb_phone.getSelectedItem() != null) {
             String id = cb_phone.getSelectedItem().toString();
 
-            if (id.equals("")) {
+            if (id.equals("")) { // nếu rỗng thì load lại toàn bộ
                 ArrayList<String> dsIdPhongDsdTheoMaKH = daoctp.getMaPhongTheoKH(id);
                 pnlData.removeAll();
 
@@ -459,7 +462,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
                 }
                 pnlData.revalidate();
                 pnlData.repaint();
-            } else {
+            } else { // load theo khách hàng cụ thể
                 ArrayList<String> dsIdPhongDsdTheoMaKH = daoctp.getMaPhongTheoKH(id);
                 pnlData.removeAll();
 
@@ -479,9 +482,10 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
                 System.out.println(e);
             });
         }
+        // mỗi lần load lại danh sách phòng đang sử dụng là xoá toàn bộ phòng trống
         tbl_phongTrong.clearSelection();
         model.setRowCount(0);
-        dsPnlPhong.forEach(e -> {
+        dsPnlPhong.forEach(e -> { // unclick
             e.setBorder(null);
         });
     }//GEN-LAST:event_cb_phoneActionPerformed
@@ -604,9 +608,9 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
         int row = tbl_phongTrong.getSelectedRow();
         ArrayList<Phong> dspt = daop.getPhongTheoTrangThai(0);
         if (hdPhongDSD_MoiNhat != null) {
-            ArrayList<String> dsid_phong = daoctp.getDsIdTheoMaHoaDon(hdPhongDSD_MoiNhat.getMaHoaDon());
+            ArrayList<String> dsid_phong = daoctp.getDsIdTheoMaHoaDon(hdPhongDSD_MoiNhat.getMaHoaDon()); // lấy toàn bộ các id phòng theo mã hoá đơn
             for (Phong i : dspt) {
-                if (!dsid_phong.contains(i.getMaPhong())) {
+                if (!dsid_phong.contains(i.getMaPhong())) { // trừ các phòng trong hoá đơn ra, còn lại load lên
                     String maphong = i.getMaPhong();
                     String loaiphong = (i.getLoaiPhong()).getLoaiPhong();
 //                    System.out.println(i.getLoaiPhong());
@@ -616,7 +620,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
                     model.addRow(rowData);
                 }
             }
-        } else {
+        } else { // chắc là ko xảy ra trường hợp này
             for (Phong i : dspt) {
                 String maphong = i.getMaPhong();
                 String loaiphong = (i.getLoaiPhong()).getLoaiPhong();
@@ -709,3 +713,15 @@ private ArrayList<Panel_Phong> dsPnlPhong = new ArrayList<>();
     private javax.swing.JTextField tf_tenPhong;
     // End of variables declaration//GEN-END:variables
 }
+
+/*
+    NGHIỆP VỤ CHÍNH CHUYỂN PHÒNG
+    lấy toàn bộ ctp theo mã phòng (global) : dsctpTheoMaPhong
+    lấy chi tiết phòng đang sử dụng = <- getLast <- dsctpTheoMaPhong
+    lấy hoá đơn mới nhất(global) <- getHoaDon <- chi tiết phòng đang sử dụng
+
+    update thời gian trả phòng trong chi tiết phòng của phòng đang sử dụng. dsctpTheoMaPhong.getLast().
+    update trang thái phòng cũ
+    tạo chi tiết phòng mới
+    update trạng thái phòng mới
+*/

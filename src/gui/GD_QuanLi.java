@@ -114,3 +114,60 @@ public class GD_QuanLi extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }
+
+/*
+    SỰ KIỆN QUẢN LÍ: Đảm bảo toàn bộ thao tác không dẫn đến lỗi
+    nhấn vào nút thêm:
+        Xoá rỗng nhập liệu
+        Thêm
+            Tạo id (trừ khách hàng)
+            Mở nhập liệu
+            Xoá chọn dòng trên bảng
+            setEnable false cho bảng
+            Đổi tên nút -> Huỷ. setIcon lại
+            Đổi trạng thái các nút
+        Huỷ
+            Đóng nhập liệu
+            setEnable true cho bảng
+            Đổi tên nút -> Thêm. setIcon lại
+            Đổi trạng thái các nút
+            Xoá rỗng nhập liệu
+    nhấn vào nút sửa:
+        Kiểm tra chọn dòng
+            Sửa
+                Mở nhập liệu
+                setEnable false cho bảng
+                Đổi tên nút -> Huỷ. setIcon lại
+                Đổi trạng thái các nút
+            Huỷ
+                Đóng nhập liệu
+                Xoá chọn dòng trên bảng
+                setEnable true cho bảng
+                Đổi tên nút -> Huỷ. setIcon lại
+                Đổi trạng thái các nút
+                Xoá rỗng nhập liệu
+    nhân vào nút lưu:
+        Thêm
+            validate
+                Tạo thực thể từ các ô nhập liệu
+                chạy lệnh SQL tạo thực thể
+                    Thông báo thêm thành công
+                    load lại bảng
+                    set lại trạng thái các nút. đổi tên nút -> thêm.
+                    đóng nhập liệu
+                    xoá rỗng nhập liệu
+                    setEnable true cho bảng
+        Sửa
+            validate
+                Tạo thực thể từ các ô nhập liệu
+                chạy lệnh SQL update thực thể
+                    Thông báo sửa thành công
+                    load lại bảng
+                    set lại trạng thái các nút. đổi tên nút -> sửa.
+                    đóng nhập liệu
+                    xoá rỗng nhập liệu
+                    setEnable true cho bảng
+
+                
+        
+*/

@@ -227,7 +227,8 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
         if (row == -1) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn dòng");
         } else {
-            new GD_QuanLi_KhachHang("NV001", row).setVisible(true);
+            new GD_QuanLi_KhachHang( row).setVisible(true);
+            loadTable(daokh.getAll(KhachHang.class), model);
         }
     }//GEN-LAST:event_btn_editActionPerformed
 
@@ -279,7 +280,7 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
 
     private DAO_KhachHang daokh = new DAO_KhachHang();
     private ArrayList<KhachHang> dskh = daokh.getAll(KhachHang.class);
-    private DefaultTableModel model;
+    public static DefaultTableModel model;
     private ArrayList<ArrayList<String>> list = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_edit;
