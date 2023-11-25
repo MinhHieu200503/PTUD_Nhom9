@@ -245,7 +245,7 @@ public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         if (row == -1) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn dòng");
         } else {
-            new GD_QuanLi_NhanVien("NV001", row).setVisible(true);
+            new GD_QuanLi_NhanVien( row).setVisible(true);
         }
     }//GEN-LAST:event_btn_editActionPerformed
 
@@ -297,7 +297,7 @@ public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
     
     private DAO_NhanVien daonv = new DAO_NhanVien();
     private ArrayList<NhanVien> dsnv = daonv.getAll(NhanVien.class);
-    private DefaultTableModel model;
+    public static DefaultTableModel model;
     private ArrayList<ArrayList<String>> list = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_edit;

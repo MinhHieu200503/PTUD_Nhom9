@@ -251,7 +251,7 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         if (row == -1) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn dòng");
         } else {
-            new GD_QuanLi_DichVu("NV001", row).setVisible(true);
+            new GD_QuanLi_DichVu( row).setVisible(true);
         }
     }//GEN-LAST:event_btn_editActionPerformed
 
@@ -316,7 +316,7 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
 //    }
     private DAO_DichVu daodv = new DAO_DichVu();
     private ArrayList<DichVu> dsdv = daodv.getAll(DichVu.class);
-    private DefaultTableModel model;
+    public static DefaultTableModel model;
     private ArrayList<ArrayList<String>> list = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_edit;

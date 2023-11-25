@@ -227,7 +227,7 @@ public class GD_TraCuu_Phong extends javax.swing.JFrame implements  I_TraCuu_Qua
         if (row == -1) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn dòng");
         } else {
-            new GD_QuanLi_Phong("NV001", row).setVisible(true);
+            new GD_QuanLi_Phong( row).setVisible(true);
         }
     }//GEN-LAST:event_btn_editActionPerformed
 
@@ -279,7 +279,7 @@ public class GD_TraCuu_Phong extends javax.swing.JFrame implements  I_TraCuu_Qua
     
     private DAO_Phong daop = new DAO_Phong();
     private ArrayList<Phong> dsp = daop.getAll(Phong.class);
-    private DefaultTableModel model;
+    public static DefaultTableModel model;
     private ArrayList<ArrayList<String>> list = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_edit;
