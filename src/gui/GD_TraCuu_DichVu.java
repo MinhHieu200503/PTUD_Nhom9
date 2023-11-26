@@ -43,9 +43,9 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
             list.add(row);
         }
         // PHÂN QUYỀN
-        if (!GD_DangNhap.taiKhoan.getVaiTro()) { // nhân viên thì ko hiển thị button edit
-            btn_edit.setVisible(false);
-        }
+//        if (!GD_DangNhap.taiKhoan.getVaiTro()) { // nhân viên thì ko hiển thị button edit
+//            btn_edit.setVisible(false);
+//        }
     }
 
     /**
@@ -88,6 +88,11 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pnlMain.setPreferredSize(new java.awt.Dimension(1650, 890));
+        pnlMain.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                pnlMainHierarchyChanged(evt);
+            }
+        });
         pnlMain.setLayout(new java.awt.BorderLayout());
 
         pnlTop.setBackground(new java.awt.Color(255, 255, 255));
@@ -265,6 +270,18 @@ public class GD_TraCuu_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
             load(ds, model);
         }
     }//GEN-LAST:event_tf_TraCuuKeyReleased
+
+    private void pnlMainHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_pnlMainHierarchyChanged
+        // TODO add your handling code here:
+        if (pnlMain.isShowing()) {
+            if (!GD_DangNhap.taiKhoan.getVaiTro()) { // nhân viên thì ko hiển thị button edit
+                btn_edit.setVisible(false);
+                
+            }
+            tf_TraCuu.setText("");
+            loadTable(daodv.getAll(DichVu.class), model);
+        }
+    }//GEN-LAST:event_pnlMainHierarchyChanged
 
     /**
      * @param args the command line arguments

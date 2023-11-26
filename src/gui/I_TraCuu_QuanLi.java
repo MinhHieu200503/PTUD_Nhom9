@@ -89,7 +89,10 @@ public interface I_TraCuu_QuanLi<T> {
                                 row[i] = ((KhachHang) fields[i].get(e)).getTenKhachHang();
                                 break;
                             case "NhanVien":
-                                row[i] = ((NhanVien) fields[i].get(e)).getTenNhanVien();
+                                if (fields[i].get(e) != null)
+                                    row[i] = ((NhanVien) fields[i].get(e)).getTenNhanVien();
+                                else 
+                                    row[i] = "";
                                 break;
 //                            case "ChucVu":
 //                                row[i] = ((ChucVu) fields[i].get(e)).getTenChucVu();

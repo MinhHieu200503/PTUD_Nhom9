@@ -30,17 +30,17 @@ public class GD_QuanLi extends javax.swing.JFrame {
      */
     public GD_QuanLi() {
         initComponents();
-        if (GD_DangNhap.taiKhoan.getVaiTro()) { // quản lí
-            jTabbedPane1.addTab("Quản lí Phòng", p.getContentPane());
-            jTabbedPane1.addTab("Quản lí Loại phòng", lp.getContentPane());
-            jTabbedPane1.addTab("Quản lí Dịch vụ", dv.getContentPane());
-            jTabbedPane1.addTab("Quản lí Ưu đãi", ud.getContentPane());
-            jTabbedPane1.addTab("Quản lí Khách hàng", kh.getContentPane());
-            jTabbedPane1.addTab("Quản lí Nhân viên", nv.getContentPane());
-            jTabbedPane1.addTab("Quản lí Ca", ca.getContentPane());
-        } else { // nhân viên
-            jTabbedPane1.addTab("Quản lí Khách hàng", kh.getContentPane());
-        }
+//        if (GD_DangNhap.taiKhoan.getVaiTro()) { // quản lí
+//            jTabbedPane1.addTab("Quản lí Phòng", p.getContentPane());
+//            jTabbedPane1.addTab("Quản lí Loại phòng", lp.getContentPane());
+//            jTabbedPane1.addTab("Quản lí Dịch vụ", dv.getContentPane());
+//            jTabbedPane1.addTab("Quản lí Ưu đãi", ud.getContentPane());
+//            jTabbedPane1.addTab("Quản lí Khách hàng", kh.getContentPane());
+//            jTabbedPane1.addTab("Quản lí Nhân viên", nv.getContentPane());
+//            jTabbedPane1.addTab("Quản lí Ca", ca.getContentPane());
+//        } else { // nhân viên
+//            jTabbedPane1.addTab("Quản lí Khách hàng", kh.getContentPane());
+//        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,6 +59,11 @@ public class GD_QuanLi extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(1900, 800));
 
         jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTabbedPane1.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                jTabbedPane1HierarchyChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,6 +78,24 @@ public class GD_QuanLi extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTabbedPane1HierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jTabbedPane1HierarchyChanged
+        // TODO add your handling code here:
+        if (jTabbedPane1.isShowing()) {
+            if (GD_DangNhap.taiKhoan.getVaiTro()) { // quản lí
+                jTabbedPane1.addTab("Quản lí Phòng", p.getContentPane());
+                jTabbedPane1.addTab("Quản lí Loại phòng", lp.getContentPane());
+                jTabbedPane1.addTab("Quản lí Dịch vụ", dv.getContentPane());
+                jTabbedPane1.addTab("Quản lí Ưu đãi", ud.getContentPane());
+                jTabbedPane1.addTab("Quản lí Khách hàng", kh.getContentPane());
+                jTabbedPane1.addTab("Quản lí Nhân viên", nv.getContentPane());
+                jTabbedPane1.addTab("Quản lí Ca", ca.getContentPane());
+            } else { // nhân viên
+                jTabbedPane1.addTab("Quản lí Khách hàng", kh.getContentPane());
+            }
+        }
+        
+    }//GEN-LAST:event_jTabbedPane1HierarchyChanged
 
     /**
      * @param args the command line arguments

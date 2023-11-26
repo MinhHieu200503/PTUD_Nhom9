@@ -42,6 +42,9 @@
           <Dimension value="[1650, 950]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="hierarchyChanged" listener="java.awt.event.HierarchyListener" parameters="java.awt.event.HierarchyEvent" handler="pnlMainHierarchyChanged"/>
+      </Events>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
       <SubComponents>

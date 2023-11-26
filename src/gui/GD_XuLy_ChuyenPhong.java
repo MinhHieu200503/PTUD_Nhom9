@@ -100,6 +100,11 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         jPanel3.setPreferredSize(new java.awt.Dimension(1600, 964));
+        jPanel3.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                jPanel3HierarchyChanged(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1090, 944));
@@ -474,6 +479,11 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
                 pnlData.revalidate();
                 pnlData.repaint();
             }
+            tf_phone.setText("");
+            tf_tenKH.setText("");
+            tf_tenPhong.setText("");
+            tf_ngayNhanPhong.setText("");
+            tf_maHD.setText("");
         }  else { // load lại combobox khi được xoá ở sự kiện chuyển phòng
             cb_phone.addItem("");
             ArrayList<String> dsidKH = daoctp.getMaKHtheoPhongDangSuDung(); 
@@ -489,6 +499,23 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
             e.setBorder(null);
         });
     }//GEN-LAST:event_cb_phoneActionPerformed
+
+    private void jPanel3HierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jPanel3HierarchyChanged
+        // TODO add your handling code here:
+        if (jPanel3.isShowing()) {
+            // Xử lý khi panel được hiển thị
+            cb_phone.removeAllItems();
+        // clear bảng phòng trống
+            model.setRowCount(0); 
+            // clear thông tin phòng cùng khách hàng
+            tf_phone.setText("");
+            tf_tenKH.setText("");
+            tf_tenPhong.setText("");
+            tf_ngayNhanPhong.setText("");
+            tf_maHD.setText("");
+        } 
+        
+    }//GEN-LAST:event_jPanel3HierarchyChanged
     public boolean chuyenPhong() {
         if (idSelectedPhongCu == null) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn phòng đang sử dụng");

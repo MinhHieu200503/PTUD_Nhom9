@@ -47,6 +47,9 @@
           <Dimension value="[1600, 964]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="hierarchyChanged" listener="java.awt.event.HierarchyListener" parameters="java.awt.event.HierarchyEvent" handler="jPanel3HierarchyChanged"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
