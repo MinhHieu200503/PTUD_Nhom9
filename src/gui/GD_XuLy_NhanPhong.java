@@ -520,7 +520,8 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
        }
         if(isConfirm == 0){
             dao_ctP_HD.themCTHD_PMoi(ctPhongHD);
-            
+            DAO_HoaDon daoHD = new DAO_HoaDon();
+            daoHD.updateNhanVienNhanPhong(gui.GD_DangNhap.taiKhoan.getNhanVien().getMaNhanVien(),hd.getMaHoaDon());
             daoPhong.capNhatTrangThaiPhong(smallPanel.Panel_DanhSachPhongFullCol.codePhong, 2);
             DAO_PhieuDatPhong daoPDP = new DAO_PhieuDatPhong();
             daoPDP.updateTrangThaiPhieuDatPhongBangMaHoaDon(hd.getMaHoaDon(),1);

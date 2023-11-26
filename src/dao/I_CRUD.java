@@ -90,7 +90,12 @@ public interface I_CRUD<T> {
                     case "Phong" -> pstm.setString(i, ((Phong) field.get(entity)).getMaPhong());
                     case "LoaiPhong" -> pstm.setString(i, ((LoaiPhong) field.get(entity)).getMaLoaiPhong());
                     case "KhachHang" -> pstm.setString(i, ((KhachHang) field.get(entity)).getSoDienThoai());
-                    case "NhanVien" -> pstm.setString(i, ((NhanVien) field.get(entity)).getMaNhanVien());
+                    case "NhanVien" -> {
+                        if (field.get(entity) == null)
+                            pstm.setString(i, null);
+                        else
+                            pstm.setString(i, ((NhanVien) field.get(entity)).getMaNhanVien());
+                    }
 //                    case "ChucVu" -> pstm.setString(i, ((ChucVu) field.get(entity)).getMaChucVu());
                     case "Ca" -> pstm.setString(i, ((Ca) field.get(entity)).getMaCa());
                     case "TaiKhoan" -> pstm.setString(i, ((TaiKhoan) field.get(entity)).getTenTaiKhoan());
