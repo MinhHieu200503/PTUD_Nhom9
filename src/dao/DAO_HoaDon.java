@@ -53,6 +53,39 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
         }
         return ds;
     }
+    
+    public boolean updateNhanVienNhanPhong(String maNhanVien,String maHoaDon){
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+        int n = 0;
+          try {
+
+              statement = con.prepareStatement("update HoaDon\n" +
+                                                "set maNhanVien = ? \n" +
+                                                "where maHoaDon = ? ");
+
+              statement.setString(1, maNhanVien);
+
+              statement.setString(2, maHoaDon);
+
+              n = statement.executeUpdate();
+
+          } catch (Exception e) {
+              // TODO: handle exception
+              e.printStackTrace();
+
+          } finally {
+              try {
+                  statement.close();
+              } catch (Exception e2) {
+                  // TODO: handle exception
+                  e2.printStackTrace();
+              }
+          }
+          return n > 0;
+    }
+    
     public void taoHoaDon(entity.HoaDon hoaDon){
 //        private String maHoaDon;
     //    private LocalDateTime ngayLapHoaDon;

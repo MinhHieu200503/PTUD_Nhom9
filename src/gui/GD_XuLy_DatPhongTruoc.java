@@ -483,9 +483,9 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
 //            
             hoaDon.setMaHoaDon(maHoaDon);
             hoaDon.setNgayLapHoaDon( LocalDateTime.now());
-            hoaDon.setNhanVien(I_CRUD.findById("NV001",new NhanVien()));
+            hoaDon.setNhanVien(null);
             hoaDon.setTrangThai(0);
-            hoaDon.setUuDai(I_CRUD.findById("UD001", new UuDai()));
+            hoaDon.setUuDai(null);
             boolean isHasKH = false;
             for(int i = 0;i<listKH.size();i++){
                 if(listKH.get(i).getSoDienThoai().trim().equals( String.valueOf(txt_SoDT.getSelectedItem()).trim())){
