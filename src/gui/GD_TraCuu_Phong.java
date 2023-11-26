@@ -37,9 +37,9 @@ public class GD_TraCuu_Phong extends javax.swing.JFrame implements  I_TraCuu_Qua
             }
             list.add(row);
         }
-        if (!GD_DangNhap.taiKhoan.getVaiTro()) { // nhân viên thì ko hiển thị button edit
-            btn_edit.setVisible(false);
-        }
+//        if (!GD_DangNhap.taiKhoan.getVaiTro()) { // nhân viên thì ko hiển thị button edit
+//            btn_edit.setVisible(false);
+//        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,6 +66,11 @@ public class GD_TraCuu_Phong extends javax.swing.JFrame implements  I_TraCuu_Qua
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pnlMain.setPreferredSize(new java.awt.Dimension(1650, 964));
+        pnlMain.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                pnlMainHierarchyChanged(evt);
+            }
+        });
         pnlMain.setLayout(new java.awt.BorderLayout());
 
         pnlTop.setBackground(new java.awt.Color(255, 255, 255));
@@ -240,6 +245,18 @@ public class GD_TraCuu_Phong extends javax.swing.JFrame implements  I_TraCuu_Qua
             load(ds, model);
         }
     }//GEN-LAST:event_tf_TraCuuKeyReleased
+
+    private void pnlMainHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_pnlMainHierarchyChanged
+        // TODO add your handling code here:
+        if (pnlMain.isShowing()) {
+            if (!GD_DangNhap.taiKhoan.getVaiTro()) { // nhân viên thì ko hiển thị button edit
+                btn_edit.setVisible(false);
+                
+            }
+            tf_TraCuu.setText("");
+            loadTable(daop.getAll(Phong.class), model);
+        }
+    }//GEN-LAST:event_pnlMainHierarchyChanged
 
     /**
      * @param args the command line arguments

@@ -65,6 +65,11 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pnlMain.setPreferredSize(new java.awt.Dimension(1650, 964));
+        pnlMain.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                pnlMainHierarchyChanged(evt);
+            }
+        });
         pnlMain.setLayout(new java.awt.BorderLayout());
 
         pnlTop.setBackground(new java.awt.Color(255, 255, 255));
@@ -241,6 +246,15 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
             load(ds, model);
         }
     }//GEN-LAST:event_tf_TraCuuKeyReleased
+
+    private void pnlMainHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_pnlMainHierarchyChanged
+        // TODO add your handling code here:
+        if (pnlMain.isShowing()) {
+                tf_TraCuu.setText("");
+               loadTable(daokh.getAll(KhachHang.class), model);
+            
+        }
+    }//GEN-LAST:event_pnlMainHierarchyChanged
 
     /**
      * @param args the command line arguments

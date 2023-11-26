@@ -47,7 +47,7 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlMain2 = new javax.swing.JPanel();
+        pnlMain = new javax.swing.JPanel();
         pnlTop2 = new javax.swing.JPanel();
         pnlTop_title2 = new javax.swing.JLabel();
         pnlCenter2 = new javax.swing.JPanel();
@@ -60,8 +60,13 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        pnlMain2.setPreferredSize(new java.awt.Dimension(1650, 925));
-        pnlMain2.setLayout(new java.awt.BorderLayout());
+        pnlMain.setPreferredSize(new java.awt.Dimension(1650, 925));
+        pnlMain.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                pnlMainHierarchyChanged(evt);
+            }
+        });
+        pnlMain.setLayout(new java.awt.BorderLayout());
 
         pnlTop2.setBackground(new java.awt.Color(255, 255, 255));
         pnlTop2.setPreferredSize(new java.awt.Dimension(828, 100));
@@ -74,7 +79,7 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
         pnlTop_title2.setText("TRA CỨU PHIẾU ĐẶT PHÒNG");
         pnlTop2.add(pnlTop_title2, java.awt.BorderLayout.CENTER);
 
-        pnlMain2.add(pnlTop2, java.awt.BorderLayout.NORTH);
+        pnlMain.add(pnlTop2, java.awt.BorderLayout.NORTH);
 
         pnlCenter2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -183,17 +188,17 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
                 .addComponent(pnlData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlMain2.add(pnlCenter2, java.awt.BorderLayout.CENTER);
+        pnlMain.add(pnlCenter2, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlMain2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlMain2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -208,6 +213,14 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
             load(ds, model);
         }
     }//GEN-LAST:event_tf_TraCuuKeyReleased
+
+    private void pnlMainHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_pnlMainHierarchyChanged
+        // TODO add your handling code here:
+        if (pnlMain.isShowing()) {
+            tf_TraCuu.setText("");
+            loadTable(daopdp.getAll(PhieuDatPhong.class), model);
+        }
+    }//GEN-LAST:event_pnlMainHierarchyChanged
 
     /**
      * @param args the command line arguments
@@ -254,7 +267,7 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
     private javax.swing.JLabel lbl_TraCuu2;
     private javax.swing.JPanel pnlCenter2;
     private javax.swing.JPanel pnlData;
-    private javax.swing.JPanel pnlMain2;
+    private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlThongTinTraCuu2;
     private javax.swing.JPanel pnlTop2;
     private javax.swing.JLabel pnlTop_title2;

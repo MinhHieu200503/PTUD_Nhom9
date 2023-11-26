@@ -62,6 +62,11 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame implements I_TraCuu_Qua
         setMaximumSize(new java.awt.Dimension(1650, 964));
 
         pnlMain.setPreferredSize(new java.awt.Dimension(1650, 950));
+        pnlMain.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                pnlMainHierarchyChanged(evt);
+            }
+        });
         pnlMain.setLayout(new java.awt.BorderLayout());
 
         pnlTop.setBackground(new java.awt.Color(255, 255, 255));
@@ -215,6 +220,14 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame implements I_TraCuu_Qua
             load(ds, model);
         }
     }//GEN-LAST:event_tf_TraCuuKeyReleased
+
+    private void pnlMainHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_pnlMainHierarchyChanged
+        // TODO add your handling code here:
+        if (pnlMain.isShowing()) {
+            tf_TraCuu.setText("");
+            loadTable(daohd.getAll(HoaDon.class), model);
+        }
+    }//GEN-LAST:event_pnlMainHierarchyChanged
 //    public void load(ArrayList<ArrayList<String>> ds) {
 //        model.setRowCount(0);
 //        ds.forEach(e -> {
