@@ -73,7 +73,7 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
        
     }
     
-    private void loadDSPhongTrong(String loaiPhong,int sucChua,int trangThai){
+    public static void loadDSPhongTrong(String loaiPhong,int sucChua,int trangThai){
         ContainerListPhong.removeAll();
         
          dao.DAO_Phong dao_phong = new DAO_Phong();
@@ -760,13 +760,13 @@ private static String day ;
 private static String  month ;
 private static String  year ;
 private static SimpleDateFormat sdf;
-smallPanel.Panel_DanhSachPhongFullCol danhSachPhong;
+static smallPanel.Panel_DanhSachPhongFullCol  danhSachPhong;
 private static LocalDateTime now;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboFilterOption1;
     private javax.swing.JComboBox<String> ComboFilterOption2;
     private javax.swing.JComboBox<String> ComboFilterOption3;
-    private javax.swing.JPanel ContainerListPhong;
+    private static javax.swing.JPanel ContainerListPhong;
     private javax.swing.JPanel Container_DatPhongNgay;
     private static javax.swing.JPanel Panel_ThongTinKhachHang1;
     private static javax.swing.JPanel Panel_ThongTinKhachHang2;

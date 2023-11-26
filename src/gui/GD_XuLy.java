@@ -4,6 +4,7 @@
  */
 package gui;
 
+import static gui.GD_XuLy_DanhSachPhong.loadDSPhongTrong;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JOptionPane;
@@ -46,6 +47,7 @@ public class GD_XuLy extends javax.swing.JFrame {
         rightPanel.add(traPhong.getContentPane());
         
         navBarChoice(0);
+        danhSachPhong.loadDSPhongTrong(null,0,-1);
         repaint();
         
         
@@ -432,7 +434,8 @@ public class GD_XuLy extends javax.swing.JFrame {
         if (evt.getSource().equals(itemDanhSachPhong)){
             setSelectedItem(itemDanhSachPhong);
             navBarChoice(0);
-            
+            danhSachPhong.loadDSPhongTrong(null,0,-1);
+
             pack();
             repaint();
         }
