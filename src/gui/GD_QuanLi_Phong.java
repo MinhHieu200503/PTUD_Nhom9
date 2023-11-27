@@ -63,12 +63,6 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
         jPanel14 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         cb_loai = new javax.swing.JComboBox<>();
-        jPanel15 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        cb_sucChua = new javax.swing.JComboBox<>();
-        jPanel16 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        tf_gia = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -158,35 +152,6 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
         });
 
         jPanel2.add(jPanel14);
-
-        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel15.setPreferredSize(new java.awt.Dimension(281, 75));
-        jPanel15.setLayout(new java.awt.BorderLayout(0, 5));
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel11.setText("Sức chứa:");
-        jPanel15.add(jLabel11, java.awt.BorderLayout.NORTH);
-
-        cb_sucChua.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        cb_sucChua.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "10", "15" }));
-        cb_sucChua.setPreferredSize(new java.awt.Dimension(160, 38));
-        jPanel15.add(cb_sucChua, java.awt.BorderLayout.CENTER);
-
-        jPanel2.add(jPanel15);
-
-        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel16.setPreferredSize(new java.awt.Dimension(283, 83));
-        jPanel16.setLayout(new java.awt.BorderLayout(0, 5));
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel12.setText("Giá mỗi giờ:");
-        jPanel16.add(jLabel12, java.awt.BorderLayout.PAGE_START);
-
-        tf_gia.setBackground(new java.awt.Color(153, 255, 204));
-        tf_gia.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jPanel16.add(tf_gia, java.awt.BorderLayout.CENTER);
-
-        jPanel2.add(jPanel16);
 
         jPanel4.add(jPanel2);
 
@@ -399,10 +364,8 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
                     String ten = tf_ten.getText().trim();
                     int trangthai = cb_trangThai.getSelectedIndex();
                     LoaiPhong lp = daolp.getLoaiPhongTheoTen(cb_loai.getSelectedItem().toString().trim());
-                    int succhua = Integer.parseInt(cb_sucChua.getSelectedItem().toString());
-                    Double gia = Double.parseDouble(tf_gia.getText().trim());
                     
-                    Phong p = new Phong(id, ten, trangthai, lp, succhua, gia);
+                    Phong p = new Phong(id, ten, trangthai, lp);
                     if (daop.create(p)) {
                         JOptionPane.showMessageDialog(this, "Thêm thành công");
                         loadTable(daop.getAll(Phong.class), model);
@@ -424,10 +387,9 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
                     String ten = tf_ten.getText().trim();
                     int trangthai = cb_trangThai.getSelectedIndex();
                     LoaiPhong lp = daolp.getLoaiPhongTheoTen(cb_loai.getSelectedItem().toString().trim());
-                    int succhua = Integer.parseInt(cb_sucChua.getSelectedItem().toString());
-                    Double gia = Double.parseDouble(tf_gia.getText().trim());
                     
-                    Phong p = new Phong(id, ten, trangthai, lp, succhua, gia);
+                    
+                    Phong p = new Phong(id, ten, trangthai, lp);
                     if (daop.update(p)) {
                         JOptionPane.showMessageDialog(this, "Sửa thành công");
                         loadTable(daop.getAll(Phong.class), model);
@@ -464,7 +426,6 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
     
     private boolean validateInput() {
         String ten = tf_ten.getText().trim();
-        String gia = tf_gia.getText().trim();
         if (ten.isEmpty()) {
             showRegexError(tf_ten, "Tên không được rỗng");
             return false;
@@ -477,14 +438,7 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
             showRegexError(tf_ten, "Viết hoa kí tự đầu, không bao gồm kí tự đặc biệt");
             return false;
         }
-        if (gia.isEmpty()) {
-            showRegexError(tf_gia, "Vui lòng nhập giá");
-            return false;
-        }
-        if (!gia.matches("^[1-9][0-9]*\\.[0-9]+$") && !gia.matches("^[1-9][0-9]*$")) {
-            showRegexError(tf_gia, "Giá phải > 0");
-            return false;
-        }
+        
         return true;
     }
     /**
@@ -532,20 +486,15 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
     private javax.swing.JButton btn_them;
     private javax.swing.JButton btn_xoaTrang;
     private javax.swing.JComboBox<String> cb_loai;
-    private javax.swing.JComboBox<String> cb_sucChua;
     private javax.swing.JComboBox<String> cb_trangThai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
@@ -556,7 +505,6 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
     private rojeru_san.complementos.RSTableMetro tbl_danhSach;
-    private javax.swing.JTextField tf_gia;
     private javax.swing.JTextField tf_id;
     private javax.swing.JTextField tf_ten;
     // End of variables declaration//GEN-END:variables

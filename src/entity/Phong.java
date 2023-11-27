@@ -14,8 +14,6 @@ public class Phong {
     private String maPhong, tenPhong;
     private int trangThai;
     private LoaiPhong loaiPhong;
-    private int sucChuaToiDa;
-    private double gia;
 
     public String getMaPhong() {
         return maPhong;
@@ -49,29 +47,11 @@ public class Phong {
         this.loaiPhong = loaiPhong;
     }
 
-    public int getSucChuaToiDa() {
-        return sucChuaToiDa;
-    }
-
-    public void setSucChuaToiDa(int sucChuaToiDa) {
-        this.sucChuaToiDa = sucChuaToiDa;
-    }
-
-    public double getGia() {
-        return gia;
-    }
-
-    public void setGia(double gia) {
-        this.gia = gia;
-    }
-
-    public Phong(String maPhong, String tenPhong, int trangThai, LoaiPhong loaiPhong, int sucChuaToiDa, double giaPhong) {
+    public Phong(String maPhong, String tenPhong, int trangThai, LoaiPhong loaiPhong) {
         this.maPhong = maPhong;
         this.tenPhong = tenPhong;
         this.trangThai = trangThai;
         this.loaiPhong = loaiPhong;
-        this.sucChuaToiDa = sucChuaToiDa;
-        this.gia = giaPhong;
     }
 
     public Phong() {
@@ -101,7 +81,7 @@ public class Phong {
 
     @Override
     public String toString() {
-        return "Phong{" + "maPhong=" + maPhong + ", tenPhong=" + tenPhong + ", trangThai=" + trangThai + ", loaiPhong=" + loaiPhong + ", sucChuaToiDa=" + sucChuaToiDa + ", giaPhong=" + gia + '}';
+        return "Phong{" + "maPhong=" + maPhong + ", tenPhong=" + tenPhong + ", trangThai=" + trangThai + ", loaiPhong=" + loaiPhong +'}';
     }
     
 }

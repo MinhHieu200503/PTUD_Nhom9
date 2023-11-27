@@ -293,7 +293,6 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
                 tempHoaDon = new HoaDon(maHD, rs.getTimestamp(2).toLocalDateTime(), rs.getInt(3),"", null, null, null); 
                 tempPhong = new Phong(maPhong, rs.getString("tenPhong"), 2, null, rs.getInt("sucChuaToiDa"), rs.getDouble("giaPhongTheoGio"));
                 
-                
                 phongDangChon = new ChitTietPhongHoaDon(rs.getTimestamp("thoiGianNhanPhong").toLocalDateTime(), LocalDateTime.now(), rs.getString(10) , tempHoaDon, tempPhong);
             }
 //            System.out.println("PhongDangChon: " + phongDangChon.toString());

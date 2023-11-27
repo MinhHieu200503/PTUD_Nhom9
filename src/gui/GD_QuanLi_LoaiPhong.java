@@ -49,6 +49,12 @@ public class GD_QuanLi_LoaiPhong extends javax.swing.JFrame implements I_TraCuu_
         jPanel6 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         tf_ten = new javax.swing.JTextField();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        cb_sucChua = new javax.swing.JComboBox<>();
+        jPanel16 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        tf_gia = new javax.swing.JTextField();
         jPanel17 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -106,6 +112,35 @@ public class GD_QuanLi_LoaiPhong extends javax.swing.JFrame implements I_TraCuu_
 
         jPanel2.add(jPanel6);
 
+        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel15.setPreferredSize(new java.awt.Dimension(281, 75));
+        jPanel15.setLayout(new java.awt.BorderLayout(0, 5));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel11.setText("Sức chứa:");
+        jPanel15.add(jLabel11, java.awt.BorderLayout.NORTH);
+
+        cb_sucChua.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        cb_sucChua.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5", "10", "15" }));
+        cb_sucChua.setPreferredSize(new java.awt.Dimension(160, 38));
+        jPanel15.add(cb_sucChua, java.awt.BorderLayout.CENTER);
+
+        jPanel2.add(jPanel15);
+
+        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel16.setPreferredSize(new java.awt.Dimension(283, 83));
+        jPanel16.setLayout(new java.awt.BorderLayout(0, 5));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel12.setText("Giá mỗi giờ:");
+        jPanel16.add(jLabel12, java.awt.BorderLayout.PAGE_START);
+
+        tf_gia.setBackground(new java.awt.Color(153, 255, 204));
+        tf_gia.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jPanel16.add(tf_gia, java.awt.BorderLayout.CENTER);
+
+        jPanel2.add(jPanel16);
+
         jPanel17.setBackground(new java.awt.Color(255, 255, 255));
         jPanel17.setPreferredSize(new java.awt.Dimension(283, 180));
         jPanel17.setLayout(new java.awt.BorderLayout(0, 5));
@@ -147,14 +182,14 @@ public class GD_QuanLi_LoaiPhong extends javax.swing.JFrame implements I_TraCuu_
 
             },
             new String [] {
-                "Mã loại phòng", "Tên loại phòng", "Mô tả"
+                "Mã loại phòng", "Tên loại phòng", "Sức chứa", "Giá", "Mô tả"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -251,7 +286,7 @@ public class GD_QuanLi_LoaiPhong extends javax.swing.JFrame implements I_TraCuu_
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
             .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
@@ -330,9 +365,11 @@ public class GD_QuanLi_LoaiPhong extends javax.swing.JFrame implements I_TraCuu_
                 if (validateInput()) { // để nhét regex vào
                     String id = tf_id.getText().trim();
                     String ten = tf_ten.getText().trim();
+                    int sc = Integer.parseInt(cb_sucChua.getSelectedItem().toString());
+                    double gia = Double.parseDouble(tf_gia.getText().trim());
                     String mota = ta_moTa.getText().trim();
                     
-                    LoaiPhong lp = new LoaiPhong(id, ten, mota);
+                    LoaiPhong lp = new LoaiPhong(id, ten, sc, gia, mota);
                     if (daolp.create(lp)) {
                         JOptionPane.showMessageDialog(this, "Thêm thành công");
                         loadTable(daolp.getAll(LoaiPhong.class), model);
@@ -352,9 +389,11 @@ public class GD_QuanLi_LoaiPhong extends javax.swing.JFrame implements I_TraCuu_
                 if (validateInput()) {
                     String id = tf_id.getText().trim();
                     String ten = tf_ten.getText().trim();
+                    int sc = Integer.parseInt(cb_sucChua.getSelectedItem().toString());
+                    double gia = Double.parseDouble(tf_gia.getText().trim());
                     String mota = ta_moTa.getText().trim();
                     
-                    LoaiPhong lp = new LoaiPhong(id, ten, mota);
+                    LoaiPhong lp = new LoaiPhong(id, ten, sc, gia, mota);
                     if (daolp.update(lp)) {
                         JOptionPane.showMessageDialog(this, "Sửa thành công");
                         loadTable(daolp.getAll(LoaiPhong.class), model);
@@ -385,6 +424,7 @@ public class GD_QuanLi_LoaiPhong extends javax.swing.JFrame implements I_TraCuu_
     }//GEN-LAST:event_tbl_danhSachMouseClicked
     private boolean validateInput() {
         String ten = tf_ten.getText().trim();
+        String gia = tf_gia.getText().trim();
         String mota = ta_moTa.getText().trim();
         
         if (ten.isEmpty()) {
@@ -397,6 +437,14 @@ public class GD_QuanLi_LoaiPhong extends javax.swing.JFrame implements I_TraCuu_
         }
         if (!ten.matches("^[A-ZÀ-Ỹ]([A-ZÀ-Ỹa-zà-ỹ\\d]*\\s?)+$")) {
             showRegexError(tf_ten, "Viết hoa kí tự đầu, không bao gồm kí tự đặc biệt");
+            return false;
+        }
+        if (gia.isEmpty()) {
+            showRegexError(tf_gia, "Vui lòng nhập giá");
+            return false;
+        }
+        if (!gia.matches("^[1-9][0-9]*\\.[0-9]+$") && !gia.matches("^[1-9][0-9]*$")) {
+            showRegexError(tf_gia, "Giá phải > 0");
             return false;
         }
         if (mota.length() > 50) {
@@ -448,11 +496,16 @@ public class GD_QuanLi_LoaiPhong extends javax.swing.JFrame implements I_TraCuu_
     private javax.swing.JButton btn_sua;
     private javax.swing.JButton btn_them;
     private javax.swing.JButton btn_xoaTrang;
+    private javax.swing.JComboBox<String> cb_sucChua;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
@@ -466,6 +519,7 @@ public class GD_QuanLi_LoaiPhong extends javax.swing.JFrame implements I_TraCuu_
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea ta_moTa;
     private rojeru_san.complementos.RSTableMetro tbl_danhSach;
+    private javax.swing.JTextField tf_gia;
     private javax.swing.JTextField tf_id;
     private javax.swing.JTextField tf_ten;
     // End of variables declaration//GEN-END:variables
