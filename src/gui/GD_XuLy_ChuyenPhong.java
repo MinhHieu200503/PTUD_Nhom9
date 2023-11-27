@@ -639,7 +639,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
             for (Phong i : dspt) {
                 if (!dsid_phong.contains(i.getMaPhong())) { // trừ các phòng trong hoá đơn ra, còn lại load lên
                     String maphong = i.getMaPhong();
-                    String loaiphong = (i.getLoaiPhong()).getLoaiPhong();
+                    String loaiphong = (i.getLoaiPhong()).getTenLoaiPhong();
 //                    System.out.println(i.getLoaiPhong());
                     String succhua = String.valueOf(i.getSucChuaToiDa());
                     String gia = String.valueOf(i.getGia());
@@ -650,7 +650,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
         } else { // chắc là ko xảy ra trường hợp này
             for (Phong i : dspt) {
                 String maphong = i.getMaPhong();
-                String loaiphong = (i.getLoaiPhong()).getLoaiPhong();
+                String loaiphong = (i.getLoaiPhong()).getTenLoaiPhong();
 //                System.out.println(i.getLoaiPhong());
                 String succhua = String.valueOf(i.getSucChuaToiDa());
                 String gia = String.valueOf(i.getGia());
