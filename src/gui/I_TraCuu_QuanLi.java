@@ -83,7 +83,7 @@ public interface I_TraCuu_QuanLi<T> {
                                 row[i] = ((Phong) fields[i].get(e)).getTenPhong();
                                 break;
                             case "LoaiPhong":
-                                row[i] = ((LoaiPhong) fields[i].get(e)).getLoaiPhong();
+                                row[i] = ((LoaiPhong) fields[i].get(e)).getTenLoaiPhong();
                                 break;
                             case "KhachHang":
                                 row[i] = ((KhachHang) fields[i].get(e)).getTenKhachHang();

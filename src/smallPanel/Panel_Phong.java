@@ -152,7 +152,7 @@ public class Panel_Phong extends javax.swing.JPanel {
     
     public String getMaLoaiPhong(entity.Phong data){
         entity.LoaiPhong loaiPhong =  data.getLoaiPhong();
-        return loaiPhong.getLoaiPhong();
+        return loaiPhong.getTenLoaiPhong();
     }
     
         public smallPanel.Panel_Phong   getPhong(){

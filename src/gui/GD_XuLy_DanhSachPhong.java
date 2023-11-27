@@ -658,10 +658,10 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
         lb_HoaDon.setText("Loại phòng");
         lbThoiGianNhanPhong.setText("Sức chứa");
         lbThoiGianSuDung.setText("Giá theo giờ");
-        entity.LoaiPhong loaiPhong = DAOphong.getPhongTheoOnlyMaPhong(maPhong).getLoaiPhong();
-        txtMaHoaDon.setText(I_CRUD.findById(loaiPhong.getMaLoaiPhong(), new entity.LoaiPhong()).getLoaiPhong());
-        txtThoiGianNhanPhong.setText(I_CRUD.findById(maPhong, new LoaiPhong()).getSucChua()+"");
-        txt_ThoiGianSuDung.setText(I_CRUD.findById(maPhong, new LoaiPhong()).getGia()+"");
+        
+        txtMaHoaDon.setText(I_CRUD.findById(maPhong, new Phong()).getLoaiPhong().getMaLoaiPhong());
+        txtThoiGianNhanPhong.setText(I_CRUD.findById(maPhong, new Phong()).getLoaiPhong().getSucChua()+"");
+        txt_ThoiGianSuDung.setText(I_CRUD.findById(maPhong, new Phong()).getLoaiPhong().getGia()+"");
         panelContainDV.setVisible(false);
         Panel_ThongTinKhachHang2 .setVisible(false);
         
