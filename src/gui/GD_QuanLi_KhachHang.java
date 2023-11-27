@@ -376,7 +376,10 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        loadTable(daokh.getAll(KhachHang.class), GD_TraCuu_KhachHang.model);
+        if (GD_TraCuu_KhachHang.model != null)
+            loadTable(daokh.getAll(KhachHang.class), GD_TraCuu_KhachHang.model);
+        else 
+            System.out.println("chưa mở giao diện tra cứu khách hàng");
     }//GEN-LAST:event_formWindowClosing
     private boolean validateInput(Object o) {
         String ten = tf_ten.getText().trim();;

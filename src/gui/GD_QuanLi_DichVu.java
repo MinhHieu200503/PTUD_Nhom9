@@ -458,7 +458,10 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        loadTable(daodv.getAll(DichVu.class), GD_TraCuu_DichVu.model);
+        if (GD_TraCuu_DichVu.model != null)
+            loadTable(daodv.getAll(DichVu.class), GD_TraCuu_DichVu.model);
+        else 
+            System.out.println("chưa mở giao diện tra cứu dịch vụ");
     }//GEN-LAST:event_formWindowClosing
     private boolean validateInput() {
         String ten = tf_ten.getText().trim();
