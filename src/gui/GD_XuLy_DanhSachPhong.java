@@ -17,7 +17,6 @@ import entity.HoaDon;
 import entity.LoaiPhong;
 import entity.PhieuDatPhong;
 import entity.Phong;
-import static gui.GD_XuLy_GoiDichVu.table_dvPhongDangSuDung;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.beans.PropertyChangeEvent;
