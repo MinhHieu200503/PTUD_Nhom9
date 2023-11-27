@@ -11,7 +11,7 @@ import java.util.Objects;
  * @author quang
  */
 public class LoaiPhong {
-    private String maLoaiPhong, loaiPhong;
+    private String maLoaiPhong, tenLoaiPhong;
     private int sucChua;
     private double gia;
     private String moTa;
@@ -24,12 +24,12 @@ public class LoaiPhong {
         this.maLoaiPhong = maLoaiPhong;
     }
 
-    public String getLoaiPhong() {
-        return loaiPhong;
+    public String getTenLoaiPhong() {
+        return tenLoaiPhong;
     }
 
-    public void setLoaiPhong(String loaiPhong) {
-        this.loaiPhong = loaiPhong;
+    public void setTenLoaiPhong(String tenLoaiPhong) {
+        this.tenLoaiPhong = tenLoaiPhong;
     }
 
     public int getSucChua() {
@@ -56,9 +56,9 @@ public class LoaiPhong {
         this.moTa = moTa;
     }
 
-    public LoaiPhong(String maLoaiPhong, String loaiPhong, int sucChua, double gia, String moTa) {
+    public LoaiPhong(String maLoaiPhong, String tenLoaiPhong, int sucChua, double gia, String moTa) {
         this.maLoaiPhong = maLoaiPhong;
-        this.loaiPhong = loaiPhong;
+        this.tenLoaiPhong = tenLoaiPhong;
         this.sucChua = sucChua;
         this.gia = gia;
         this.moTa = moTa;
@@ -91,6 +91,6 @@ public class LoaiPhong {
 
     @Override
     public String toString() {
-        return "LoaiPhong{" + "maLoaiPhong=" + maLoaiPhong + ", loaiPhong=" + loaiPhong + ", sucChua=" + sucChua + ", gia=" + gia + ", moTa=" + moTa + '}';
+        return "LoaiPhong{" + "maLoaiPhong=" + maLoaiPhong + ", tenLoaiPhong=" + tenLoaiPhong + ", sucChua=" + sucChua + ", gia=" + gia + ", moTa=" + moTa + '}';
     }
 }
