@@ -135,14 +135,14 @@ public class GD_TraCuu_Phong extends javax.swing.JFrame implements  I_TraCuu_Qua
 
             },
             new String [] {
-                "Mã phòng", "Tên phòng", "Trạng thái", "Loại phòng", "Sức chứa", "Giá"
+                "Mã phòng", "Tên phòng", "Trạng thái", "Loại phòng"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {

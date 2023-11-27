@@ -11,7 +11,10 @@ import java.util.Objects;
  * @author quang
  */
 public class LoaiPhong {
-    private String maLoaiPhong, loaiPhong, moTa;
+    private String maLoaiPhong, loaiPhong;
+    private int sucChua;
+    private double gia;
+    private String moTa;
 
     public String getMaLoaiPhong() {
         return maLoaiPhong;
@@ -29,6 +32,22 @@ public class LoaiPhong {
         this.loaiPhong = loaiPhong;
     }
 
+    public int getSucChua() {
+        return sucChua;
+    }
+
+    public void setSucChua(int sucChua) {
+        this.sucChua = sucChua;
+    }
+
+    public double getGia() {
+        return gia;
+    }
+
+    public void setGia(double gia) {
+        this.gia = gia;
+    }
+    
     public String getMoTa() {
         return moTa;
     }
@@ -37,9 +56,11 @@ public class LoaiPhong {
         this.moTa = moTa;
     }
 
-    public LoaiPhong(String maLoaiPhong, String loaiPhong, String moTa) {
+    public LoaiPhong(String maLoaiPhong, String loaiPhong, int sucChua, double gia, String moTa) {
         this.maLoaiPhong = maLoaiPhong;
         this.loaiPhong = loaiPhong;
+        this.sucChua = sucChua;
+        this.gia = gia;
         this.moTa = moTa;
     }
 
@@ -70,7 +91,6 @@ public class LoaiPhong {
 
     @Override
     public String toString() {
-        return "LoaiPhong{" + "maLoaiPhong=" + maLoaiPhong + ", loaiPhong=" + loaiPhong + ", moTa=" + moTa + '}';
+        return "LoaiPhong{" + "maLoaiPhong=" + maLoaiPhong + ", loaiPhong=" + loaiPhong + ", sucChua=" + sucChua + ", gia=" + gia + ", moTa=" + moTa + '}';
     }
-    
 }
