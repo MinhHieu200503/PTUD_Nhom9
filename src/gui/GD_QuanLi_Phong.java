@@ -148,7 +148,7 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
         jPanel14.add(cb_loai, java.awt.BorderLayout.CENTER);
         ArrayList<LoaiPhong> dslp = daolp.getAll(LoaiPhong.class);
         dslp.forEach(e -> {
-            cb_loai.addItem(e.getLoaiPhong());
+            cb_loai.addItem(e.getTenLoaiPhong());
         });
 
         jPanel2.add(jPanel14);
@@ -179,14 +179,14 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
 
             },
             new String [] {
-                "Mã phòng", "Tên phòng", "Trạng thái", "Loại phòng", "Sức chứa", "Giá"
+                "Mã phòng", "Tên phòng", "Trạng thái", "Loại phòng"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -421,7 +421,10 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        loadTable(daop.getAll(Phong.class), GD_TraCuu_Phong.model);
+        if (GD_TraCuu_Phong.model != null) 
+            loadTable(daop.getAll(Phong.class), GD_TraCuu_Phong.model);
+        else
+            System.out.println("chưa mở giao diện tra cứu phòng");
     }//GEN-LAST:event_formWindowClosing
     
     private boolean validateInput() {

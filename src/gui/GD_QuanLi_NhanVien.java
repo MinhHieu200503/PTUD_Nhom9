@@ -595,7 +595,10 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        loadTable(daonv.getAll(NhanVien.class), GD_TraCuu_NhanVien.model);
+        if (GD_TraCuu_NhanVien.model != null)
+            loadTable(daonv.getAll(NhanVien.class), GD_TraCuu_NhanVien.model);
+        else 
+            System.out.println("chưa mở giao diện tra cứu nhân viên");
     }//GEN-LAST:event_formWindowClosing
     private boolean validateInput() {
         String ten = tf_ten.getText().trim();
