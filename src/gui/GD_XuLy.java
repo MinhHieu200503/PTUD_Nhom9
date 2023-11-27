@@ -17,12 +17,12 @@ import javax.swing.JPanel;
 public class GD_XuLy extends javax.swing.JFrame {
 
     private GD_XuLy_DanhSachPhong danhSachPhong = new GD_XuLy_DanhSachPhong();
-    private GD_XuLy_DatPhongNgay datPhongNgay = new GD_XuLy_DatPhongNgay();
+//    private GD_XuLy_DatPhongNgay datPhongNgay = new GD_XuLy_DatPhongNgay();
     private GD_XuLy_DatPhongTruoc datPhongTruoc = new GD_XuLy_DatPhongTruoc();
     private GD_XuLy_NhanPhong nhanPhong = new GD_XuLy_NhanPhong();
-    private GD_XuLy_GoiDichVu goiDichVu = new GD_XuLy_GoiDichVu();
-    private GD_XuLy_ChuyenPhong chuyenPhong = new GD_XuLy_ChuyenPhong();
-    private GD_XuLy_TraPhong traPhong = new GD_XuLy_TraPhong();
+//    private GD_XuLy_GoiDichVu goiDichVu = new GD_XuLy_GoiDichVu();
+//    private GD_XuLy_ChuyenPhong chuyenPhong = new GD_XuLy_ChuyenPhong();
+//    private GD_XuLy_TraPhong traPhong = new GD_XuLy_TraPhong();
     
     /**
      * Creates new form GD_XuLy
@@ -39,12 +39,12 @@ public class GD_XuLy extends javax.swing.JFrame {
 //        ========------ IMPORTANT DEMO FRAME PROJECT ------========     
         
         rightPanel.add(danhSachPhong.getContentPane());
-        rightPanel.add(datPhongNgay.getContentPane());
+//        rightPanel.add(datPhongNgay.getContentPane());
         rightPanel.add(datPhongTruoc.getContentPane());
         rightPanel.add(nhanPhong.getContentPane());
-        rightPanel.add(goiDichVu.getContentPane());
-        rightPanel.add(chuyenPhong.getContentPane());
-        rightPanel.add(traPhong.getContentPane());
+//        rightPanel.add(goiDichVu.getContentPane());
+//        rightPanel.add(chuyenPhong.getContentPane());
+//        rightPanel.add(traPhong.getContentPane());
         
         navBarChoice(0);
         danhSachPhong.loadDSPhongTrong(null,0,-1);
@@ -442,14 +442,14 @@ public class GD_XuLy extends javax.swing.JFrame {
         else if (evt.getSource().equals(itemDatPhongNgay)){
             setSelectedItem(itemDatPhongNgay);
             navBarChoice(1);
-            datPhongNgay.loadDSPhongTrong();
-            datPhongNgay.setTableDataNull();
+//            datPhongNgay.loadDSPhongTrong();
+//            datPhongNgay.setTableDataNull();
             pack();
             repaint();
         }
         else if (evt.getSource().equals(itemDatPhongTruoc)){
             setSelectedItem(itemDatPhongTruoc);
-            navBarChoice(2);
+            navBarChoice(2); // => test (2)
             datPhongTruoc.loadDSPhongTrong(null,0,null);
             pack();
             repaint();
@@ -464,22 +464,22 @@ public class GD_XuLy extends javax.swing.JFrame {
         else if (evt.getSource().equals(itemGoiDichVu)){
             setSelectedItem(itemGoiDichVu);
             navBarChoice(4);
-            goiDichVu.loadDSPhongDangSuDung();
-            goiDichVu.loadDSTatCaDichVu();
+//            goiDichVu.loadDSPhongDangSuDung();
+//            goiDichVu.loadDSTatCaDichVu();
             pack();
             repaint();
         }
         else if (evt.getSource().equals(itemChuyenPhong)){
             setSelectedItem(itemChuyenPhong);
             navBarChoice(5);
-            chuyenPhong.loadDSPhongDangSuDung();
+//            chuyenPhong.loadDSPhongDangSuDung();
             pack();
             repaint();
         }
         else if (evt.getSource().equals(itemTraPhong)){
             setSelectedItem(itemTraPhong);
             navBarChoice(6  );
-            traPhong.fullLoad();
+//            traPhong.fullLoad();
             pack();
             repaint();
         }

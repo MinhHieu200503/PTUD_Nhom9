@@ -15,6 +15,7 @@ import entity.ChiTietDichVuHoaDon;
 import entity.ChitTietPhongHoaDon;
 import entity.HoaDon;
 import entity.KhachHang;
+import entity.LoaiPhong;
 import entity.NhanVien;
 import entity.PhieuDatPhong;
 import entity.Phong;
@@ -143,6 +144,11 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
         txt_TienCoc.setEditable(false);
         txt_TienCoc.setEnabled(false);
         txt_TienCoc.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txt_TienCoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_TienCocActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         jLabel3.setText("Tiền cọc đã nhận: ");
@@ -553,6 +559,10 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
             //        }
     }//GEN-LAST:event_tablePDPxoaMotDongTable
 
+    private void txt_TienCocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_TienCocActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_TienCocActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -670,7 +680,7 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
   
     public static void setTienCoc(String maPhong){
         dao.DAO_Phong DAOphong = new  DAO_Phong();
-        txt_TienCoc.setText(String.valueOf(DAOphong.getPhongTheoOnlyMaPhong(maPhong).getGia()));
+        txt_TienCoc.setText(String.valueOf(I_CRUD.findById(maPhong, new Phong()).getLoaiPhong().getGia()));
     }
     
     

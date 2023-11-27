@@ -79,7 +79,7 @@ public class DAO_Phong implements I_CRUD<Phong>{
             sqlLoaiPhong = "  and loaiPhong = ?  ";
         }
         if(sucChua !=0){
-            sqlSucChua = "  and sucChuaToiDa = ? ";
+            sqlSucChua = "  and sucChua = ? ";
         }
         if(trangThai == 1){
             inOrNotin = "phong.maPhong in ";
@@ -95,7 +95,7 @@ public class DAO_Phong implements I_CRUD<Phong>{
                 sqlLoaiPhong = "  loaiPhong = ? and ";
                 }
                 if(sucChua !=0){
-                 sqlSucChua = "   sucChuaToiDa = ? and  ";
+                 sqlSucChua = "   sucChua = ? and  ";
                 }
         }
         if(trangThai == 1 && dateNow == false){
@@ -159,11 +159,11 @@ public class DAO_Phong implements I_CRUD<Phong>{
 
             while (rs.next()) {
 		 if(dateNow == false){
-                    dsphong.add(new entity.Phong(rs.getString(1).trim(), rs.getString(2), trangThai, I_CRUD.findById(rs.getString(4), new LoaiPhong()), rs.getInt(5), rs.getDouble(6) ));
+                    dsphong.add(new entity.Phong(rs.getString(1).trim(), rs.getString(2), trangThai, I_CRUD.findById(rs.getString(4), new LoaiPhong())));
 
                  }
                  else{
-                   dsphong.add(new entity.Phong(rs.getString(1).trim(), rs.getString(2), rs.getInt(3), I_CRUD.findById(rs.getString(4), new LoaiPhong()), rs.getInt(5), rs.getDouble(6) ));
+                   dsphong.add(new entity.Phong(rs.getString(1).trim(), rs.getString(2), rs.getInt(3),I_CRUD.findById(rs.getString(4), new LoaiPhong()) ));
 
                  }
                  
@@ -197,14 +197,14 @@ public class DAO_Phong implements I_CRUD<Phong>{
             sqlLoaiPhong = "   loaiPhong = ?  ";
         }
         if(sucChua !=0){
-            sqlSucChua = " and  sucChuaToiDa = ?  ";
+            sqlSucChua = " and  sucChua = ?  ";
         }
 //        
        
         
                     if(sqlLoaiPhong.trim().equals("")&&!sqlSucChua.trim().equals("")&&trangThai!=-1){
                        sqlTrangThai = "  trangThai = ?  ";
-                       sqlSucChua = "  and sucChuaToiDa = ?  ";
+                       sqlSucChua = "  and sucChua = ?  ";
                         
                     }
                     else if(!sqlLoaiPhong.trim().equals("")&&sqlSucChua.trim().equals("")&&trangThai!=-1){
@@ -214,11 +214,11 @@ public class DAO_Phong implements I_CRUD<Phong>{
                     }
                     else if(!sqlLoaiPhong.trim().equals("")&&!sqlSucChua.trim().equals("")&&trangThai==-1){
                         sqlLoaiPhong = "  loaiPhong = ?  ";
-                        sqlSucChua = "  and sucChuaToiDa = ?  ";
+                        sqlSucChua = "  and sucChua = ?  ";
                         
                     }
                     else if(sqlLoaiPhong.trim().equals("")&&!sqlSucChua.trim().equals("")&&trangThai==-1){                      
-                        sqlSucChua = "   sucChuaToiDa = ?  ";
+                        sqlSucChua = "   sucChua = ?  ";
                     }
                     else if(!sqlLoaiPhong.trim().equals("")&&sqlSucChua.trim().equals("")&&trangThai==-1){                      
                          sqlLoaiPhong = "  loaiPhong = ?  ";
@@ -229,7 +229,7 @@ public class DAO_Phong implements I_CRUD<Phong>{
                     else if(!sqlLoaiPhong.trim().equals("")&&!sqlSucChua.trim().equals("")&&trangThai!=-1){
                        sqlTrangThai = "  trangThai = ?  ";
                        sqlLoaiPhong = "  and loaiPhong = ?  ";
-                        sqlSucChua = "  and sucChuaToiDa = ?  ";
+                        sqlSucChua = "  and sucChua = ?  ";
                     }
         try {
             
@@ -281,7 +281,7 @@ public class DAO_Phong implements I_CRUD<Phong>{
                 
                 
                  while (rs.next()) {	
-                dsphong.add(new entity.Phong(rs.getString(1).trim(), rs.getString(2), rs.getInt(3), I_CRUD.findById(rs.getString(4), new LoaiPhong()), rs.getInt(5), rs.getDouble(6) ));
+                dsphong.add(new entity.Phong(rs.getString(1).trim(), rs.getString(2), rs.getInt(3), I_CRUD.findById(rs.getString(4), new LoaiPhong()) ));
                 }
             
         } catch (Exception e) {
@@ -383,8 +383,8 @@ public class DAO_Phong implements I_CRUD<Phong>{
 
             while (rs.next()) {
 //			
-                phong = new entity.Phong(rs.getString(1).trim(), rs.getString(2), rs.getInt(3), I_CRUD.findById(rs.getString(4), new LoaiPhong()), rs.getInt(5), rs.getDouble(6) );
-                    
+                phong = new entity.Phong(rs.getString(1).trim(), rs.getString(2), rs.getInt(3), I_CRUD.findById(rs.getString(4), new LoaiPhong()) );
+                   
             }
              System.out.println(phong);
         } catch (Exception e) {

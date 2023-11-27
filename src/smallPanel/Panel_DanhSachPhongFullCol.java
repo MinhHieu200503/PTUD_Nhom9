@@ -5,7 +5,7 @@
 package smallPanel;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import gui.GD_XuLy_DatPhongNgay;
+//import gui.GD_XuLy_DatPhongNgay;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -195,12 +195,13 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ArrayList<entity.Phong> temp = new ArrayList<entity.Phong>();
-                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-               temp.add(new entity.Phong("002", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("003", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("004", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("005", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
-                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
+                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường",12 ,5,"không")));
+                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("LP001", "Thường",12 ,5,"không")));
+                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường",12 ,5,"không")));
+                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường",12 ,5,"không")));
+                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường",12 ,5,"không")));
+
+                temp.add(new entity.Phong("006", "Minh", 1, new entity.LoaiPhong("001", "Thường",12 ,5,"không")));
 //                temp.add(new entity.Phong("007", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                temp.add(new entity.Phong("008", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //                temp.add(new entity.Phong("009", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
@@ -224,7 +225,7 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
 //                temp.add(new entity.Phong("001", "Minh", 1, new entity.LoaiPhong("001", "Thường", "không"), 15,5));
 //           
 //                
-                new Panel_DanhSachPhongFullCol(temp,GD_XuLy_DatPhongNgay.class).setVisible(true);
+//                new Panel_DanhSachPhongFullCol(temp,GD_XuLy_DatPhongNgay.class).setVisible(true);
             }
         });
     }
@@ -288,7 +289,7 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                         
                     }
                     else if(classUse.equalsIgnoreCase("GoiDichVu")){
-                        gui.GD_XuLy_GoiDichVu.fillData(tmp.getCode());
+//                        gui.GD_XuLy_GoiDichVu.fillData(tmp.getCode());
                     }
                     else if(classUse.equalsIgnoreCase("DatPhongTruoc")){
                         DatPhongTruoc(evt);
@@ -309,7 +310,6 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
 
                 });
                 }
-                // add zo container cha
 
                 panel_Container_ListPhong.setLayout(new FlowLayout());
                 panel_Container_ListPhong.add(container_ListPhong_minisize);
@@ -352,7 +352,7 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                         
                     }
                     else if(classUse.equalsIgnoreCase("GoiDichVu")){
-                        gui.GD_XuLy_GoiDichVu.fillData(tmp.getCode());
+//                        gui.GD_XuLy_GoiDichVu.fillData(tmp.getCode());
                     }
                     else if(classUse.equalsIgnoreCase("DatPhongTruoc")){
                         DatPhongTruoc(evt);
@@ -403,7 +403,6 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
              for(int i = 0;i<panel_Container_ListPhong.getComponentCount();i++){
              JPanel one_Row  = (JPanel) panel_Container_ListPhong.getComponent(i);
              for(int row = 0; row<one_Row.getComponentCount();row ++){
-//                 System.out.println("smallPanel.Panel_DanhSachPhong.setAllPanelPhongFalse()" +i +" /" + row);
                    smallPanel.Panel_Phong tmp = (smallPanel.Panel_Phong) one_Row.getComponent(row);
                  if(!tmp.getBackground().equals(Color.BLUE)){
                     
@@ -517,7 +516,7 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                       temp.setBackground(Color.BLUE);
                     Border border = new LineBorder(new Color(0,153,153), 4, true);
                     temp.setBorder(border);
-                    GD_XuLy_DatPhongNgay.setTableData(codePhong);
+//                    GD_XuLy_DatPhongNgay.setTableData(codePhong);
                 }
             return 1;
 

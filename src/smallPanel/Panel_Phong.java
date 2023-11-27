@@ -6,6 +6,7 @@ package smallPanel;
 
 import dao.DAO_LoaiPhong;
 import dao.DAO_Phong;
+import dao.I_CRUD;
 import entity.LoaiPhong;
 import java.awt.Color;
 import java.awt.Component;
@@ -125,14 +126,16 @@ public class Panel_Phong extends javax.swing.JPanel {
     }
     
     public void setData(entity.Phong data){
+        dao.DAO_LoaiPhong daoLP = new DAO_LoaiPhong();
+        DAO_Phong daoPhong = new DAO_Phong();
         lb_TenPhong.setText(data.getTenPhong() + " - " + data.getMaPhong());
-        lb_SucChua.setText("Sức chứa: " + String.valueOf(data.getSucChuaToiDa()));
-        lb_Gia.setText("Giá: "+ String.format("%,.3f", data.getGia()) + "Đ");
+        lb_SucChua.setText("Sức chứa: " + String.valueOf(daoPhong.getPhongTheoOnlyMaPhong(data.getMaPhong()).getLoaiPhong().getSucChua()));
+        lb_Gia.setText("Giá: "+ String.format("%,.3f",I_CRUD.findById(data.getLoaiPhong().getMaLoaiPhong(), new LoaiPhong()).getGia()) + "Đ");
 
         this.setId(data.getMaPhong());
         this.setTenPhong(data.getTenPhong());
-        this.setSucChua(data.getSucChuaToiDa());
-        this.setGia(data.getGia());
+        this.setSucChua(I_CRUD.findById(data.getLoaiPhong().getMaLoaiPhong(), new LoaiPhong()).getSucChua());
+        this.setGia(I_CRUD.findById(data.getLoaiPhong().getMaLoaiPhong(), new LoaiPhong()).getGia());
         this.setTrangThai(data.getTrangThai());
         String loaiPhong = getMaLoaiPhong(data);
 
