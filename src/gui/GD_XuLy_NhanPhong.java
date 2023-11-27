@@ -15,6 +15,7 @@ import entity.ChiTietDichVuHoaDon;
 import entity.ChitTietPhongHoaDon;
 import entity.HoaDon;
 import entity.KhachHang;
+import entity.LoaiPhong;
 import entity.NhanVien;
 import entity.PhieuDatPhong;
 import entity.Phong;
@@ -670,7 +671,7 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
   
     public static void setTienCoc(String maPhong){
         dao.DAO_Phong DAOphong = new  DAO_Phong();
-        txt_TienCoc.setText(String.valueOf(DAOphong.getPhongTheoOnlyMaPhong(maPhong).getGia()));
+        txt_TienCoc.setText(String.valueOf(I_CRUD.findById(maPhong, new LoaiPhong()).getGia()));
     }
     
     

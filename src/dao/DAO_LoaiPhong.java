@@ -28,7 +28,7 @@ public class DAO_LoaiPhong implements I_CRUD<LoaiPhong>{
             pstm.setString(1, name);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                lp = new LoaiPhong(rs.getString(1), name, rs.getString(3));
+                lp = new LoaiPhong(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getFloat(4),rs.getString(5));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_LoaiPhong.class.getName()).log(Level.SEVERE, null, ex);
