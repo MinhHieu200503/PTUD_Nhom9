@@ -76,7 +76,7 @@ public class DAO_Phong implements I_CRUD<Phong>{
         // if else
         boolean dateNow = true;
         if(loaiPhong != null){
-            sqlLoaiPhong = "  and loaiPhong = ?  ";
+            sqlLoaiPhong = "  and tenLoaiPhong = ?  ";
         }
         if(sucChua !=0){
             sqlSucChua = "  and sucChua = ? ";
@@ -92,7 +92,7 @@ public class DAO_Phong implements I_CRUD<Phong>{
             selectedDate = date;
             dateNow = false;
                 if(loaiPhong != null){
-                sqlLoaiPhong = "  loaiPhong = ? and ";
+                sqlLoaiPhong = "  tenLoaiPhong = ? and ";
                 }
                 if(sucChua !=0){
                  sqlSucChua = "   sucChua = ? and  ";
@@ -194,7 +194,7 @@ public class DAO_Phong implements I_CRUD<Phong>{
         String sqlSucChua = " ";
         String sqlTrangThai = "  ";
         if(loaiPhong != null){
-            sqlLoaiPhong = "   loaiPhong = ?  ";
+            sqlLoaiPhong = "   tenLoaiPhong = ?  ";
         }
         if(sucChua !=0){
             sqlSucChua = " and  sucChua = ?  ";
@@ -209,11 +209,11 @@ public class DAO_Phong implements I_CRUD<Phong>{
                     }
                     else if(!sqlLoaiPhong.trim().equals("")&&sqlSucChua.trim().equals("")&&trangThai!=-1){
                        sqlTrangThai = "  trangThai = ?  ";
-                       sqlLoaiPhong = "  and loaiPhong = ?  ";
+                       sqlLoaiPhong = "  and tenLoaiPhong = ?  ";
                         
                     }
                     else if(!sqlLoaiPhong.trim().equals("")&&!sqlSucChua.trim().equals("")&&trangThai==-1){
-                        sqlLoaiPhong = "  loaiPhong = ?  ";
+                        sqlLoaiPhong = "  tenLoaiPhong = ?  ";
                         sqlSucChua = "  and sucChua = ?  ";
                         
                     }
@@ -221,14 +221,14 @@ public class DAO_Phong implements I_CRUD<Phong>{
                         sqlSucChua = "   sucChua = ?  ";
                     }
                     else if(!sqlLoaiPhong.trim().equals("")&&sqlSucChua.trim().equals("")&&trangThai==-1){                      
-                         sqlLoaiPhong = "  loaiPhong = ?  ";
+                         sqlLoaiPhong = "  tenLoaiPhong = ?  ";
                     }
                     else if(sqlLoaiPhong.trim().equals("")&&sqlSucChua.trim().equals("")&&trangThai!=-1){                      
                         sqlTrangThai = "  trangThai = ?  ";
                     }
                     else if(!sqlLoaiPhong.trim().equals("")&&!sqlSucChua.trim().equals("")&&trangThai!=-1){
                        sqlTrangThai = "  trangThai = ?  ";
-                       sqlLoaiPhong = "  and loaiPhong = ?  ";
+                       sqlLoaiPhong = "  and tenLoaiPhong = ?  ";
                         sqlSucChua = "  and sucChua = ?  ";
                     }
         try {
