@@ -85,6 +85,11 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
         jPanel1.setBackground(new java.awt.Color(153, 255, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
         jPanel1.setPreferredSize(new java.awt.Dimension(1920, 763));
+        jPanel1.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                jPanel1HierarchyChanged(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -426,6 +431,12 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
         else
             System.out.println("chưa mở giao diện tra cứu phòng");
     }//GEN-LAST:event_formWindowClosing
+
+    private void jPanel1HierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jPanel1HierarchyChanged
+        // TODO add your handling code here:
+        if (model != null)
+            loadTable(daop.getAll(Phong.class), model);
+    }//GEN-LAST:event_jPanel1HierarchyChanged
     
     private boolean validateInput() {
         String ten = tf_ten.getText().trim();

@@ -7,7 +7,11 @@ package gui;
 import dao.DAO_DichVu;
 import entity.DichVu;
 import java.awt.Font;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -19,7 +23,7 @@ import javax.swing.table.TableCellRenderer;
  * @author quang
  */
 public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_QuanLi<DichVu>{
-
+    private DecimalFormat df = new DecimalFormat("#,###.###");
     /**
      * Creates new form GD_QuanLi_DichVu
      */
@@ -90,6 +94,11 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         jPanel1.setBackground(new java.awt.Color(153, 255, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
         jPanel1.setPreferredSize(new java.awt.Dimension(1920, 763));
+        jPanel1.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                jPanel1HierarchyChanged(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -453,6 +462,11 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         int i = tbl_danhSach.getSelectedRow();
         if (i != -1) {
            showDetailInput(jPanel2, model, i);
+            try {
+                tf_gia.setText(df.parse(model.getValueAt(i, 2).toString()).toString());
+            } catch (ParseException ex) {
+                Logger.getLogger(GD_QuanLi_DichVu.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_tbl_danhSachMouseClicked
 
@@ -463,6 +477,12 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         else 
             System.out.println("chưa mở giao diện tra cứu dịch vụ");
     }//GEN-LAST:event_formWindowClosing
+
+    private void jPanel1HierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jPanel1HierarchyChanged
+        // TODO add your handling code here:
+        if (model != null)
+            loadTable(daodv.getAll(DichVu.class), model);
+    }//GEN-LAST:event_jPanel1HierarchyChanged
     private boolean validateInput() {
         String ten = tf_ten.getText().trim();
         String gia = tf_gia.getText().trim();

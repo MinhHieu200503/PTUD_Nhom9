@@ -7,7 +7,11 @@ package gui;
 import dao.DAO_LoaiPhong;
 import entity.LoaiPhong;
 import java.awt.Font;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -19,7 +23,7 @@ import javax.swing.table.TableCellRenderer;
  * @author quang
  */
 public class GD_QuanLi_LoaiPhong extends javax.swing.JFrame implements I_TraCuu_QuanLi<LoaiPhong>{
-
+    private DecimalFormat df = new DecimalFormat("#,###.###");
     /**
      * Creates new form GD_QuanLi_LoaiPhong
      */
@@ -420,6 +424,11 @@ public class GD_QuanLi_LoaiPhong extends javax.swing.JFrame implements I_TraCuu_
         int i = tbl_danhSach.getSelectedRow();
         if (i != -1) {
             showDetailInput(jPanel2, model, i);
+            try {
+                tf_gia.setText(df.parse(model.getValueAt(i, 3).toString()).toString());
+            } catch (ParseException ex) {
+                Logger.getLogger(GD_QuanLi_LoaiPhong.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_tbl_danhSachMouseClicked
     private boolean validateInput() {

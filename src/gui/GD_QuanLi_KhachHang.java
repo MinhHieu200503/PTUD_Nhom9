@@ -79,6 +79,11 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
         jPanel9.setBackground(new java.awt.Color(153, 255, 204));
         jPanel9.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
         jPanel9.setPreferredSize(new java.awt.Dimension(1920, 763));
+        jPanel9.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                jPanel9HierarchyChanged(evt);
+            }
+        });
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -376,11 +381,18 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        if (GD_TraCuu_KhachHang.model != null)
+        if (GD_TraCuu_KhachHang.model != null) {
             loadTable(daokh.getAll(KhachHang.class), GD_TraCuu_KhachHang.model);
+        }
         else 
             System.out.println("chưa mở giao diện tra cứu khách hàng");
     }//GEN-LAST:event_formWindowClosing
+
+    private void jPanel9HierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jPanel9HierarchyChanged
+        // TODO add your handling code here:
+        if (model != null)
+            loadTable(daokh.getAll(KhachHang.class), model);
+    }//GEN-LAST:event_jPanel9HierarchyChanged
     private boolean validateInput(Object o) {
         String ten = tf_ten.getText().trim();;
         String phone = tf_phone.getText().trim();

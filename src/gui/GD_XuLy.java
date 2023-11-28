@@ -471,8 +471,8 @@ public class GD_XuLy extends javax.swing.JFrame {
         }
         else if (evt.getSource().equals(itemChuyenPhong)){
             setSelectedItem(itemChuyenPhong);
-            navBarChoice(5);
-//            chuyenPhong.loadDSPhongDangSuDung();
+            navBarChoice(3);
+//      Khỏi cần load tui xử lí rồi      chuyenPhong.loadDSPhongDangSuDung(); 
             pack();
             repaint();
         }

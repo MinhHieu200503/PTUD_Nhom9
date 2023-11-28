@@ -130,7 +130,7 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
 
             },
             new String [] {
-                "Mã phiếu đặt phòng", "Giờ vào", "Giờ ra", "Trạng thái", "Giá cọc", "Nhân viên", "Khách hàng", "Phòng", "Hoá đơn"
+                "Mã phiếu", "Giờ vào", "Giờ ra", "Trạng thái", "Giá cọc", "Nhân viên", "Khách hàng", "Phòng", "Hoá đơn"
             }
         ) {
             Class[] types = new Class [] {
