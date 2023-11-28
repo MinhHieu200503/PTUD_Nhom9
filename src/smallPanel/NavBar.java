@@ -62,6 +62,11 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         navBarChoice(0);
 //        name_Account.setText(GD_DangNhap.taiKhoan.getNhanVien().getTenNhanVien());
 
+    //checkRole
+    if (new GD_DangNhap().taiKhoan.getVaiTro() == false){
+        rSButtonMetro2.setVisible(false);
+    }
+
     }
     
     public void loadNameUser(){
@@ -117,6 +122,10 @@ private GD_TrangChu trangChu = new GD_TrangChu();
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jPanel7 = new javax.swing.JPanel();
+        rSButtonMetro2 = new rojerusan.RSButtonMetro();
+        rSButtonMetro3 = new rojerusan.RSButtonMetro();
+        rSButtonMetro4 = new rojerusan.RSButtonMetro();
         jPanel8 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         leftPanel = new javax.swing.JPanel();
@@ -142,10 +151,6 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         label_QuanLy = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         add = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        rSButtonMetro2 = new rojerusan.RSButtonMetro();
-        rSButtonMetro3 = new rojerusan.RSButtonMetro();
-        rSButtonMetro4 = new rojerusan.RSButtonMetro();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setAlignmentX(0.0F);
@@ -153,6 +158,56 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         setMinimumSize(new java.awt.Dimension(1920, 1030));
         setPreferredSize(new java.awt.Dimension(1920, 1030));
         setLayout(null);
+
+        jPanel7.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel7.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                moveMenu(evt);
+            }
+        });
+        jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.Y_AXIS));
+
+        rSButtonMetro2.setBackground(new java.awt.Color(0, 153, 153));
+        rSButtonMetro2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-setting-50.png"))); // NOI18N
+        rSButtonMetro2.setText("Cài đặt thanh toán");
+        rSButtonMetro2.setAlignmentX(0.5F);
+        rSButtonMetro2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        rSButtonMetro2.setIconTextGap(30);
+        rSButtonMetro2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pressThanhToan(evt);
+            }
+        });
+        jPanel7.add(rSButtonMetro2);
+
+        rSButtonMetro3.setBackground(new java.awt.Color(0, 153, 153));
+        rSButtonMetro3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-book-50.png"))); // NOI18N
+        rSButtonMetro3.setText("Hướng dẫn sử dụng");
+        rSButtonMetro3.setAlignmentX(0.5F);
+        rSButtonMetro3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        rSButtonMetro3.setIconTextGap(30);
+        rSButtonMetro3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonMetro3ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(rSButtonMetro3);
+
+        rSButtonMetro4.setBackground(new java.awt.Color(0, 153, 153));
+        rSButtonMetro4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-log-out-50.png"))); // NOI18N
+        rSButtonMetro4.setText("Thoát");
+        rSButtonMetro4.setAlignmentX(0.5F);
+        rSButtonMetro4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        rSButtonMetro4.setIconTextGap(30);
+        rSButtonMetro4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                exitApp(evt);
+            }
+        });
+        jPanel7.add(rSButtonMetro4);
+
+        add(jPanel7);
+        jPanel7.setBounds(0, 67, 470, 190);
 
         jPanel1.setBackground(new java.awt.Color(40, 77, 133));
         jPanel1.setMaximumSize(new java.awt.Dimension(1920, 66));
@@ -521,76 +576,6 @@ private GD_TrangChu trangChu = new GD_TrangChu();
 
         add(jPanel8);
         jPanel8.setBounds(0, 0, 1920, 1030);
-
-        jPanel7.setBackground(new java.awt.Color(0, 153, 153));
-        jPanel7.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                moveMenu(evt);
-            }
-        });
-
-        rSButtonMetro2.setBackground(new java.awt.Color(0, 153, 153));
-        rSButtonMetro2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-setting-50.png"))); // NOI18N
-        rSButtonMetro2.setText("Cài đặt thanh toán");
-        rSButtonMetro2.setAlignmentX(0.5F);
-        rSButtonMetro2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        rSButtonMetro2.setIconTextGap(30);
-        rSButtonMetro2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                pressThanhToan(evt);
-            }
-        });
-
-        rSButtonMetro3.setBackground(new java.awt.Color(0, 153, 153));
-        rSButtonMetro3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-book-50.png"))); // NOI18N
-        rSButtonMetro3.setText("Hướng dẫn sử dụng");
-        rSButtonMetro3.setAlignmentX(0.5F);
-        rSButtonMetro3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        rSButtonMetro3.setIconTextGap(30);
-        rSButtonMetro3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonMetro3ActionPerformed(evt);
-            }
-        });
-
-        rSButtonMetro4.setBackground(new java.awt.Color(0, 153, 153));
-        rSButtonMetro4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-log-out-50.png"))); // NOI18N
-        rSButtonMetro4.setText("Thoát");
-        rSButtonMetro4.setAlignmentX(0.5F);
-        rSButtonMetro4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        rSButtonMetro4.setIconTextGap(30);
-        rSButtonMetro4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                exitApp(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rSButtonMetro2, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
-                    .addComponent(rSButtonMetro3, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
-                    .addComponent(rSButtonMetro4, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(rSButtonMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rSButtonMetro3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rSButtonMetro4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
-        );
-
-        add(jPanel7);
-        jPanel7.setBounds(0, 67, 470, 190);
     }// </editor-fold>//GEN-END:initComponents
 
     private void enteredMenu(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enteredMenu

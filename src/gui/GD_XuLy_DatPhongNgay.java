@@ -236,7 +236,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         else{
             
             JOptionPane.showMessageDialog(null, "Là khách hàng đang không có hóa đơn");
-            HoaDon hd = new HoaDon(I_TraCuu_QuanLi.createIdForHoaDon(daoHD.getDsIdTheoNgayHienTai(), "HD"), LocalDateTime.now(), 0, "", khachHang , 
+            HoaDon hd = new HoaDon(I_TraCuu_QuanLi.createIdForHoaDon_PDP(daoHD.getDsIdTheoNgayHienTai(), "HD"), LocalDateTime.now(), 0, "", khachHang , 
                             null, I_CRUD.findById("NV001", new NhanVien()));
         daoHD.create(hd);
             for(int i=0; i<count; i++){ 
