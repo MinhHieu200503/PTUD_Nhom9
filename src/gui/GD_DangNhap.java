@@ -331,10 +331,10 @@ public class GD_DangNhap extends javax.swing.JFrame {
                         main.setVisible(true);
                     }
                     else{
-                        JOptionPane.showMessageDialog(null, "Sai mật khẩu");
+                        JOptionPane.showMessageDialog(null, "Thông tin không chính xác");
                     }
                 }
-                else JOptionPane.showMessageDialog(null, "Tài khoản không tồn tại");
+                else JOptionPane.showMessageDialog(null, "Thông tin không chính xác");
         }
         else{
            

@@ -287,7 +287,7 @@ public class Panel_DanhSachPhongFullColMini extends javax.swing.JFrame {
                         
                     }
                     else if(classUse.equalsIgnoreCase("GoiDichVu")){
-//                        gui.GD_XuLy_GoiDichVu.fillData(tmp.getCode());
+                        gui.GD_XuLy_GoiDichVu.fillData(tmp.getCode());
                     }
                         
                

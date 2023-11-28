@@ -5,6 +5,7 @@
 package smallPanel;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import gui.GD_XuLy_DatPhongNgay;
 //import gui.GD_XuLy_DatPhongNgay;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -516,7 +517,7 @@ public class Panel_DanhSachPhongFullCol extends javax.swing.JFrame {
                       temp.setBackground(Color.BLUE);
                     Border border = new LineBorder(new Color(0,153,153), 4, true);
                     temp.setBorder(border);
-//                    GD_XuLy_DatPhongNgay.setTableData(codePhong);
+                    GD_XuLy_DatPhongNgay.setTableData(codePhong);
                 }
             return 1;
 
