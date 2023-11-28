@@ -12,7 +12,7 @@ import dao.DAO_PhieuDatPhong;
 import dao.DAO_Phong;
 import dao.I_CRUD;
 import entity.ChiTietDichVuHoaDon;
-import entity.ChitTietPhongHoaDon;
+import entity.ChiTietPhongHoaDon;
 import entity.HoaDon;
 import entity.KhachHang;
 import entity.LoaiPhong;
@@ -495,7 +495,7 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
        DAO_Phong daoPhong = new DAO_Phong();
        entity.HoaDon hd = new HoaDon();
        hd =  I_CRUD.findById(pdp.getHoaDon().getMaHoaDon(), new HoaDon());
-       ChitTietPhongHoaDon ctPhongHD = null;
+       ChiTietPhongHoaDon ctPhongHD = null;
        int isConfirm;
        boolean isValid = false;
        Phong phongNhan = I_CRUD.findById(smallPanel.Panel_DanhSachPhongFullCol.codePhong, new Phong());
@@ -514,14 +514,14 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
            if(result<0){
             isConfirm = JOptionPane.showConfirmDialog(null, "Xác nhận nhận phòng đặt vào lúc " +LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")));
             if(isConfirm == 0 ){
-                 ctPhongHD = new ChitTietPhongHoaDon(LocalDateTime.now(), null, "MP000 Đang sử dụng", hd, I_CRUD.findById(pdp.getPhong().getMaPhong().trim(), new Phong()));
+                 ctPhongHD = new ChiTietPhongHoaDon(LocalDateTime.now(), null, "MP000 Đang sử dụng", hd, I_CRUD.findById(pdp.getPhong().getMaPhong().trim(), new Phong()));
                  
             }
        }
        else{
            isConfirm = JOptionPane.showConfirmDialog(null, "Xác nhận nhận phòng đã đặt trước " +thoiGianDatPhong.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")));
            if(isConfirm ==0){
-            ctPhongHD = new ChitTietPhongHoaDon(thoiGianDatPhong, null, "MP000 Đang sử dụng", hd, I_CRUD.findById(pdp.getPhong().getMaPhong().trim(), new Phong()));
+            ctPhongHD = new ChiTietPhongHoaDon(thoiGianDatPhong, null, "MP000 Đang sử dụng", hd, I_CRUD.findById(pdp.getPhong().getMaPhong().trim(), new Phong()));
            }
        }
         if(isConfirm == 0){

@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author quang
  */
-public class ChitTietPhongHoaDon {
+public class ChiTietPhongHoaDon {
     private LocalDateTime thoiGianNhanPhong, thoiGianTraPhong;
     private String ghiChu;
     private HoaDon hoaDon;
@@ -57,7 +57,7 @@ public class ChitTietPhongHoaDon {
         this.phong = phong;
     }
 
-    public ChitTietPhongHoaDon(LocalDateTime thoiGianNhanPhong, LocalDateTime thoiGianTraPhong, String ghiChu, HoaDon hoaDon, Phong phong) {
+    public ChiTietPhongHoaDon(LocalDateTime thoiGianNhanPhong, LocalDateTime thoiGianTraPhong, String ghiChu, HoaDon hoaDon, Phong phong) {
         this.thoiGianNhanPhong = thoiGianNhanPhong;
         this.thoiGianTraPhong = thoiGianTraPhong;
         this.ghiChu = ghiChu;
@@ -84,7 +84,7 @@ public class ChitTietPhongHoaDon {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ChitTietPhongHoaDon other = (ChitTietPhongHoaDon) obj;
+        final ChiTietPhongHoaDon other = (ChiTietPhongHoaDon) obj;
         if (!Objects.equals(this.hoaDon, other.hoaDon)) {
             return false;
         }

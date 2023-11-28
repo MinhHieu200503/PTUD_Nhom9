@@ -5,7 +5,7 @@
 package dao;
 
 import entity.ChiTietDichVuHoaDon;
-import entity.ChitTietPhongHoaDon;
+import entity.ChiTietPhongHoaDon;
 import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

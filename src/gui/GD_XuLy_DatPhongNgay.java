@@ -9,7 +9,7 @@ import dao.DAO_HoaDon;
 import dao.DAO_KhachHang;
 import dao.DAO_Phong;
 import dao.I_CRUD;
-import entity.ChitTietPhongHoaDon;
+import entity.ChiTietPhongHoaDon;
 import entity.HoaDon;
 import entity.KhachHang;
 import entity.NhanVien;
@@ -159,7 +159,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         
         lsCT = dao_cthd.getThongCTPhongbyKhachHang(txt_SoDT.getEditor().getItem().toString());
         
-        for(ChitTietPhongHoaDon ct: lsCT){
+        for(ChiTietPhongHoaDon ct: lsCT){
             if(maPhong.equals(ct.getPhong().getMaPhong())){
                 return false;
             }
@@ -226,7 +226,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                 String maPhong = (String) model.getValueAt(i, 0);
                 if(isChuaDat(maPhong)){
                     String maHDcu = daoHD.getHoaDonByPhongDangSuDung((String) model.getValueAt(0, 0));
-                    ChitTietPhongHoaDon ctPhongHD = new ChitTietPhongHoaDon(LocalDateTime.now(), null, "MP000 Đang sử dụng", I_CRUD.findById(maHDcu, new HoaDon()), I_CRUD.findById(maPhong+"".trim(), new Phong()));
+                    ChiTietPhongHoaDon ctPhongHD = new ChiTietPhongHoaDon(LocalDateTime.now(), null, "MP000 Đang sử dụng", I_CRUD.findById(maHDcu, new HoaDon()), I_CRUD.findById(maPhong+"".trim(), new Phong()));
                     dao_ctP_HD.themCTHD_PMoi(ctPhongHD);
                     daoPhong.capNhatTrangThaiPhong(maPhong, 2);
                 }   
@@ -243,7 +243,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                 String maPhong = (String) model.getValueAt(i, 0);
                 
                     
-                    ChitTietPhongHoaDon ctPhongHD = new ChitTietPhongHoaDon(LocalDateTime.now(), null, "MP000 Đang sử dụng", hd, I_CRUD.findById(maPhong+"".trim(), new Phong()));
+                    ChiTietPhongHoaDon ctPhongHD = new ChiTietPhongHoaDon(LocalDateTime.now(), null, "MP000 Đang sử dụng", hd, I_CRUD.findById(maPhong+"".trim(), new Phong()));
                     dao_ctP_HD.themCTHD_PMoi(ctPhongHD);
                     daoPhong.capNhatTrangThaiPhong(maPhong, 2);
                  
@@ -309,7 +309,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
                                     lsCT = dao_cthd.getThongCTPhongbyKhachHang(soDT);
                                      
                                     int i = 0;
-                                    for(ChitTietPhongHoaDon ct: lsCT)
+                                    for(ChiTietPhongHoaDon ct: lsCT)
                                     {
                                         String[] row = {ct.getPhong().getMaPhong(), ct.getPhong().getLoaiPhong().getTenLoaiPhong(), ct.getPhong().getLoaiPhong().getSucChua() +"", ct.getPhong().getLoaiPhong().getGia()+""};
                                         model.addRow(row);
@@ -723,7 +723,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
     // End of variables declaration//GEN-END:variables
     public static DefaultTableModel model  =new DefaultTableModel();
     DAO_ChiTietPhong_HoaDon dao_cthd = new DAO_ChiTietPhong_HoaDon();
-         ArrayList<ChitTietPhongHoaDon> lsCT = new ArrayList();
+         ArrayList<ChiTietPhongHoaDon> lsCT = new ArrayList();
     private Thread thread = null;
     public static void setTableData(String codePhong){
           model = (DefaultTableModel) tablePhongDatNgay.getModel();

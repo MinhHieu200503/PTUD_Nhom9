@@ -20,7 +20,7 @@ public class NewMain {
      */
     public static void main(String[] args) {
         dao.DAO_HoaDon tmp = new DAO_HoaDon();
-        ThongTinPhongDangChon temp =  tmp.getThongTinTraPhong("MP003");
+        ThongTinPhongDangChon temp =  tmp.getThongTinTraPhong("MP006");
         
         ArrayList<ThongTinPhongDangChon.PhongVaDichVu> temp2 = temp.danhSachPhong;
        

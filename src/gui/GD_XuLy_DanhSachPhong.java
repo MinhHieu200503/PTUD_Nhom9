@@ -12,7 +12,7 @@ import dao.DAO_PhieuDatPhong;
 import dao.DAO_Phong;
 import dao.I_CRUD;
 import entity.ChiTietDichVuHoaDon;
-import entity.ChitTietPhongHoaDon;
+import entity.ChiTietPhongHoaDon;
 import entity.HoaDon;
 import entity.LoaiPhong;
 import entity.PhieuDatPhong;
@@ -689,7 +689,7 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
     private static void setTxtThongTinPhongDangSuDung(String maPhong){
         dao.DAO_Phong DAOphong = new  DAO_Phong();
         dao.DAO_ChiTietPhong_HoaDon daoCtphd= new DAO_ChiTietPhong_HoaDon();
-        entity.ChitTietPhongHoaDon ctphd = daoCtphd.layChiTietPhongHoaDonDuaTrenMaPhong(maPhong);
+        entity.ChiTietPhongHoaDon ctphd = daoCtphd.layChiTietPhongHoaDonDuaTrenMaPhong(maPhong);
         txtMaPhong.setText(maPhong);
         txtMaHoaDon.setText(ctphd.getHoaDon().getMaHoaDon());
         

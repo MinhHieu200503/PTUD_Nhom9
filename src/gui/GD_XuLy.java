@@ -472,6 +472,8 @@ public class GD_XuLy extends javax.swing.JFrame {
         else if (evt.getSource().equals(itemChuyenPhong)){
             setSelectedItem(itemChuyenPhong);
             navBarChoice(5);
+            // phải load lại: Khi đặt phòng ngay và nhận phòng có cập nhập 
+            chuyenPhong.loadDSPhongDangSuDung();
             pack();
             repaint();
         }

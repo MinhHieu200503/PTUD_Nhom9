@@ -63,9 +63,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
 //        name_Account.setText(GD_DangNhap.taiKhoan.getNhanVien().getTenNhanVien());
 
     //checkRole
-    if (new GD_DangNhap().taiKhoan.getVaiTro() == false){
-        rSButtonMetro2.setVisible(false);
-    }
+
 
     }
     
@@ -73,6 +71,9 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         if (GD_DangNhap.taiKhoan.getNhanVien() != null){
             name_Account.setText(GD_DangNhap.taiKhoan.getNhanVien().getTenNhanVien());
         }
+        if (GD_DangNhap.taiKhoan.getVaiTro() == false){
+        rSButtonMetro2.setVisible(false);
+    }
     }
     
     public void navBarChoice(int index){

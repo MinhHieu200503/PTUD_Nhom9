@@ -7,7 +7,7 @@ package gui;
 import dao.DAO_ChiTietPhong_HoaDon;
 import dao.DAO_Phong;
 import dao.I_CRUD;
-import entity.ChitTietPhongHoaDon;
+import entity.ChiTietPhongHoaDon;
 import entity.HoaDon;
 import entity.KhachHang;
 import entity.Phong;
@@ -539,7 +539,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
                     
             }
             // Lấy chi tiết phòng cũ
-            ChitTietPhongHoaDon ctPhongCu = dsctpTheoMa.get(dsctpTheoMa.size() - 1); 
+            ChiTietPhongHoaDon ctPhongCu = dsctpTheoMa.get(dsctpTheoMa.size() - 1); 
             String ghiChuPhongCu = ctPhongCu.getGhiChu().substring(0, 5) + " " + idSelectedPhongMoi;
             // Update giờ ra cho phòng cũ (ghi chú chi tiết phòng) 
             if (!daoctp.updateGioRa(idSelectedPhongCu, hdPhongDSD_MoiNhat.getMaHoaDon(), now, ghiChuPhongCu)) {
@@ -553,7 +553,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
             Phong phongMoi = I_CRUD.findById(idSelectedPhongMoi, new Phong());
             // Ghi chú cho phòng mới
             String ghiChuPhongMoi = idSelectedPhongCu + " Đang sử dụng";
-            ChitTietPhongHoaDon ctp_new = new ChitTietPhongHoaDon(now, null, ghiChuPhongMoi, hdPhongDSD_MoiNhat, phongMoi);
+            ChiTietPhongHoaDon ctp_new = new ChiTietPhongHoaDon(now, null, ghiChuPhongMoi, hdPhongDSD_MoiNhat, phongMoi);
             if (!daoctp.themCTHD_PMoi(ctp_new)) {
                 return false;
             }
@@ -697,7 +697,7 @@ private String  idSelectedPhongCu = null;
 private String idSelectedPhongMoi = null;
 private Panel_Phong previousSelectedRoom = null;
 private DefaultTableModel model;
-private ArrayList<ChitTietPhongHoaDon> dsctpTheoMa = new ArrayList<>();
+private ArrayList<ChiTietPhongHoaDon> dsctpTheoMa = new ArrayList<>();
 private HoaDon hdPhongDSD_MoiNhat;
 private ArrayList<Panel_Phong> dsPnlPhong = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables

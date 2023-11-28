@@ -2,7 +2,7 @@ package entity;
 
 
 import entity.ChiTietDichVuHoaDon;
-import entity.ChitTietPhongHoaDon;
+import entity.ChiTietPhongHoaDon;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -103,7 +103,7 @@ public class ThongTinPhongDangChon {
     
     
         public class PhongVaDichVu{
-            private entity.ChitTietPhongHoaDon chiTietPhongHoaDon;
+            private entity.ChiTietPhongHoaDon chiTietPhongHoaDon;
             public ArrayList<DichVu> dichVu;
 
             public DichVu createDichVu(){
@@ -140,11 +140,11 @@ public class ThongTinPhongDangChon {
                 this.dichVu = new ArrayList<>();
             }
 
-            public ChitTietPhongHoaDon getChiTietPhongHoaDon() {
+            public ChiTietPhongHoaDon getChiTietPhongHoaDon() {
                 return chiTietPhongHoaDon;
             }
 
-            public void setChiTietPhongHoaDon(ChitTietPhongHoaDon chiTietPhongHoaDon) {
+            public void setChiTietPhongHoaDon(ChiTietPhongHoaDon chiTietPhongHoaDon) {
                 this.chiTietPhongHoaDon = chiTietPhongHoaDon;
             }
 

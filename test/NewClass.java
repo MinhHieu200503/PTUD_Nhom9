@@ -2,7 +2,7 @@
 import dao.DAO_ChiTietPhong_HoaDon;
 import dao.DAO_HoaDon;
 import dao.I_CRUD;
-import entity.ChitTietPhongHoaDon;
+import entity.ChiTietPhongHoaDon;
 import entity.HoaDon;
 import entity.KhachHang;
 import entity.NhanVien;
@@ -28,7 +28,7 @@ public class NewClass {
                 I_CRUD.findById("NV001", new NhanVien()));
         daohd.create(a);
         DAO_ChiTietPhong_HoaDon daoctp = new DAO_ChiTietPhong_HoaDon();
-        ChitTietPhongHoaDon b = new ChitTietPhongHoaDon(LocalDateTime.now(), null, "MP000 Đang sử dụng", a, I_CRUD.findById("MP001", new Phong()));
+        ChiTietPhongHoaDon b = new ChiTietPhongHoaDon(LocalDateTime.now(), null, "MP000 Đang sử dụng", a, I_CRUD.findById("MP001", new Phong()));
         daoctp.themCTHD_PMoi(b);
     }
 }

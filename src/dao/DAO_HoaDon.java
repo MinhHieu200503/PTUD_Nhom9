@@ -6,7 +6,7 @@ package dao;
 
 import connectDB.ConnectDB;
 import entity.ChiTietDichVuHoaDon;
-import entity.ChitTietPhongHoaDon;
+import entity.ChiTietPhongHoaDon;
 import entity.DichVu;
 import entity.HoaDon;
 import java.util.ArrayList;
@@ -284,7 +284,7 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
             statement.setString(2, maPhong);
             rs = statement.executeQuery();
             
-            entity.ChitTietPhongHoaDon phongDangChon = null;
+            entity.ChiTietPhongHoaDon phongDangChon = null;
             entity.HoaDon tempHoaDon = null;
             entity.Phong tempPhong = null;
 
@@ -293,7 +293,7 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
                 tempHoaDon = new HoaDon(maHD, rs.getTimestamp(2).toLocalDateTime(), rs.getInt(3),"", null, null, null); 
                 tempPhong = I_CRUD.findById(maPhong, new Phong());
                 
-                phongDangChon = new ChitTietPhongHoaDon(rs.getTimestamp("thoiGianNhanPhong").toLocalDateTime(), LocalDateTime.now(), rs.getString(10) , tempHoaDon, tempPhong);
+                phongDangChon = new ChiTietPhongHoaDon(rs.getTimestamp("thoiGianNhanPhong").toLocalDateTime(), LocalDateTime.now(), rs.getString(10) , tempHoaDon, tempPhong);
             }
 //            System.out.println("PhongDangChon: " + phongDangChon.toString());
             // có được chi tiết phòng đang chọn (Mã hóa đơn, mã phòng ) -> đi lấy các phòng chuyển của phòng đang được chọn cho vào ghi chú
@@ -349,10 +349,12 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
                     rs = statement.executeQuery();
                     while(rs.next()){
                         i++;
-//                        System.out.println(i);
                         result.danhSachPhong.add(result.createPhongVaDichVu());
-                        tempPhong = I_CRUD.findById(rs.getString(11), new Phong());
-                        result.danhSachPhong.get(i).setChiTietPhongHoaDon(new ChitTietPhongHoaDon(rs.getTimestamp(7).toLocalDateTime(), rs.getTimestamp(8).toLocalDateTime(), rs.getString(9) , tempHoaDon, tempPhong));
+                        tempPhong = I_CRUD.findById(rs.getString(12), new Phong());
+                        result.danhSachPhong.get(i).setChiTietPhongHoaDon(new ChiTietPhongHoaDon(rs.getTimestamp("thoiGianNhanPhong").toLocalDateTime(),
+                                        rs.getTimestamp("thoiGianTraPhong").toLocalDateTime(), 
+                                        rs.getString(10) , 
+                                        tempHoaDon, tempPhong));
                         
                             //DỊch vụ
                             
@@ -364,17 +366,14 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
                              rs2 = statement.executeQuery();
                             int k = 0;
                             while(rs2.next()){
-                                
                                 result.danhSachPhong.get(i).dichVu.add(result.createPhongVaDichVu().createDichVu());
                                 result.danhSachPhong.get(i).dichVu.get(k).setChiTietDichVu(new ChiTietDichVuHoaDon(rs2.getInt(1), new DichVu(rs2.getString(5), rs2.getString(6), rs2.getDouble(7), 0, 0, null), null, null));
                                 k++;
                             }
                         
-                        
                         //next Phong Chuyen Phong
-                        tempResult = rs.getString(9);
+                        tempResult = rs.getString(10);
                         pre = tempResult.substring(0,5);
-                        
                     }
                 }
                 while (tempResult.contains("MP000") == false);

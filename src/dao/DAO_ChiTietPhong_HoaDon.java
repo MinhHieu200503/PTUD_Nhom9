@@ -5,7 +5,7 @@
 package dao;
 
 import connectDB.ConnectDB;
-import entity.ChitTietPhongHoaDon;
+import entity.ChiTietPhongHoaDon;
 
 import entity.LoaiPhong;
 
@@ -37,9 +37,9 @@ import java.util.logging.Logger;
  *
  * @author quang
  */
-public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
+public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChiTietPhongHoaDon>{
 
-    public boolean themCTHD_PMoi(ChitTietPhongHoaDon cTHD_P) {
+    public boolean themCTHD_PMoi(ChiTietPhongHoaDon cTHD_P) {
 		ConnectDB.getInstance().connect();
 		Connection con = (Connection) ConnectDB.getInstance().getConnection();
 		PreparedStatement pstm = null;
@@ -172,8 +172,8 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
         return n > 0;
     }
     
-    public entity.ChitTietPhongHoaDon layChiTietPhongHoaDonDuaTrenMaPhong(String maPhong){
-        entity.ChitTietPhongHoaDon ctphd = null;
+    public entity.ChiTietPhongHoaDon layChiTietPhongHoaDonDuaTrenMaPhong(String maPhong){
+        entity.ChiTietPhongHoaDon ctphd = null;
 
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
@@ -189,7 +189,7 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
                 LocalDateTime thoiGianNhanPhong = LocalDateTime.parse(rs.getString(1),formatter);
                 
-                ctphd = new ChitTietPhongHoaDon(thoiGianNhanPhong, null, rs.getString(3), I_CRUD.findById(rs.getString(4), new entity.HoaDon()), I_CRUD.findById(rs.getString(5),new entity.Phong()));
+                ctphd = new ChiTietPhongHoaDon(thoiGianNhanPhong, null, rs.getString(3), I_CRUD.findById(rs.getString(4), new entity.HoaDon()), I_CRUD.findById(rs.getString(5),new entity.Phong()));
             }
              
         } catch (Exception e) {
@@ -208,11 +208,11 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
     }
         
 
-    public ArrayList<ChitTietPhongHoaDon> getDStheoMaPhong(String maphong) {
+    public ArrayList<ChiTietPhongHoaDon> getDStheoMaPhong(String maphong) {
         ConnectDB.getInstance();
         Connection con = (Connection) ConnectDB.getInstance().getConnection();
         PreparedStatement pstm = null;
-        ArrayList<ChitTietPhongHoaDon> ds = new ArrayList<>();
+        ArrayList<ChiTietPhongHoaDon> ds = new ArrayList<>();
         try {
             pstm = con.prepareStatement("select * from chitietphonghoadon where maphong = ?");
             pstm.setString(1, maphong);
@@ -223,7 +223,7 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
                 LocalDateTime in = I_CRUD.SQLtoJava(rs.getString(1));
                 LocalDateTime out = I_CRUD.SQLtoJava(rs.getString(2));
                 String ghichu = rs.getString(3);
-                ChitTietPhongHoaDon ctp = new ChitTietPhongHoaDon(in, out, ghichu, hd, p);
+                ChiTietPhongHoaDon ctp = new ChiTietPhongHoaDon(in, out, ghichu, hd, p);
                 ds.add(ctp);
             }
         } catch (SQLException ex) {
@@ -269,8 +269,8 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
 
     }
     
-     public ArrayList<ChitTietPhongHoaDon> getThongCTPhongbyKhachHang(String sdt){
-        ArrayList<ChitTietPhongHoaDon> ls = new ArrayList<>();
+     public ArrayList<ChiTietPhongHoaDon> getThongCTPhongbyKhachHang(String sdt){
+        ArrayList<ChiTietPhongHoaDon> ls = new ArrayList<>();
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         PreparedStatement statement = null;
@@ -284,7 +284,7 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChitTietPhongHoaDon>{
             ResultSet rs = statement.executeQuery();
             while(rs.next()){
                
-                ls.add(new ChitTietPhongHoaDon(I_CRUD.SQLtoJava(rs.getString("thoiGianNhanPhong")), I_CRUD.SQLtoJava(rs.getString("thoiGianTraPhong")), 
+                ls.add(new ChiTietPhongHoaDon(I_CRUD.SQLtoJava(rs.getString("thoiGianNhanPhong")), I_CRUD.SQLtoJava(rs.getString("thoiGianTraPhong")), 
                         rs.getString("ghiChu"), I_CRUD.findById(rs.getString("maHoaDon"), new HoaDon()) , I_CRUD.findById(rs.getString("maPhong"), new Phong())));
             }
            

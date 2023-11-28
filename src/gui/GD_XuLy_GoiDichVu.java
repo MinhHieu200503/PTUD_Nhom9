@@ -12,7 +12,7 @@ import dao.DAO_KhachHang;
 import dao.DAO_Phong;
 import dao.I_CRUD;
 import entity.ChiTietDichVuHoaDon;
-import entity.ChitTietPhongHoaDon;
+import entity.ChiTietPhongHoaDon;
 import entity.DichVu;
 import entity.HoaDon;
 import entity.KhachHang;
