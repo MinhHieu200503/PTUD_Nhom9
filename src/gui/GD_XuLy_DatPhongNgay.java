@@ -237,7 +237,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
             
             JOptionPane.showMessageDialog(null, "Là khách hàng đang không có hóa đơn");
             HoaDon hd = new HoaDon(I_TraCuu_QuanLi.createIdForHoaDon_PDP(daoHD.getDsIdTheoNgayHienTai(), "HD"), LocalDateTime.now(), 0, "", khachHang , 
-                            null, I_CRUD.findById("NV001", new NhanVien()));
+                            null, GD_DangNhap.taiKhoan.getNhanVien());
         daoHD.create(hd);
             for(int i=0; i<count; i++){ 
                 String maPhong = (String) model.getValueAt(i, 0);
