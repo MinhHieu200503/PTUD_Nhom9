@@ -24,7 +24,7 @@ public class DAO_LoaiPhong implements I_CRUD<LoaiPhong>{
         LoaiPhong lp = null;
         PreparedStatement pstm = null;
         try {
-            pstm = con.prepareStatement("select * from LoaiPhong where loaiPhong = ?");
+            pstm = con.prepareStatement("select * from LoaiPhong where tenLoaiPhong = ?");
             pstm.setString(1, name);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {

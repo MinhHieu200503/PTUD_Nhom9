@@ -115,6 +115,11 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         jPanel1.setBackground(new java.awt.Color(153, 255, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
         jPanel1.setPreferredSize(new java.awt.Dimension(1920, 763));
+        jPanel1.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                jPanel1HierarchyChanged(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 10, 10, 10));
@@ -600,6 +605,12 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         else 
             System.out.println("chưa mở giao diện tra cứu nhân viên");
     }//GEN-LAST:event_formWindowClosing
+
+    private void jPanel1HierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jPanel1HierarchyChanged
+        // TODO add your handling code here:
+        if (model != null)
+            loadTable(daonv.getAll(NhanVien.class), model);
+    }//GEN-LAST:event_jPanel1HierarchyChanged
     private boolean validateInput() {
         String ten = tf_ten.getText().trim();
         Date ngaysinh = datechooser_ngaySinh.getDate();

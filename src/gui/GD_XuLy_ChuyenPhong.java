@@ -11,21 +11,16 @@ import entity.ChitTietPhongHoaDon;
 import entity.HoaDon;
 import entity.KhachHang;
 import entity.Phong;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
-import javax.swing.SingleSelectionModel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import smallPanel.Panel_DanhSachPhongFullCol;
 import smallPanel.Panel_Phong;
 
 /**
