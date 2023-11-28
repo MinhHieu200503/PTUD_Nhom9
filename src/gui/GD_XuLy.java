@@ -22,7 +22,7 @@ public class GD_XuLy extends javax.swing.JFrame {
     private GD_XuLy_NhanPhong nhanPhong = new GD_XuLy_NhanPhong();
 //    private GD_XuLy_GoiDichVu goiDichVu = new GD_XuLy_GoiDichVu();
 //    private GD_XuLy_ChuyenPhong chuyenPhong = new GD_XuLy_ChuyenPhong();
-//    private GD_XuLy_TraPhong traPhong = new GD_XuLy_TraPhong();
+    private GD_XuLy_TraPhong traPhong = new GD_XuLy_TraPhong();
     
     /**
      * Creates new form GD_XuLy
@@ -44,7 +44,7 @@ public class GD_XuLy extends javax.swing.JFrame {
         rightPanel.add(nhanPhong.getContentPane());
 //        rightPanel.add(goiDichVu.getContentPane());
 //        rightPanel.add(chuyenPhong.getContentPane());
-//        rightPanel.add(traPhong.getContentPane());
+        rightPanel.add(traPhong.getContentPane());
         
         navBarChoice(0);
         danhSachPhong.loadDSPhongTrong(null,0,-1);
@@ -478,8 +478,8 @@ public class GD_XuLy extends javax.swing.JFrame {
         }
         else if (evt.getSource().equals(itemTraPhong)){
             setSelectedItem(itemTraPhong);
-            navBarChoice(6  );
-//            traPhong.fullLoad();
+            navBarChoice(6);
+            traPhong.fullLoad();
             pack();
             repaint();
         }

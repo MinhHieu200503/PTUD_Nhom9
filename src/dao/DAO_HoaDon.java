@@ -291,7 +291,7 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
             while (rs.next()) {
                 // Quang: tui chỉnh lại entity hoá đơn, có tác động vào thêm tham số ghi chú là ""
                 tempHoaDon = new HoaDon(maHD, rs.getTimestamp(2).toLocalDateTime(), rs.getInt(3),"", null, null, null); 
-//                tempPhong = new Phong(maPhong, rs.getString("tenPhong"), 2, null, rs.getInt("sucChuaToiDa"), rs.getDouble("giaPhongTheoGio"));
+                tempPhong = I_CRUD.findById(maPhong, new Phong());
                 
                 phongDangChon = new ChitTietPhongHoaDon(rs.getTimestamp("thoiGianNhanPhong").toLocalDateTime(), LocalDateTime.now(), rs.getString(10) , tempHoaDon, tempPhong);
             }
@@ -301,13 +301,15 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
 //            System.out.println("HoaDon: " + tempPhong.toString());  
 //            System.out.println("HoaDon: " + phongDangChon.toString());
             
+
+            // check Boolean Phiếu đặt phòng
             statement = con.prepareStatement("select * from HoaDon hd inner join PhieuDatPhong pdp on hd.maHoaDon = pdp.maHoaDon \n" +
                                             "\n" +
                                             "where hd.maHoaDon = ?");
             statement.setString(1, maHD);
             rs = statement.executeQuery();
             while (rs.next()) {                
-                result.setDatCoc(rs.getDouble(11));
+                result.setDatCoc(rs.getDouble("datCoc"));
                 result.setPhieuDatPhong(rs.getString("maPhieuDatPhong"));
             }     
             
@@ -349,7 +351,7 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
                         i++;
 //                        System.out.println(i);
                         result.danhSachPhong.add(result.createPhongVaDichVu());
-//                        tempPhong = new Phong(rs.getString(11), rs.getString(13), 2, null, rs.getInt(16), rs.getDouble(17));
+                        tempPhong = I_CRUD.findById(rs.getString(11), new Phong());
                         result.danhSachPhong.get(i).setChiTietPhongHoaDon(new ChitTietPhongHoaDon(rs.getTimestamp(7).toLocalDateTime(), rs.getTimestamp(8).toLocalDateTime(), rs.getString(9) , tempHoaDon, tempPhong));
                         
                             //DỊch vụ

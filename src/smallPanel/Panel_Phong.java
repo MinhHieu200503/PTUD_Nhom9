@@ -15,6 +15,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.RenderingHints;
+import java.text.DecimalFormat;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
@@ -126,16 +127,17 @@ public class Panel_Phong extends javax.swing.JPanel {
     }
     
     public void setData(entity.Phong data){
+        DecimalFormat formatter = new DecimalFormat("###,###,###");
         dao.DAO_LoaiPhong daoLP = new DAO_LoaiPhong();
         DAO_Phong daoPhong = new DAO_Phong();
         lb_TenPhong.setText(data.getTenPhong() + " - " + data.getMaPhong());
-        lb_SucChua.setText("Sức chứa: " + String.valueOf(daoPhong.getPhongTheoOnlyMaPhong(data.getMaPhong()).getLoaiPhong().getSucChua()));
-        lb_Gia.setText("Giá: "+ String.format("%,.3f",I_CRUD.findById(data.getLoaiPhong().getMaLoaiPhong(), new LoaiPhong()).getGia()) + "Đ");
+        lb_SucChua.setText("Sức chứa: " + String.valueOf(data.getLoaiPhong().getSucChua()));
+        lb_Gia.setText("Giá: " + formatter.format(data.getLoaiPhong().getGia()) + " VNĐ");
 
         this.setId(data.getMaPhong());
         this.setTenPhong(data.getTenPhong());
-        this.setSucChua(I_CRUD.findById(data.getLoaiPhong().getMaLoaiPhong(), new LoaiPhong()).getSucChua());
-        this.setGia(I_CRUD.findById(data.getLoaiPhong().getMaLoaiPhong(), new LoaiPhong()).getGia());
+        this.setSucChua(data.getLoaiPhong().getSucChua());
+        this.setGia(data.getLoaiPhong().getGia());
         this.setTrangThai(data.getTrangThai());
         String loaiPhong = getMaLoaiPhong(data);
 

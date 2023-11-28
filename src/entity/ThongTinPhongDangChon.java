@@ -173,7 +173,7 @@ public class ThongTinPhongDangChon {
     public Double tongTienPhong(){
        Double result = 0.0;
         for (PhongVaDichVu phongVaDichVu : danhSachPhong) {
-            double gia = phongVaDichVu.getChiTietPhongHoaDon().getPhong().getGia() / 60;
+            double gia = phongVaDichVu.getChiTietPhongHoaDon().getPhong().getLoaiPhong().getGia() / 60;
               Duration timeResult = Duration.between(phongVaDichVu.getChiTietPhongHoaDon().getThoiGianTraPhong(), phongVaDichVu.chiTietPhongHoaDon.getThoiGianNhanPhong());
               long minutes = Math.abs(timeResult.toMinutes());
               result = result + (gia*minutes);
