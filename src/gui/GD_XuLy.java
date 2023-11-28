@@ -21,7 +21,7 @@ public class GD_XuLy extends javax.swing.JFrame {
     private GD_XuLy_DatPhongTruoc datPhongTruoc = new GD_XuLy_DatPhongTruoc();
     private GD_XuLy_NhanPhong nhanPhong = new GD_XuLy_NhanPhong();
 //    private GD_XuLy_GoiDichVu goiDichVu = new GD_XuLy_GoiDichVu();
-//    private GD_XuLy_ChuyenPhong chuyenPhong = new GD_XuLy_ChuyenPhong();
+    private GD_XuLy_ChuyenPhong chuyenPhong = new GD_XuLy_ChuyenPhong();
     private GD_XuLy_TraPhong traPhong = new GD_XuLy_TraPhong();
     
     /**
@@ -43,7 +43,7 @@ public class GD_XuLy extends javax.swing.JFrame {
         rightPanel.add(datPhongTruoc.getContentPane());
         rightPanel.add(nhanPhong.getContentPane());
 //        rightPanel.add(goiDichVu.getContentPane());
-//        rightPanel.add(chuyenPhong.getContentPane());
+        rightPanel.add(chuyenPhong.getContentPane());
         rightPanel.add(traPhong.getContentPane());
         
         navBarChoice(0);
@@ -471,8 +471,8 @@ public class GD_XuLy extends javax.swing.JFrame {
         }
         else if (evt.getSource().equals(itemChuyenPhong)){
             setSelectedItem(itemChuyenPhong);
-            navBarChoice(5);
-//            chuyenPhong.loadDSPhongDangSuDung();
+            navBarChoice(3);
+//      Khỏi cần load tui xử lí rồi      chuyenPhong.loadDSPhongDangSuDung(); 
             pack();
             repaint();
         }

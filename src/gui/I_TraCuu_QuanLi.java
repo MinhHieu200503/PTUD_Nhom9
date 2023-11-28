@@ -324,7 +324,7 @@ public interface I_TraCuu_QuanLi<T> {
      * @param dsid là danh sách các id 
      * @param prefix như HDddMMyyyy001 thì prefix là HD. 
      */
-    public static String createIdForHoaDon(ArrayList<String> dsidTheoNgay, String prefix) {
+    public static String createIdForHoaDon_PDP(ArrayList<String> dsidTheoNgay, String prefix) {
         // Kiểm tra xem ds có rỗng hay không nếu rỗng thì mã là prefix + ngày hiện tại + '001' không thì lấy mã cuối cùng trong ds + 1
         if (dsidTheoNgay.isEmpty()) {
             prefix += LocalDate.now().format(DateTimeFormatter.ofPattern("ddMMyyyy"));

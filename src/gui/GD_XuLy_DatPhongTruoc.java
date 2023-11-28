@@ -479,7 +479,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
             soLuongHoaDon = DAOHoaDon.laySoLuongHoaDon()+1;
             ArrayList<entity.KhachHang> listKH = DAOKhachHang.getAllKhachHang();
             entity.HoaDon hoaDon = new HoaDon();
-            String maHoaDon = I_TraCuu_QuanLi.createIdForHoaDon(DAOHoaDon.getDsIdTheoNgayHienTai(), "HD");
+            String maHoaDon = I_TraCuu_QuanLi.createIdForHoaDon_PDP(DAOHoaDon.getDsIdTheoNgayHienTai(), "HD");
 //            
             hoaDon.setMaHoaDon(maHoaDon);
             hoaDon.setNgayLapHoaDon( LocalDateTime.now());
