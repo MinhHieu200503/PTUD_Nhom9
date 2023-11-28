@@ -208,13 +208,12 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChiTietPhongHoaDon>{
     }
         
 
-    public ArrayList<ChiTietPhongHoaDon> getDStheoMaPhong(String maphong) {
+    public ChiTietPhongHoaDon getCTPtheoMP(String maphong) {
         ConnectDB.getInstance();
         Connection con = (Connection) ConnectDB.getInstance().getConnection();
         PreparedStatement pstm = null;
-        ArrayList<ChiTietPhongHoaDon> ds = new ArrayList<>();
         try {
-            pstm = con.prepareStatement("select * from chitietphonghoadon where maphong = ?");
+            pstm = con.prepareStatement("select * from chitietphonghoadon where maphong = ? and thoigiantraphong is null");
             pstm.setString(1, maphong);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
@@ -224,13 +223,13 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChiTietPhongHoaDon>{
                 LocalDateTime out = I_CRUD.SQLtoJava(rs.getString(2));
                 String ghichu = rs.getString(3);
                 ChiTietPhongHoaDon ctp = new ChiTietPhongHoaDon(in, out, ghichu, hd, p);
-                ds.add(ctp);
+               return ctp;
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_ChiTietPhong_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return ds;
+        return null;
     }
     public boolean updateGioRa(String map, String mahd, LocalDateTime giora, String ghiChu) {
         ConnectDB.getInstance();
