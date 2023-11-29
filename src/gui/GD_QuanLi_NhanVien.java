@@ -38,6 +38,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
     }
     public GD_QuanLi_NhanVien( int row) {
         initComponents();
+        jPanel1.removeHierarchyListener(jPanel1.getHierarchyListeners()[0]);
         model = (DefaultTableModel) tbl_danhSach.getModel();
         setEnableInput(false, jPanel2);
         loadTable(daonv.getAll(NhanVien.class), model);

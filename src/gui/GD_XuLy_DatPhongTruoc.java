@@ -548,6 +548,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
             }
             loadDSPhongTrong(null, 0,getDateChooser() );
             JOptionPane.showMessageDialog(null,"Đặt phòng thành công");
+            gui.GD_XuLy_NhanPhong.setTablePDP();
             txt_SoDT.setSelectedItem("");
             txt_khachHang.setText("");
             txt_TienCoc.setText("");

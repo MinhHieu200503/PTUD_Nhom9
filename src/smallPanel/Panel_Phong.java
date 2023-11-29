@@ -142,7 +142,7 @@ public class Panel_Phong extends javax.swing.JPanel {
         this.setTrangThai(data.getTrangThai());
         String loaiPhong = getMaLoaiPhong(data);
         String[] arrLoai = loaiPhong.trim().split(" ");
-        System.out.println("smallPanel.Panel_Phong.setData()=>>>>>" + arrLoai[0]);
+        
         if(!arrLoai[0].equalsIgnoreCase("Vip")){
             this.logoVip.setIcon(null);
         }

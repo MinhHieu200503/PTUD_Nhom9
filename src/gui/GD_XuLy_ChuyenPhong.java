@@ -520,7 +520,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
             return false;
         } else {
             // Phòng cũ là phòng đang sử dụng. Phòng mới là phòng sẽ chuyển. Đang sử dụng đồng nghĩa vs mới nhất luôn.
-//            ArrayList<ChitTietPhongHoaDon> dsctpTheoMa = daoctp.getDStheoMaPhong(idSelectedPhongCu); // Lấy all chi tiết phòng theo phòng
+//            ArrayList<ChitTietPhongHoaDon> dsctpTheoMa = daoctp.getCTPtheoMP(idSelectedPhongCu); // Lấy all chi tiết phòng theo phòng
 //            hdPhongDSD_MoiNhat = dsctpTheoMa.getLast().getHoaDon(); // Lấy Hoá đơn mới nhất của chi tiết phòng theo mã phòng. Hoá đơn mới nhất là hoá đơn chứa các phòng đang dc sử dụng.
             LocalDateTime now = LocalDateTime.now(); // Thòi gian trả phòng | nhận phòng
 
@@ -539,8 +539,7 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
                     
             }
             // Lấy chi tiết phòng cũ
-            ChiTietPhongHoaDon ctPhongCu = dsctpTheoMa.get(dsctpTheoMa.size() - 1); 
-            String ghiChuPhongCu = ctPhongCu.getGhiChu().substring(0, 5) + " " + idSelectedPhongMoi;
+            String ghiChuPhongCu = ctpOld.getGhiChu().substring(0, 5) + " " + idSelectedPhongMoi;
             // Update giờ ra cho phòng cũ (ghi chú chi tiết phòng) 
             if (!daoctp.updateGioRa(idSelectedPhongCu, hdPhongDSD_MoiNhat.getMaHoaDon(), now, ghiChuPhongCu)) {
                 return false;
@@ -605,17 +604,17 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
                     p.setBorder(border); // Cập nhật viền cho phần tử mới
                     previousSelectedRoom = p;
                     idSelectedPhongCu = p.getId();
-                    dsctpTheoMa = daoctp.getDStheoMaPhong(idSelectedPhongCu);
-                    hdPhongDSD_MoiNhat = dsctpTheoMa.getLast().getHoaDon();
+                    ctpOld = daoctp.getCTPtheoMP(idSelectedPhongCu);
+                    hdPhongDSD_MoiNhat = ctpOld.getHoaDon();
                     if (hdPhongDSD_MoiNhat != null)
-                        hdPhongDSD_MoiNhat = dsctpTheoMa.getLast().getHoaDon();
+                        hdPhongDSD_MoiNhat = ctpOld.getHoaDon();
                     loadDSPhongTrong();
                     // show detail 
                     KhachHang tmpKH = hdPhongDSD_MoiNhat.getKhachHang();
                     tf_phone.setText(tmpKH.getSoDienThoai());
                     tf_tenKH.setText(tmpKH.getTenKhachHang());
                     tf_tenPhong.setText(p.getTenPhong());
-                    tf_ngayNhanPhong.setText(dsctpTheoMa.getLast().getThoiGianNhanPhong().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+                    tf_ngayNhanPhong.setText(ctpOld.getThoiGianNhanPhong().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
                     tf_maHD.setText(hdPhongDSD_MoiNhat.getMaHoaDon());
                 }
             });
@@ -697,8 +696,8 @@ private String  idSelectedPhongCu = null;
 private String idSelectedPhongMoi = null;
 private Panel_Phong previousSelectedRoom = null;
 private DefaultTableModel model;
-private ArrayList<ChiTietPhongHoaDon> dsctpTheoMa = new ArrayList<>();
 private HoaDon hdPhongDSD_MoiNhat;
+private ChiTietPhongHoaDon ctpOld = null;
 private ArrayList<Panel_Phong> dsPnlPhong = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cb_phone;
