@@ -71,6 +71,8 @@ public class GD_XuLy_TraPhong extends javax.swing.JFrame {
     
     public void fullLoad(){
         jPanel12.removeAll();
+        jPanel2.setVisible(false);
+        jPanel2.setVisible(true);
         model = new DefaultTableModel(new String[] {"Phòng"}, 0);
         rSTableMetro1.setModel(model);
         
@@ -93,6 +95,8 @@ public class GD_XuLy_TraPhong extends javax.swing.JFrame {
         jLabel18.setText("");
         loadData(temp);
         repaint();
+        jPanel2.setVisible(false);
+        jPanel2.setVisible(true);
     }
     
     public void loadData(ArrayList<Panel_Phong> temp){
@@ -1395,9 +1399,9 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
     private void click(java.awt.event.MouseEvent evt) {                       
         int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn thanh toán ?", "Thông báo", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(null, "Thanh toán thành công");
             updateBill();
             fullLoad();
+            JOptionPane.showMessageDialog(null, "Thanh toán thành công");
             this.dispose();
         } else {
             
@@ -1415,6 +1419,7 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
         
         
         for (ThongTinPhongDangChon thongTinPhongDangChon : result) {
+            System.out.println("asdasdasd" + thongTinPhongDangChon.toString());
             if (thongTinPhongDangChon.getPhieuDatPhong() != null){
                new dao.DAO_PhieuDatPhong().updateBill(thongTinPhongDangChon.getPhieuDatPhong());
             }
