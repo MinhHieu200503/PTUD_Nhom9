@@ -93,6 +93,8 @@ public class GD_XuLy_TraPhong extends javax.swing.JFrame {
         jLabel18.setText("");
         loadData(temp);
         repaint();
+        jPanel2.setVisible(false);
+        jPanel2.setVisible(true);
     }
     
     public void loadData(ArrayList<Panel_Phong> temp){
