@@ -1417,6 +1417,7 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
         
         
         for (ThongTinPhongDangChon thongTinPhongDangChon : result) {
+            System.out.println("asdasdasd" + thongTinPhongDangChon.toString());
             if (thongTinPhongDangChon.getPhieuDatPhong() != null){
                new dao.DAO_PhieuDatPhong().updateBill(thongTinPhongDangChon.getPhieuDatPhong());
             }

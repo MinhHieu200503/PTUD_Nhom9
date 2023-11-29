@@ -164,15 +164,16 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
         PreparedStatement statement = null;
         try {
             //FINAL
-//            statement = con.prepareStatement("Select * from ChiTietPhongHoaDon ct inner join Phong p on ct.maPhong= p.maPhong where p.trangThai = 3 and ct.ghiChu like N'Đang sử dụng'  and ct.maPhong = ?");
+            statement = con.prepareStatement("Select * from ChiTietPhongHoaDon ct inner join Phong p on ct.maPhong= p.maPhong where p.trangThai = 2 and ct.ghiChu like N'%Đang sử dụng'  and ct.maPhong = ?");
             //TEST
-            statement = con.prepareStatement("Select * from ChiTietPhongHoaDon ct inner join Phong p on ct.maPhong= p.maPhong where p.trangThai = 2  and ct.maPhong = ?");
+//            statement = con.prepareStatement("Select * from ChiTietPhongHoaDon ct inner join Phong p on ct.maPhong= p.maPhong where p.trangThai = 2  and ct.maPhong = ?");
 
             statement.setString(1, input_MaPhong);
             ResultSet rs = statement.executeQuery();
 
-            while (rs.next()) {		
-                result = rs.getString(4);
+            while (rs.next()) {
+                    result = rs.getString(4);
+                    System.out.println("MaHD: "+result);
             }
         } catch (Exception e) {
             // TODO: handle exception
