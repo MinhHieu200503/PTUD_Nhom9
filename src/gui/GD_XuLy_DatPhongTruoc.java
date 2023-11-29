@@ -513,7 +513,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
                     // tách chuỗi để lấy số thứ tự
                 int index = soLuongHoaDon + 1;
                 //tự động tạo mã hóa đơn mới
-                String newID = "DPP" + String.format("%03d", index);
+                String newID = I_TraCuu_QuanLi.createIdForHoaDon_PDP(DAOHoaDon.getDsIdTheoNgayHienTai(), "PDP");
                 // lay thoi gian nhan phong
 
                 String dateChooser = getDateChooser();
