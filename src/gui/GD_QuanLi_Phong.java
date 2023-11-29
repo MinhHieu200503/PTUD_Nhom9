@@ -33,6 +33,7 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
     }
     public GD_QuanLi_Phong(int row) {
         initComponents();
+        jPanel1.removeHierarchyListener(jPanel1.getHierarchyListeners()[0]);
         model = (DefaultTableModel) tbl_danhSach.getModel();
         setEnableInput(false, jPanel2);
         loadTable(dsp, model);
