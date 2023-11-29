@@ -76,7 +76,7 @@ public class DAO_Phong implements I_CRUD<Phong>{
         // if else
         boolean dateNow = true;
         if(loaiPhong != null){
-            sqlLoaiPhong = "  and tenLoaiPhong = ?  ";
+            sqlLoaiPhong = "  and tenLoaiPhong like ?  ";
         }
         if(sucChua !=0){
             sqlSucChua = "  and sucChua = ? ";
@@ -92,7 +92,7 @@ public class DAO_Phong implements I_CRUD<Phong>{
             selectedDate = date;
             dateNow = false;
                 if(loaiPhong != null){
-                sqlLoaiPhong = "  tenLoaiPhong = ? and ";
+                sqlLoaiPhong = "  tenLoaiPhong like ? and ";
                 }
                 if(sucChua !=0){
                  sqlSucChua = "   sucChua = ? and  ";
@@ -115,14 +115,14 @@ public class DAO_Phong implements I_CRUD<Phong>{
                             statement.setInt(2, sucChua);
                         }
                         else if(sqlSucChua.trim().equals("")&&!sqlLoaiPhong.trim().equals("")){
-                            statement.setString(2, loaiPhong);
+                            statement.setString(2, "%" +loaiPhong+"%");
 
                         }
                         else if(sqlLoaiPhong.trim().equals("")&&sqlSucChua.trim().equals("")){
                             
                         }
                         else{
-                            statement.setString(2, loaiPhong);
+                            statement.setString(2, "%" +loaiPhong+"%");
                             statement.setInt(3, sucChua);
                         }
             }
@@ -142,7 +142,7 @@ public class DAO_Phong implements I_CRUD<Phong>{
                     }
                     else if(sqlSucChua.trim().equals("")&&!sqlLoaiPhong.trim().equals("")){
 
-                        statement.setString(1, loaiPhong);
+                        statement.setString(1, "%" +loaiPhong+"%");
                         statement.setString(2, selectedDate);
 
                     }
@@ -150,7 +150,7 @@ public class DAO_Phong implements I_CRUD<Phong>{
                         statement.setString(1, selectedDate);
                     }
                     else{
-                        statement.setString(1, loaiPhong);
+                        statement.setString(1, "%" +loaiPhong+"%");
                         statement.setInt(2, sucChua);
                         statement.setString(3, selectedDate);
                     }
@@ -194,7 +194,7 @@ public class DAO_Phong implements I_CRUD<Phong>{
         String sqlSucChua = " ";
         String sqlTrangThai = "  ";
         if(loaiPhong != null){
-            sqlLoaiPhong = "   tenLoaiPhong = ?  ";
+            sqlLoaiPhong = "   tenLoaiPhong like ?  ";
         }
         if(sucChua !=0){
             sqlSucChua = " and  sucChua = ?  ";
@@ -209,11 +209,11 @@ public class DAO_Phong implements I_CRUD<Phong>{
                     }
                     else if(!sqlLoaiPhong.trim().equals("")&&sqlSucChua.trim().equals("")&&trangThai!=-1){
                        sqlTrangThai = "  trangThai = ?  ";
-                       sqlLoaiPhong = "  and tenLoaiPhong = ?  ";
+                       sqlLoaiPhong = "  and tenLoaiPhong like ?  ";
                         
                     }
                     else if(!sqlLoaiPhong.trim().equals("")&&!sqlSucChua.trim().equals("")&&trangThai==-1){
-                        sqlLoaiPhong = "  tenLoaiPhong = ?  ";
+                        sqlLoaiPhong = "  tenLoaiPhong like ?  ";
                         sqlSucChua = "  and sucChua = ?  ";
                         
                     }
@@ -221,14 +221,14 @@ public class DAO_Phong implements I_CRUD<Phong>{
                         sqlSucChua = "   sucChua = ?  ";
                     }
                     else if(!sqlLoaiPhong.trim().equals("")&&sqlSucChua.trim().equals("")&&trangThai==-1){                      
-                         sqlLoaiPhong = "  tenLoaiPhong = ?  ";
+                         sqlLoaiPhong = "  tenLoaiPhong like ?  ";
                     }
                     else if(sqlLoaiPhong.trim().equals("")&&sqlSucChua.trim().equals("")&&trangThai!=-1){                      
                         sqlTrangThai = "  trangThai = ?  ";
                     }
                     else if(!sqlLoaiPhong.trim().equals("")&&!sqlSucChua.trim().equals("")&&trangThai!=-1){
                        sqlTrangThai = "  trangThai = ?  ";
-                       sqlLoaiPhong = "  and tenLoaiPhong = ?  ";
+                       sqlLoaiPhong = "  and tenLoaiPhong like ?  ";
                         sqlSucChua = "  and sucChua = ?  ";
                     }
         try {
@@ -250,11 +250,11 @@ public class DAO_Phong implements I_CRUD<Phong>{
                     }
                     else if(!sqlLoaiPhong.trim().equals("")&&sqlSucChua.trim().equals("")&&trangThai!=-1){
                         statement.setInt(1, trangThai);
-                        statement.setString(2, loaiPhong);
+                        statement.setString(2, "%" +loaiPhong+"%");
                         
                     }
                     else if(!sqlLoaiPhong.trim().equals("")&&!sqlSucChua.trim().equals("")&&trangThai==-1){
-                        statement.setString(1, loaiPhong);
+                        statement.setString(1, "%" +loaiPhong+"%");
                         statement.setInt(2, sucChua);
                         
                     }
@@ -262,14 +262,14 @@ public class DAO_Phong implements I_CRUD<Phong>{
                         statement.setInt(1, sucChua);
                     }
                     else if(!sqlLoaiPhong.trim().equals("")&&sqlSucChua.trim().equals("")&&trangThai==-1){                      
-                        statement.setString(1, loaiPhong);
+                        statement.setString(1, "%" +loaiPhong+"%");
                     }
                     else if(sqlLoaiPhong.trim().equals("")&&sqlSucChua.trim().equals("")&&trangThai!=-1){                      
                         statement.setInt(1, trangThai);
                     }
                     else{
                         statement.setInt(1, trangThai);
-                        statement.setString(2, loaiPhong);
+                        statement.setString(2, "%" +loaiPhong+"%");
                         statement.setInt(3, sucChua);
                     }
                     
@@ -281,7 +281,7 @@ public class DAO_Phong implements I_CRUD<Phong>{
                 
                 
                  while (rs.next()) {	
-                dsphong.add(new entity.Phong(rs.getString(1).trim(), rs.getString(2), rs.getInt(3), I_CRUD.findById(rs.getString(4), new LoaiPhong()) ));
+                dsphong.add(new entity.Phong(rs.getString(1).trim(), rs.getString(2), rs.getInt(3), I_CRUD.findById(rs.getString(4), new LoaiPhong())));
                 }
             
         } catch (Exception e) {

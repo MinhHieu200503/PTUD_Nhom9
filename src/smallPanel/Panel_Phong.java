@@ -16,6 +16,7 @@ import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.text.DecimalFormat;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
@@ -140,8 +141,9 @@ public class Panel_Phong extends javax.swing.JPanel {
         this.setGia(data.getLoaiPhong().getGia());
         this.setTrangThai(data.getTrangThai());
         String loaiPhong = getMaLoaiPhong(data);
-
-        if(loaiPhong.equalsIgnoreCase("thường")){
+        String[] arrLoai = loaiPhong.trim().split(" ");
+        System.out.println("smallPanel.Panel_Phong.setData()=>>>>>" + arrLoai[0]);
+        if(!arrLoai[0].equalsIgnoreCase("Vip")){
             this.logoVip.setIcon(null);
         }
         if(this.trangThai==2){

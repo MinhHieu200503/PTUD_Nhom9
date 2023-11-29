@@ -533,7 +533,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
                 pdp.setTrangThai(0);
                 pdp.setDatCoc(Double.valueOf(txt_TienCoc.getText()));
                 pdp.setHoaDon(I_CRUD.findById(maHoaDon, new HoaDon()));
-                pdp.setNhanVien(I_CRUD.findById("NV001",new NhanVien()));
+                pdp.setNhanVien(gui.GD_DangNhap.taiKhoan.getNhanVien());
                 pdp.setKhachHang(I_CRUD.findById(String.valueOf(txt_SoDT.getSelectedItem()).trim(), new KhachHang()));
                 pdp.setPhong(phong);
 
