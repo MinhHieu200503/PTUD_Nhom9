@@ -33,6 +33,7 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
     }
     public GD_QuanLi_KhachHang(int row) {
         initComponents();
+        jPanel9.removeHierarchyListener(jPanel9.getHierarchyListeners()[0]);
         model = (DefaultTableModel) tbl_danhSach.getModel();
         setEnableInput(false, jPanel11);
         loadTable(dskh, model);
