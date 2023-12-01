@@ -611,6 +611,11 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         // TODO add your handling code here:
         if (model != null)
             loadTable(daonv.getAll(NhanVien.class), model);
+        ArrayList<Ca> dsca = daoca.getAll(Ca.class);
+        cb_ca.removeAllItems();
+        dsca.forEach(e -> {
+            cb_ca.addItem(e.getTenCa());
+        });
     }//GEN-LAST:event_jPanel1HierarchyChanged
     private boolean validateInput() {
         String ten = tf_ten.getText().trim();

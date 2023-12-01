@@ -437,6 +437,12 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
         // TODO add your handling code here:
         if (model != null)
             loadTable(daop.getAll(Phong.class), model);
+        cb_loai.removeAllItems();
+        ArrayList<LoaiPhong> dslp = daolp.getAll(LoaiPhong.class);
+        dslp.forEach(e -> {
+            cb_loai.addItem(e.getTenLoaiPhong());
+        });
+
     }//GEN-LAST:event_jPanel1HierarchyChanged
     
     private boolean validateInput() {
