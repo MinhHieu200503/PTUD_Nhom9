@@ -35,12 +35,22 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
     }
     public GD_QuanLi_DichVu(int row) {
         initComponents();
-        jPanel1.removeHierarchyListener(jPanel1.getHierarchyListeners()[0]);
+        jPanel1.removeHierarchyListener(jPanel1.getHierarchyListeners()[0]); // ko cho load 2 lần
         model = (DefaultTableModel) tbl_danhSach.getModel();
         setEnableInput(false, jPanel2);
         loadTable(dsdv, model);
+        // Khử định dạng tiền khi select 
+        
         tbl_danhSach.setRowSelectionInterval(row, row);
+      
         showDetailInput(jPanel2, model, row);
+          try {
+            tf_gia.setText(df.parse(model.getValueAt(row, 2).toString()).toString());
+        } catch (ParseException ex) {
+            Logger.getLogger(GD_QuanLi_DichVu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        String txt = model.getValueAt(row, 2).toString().trim();
+//        tf_gia.setText(txt.substring(0, txt.length() - 1));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -173,7 +183,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         jPanel13.add(jLabel9, java.awt.BorderLayout.NORTH);
 
         cb_trangThai.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        cb_trangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Còn hàng", "Hết hàng" }));
+        cb_trangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hết hàng", "Còn hàng", " " }));
         cb_trangThai.setPreferredSize(new java.awt.Dimension(160, 38));
         jPanel13.add(cb_trangThai, java.awt.BorderLayout.CENTER);
 
@@ -434,6 +444,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
                     Double gia = Double.valueOf(tf_gia.getText().trim());
                     int soluong = Integer.parseInt(tf_soLuong.getText().trim());
                     int trangthai = cb_trangThai.getSelectedIndex();
+                    System.err.println(trangthai);
                     String mota = ta_moTa.getText().trim();
                     
                     DichVu dv = new DichVu(id, ten, gia, soluong, trangthai, mota);
