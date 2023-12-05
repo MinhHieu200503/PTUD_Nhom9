@@ -334,10 +334,13 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
             DAO_HoaDon dao_hd = new DAO_HoaDon();
             
             for(HoaDon hd: dao_hd.getAll(HoaDon.class)){
-                if(hd.getKhachHang().getSoDienThoai().equals(sdt) && hd.getTrangThai() == 0){
+                if(hd.getKhachHang().getSoDienThoai().equals(sdt) && hd.getTrangThai() == 0 && hd.getNhanVien()!=null){
+                    JOptionPane.showMessageDialog(null, hd.getNhanVien() + "vy");
                     return true;
                 }
             }
+            
+            
             return false;
         }
         
