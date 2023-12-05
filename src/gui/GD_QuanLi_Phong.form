@@ -375,7 +375,6 @@
                             <Column editable="false" title="Lo&#x1ea1;i ph&#xf2;ng" type="java.lang.String"/>
                           </Table>
                         </Property>
-                        <Property name="cellSelectionEnabled" type="boolean" value="true"/>
                         <Property name="colorBackgoundHead" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="99" green="99" red="0" type="rgb"/>
                         </Property>
@@ -418,6 +417,7 @@
                             </Column>
                           </TableColumnModel>
                         </Property>
+                        <Property name="columnSelectionAllowed" type="boolean" value="false"/>
                         <Property name="rowHeight" type="int" value="30"/>
                         <Property name="selectionMode" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                           <Connection code="javax.swing.ListSelectionModel.SINGLE_SELECTION" type="code"/>
