@@ -7,12 +7,14 @@ package smallPanel;
 import gui.GD_DangNhap;
 import gui.GD_XuLy;
 import gui.GD_QuanLi;
+import gui.GD_ThongTinCaNhan;
 import gui.GD_TraCuu;
 import gui.GD_TrangChu;
 import gui.GD_Thongke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Panel;
@@ -35,7 +37,8 @@ private GD_TrangChu trangChu = new GD_TrangChu();
     private GD_TraCuu traCuu = new GD_TraCuu();
     private GD_Thongke thongKe = new GD_Thongke();
     private GD_QuanLi quanLi = new GD_QuanLi();
-    
+    private GD_ThongTinCaNhan profile = new GD_ThongTinCaNhan();
+    private Container container = profile.getContentPane();
     /**
      * Creates new form navBar
      */
@@ -53,7 +56,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         this.add.add(traCuu.getContentPane());
         this.add.add(thongKe.getContentPane());
         this.add.add(quanLi.getContentPane());
-        
+        this.add.add(profile.getContentPane());
 //        xuLy.setVisible(false);
 //        traCuu.setVisible(false);
 //        thongKe.setVisible(false);
@@ -126,6 +129,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         jPanel7 = new javax.swing.JPanel();
         rSButtonMetro2 = new rojerusan.RSButtonMetro();
         rSButtonMetro3 = new rojerusan.RSButtonMetro();
+        rSButtonMetro5 = new rojerusan.RSButtonMetro();
         rSButtonMetro4 = new rojerusan.RSButtonMetro();
         jPanel8 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -194,6 +198,19 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         });
         jPanel7.add(rSButtonMetro3);
 
+        rSButtonMetro5.setBackground(new java.awt.Color(0, 153, 153));
+        rSButtonMetro5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-user-settings-50.png"))); // NOI18N
+        rSButtonMetro5.setText("Thông tin nhân viên");
+        rSButtonMetro5.setAlignmentX(0.5F);
+        rSButtonMetro5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        rSButtonMetro5.setIconTextGap(30);
+        rSButtonMetro5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonMetro5ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(rSButtonMetro5);
+
         rSButtonMetro4.setBackground(new java.awt.Color(0, 153, 153));
         rSButtonMetro4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-log-out-50.png"))); // NOI18N
         rSButtonMetro4.setText("Thoát");
@@ -208,7 +225,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         jPanel7.add(rSButtonMetro4);
 
         add(jPanel7);
-        jPanel7.setBounds(0, 67, 470, 190);
+        jPanel7.setBounds(0, 67, 450, 210);
 
         jPanel1.setBackground(new java.awt.Color(40, 77, 133));
         jPanel1.setMaximumSize(new java.awt.Dimension(1920, 66));
@@ -667,6 +684,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
 
     private void rSButtonMetro3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro3ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_rSButtonMetro3ActionPerformed
 
     private void pressThanhToan(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pressThanhToan
@@ -675,6 +693,12 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         } catch (Exception e) {
         }
     }//GEN-LAST:event_pressThanhToan
+
+    private void rSButtonMetro5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro5ActionPerformed
+        // TODO add your handling code here:
+        navBarChoice(6);
+        jPanel7.setVisible(false);
+    }//GEN-LAST:event_rSButtonMetro5ActionPerformed
 
     
     public void clickMenuUnderline(JPanel panel){
@@ -714,6 +738,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
     private rojerusan.RSButtonMetro rSButtonMetro2;
     private rojerusan.RSButtonMetro rSButtonMetro3;
     private rojerusan.RSButtonMetro rSButtonMetro4;
+    private rojerusan.RSButtonMetro rSButtonMetro5;
     private javax.swing.JPanel rightPanel;
     private javax.swing.JPanel room;
     private javax.swing.JPanel search;
