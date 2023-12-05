@@ -519,7 +519,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
             }
         } else if (o.equals(btn_luu)) {
             if (btn_them.getText().equals("Huỷ")) {
-                if (validateInput()) { // để nhét regex vào
+                if (validateInput(btn_luu)) { // để nhét regex vào
                     String id = tf_id.getText().trim();
                     String ten = tf_ten.getText().trim();
                     SimpleDateFormat date = new SimpleDateFormat("yyy-MM-dd");
@@ -552,7 +552,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
                 }
             }
             if (btn_sua.getText().equals("Huỷ")) {
-                if (validateInput()) {
+                if (validateInput(btn_sua)) {
                     String id = tf_id.getText().trim();
                     String ten = tf_ten.getText().trim();
                     SimpleDateFormat date = new SimpleDateFormat("yyy-MM-dd");
@@ -569,7 +569,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
                     
                     NhanVien nv = new NhanVien(id, ten, ngaySinh, gioiTinh, cmnd, diaChi, sdt, trangThai, gmail, ca);
                     TaiKhoan tk = new TaiKhoan(sdt, String.valueOf(pf_matKhau.getPassword()), cb_vaiTro.getSelectedItem().equals("Quản lí"), nv);
-                    if (daonv.update(nv) && daotk.update(tk)) {
+                    if (daonv.update(nv) && daotk.updateTK(tk)) {
                         JOptionPane.showMessageDialog(this, "Sửa thành công");
                         loadTable(daonv.getAll(NhanVien.class), model);
                         tbl_danhSach.clearSelection();
@@ -617,7 +617,7 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
             cb_ca.addItem(e.getTenCa());
         });
     }//GEN-LAST:event_jPanel1HierarchyChanged
-    private boolean validateInput() {
+    private boolean validateInput(Object o) {
         String ten = tf_ten.getText().trim();
         Date ngaysinh = datechooser_ngaySinh.getDate();
         String cmnd = tf_cmnd.getText().trim();
@@ -668,6 +668,25 @@ public class GD_QuanLi_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
             showRegexError(tf_phone, "Số điện thoại bắt đầu bằng chữ số 0 và có tối đa 10 chữ số");
             return false;
         }
+        if (o.equals(btn_sua)) {
+            int row = tbl_danhSach.getSelectedRow();
+            ArrayList<NhanVien> ds = daonv.getAll(NhanVien.class);
+            for (NhanVien i : ds) {
+                if (!i.getSoDienThoai().equals(model.getValueAt(row, 6)) && i.getSoDienThoai().equals(phone)) {
+                    JOptionPane.showMessageDialog(null, "Số điện thoại không được trùng", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+            }
+        } else {
+            ArrayList<NhanVien> ds = daonv.getAll(NhanVien.class);
+            for (NhanVien i : ds) {
+                if (i.getSoDienThoai().equals(phone)) {
+                    JOptionPane.showMessageDialog(null, "Số điện thoại không được trùng", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+            }
+        }
+        
         if (gmail.isEmpty()) {
             showRegexError(tf_gmail, "Gmail không được rỗng");
             return false;

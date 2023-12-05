@@ -6,6 +6,7 @@ package gui;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dao.DAO_KhachHang;
+import dao.I_CRUD;
 import entity.KhachHang;
 import java.awt.Font;
 import java.awt.HeadlessException;
@@ -405,7 +406,16 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
             showRegexError(tf_phone, "Số điện thoại bắt đầu bằng chữ số 0 và có tối đa 10 chữ số");
             return false;
         }
-        if (!o.equals(btn_sua)) {
+        if (o.equals(btn_sua)) {
+            int row = tbl_danhSach.getSelectedRow();
+            ArrayList<KhachHang> ds = daokh.getAll(KhachHang.class);
+            for (KhachHang k : ds) {
+                if (!k.getSoDienThoai().equals(model.getValueAt(row, 0)) && k.getSoDienThoai().equals(phone)) {
+                    JOptionPane.showMessageDialog(null, "Số điện thoại không được trùng", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+            }
+        } else {
             ArrayList<KhachHang> ds = daokh.getAll(KhachHang.class);
             for (KhachHang k : ds) {
                 if (k.getSoDienThoai().equals(phone)) {
