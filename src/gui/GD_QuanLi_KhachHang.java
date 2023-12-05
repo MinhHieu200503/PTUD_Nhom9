@@ -170,6 +170,8 @@ public class GD_QuanLi_KhachHang extends javax.swing.JFrame implements I_TraCuu_
         tbl_danhSach.setColorBordeFilas(new java.awt.Color(0, 153, 153));
         tbl_danhSach.setColorBordeHead(new java.awt.Color(0, 102, 102));
         tbl_danhSach.setColorFilasBackgound2(new java.awt.Color(153, 255, 204));
+        tbl_danhSach.setColorFilasForeground1(new java.awt.Color(0, 0, 0));
+        tbl_danhSach.setColorFilasForeground2(new java.awt.Color(0, 0, 0));
         tbl_danhSach.setRowHeight(30);
         tbl_danhSach.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbl_danhSach.getTableHeader().setReorderingAllowed(false);
