@@ -175,6 +175,8 @@ public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         table_traCuu.setColorBordeFilas(new java.awt.Color(0, 153, 153));
         table_traCuu.setColorBordeHead(new java.awt.Color(0, 102, 102));
         table_traCuu.setColorFilasBackgound2(new java.awt.Color(153, 255, 204));
+        table_traCuu.setColorFilasForeground1(new java.awt.Color(0, 0, 0));
+        table_traCuu.setColorFilasForeground2(new java.awt.Color(0, 0, 0));
         table_traCuu.setRowHeight(30);
         table_traCuu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         table_traCuu.getTableHeader().setReorderingAllowed(false);

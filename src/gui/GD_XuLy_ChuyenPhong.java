@@ -218,6 +218,8 @@ public class GD_XuLy_ChuyenPhong extends javax.swing.JFrame {
         tbl_phongTrong.setColorBordeFilas(new java.awt.Color(0, 153, 153));
         tbl_phongTrong.setColorBordeHead(new java.awt.Color(0, 102, 102));
         tbl_phongTrong.setColorFilasBackgound2(new java.awt.Color(153, 255, 204));
+        tbl_phongTrong.setColorFilasForeground1(new java.awt.Color(0, 0, 0));
+        tbl_phongTrong.setColorFilasForeground2(new java.awt.Color(0, 0, 0));
         tbl_phongTrong.setRowHeight(30);
         tbl_phongTrong.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbl_phongTrong.getTableHeader().setReorderingAllowed(false);

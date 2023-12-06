@@ -6,10 +6,12 @@ package dao;
 
 import java.sql.*;
 import connectDB.ConnectDB;
+import entity.NhanVien;
 import entity.TaiKhoan;
-import java.util.List;
 import java.util.Properties;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
@@ -17,7 +19,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -105,5 +106,39 @@ public class DAO_TaiKhoan implements I_CRUD<TaiKhoan>{
         } finally {
             return n;
         }
+    }
+    public boolean updateTK(TaiKhoan tk) { // dựa trên mã nhân viên: vì mã nhân viên nó bất biến
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement pstm;
+        int n = 0;
+        try {
+            String sql = "update taikhoan set tentaikhoan = ?, matkhau = ?, vaitro = ? where manhanvien = ?";
+            pstm = con.prepareStatement(sql);
+            pstm.setString(1, tk.getTenTaiKhoan());
+            pstm.setString(2, tk.getMatKhau());
+            pstm.setBoolean(3, tk.getVaiTro());
+            pstm.setString(4, tk.getNhanVien().getMaNhanVien());
+            n = pstm.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_TaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return n > 0;
+    }
+    public TaiKhoan findByNV(String id) { // id là id nhân viên
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        try {
+            Statement stm = con.createStatement();
+            String sql = "select * from taikhoan where maNhanVien = '" + id + "'";
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                return new TaiKhoan(rs.getString(1), rs.getString(2), rs.getBoolean(3), I_CRUD.findById(id, new NhanVien()));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_TaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

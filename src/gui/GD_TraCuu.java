@@ -32,7 +32,7 @@ public class GD_TraCuu extends javax.swing.JFrame {
     GD_TraCuu_DichVu gddv = new GD_TraCuu_DichVu();
     GD_TraCuu_PhieuDatPhong gdpdp = new GD_TraCuu_PhieuDatPhong();
     GD_TraCuu_NhanVien gdnv = new GD_TraCuu_NhanVien();
-    
+    private static int isFirst = 0;
     public GD_TraCuu() {
         initComponents();
 //        setExtendedState(6);
@@ -84,6 +84,11 @@ public class GD_TraCuu extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(1920, 964));
         setMinimumSize(new java.awt.Dimension(1920, 964));
 
+        pnlMain.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                pnlMainHierarchyChanged(evt);
+            }
+        });
         pnlMain.setLayout(new javax.swing.BoxLayout(pnlMain, javax.swing.BoxLayout.X_AXIS));
 
         pnlLeft.setBackground(new java.awt.Color(0, 153, 153));
@@ -416,6 +421,15 @@ public class GD_TraCuu extends javax.swing.JFrame {
         Object a = evt.getSource();
         enteredMenu((JPanel) a);
     }//GEN-LAST:event_enterMenu
+
+    private void pnlMainHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_pnlMainHierarchyChanged
+        // TODO add your handling code here:
+        if (isFirst == 0 && pnlMain.isShowing()) {
+            if (!GD_DangNhap.taiKhoan.getVaiTro()) { // nhân viên
+                pnlLeft.getComponent(pnlLeft.getComponentCount() - 1).setVisible(false);
+            }
+        }
+    }//GEN-LAST:event_pnlMainHierarchyChanged
     
     public void enteredMenu(javax.swing.JPanel panel){
         if (!choice.equals(panel)){ // Nếu không phải là panel đang được chọn thì set màu lại
