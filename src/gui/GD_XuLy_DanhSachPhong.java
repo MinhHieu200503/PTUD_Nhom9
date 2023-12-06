@@ -665,7 +665,7 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
         lbThoiGianNhanPhong.setText("Sức chứa");
         lbThoiGianSuDung.setText("Giá theo giờ");
         
-        txtMaHoaDon.setText(I_CRUD.findById(maPhong, new Phong()).getLoaiPhong().getMaLoaiPhong());
+        txtMaHoaDon.setText(I_CRUD.findById(maPhong, new Phong()).getLoaiPhong().getTenLoaiPhong());
         txtThoiGianNhanPhong.setText(I_CRUD.findById(maPhong, new Phong()).getLoaiPhong().getSucChua()+"");
         txt_ThoiGianSuDung.setText(I_CRUD.findById(maPhong, new Phong()).getLoaiPhong().getGia()+"");
         panelContainDV.setVisible(false);
