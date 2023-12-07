@@ -34,7 +34,20 @@ public class GD_QuanLi_LoaiPhong extends javax.swing.JFrame implements I_TraCuu_
         loadTable(dslp, model);
 //        ta_moTa.setEditable(false);
     }
-
+    public GD_QuanLi_LoaiPhong(int row) {
+        initComponents();
+        jPanel1.removeHierarchyListener(jPanel1.getHierarchyListeners()[0]);
+        model = (DefaultTableModel) tbl_danhSach.getModel();
+        setEnableInput(false, jPanel2);
+        loadTable(dslp, model);
+        tbl_danhSach.setRowSelectionInterval(row, row);
+        showDetailInput(jPanel2, model, row);
+        try {
+            tf_gia.setText(df.parse(model.getValueAt(row, 3).toString()).toString());
+        } catch (ParseException ex) {
+            Logger.getLogger(GD_QuanLi_LoaiPhong.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,11 +88,21 @@ public class GD_QuanLi_LoaiPhong extends javax.swing.JFrame implements I_TraCuu_
         btn_luu = new javax.swing.JButton();
         btn_xoaTrang = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
         jPanel1.setPreferredSize(new java.awt.Dimension(1920, 763));
+        jPanel1.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                jPanel1HierarchyChanged(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -433,6 +456,20 @@ public class GD_QuanLi_LoaiPhong extends javax.swing.JFrame implements I_TraCuu_
             }
         }
     }//GEN-LAST:event_tbl_danhSachMouseClicked
+
+    private void jPanel1HierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jPanel1HierarchyChanged
+        // TODO add your handling code here:
+        if (model != null)
+            loadTable(daolp.getAll(LoaiPhong.class), model);
+    }//GEN-LAST:event_jPanel1HierarchyChanged
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        if (GD_TraCuu_LoaiPhong.model != null) 
+            loadTable(daolp.getAll(LoaiPhong.class), GD_TraCuu_LoaiPhong.model);
+        else
+            System.out.println("chưa mở giao diện tra cứu loại phòng");
+    }//GEN-LAST:event_formWindowClosing
     private boolean validateInput() {
         String ten = tf_ten.getText().trim();
         String gia = tf_gia.getText().trim();
