@@ -166,10 +166,12 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
         lb_HoaDon.setText("MÃ HÓA ĐƠN:");
 
         txtMaPhong.setEditable(false);
+        txtMaPhong.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtMaPhong.setEnabled(false);
         txtMaPhong.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         txtThoiGianNhanPhong.setEditable(false);
+        txtThoiGianNhanPhong.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtThoiGianNhanPhong.setEnabled(false);
         txtThoiGianNhanPhong.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -177,6 +179,7 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
         jLabel8.setText("MÃ PHÒNG: ");
 
         txt_ThoiGianSuDung.setEditable(false);
+        txt_ThoiGianSuDung.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txt_ThoiGianSuDung.setEnabled(false);
         txt_ThoiGianSuDung.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -187,6 +190,7 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
         lbThoiGianNhanPhong.setText("THỜI GIAN NHẬN PHÒNG");
 
         txtMaHoaDon.setEditable(false);
+        txtMaHoaDon.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtMaHoaDon.setEnabled(false);
         txtMaHoaDon.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -389,6 +393,7 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
         jLabel6.setText("SỐ ĐIỆN THOẠI");
 
         txt_TenKhachHang.setEditable(false);
+        txt_TenKhachHang.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txt_TenKhachHang.setEnabled(false);
         txt_TenKhachHang.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -396,6 +401,7 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
         jLabel7.setText("TÊN KHÁCH HÀNG:");
 
         txt_SDT.setEditable(false);
+        txt_SDT.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txt_SDT.setEnabled(false);
         txt_SDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -659,7 +665,7 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
         lbThoiGianNhanPhong.setText("Sức chứa");
         lbThoiGianSuDung.setText("Giá theo giờ");
         
-        txtMaHoaDon.setText(I_CRUD.findById(maPhong, new Phong()).getLoaiPhong().getMaLoaiPhong());
+        txtMaHoaDon.setText(I_CRUD.findById(maPhong, new Phong()).getLoaiPhong().getTenLoaiPhong());
         txtThoiGianNhanPhong.setText(I_CRUD.findById(maPhong, new Phong()).getLoaiPhong().getSucChua()+"");
         txt_ThoiGianSuDung.setText(I_CRUD.findById(maPhong, new Phong()).getLoaiPhong().getGia()+"");
         panelContainDV.setVisible(false);

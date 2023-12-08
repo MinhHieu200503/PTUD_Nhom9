@@ -4,29 +4,25 @@
  */
 package gui;
 
-import dao.DAO_NhanVien;
-import entity.NhanVien;
-import java.awt.Font;
+import dao.DAO_UuDai;
+import entity.UuDai;
 import java.util.ArrayList;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
 
 /**
  *
  * @author quang
  */
-public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_QuanLi<NhanVien>{
+public class GD_TraCuu_UuDai extends javax.swing.JFrame implements I_TraCuu_QuanLi<UuDai>{
 
     /**
-     * Creates new form GD_TraCuu_NhanVien
+     * Creates new form GD_TraCuu_UuDai
      */
-    public GD_TraCuu_NhanVien() {
+    public GD_TraCuu_UuDai() {
         initComponents();
         model = (DefaultTableModel) table_traCuu.getModel();
-        loadTable(dsnv, model);
+        loadTable(daoud.getAll(UuDai.class), model);
         for (int i = 0; i<model.getRowCount(); i++) {
             ArrayList<String> row = new ArrayList<>();
             for (int j = 0; j < model.getColumnCount(); j++) {
@@ -37,9 +33,6 @@ public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
             }
             list.add(row);
         }
-//        if (!GD_DangNhap.taiKhoan.getVaiTro()) { // nhân viên thì ko hiển thị button edit
-//            btn_edit.setVisible(false);
-//        }
     }
 
     /**
@@ -54,7 +47,6 @@ public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         pnlMain = new javax.swing.JPanel();
         pnlTop = new javax.swing.JPanel();
         pnlTop_title = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
         pnlCenter = new javax.swing.JPanel();
         pnlThongTinTraCuu = new javax.swing.JPanel();
         lbl_TraCuu = new javax.swing.JLabel();
@@ -76,31 +68,15 @@ public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         pnlMain.setLayout(new java.awt.BorderLayout());
 
         pnlTop.setBackground(new java.awt.Color(255, 255, 255));
-        pnlTop.setPreferredSize(new java.awt.Dimension(828, 135));
+        pnlTop.setPreferredSize(new java.awt.Dimension(828, 100));
         pnlTop.setLayout(new java.awt.BorderLayout());
 
         pnlTop_title.setBackground(new java.awt.Color(255, 255, 255));
         pnlTop_title.setFont(new java.awt.Font("Segoe UI Black", 1, 30)); // NOI18N
         pnlTop_title.setForeground(new java.awt.Color(0, 153, 153));
         pnlTop_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        pnlTop_title.setText("TRA CỨU NHÂN VIÊN");
+        pnlTop_title.setText("TRA CỨU ƯU ĐÃI");
         pnlTop.add(pnlTop_title, java.awt.BorderLayout.CENTER);
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1650, 25));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1650, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
-
-        pnlTop.add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         pnlMain.add(pnlTop, java.awt.BorderLayout.NORTH);
 
@@ -153,14 +129,14 @@ public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
 
             },
             new String [] {
-                "Mã nhân viên", "Tên nhân viên", "Ngày sinh", "Giới tính", "CMND", "Địa chỉ", "Số điện thoại", "Trạng thái", "Gmail", "Ca"
+                "Mã ưu đãi", "Tên ưu đãi", "Giảm giá", "Ngày áp dụng", "Ngày kết thúc áp dụng"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -188,12 +164,12 @@ public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
             pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDataLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1590, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1860, Short.MAX_VALUE)
                 .addGap(30, 30, 30))
         );
         pnlDataLayout.setVerticalGroup(
             pnlDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
@@ -240,11 +216,21 @@ public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, 919, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, 890, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tf_TraCuuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_TraCuuKeyReleased
+        // TODO add your handling code here:
+        if (tf_TraCuu.getText().trim().equals("")) {
+            loadTable(daoud.getAll(UuDai.class), model);
+        } else {
+            ArrayList<ArrayList<String>> ds = search(tf_TraCuu.getText().trim(), list);
+            load(ds, model);
+        }
+    }//GEN-LAST:event_tf_TraCuuKeyReleased
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
         // TODO add your handling code here:
@@ -252,29 +238,19 @@ public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
         if (row == -1) {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn dòng");
         } else {
-            new GD_QuanLi_NhanVien( row).setVisible(true);
+            new GD_QuanLi_UuDai( row).setVisible(true);
         }
     }//GEN-LAST:event_btn_editActionPerformed
-
-    private void tf_TraCuuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_TraCuuKeyReleased
-        // TODO add your handling code here:
-        if (tf_TraCuu.getText().trim().equals("")) {
-            loadTable(daonv.getAll(NhanVien.class), model);
-        } else {
-            ArrayList<ArrayList<String>> ds = search(tf_TraCuu.getText().trim(), list);
-            load(ds, model);
-        }
-    }//GEN-LAST:event_tf_TraCuuKeyReleased
 
     private void pnlMainHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_pnlMainHierarchyChanged
         // TODO add your handling code here:
         if (pnlMain.isShowing()) {
             if (!GD_DangNhap.taiKhoan.getVaiTro()) { // nhân viên thì ko hiển thị button edit
                 btn_edit.setVisible(false);
-                
+
             }
             tf_TraCuu.setText("");
-            loadTable(daonv.getAll(NhanVien.class), model);
+            loadTable(daoud.getAll(UuDai.class), model);
         }
     }//GEN-LAST:event_pnlMainHierarchyChanged
 
@@ -295,32 +271,28 @@ public class GD_TraCuu_NhanVien extends javax.swing.JFrame implements I_TraCuu_Q
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GD_TraCuu_NhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GD_TraCuu_UuDai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GD_TraCuu_NhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GD_TraCuu_UuDai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GD_TraCuu_NhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GD_TraCuu_UuDai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GD_TraCuu_NhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GD_TraCuu_UuDai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GD_TraCuu_NhanVien().setVisible(true);
+                new GD_TraCuu_UuDai().setVisible(true);
             }
         });
     }
-    
-    private DAO_NhanVien daonv = new DAO_NhanVien();
-    private ArrayList<NhanVien> dsnv = daonv.getAll(NhanVien.class);
+    private DAO_UuDai daoud = new DAO_UuDai();
     public static DefaultTableModel model;
     private ArrayList<ArrayList<String>> list = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_edit;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbl_TraCuu;
     private javax.swing.JPanel pnlBottom;

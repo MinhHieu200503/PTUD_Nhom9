@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.Window;
 import javax.swing.JDesktopPane;
@@ -32,7 +33,10 @@ public class GD_TraCuu extends javax.swing.JFrame {
     GD_TraCuu_DichVu gddv = new GD_TraCuu_DichVu();
     GD_TraCuu_PhieuDatPhong gdpdp = new GD_TraCuu_PhieuDatPhong();
     GD_TraCuu_NhanVien gdnv = new GD_TraCuu_NhanVien();
+    GD_TraCuu_LoaiPhong gdlp = new GD_TraCuu_LoaiPhong();
+    GD_TraCuu_UuDai gdud = new GD_TraCuu_UuDai();
     
+    private static int isFirst = 0;
     public GD_TraCuu() {
         initComponents();
 //        setExtendedState(6);
@@ -41,12 +45,16 @@ public class GD_TraCuu extends javax.swing.JFrame {
         pnlRight.add(gdhd.getContentPane(), BorderLayout.CENTER);
 //        pack();
         pnlRight.add(gdp.getContentPane(), BorderLayout.CENTER);
+        pnlRight.add(gdlp.getContentPane(), BorderLayout.CENTER);
 //        pack();
         pnlRight.add(gddv.getContentPane(), BorderLayout.CENTER);
 //        pack();
         pnlRight.add(gdpdp.getContentPane(), BorderLayout.CENTER);
 //        pack();
+        pnlRight.add(gdud.getContentPane(), BorderLayout.CENTER);
         pnlRight.add(gdnv.getContentPane(), BorderLayout.CENTER);
+        
+        
         pack();
         
         choice= pnlLeft_1; // gán nó vào pnlTitle
@@ -72,10 +80,14 @@ public class GD_TraCuu extends javax.swing.JFrame {
         pnlLeft_2_lableHoaDon = new javax.swing.JLabel();
         pnlLeft_3 = new javax.swing.JPanel();
         pnlLeft_3_labelPhong = new javax.swing.JLabel();
+        pnlLeft_7 = new javax.swing.JPanel();
+        pnlLeft_3_labelPhong1 = new javax.swing.JLabel();
         pnlLeft_4 = new javax.swing.JPanel();
         pnlLeft_4_labelDichVu = new javax.swing.JLabel();
         pnlLeft_5 = new javax.swing.JPanel();
         pnlLeft_5_labelPhieuDatPhong = new javax.swing.JLabel();
+        pnlLeft_8 = new javax.swing.JPanel();
+        pnlLeft_5_labelPhieuDatPhong1 = new javax.swing.JLabel();
         pnlLeft_6 = new javax.swing.JPanel();
         pnlLeft_6_labelNhanVien = new javax.swing.JLabel();
         pnlRight = new javax.swing.JPanel();
@@ -84,6 +96,11 @@ public class GD_TraCuu extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(1920, 964));
         setMinimumSize(new java.awt.Dimension(1920, 964));
 
+        pnlMain.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                pnlMainHierarchyChanged(evt);
+            }
+        });
         pnlMain.setLayout(new javax.swing.BoxLayout(pnlMain, javax.swing.BoxLayout.X_AXIS));
 
         pnlLeft.setBackground(new java.awt.Color(0, 153, 153));
@@ -195,6 +212,38 @@ public class GD_TraCuu extends javax.swing.JFrame {
             .addComponent(pnlLeft_3_labelPhong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        pnlLeft_7.setBackground(new java.awt.Color(0, 153, 153));
+        pnlLeft_7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                enterMenu(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                exitMenu(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnlLeft_7MousePressed(evt);
+            }
+        });
+
+        pnlLeft_3_labelPhong1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        pnlLeft_3_labelPhong1.setForeground(new java.awt.Color(255, 255, 255));
+        pnlLeft_3_labelPhong1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-room-50.png"))); // NOI18N
+        pnlLeft_3_labelPhong1.setText("Loại phòng");
+
+        javax.swing.GroupLayout pnlLeft_7Layout = new javax.swing.GroupLayout(pnlLeft_7);
+        pnlLeft_7.setLayout(pnlLeft_7Layout);
+        pnlLeft_7Layout.setHorizontalGroup(
+            pnlLeft_7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLeft_7Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addComponent(pnlLeft_3_labelPhong1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlLeft_7Layout.setVerticalGroup(
+            pnlLeft_7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlLeft_3_labelPhong1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
         pnlLeft_4.setBackground(new java.awt.Color(0, 153, 153));
         pnlLeft_4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -259,6 +308,38 @@ public class GD_TraCuu extends javax.swing.JFrame {
             .addComponent(pnlLeft_5_labelPhieuDatPhong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        pnlLeft_8.setBackground(new java.awt.Color(0, 153, 153));
+        pnlLeft_8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                enterMenu(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                exitMenu(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnlLeft_8MousePressed(evt);
+            }
+        });
+
+        pnlLeft_5_labelPhieuDatPhong1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        pnlLeft_5_labelPhieuDatPhong1.setForeground(new java.awt.Color(255, 255, 255));
+        pnlLeft_5_labelPhieuDatPhong1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-voucher-50.png"))); // NOI18N
+        pnlLeft_5_labelPhieuDatPhong1.setText("Ưu đãi");
+
+        javax.swing.GroupLayout pnlLeft_8Layout = new javax.swing.GroupLayout(pnlLeft_8);
+        pnlLeft_8.setLayout(pnlLeft_8Layout);
+        pnlLeft_8Layout.setHorizontalGroup(
+            pnlLeft_8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLeft_8Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(pnlLeft_5_labelPhieuDatPhong1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlLeft_8Layout.setVerticalGroup(
+            pnlLeft_8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlLeft_5_labelPhieuDatPhong1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
         pnlLeft_6.setBackground(new java.awt.Color(0, 153, 153));
         pnlLeft_6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -302,6 +383,8 @@ public class GD_TraCuu extends javax.swing.JFrame {
             .addComponent(pnlLeft_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnlLeft_5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnlLeft_6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlLeft_7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlLeft_8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlLeftLayout.setVerticalGroup(
             pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,12 +397,16 @@ public class GD_TraCuu extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(pnlLeft_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
+                .addComponent(pnlLeft_7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addComponent(pnlLeft_4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(pnlLeft_5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
+                .addComponent(pnlLeft_8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addComponent(pnlLeft_6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(486, Short.MAX_VALUE))
+                .addContainerGap(350, Short.MAX_VALUE))
         );
 
         pnlMain.add(pnlLeft);
@@ -377,35 +464,21 @@ public class GD_TraCuu extends javax.swing.JFrame {
         
     }
     
-    private void pnlLeft_1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLeft_1MousePressed
-        chinhMauKhiNhanVaoMenu(pnlLeft_1);
-        chuyenPanel(gdkh);
-    }//GEN-LAST:event_pnlLeft_1MousePressed
+    private void pnlMainHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_pnlMainHierarchyChanged
+        // TODO add your handling code here:
+        if (isFirst == 0 && pnlMain.isShowing()) {
+            if (!GD_DangNhap.taiKhoan.getVaiTro()) { // nhân viên
+                pnlLeft.getComponent(6).setVisible(false); // ẩn tra cứu nhân viên nếu là nhân viên
+            }
+            isFirst = 1;
+        }
+    }//GEN-LAST:event_pnlMainHierarchyChanged
 
-    private void pnlLeft_2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLeft_2MousePressed
-        chinhMauKhiNhanVaoMenu(pnlLeft_2);
-        chuyenPanel(gdhd);
-    }//GEN-LAST:event_pnlLeft_2MousePressed
-
-    private void pnlLeft_4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLeft_4MousePressed
-        chinhMauKhiNhanVaoMenu(pnlLeft_4);
-        chuyenPanel(gddv);
-    }//GEN-LAST:event_pnlLeft_4MousePressed
-
-    private void pnlLeft_5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLeft_5MousePressed
-        chinhMauKhiNhanVaoMenu(pnlLeft_5);
-        chuyenPanel(gdpdp);
-    }//GEN-LAST:event_pnlLeft_5MousePressed
-
-    private void pnlLeft_3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLeft_3MousePressed
-        chinhMauKhiNhanVaoMenu(pnlLeft_3);
-        chuyenPanel(gdp);
-    }//GEN-LAST:event_pnlLeft_3MousePressed
-
-    private void pnlLeft_6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLeft_6MousePressed
-        chinhMauKhiNhanVaoMenu(pnlLeft_6);
-        chuyenPanel(gdnv);
-    }//GEN-LAST:event_pnlLeft_6MousePressed
+    private void pnlLeft_7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLeft_7MousePressed
+        // TODO add your handling code here:
+        chinhMauKhiNhanVaoMenu(pnlLeft_7);
+        chuyenPanel(gdlp);
+    }//GEN-LAST:event_pnlLeft_7MousePressed
 
     private void exitMenu(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMenu
         Object a = evt.getSource();
@@ -416,6 +489,42 @@ public class GD_TraCuu extends javax.swing.JFrame {
         Object a = evt.getSource();
         enteredMenu((JPanel) a);
     }//GEN-LAST:event_enterMenu
+
+    private void pnlLeft_6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLeft_6MousePressed
+        chinhMauKhiNhanVaoMenu(pnlLeft_6);
+        chuyenPanel(gdnv);
+    }//GEN-LAST:event_pnlLeft_6MousePressed
+
+    private void pnlLeft_5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLeft_5MousePressed
+        chinhMauKhiNhanVaoMenu(pnlLeft_5);
+        chuyenPanel(gdpdp);
+    }//GEN-LAST:event_pnlLeft_5MousePressed
+
+    private void pnlLeft_4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLeft_4MousePressed
+        chinhMauKhiNhanVaoMenu(pnlLeft_4);
+        chuyenPanel(gddv);
+    }//GEN-LAST:event_pnlLeft_4MousePressed
+
+    private void pnlLeft_3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLeft_3MousePressed
+        chinhMauKhiNhanVaoMenu(pnlLeft_3);
+        chuyenPanel(gdp);
+    }//GEN-LAST:event_pnlLeft_3MousePressed
+
+    private void pnlLeft_2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLeft_2MousePressed
+        chinhMauKhiNhanVaoMenu(pnlLeft_2);
+        chuyenPanel(gdhd);
+    }//GEN-LAST:event_pnlLeft_2MousePressed
+
+    private void pnlLeft_1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLeft_1MousePressed
+        chinhMauKhiNhanVaoMenu(pnlLeft_1);
+        chuyenPanel(gdkh);
+    }//GEN-LAST:event_pnlLeft_1MousePressed
+
+    private void pnlLeft_8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLeft_8MousePressed
+        // TODO add your handling code here:
+        chinhMauKhiNhanVaoMenu(pnlLeft_8);
+        chuyenPanel(gdud);
+    }//GEN-LAST:event_pnlLeft_8MousePressed
     
     public void enteredMenu(javax.swing.JPanel panel){
         if (!choice.equals(panel)){ // Nếu không phải là panel đang được chọn thì set màu lại
@@ -484,12 +593,16 @@ public class GD_TraCuu extends javax.swing.JFrame {
     private javax.swing.JLabel pnlLeft_2_lableHoaDon;
     private javax.swing.JPanel pnlLeft_3;
     private javax.swing.JLabel pnlLeft_3_labelPhong;
+    private javax.swing.JLabel pnlLeft_3_labelPhong1;
     private javax.swing.JPanel pnlLeft_4;
     private javax.swing.JLabel pnlLeft_4_labelDichVu;
     private javax.swing.JPanel pnlLeft_5;
     private javax.swing.JLabel pnlLeft_5_labelPhieuDatPhong;
+    private javax.swing.JLabel pnlLeft_5_labelPhieuDatPhong1;
     private javax.swing.JPanel pnlLeft_6;
     private javax.swing.JLabel pnlLeft_6_labelNhanVien;
+    private javax.swing.JPanel pnlLeft_7;
+    private javax.swing.JPanel pnlLeft_8;
     private javax.swing.JPanel pnlLeft_title;
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlRight;

@@ -648,7 +648,7 @@ public class GD_XuLy_NhanPhong extends javax.swing.JFrame {
         }  
     }
     
-    public void setTablePDP(){
+    public static void setTablePDP(){
         DAO_PhieuDatPhong daopdp = new DAO_PhieuDatPhong();
 //        
         ArrayList<PhieuDatPhong> dsPDP = new ArrayList<>();

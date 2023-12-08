@@ -25,6 +25,7 @@ public class GD_QuanLi extends javax.swing.JFrame {
     GD_QuanLi_NhanVien nv = new GD_QuanLi_NhanVien();
     GD_QuanLi_Ca ca = new GD_QuanLi_Ca();
     GD_QuanLi_UuDai ud = new GD_QuanLi_UuDai();
+    private static int isFirst = 0;
     /**
      * Creates new form GD_QuanLi
      */
@@ -81,7 +82,7 @@ public class GD_QuanLi extends javax.swing.JFrame {
 
     private void jTabbedPane1HierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jTabbedPane1HierarchyChanged
         // TODO add your handling code here:
-        if (jTabbedPane1.isShowing()) {
+        if (isFirst == 0 && jTabbedPane1.isShowing()) {
             if (GD_DangNhap.taiKhoan.getVaiTro()) { // quản lí
                 jTabbedPane1.addTab("Quản lí Phòng", p.getContentPane());
                 jTabbedPane1.addTab("Quản lí Loại phòng", lp.getContentPane());
@@ -93,6 +94,7 @@ public class GD_QuanLi extends javax.swing.JFrame {
             } else { // nhân viên
                 jTabbedPane1.addTab("Quản lí Khách hàng", kh.getContentPane());
             }
+            isFirst = 1;
         }
         
     }//GEN-LAST:event_jTabbedPane1HierarchyChanged

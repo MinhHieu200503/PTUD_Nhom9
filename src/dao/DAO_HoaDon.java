@@ -173,8 +173,9 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
             statement.setString(1, input_MaPhong);
             ResultSet rs = statement.executeQuery();
 
-            while (rs.next()) {		
-                result = rs.getString(4);
+            while (rs.next()) {
+                    result = rs.getString(4);
+                    System.out.println("MaHD: "+result);
             }
         } catch (Exception e) {
             // TODO: handle exception

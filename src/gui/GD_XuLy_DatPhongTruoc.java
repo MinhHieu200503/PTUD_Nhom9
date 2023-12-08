@@ -513,7 +513,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
                     // tách chuỗi để lấy số thứ tự
                 int index = soLuongHoaDon + 1;
                 //tự động tạo mã hóa đơn mới
-                String newID = "DPP" + String.format("%03d", index);
+                String newID = I_TraCuu_QuanLi.createIdForHoaDon_PDP(DAOHoaDon.getDsIdTheoNgayHienTai(), "PDP");
                 // lay thoi gian nhan phong
 
                 String dateChooser = getDateChooser();
@@ -533,7 +533,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
                 pdp.setTrangThai(0);
                 pdp.setDatCoc(Double.valueOf(txt_TienCoc.getText()));
                 pdp.setHoaDon(I_CRUD.findById(maHoaDon, new HoaDon()));
-                pdp.setNhanVien(I_CRUD.findById("NV001",new NhanVien()));
+                pdp.setNhanVien(gui.GD_DangNhap.taiKhoan.getNhanVien());
                 pdp.setKhachHang(I_CRUD.findById(String.valueOf(txt_SoDT.getSelectedItem()).trim(), new KhachHang()));
                 pdp.setPhong(phong);
 
@@ -548,6 +548,7 @@ public class GD_XuLy_DatPhongTruoc extends javax.swing.JFrame {
             }
             loadDSPhongTrong(null, 0,getDateChooser() );
             JOptionPane.showMessageDialog(null,"Đặt phòng thành công");
+            gui.GD_XuLy_NhanPhong.setTablePDP();
             txt_SoDT.setSelectedItem("");
             txt_khachHang.setText("");
             txt_TienCoc.setText("");

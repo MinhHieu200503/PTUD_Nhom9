@@ -32,7 +32,15 @@ public class GD_QuanLi_UuDai extends javax.swing.JFrame implements I_TraCuu_Quan
         setEnableInput(false, jPanel2);
         loadTable(dsud, model);
     }
-
+    public GD_QuanLi_UuDai(int row) {
+        initComponents();
+        jPanel1.removeHierarchyListener(jPanel1.getHierarchyListeners()[0]);
+        model = (DefaultTableModel) tbl_danhSach.getModel();
+        setEnableInput(false, jPanel2);
+        loadTable(dsud, model);
+        tbl_danhSach.setRowSelectionInterval(row, row);
+        showDetailInput(jPanel2, model, row);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -72,11 +80,21 @@ public class GD_QuanLi_UuDai extends javax.swing.JFrame implements I_TraCuu_Quan
         btn_luu = new javax.swing.JButton();
         btn_xoaTrang = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
         jPanel1.setPreferredSize(new java.awt.Dimension(1920, 763));
+        jPanel1.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                jPanel1HierarchyChanged(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -205,6 +223,8 @@ public class GD_QuanLi_UuDai extends javax.swing.JFrame implements I_TraCuu_Quan
         tbl_danhSach.setColorBordeFilas(new java.awt.Color(0, 153, 153));
         tbl_danhSach.setColorBordeHead(new java.awt.Color(0, 102, 102));
         tbl_danhSach.setColorFilasBackgound2(new java.awt.Color(153, 255, 204));
+        tbl_danhSach.setColorFilasForeground1(new java.awt.Color(0, 0, 0));
+        tbl_danhSach.setColorFilasForeground2(new java.awt.Color(0, 0, 0));
         tbl_danhSach.setRowHeight(30);
         tbl_danhSach.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbl_danhSach.getTableHeader().setReorderingAllowed(false);
@@ -429,6 +449,20 @@ public class GD_QuanLi_UuDai extends javax.swing.JFrame implements I_TraCuu_Quan
             showDetailInput(jPanel2, model, i);
         }
     }//GEN-LAST:event_tbl_danhSachMouseClicked
+
+    private void jPanel1HierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jPanel1HierarchyChanged
+        // TODO add your handling code here:
+        if (model != null)
+            loadTable(daoud.getAll(UuDai.class), model);
+    }//GEN-LAST:event_jPanel1HierarchyChanged
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        if (GD_TraCuu_UuDai.model != null) 
+            loadTable(daoud.getAll(UuDai.class), GD_TraCuu_UuDai.model);
+        else
+            System.out.println("chưa mở giao diện tra cứu ưu đãi");
+    }//GEN-LAST:event_formWindowClosing
     private boolean validateInput() {
         String ten = tf_ten.getText().trim();
         String chietkhau = tf_chietKhau.getText().trim();

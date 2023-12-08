@@ -33,6 +33,7 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
     }
     public GD_QuanLi_Phong(int row) {
         initComponents();
+        jPanel1.removeHierarchyListener(jPanel1.getHierarchyListeners()[0]);
         model = (DefaultTableModel) tbl_danhSach.getModel();
         setEnableInput(false, jPanel2);
         loadTable(dsp, model);
@@ -206,6 +207,9 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
         tbl_danhSach.setColorBordeFilas(new java.awt.Color(0, 153, 153));
         tbl_danhSach.setColorBordeHead(new java.awt.Color(0, 102, 102));
         tbl_danhSach.setColorFilasBackgound2(new java.awt.Color(153, 255, 204));
+        tbl_danhSach.setColorFilasForeground1(new java.awt.Color(0, 0, 0));
+        tbl_danhSach.setColorFilasForeground2(new java.awt.Color(0, 0, 0));
+        tbl_danhSach.setColumnSelectionAllowed(false);
         tbl_danhSach.setRowHeight(30);
         tbl_danhSach.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbl_danhSach.getTableHeader().setReorderingAllowed(false);
@@ -436,6 +440,12 @@ public class GD_QuanLi_Phong extends javax.swing.JFrame implements I_TraCuu_Quan
         // TODO add your handling code here:
         if (model != null)
             loadTable(daop.getAll(Phong.class), model);
+        cb_loai.removeAllItems();
+        ArrayList<LoaiPhong> dslp = daolp.getAll(LoaiPhong.class);
+        dslp.forEach(e -> {
+            cb_loai.addItem(e.getTenLoaiPhong());
+        });
+
     }//GEN-LAST:event_jPanel1HierarchyChanged
     
     private boolean validateInput() {
