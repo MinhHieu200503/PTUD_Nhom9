@@ -165,8 +165,11 @@ public class ThongTinPhongDangChon {
 
     @Override
     public String toString() {
-        return "ThongTinPhongDangChon{" + "maPhong=" + maPhong + ", tenKhachHang=" + tenKhachHang + ", datCoc=" + datCoc + ", phieuDatPhong=" + phieuDatPhong + ", danhSachPhong=" + danhSachPhong + '}';
+        return "ThongTinPhongDangChon{" + "maPhong=" + maPhong + ", tenKhachHang=" + tenKhachHang + ", datCoc=" + datCoc + ", phieuDatPhong=" + phieuDatPhong + ", thoiGianSuDungTichLuy=" + thoiGianSuDungTichLuy + ", maUuDai=" + maUuDai + ", danhSachPhong=" + danhSachPhong + '}';
     }
+
+        
+        
 
 
     

@@ -1,9 +1,19 @@
 package gui;
 
 
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import entity.ChiTietPhongHoaDon;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ItemEvent;
+import static java.lang.Math.abs;
+import java.text.DecimalFormat;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -32,34 +42,253 @@ import org.jfree.data.xy.XYSeriesCollection;
  * @author Admin
  */
 public class GD_Thongke extends javax.swing.JFrame {
-
+    DecimalFormat formatter = new DecimalFormat("###,###,### Đ");
+    boolean buildComponent = false;
     /**
      * Creates new form GD
      */
     public GD_Thongke() {
+        FlatMacLightLaf.setup();
+        UIManager.put( "Button.arc", 10 );
+        UIManager.put( "Component.arc", 10 );
+        UIManager.put( "ProgressBar.arc", 10 );
+        UIManager.put( "TextComponent.arc", 10 );
         initComponents();
-        display();
         this.setBackground(Color.white);
-        CategoryDataset dataset1 = createDataset();
-        JFreeChart chart = ChartFactory.createBarChart(
-            "",        // chart title
-            "",               // domain axis label
-            "Triệu",                  // range axis label
-            dataset1,                 // data
-            PlotOrientation.VERTICAL,
-            true,                     // include legend
-            true,                     // tooltips?
-            false                     // URL generator?  Not required...
-        );
-        ChartPanel chartPanel2 = new ChartPanel(chart) {
-
-            @Override
-            public Dimension getPreferredSize() {
-                return new Dimension(474, 900);
-            }
-        };
+        load_comboBox();
+        load_TongDoanhThu();
+        load_SoSanh();
+        load_comboBox_DoanhThuThang();
         
-        panel_Chart_SoSanh.add(chartPanel2, BorderLayout.CENTER);
+        load_comboBox_DoanhThuThang();
+        load_ThongKeThang();
+        buildComponent = true;
+    }
+    
+    public void load_comboBox(){
+        comboBoxDoanhThu.removeAllItems();
+        comboBoxSoSanh.removeAllItems();
+        dao.DAO_HoaDon dao_HoaDon = new dao.DAO_HoaDon();
+        ArrayList<String> doanhThuTheoNam = dao_HoaDon.tongDoanhThu_NamDoanhThu_ComboBox();
+        boolean skip = false;
+        for (String string : doanhThuTheoNam) {
+            comboBoxDoanhThu.addItem(string);
+            if (skip == true){
+                comboBoxSoSanh.addItem(string);
+            }
+            skip = true;
+        }
+    }
+    
+    public void load_TongDoanhThu(){
+        chart.removeAll();
+        dao.DAO_HoaDon dao_HoaDon = new dao.DAO_HoaDon();
+        
+        textTongSoHoaDon.setText(String.valueOf(dao_HoaDon.tongDoanhThu_TongSoHoaDon(String.valueOf(comboBoxDoanhThu.getSelectedItem()))));
+        textTongSoDichVu.setText(String.valueOf(dao_HoaDon.tongDoanhThu_TongSoDichVu(String.valueOf(comboBoxDoanhThu.getSelectedItem()))));
+        
+        double[] tongTienPhongVaDichVu = dao_HoaDon.tongDoanhThu_PhongVaDichVu(String.valueOf(comboBoxDoanhThu.getSelectedItem()), "");
+        
+        textTongDoanhThuDichVu.setText(formatter.format(tongTienPhongVaDichVu[1]));
+        textTongDoanhThuPhong.setText(formatter.format(tongTienPhongVaDichVu[0]));
+        textTongDoanhThuPhong2.setText(formatter.format(tongTienPhongVaDichVu[0] + tongTienPhongVaDichVu[1]));
+        
+        ArrayList<String[]> phongSuDungNhieuNhat = dao_HoaDon.tongDoanhThu_PhongSuDungNhieuNhat(String.valueOf(comboBoxDoanhThu.getSelectedItem()));
+        ArrayList<String[]> dichVuSuDungNhieuNhat = dao_HoaDon.tongDoanhThu_DichVuSuDungNhieuNhat(String.valueOf(comboBoxDoanhThu.getSelectedItem()));
+        
+        DefaultTableModel model = (DefaultTableModel) rSTableMetro1.getModel();
+        model.setRowCount(0);
+        for (String[] strings : phongSuDungNhieuNhat) {
+            model.addRow(new String[] {strings[0], strings[1]});
+        }
+        
+        model = (DefaultTableModel) rSTableMetro2.getModel();
+        model.setRowCount(0);
+        for (String[] strings : dichVuSuDungNhieuNhat) {
+            model.addRow(new String[] {strings[0], strings[1]});
+        }
+        
+        ArrayList<Double> chart_tongDoanhThu = new ArrayList<>();
+        for (int i = 1; i < 13; i++) {
+            double[] temp = dao_HoaDon.tongDoanhThu_PhongVaDichVu(String.valueOf(comboBoxDoanhThu.getSelectedItem()), String.valueOf(i));
+            chart_tongDoanhThu.add(temp[0] + temp[1]);
+        }
+        display(chart_tongDoanhThu);
+        load_SoSanh();
+    }
+    
+    public void load_SoSanh(){
+        panel_Chart_SoSanh.removeAll();
+        dao.DAO_HoaDon dao_HoaDon = new dao.DAO_HoaDon();
+        double[] tongTienPhongVaDichVu = dao_HoaDon.tongDoanhThu_PhongVaDichVu(String.valueOf(comboBoxDoanhThu.getSelectedItem()), "");
+        double[] tongTienPhongVaDichVuSoSanh = dao_HoaDon.tongDoanhThu_PhongVaDichVu(String.valueOf(comboBoxSoSanh.getSelectedItem()), "");
+        panel_Chart_SoSanh.add(createDataset(tongTienPhongVaDichVuSoSanh, tongTienPhongVaDichVu), BorderLayout.CENTER);
+        
+        jLabel1.setText(String.valueOf(comboBoxSoSanh.getSelectedItem()) + " <-> " + String.valueOf(comboBoxDoanhThu.getSelectedItem()));
+        
+        double[] phanTram = {tongTienPhongVaDichVu[0] + tongTienPhongVaDichVuSoSanh[0], tongTienPhongVaDichVu[1] + tongTienPhongVaDichVuSoSanh[1]};
+        
+        double[] tongTienCua1Nam = {tongTienPhongVaDichVu[0] + tongTienPhongVaDichVu[1], tongTienPhongVaDichVuSoSanh[0] + tongTienPhongVaDichVuSoSanh[1]};
+        
+        if (tongTienPhongVaDichVuSoSanh[0] < tongTienPhongVaDichVu[0]){
+            iconDoanhThuSoSanhPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-up-20.png"))); // NOI18N
+        }else if (tongTienPhongVaDichVuSoSanh[0] > tongTienPhongVaDichVu[0]){
+            iconDoanhThuSoSanhPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-down-20.png"))); // NOI18N
+        }else{
+            iconDoanhThuSoSanhPhong.setIcon(null); // NOI18N
+        }
+        
+        if (tongTienPhongVaDichVuSoSanh[1] < tongTienPhongVaDichVu[1]){
+            iconDoanhThuSoSanhPhong2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-up-20.png"))); // NOI18N
+        }else if (tongTienPhongVaDichVuSoSanh[1] > tongTienPhongVaDichVu[1]){
+            iconDoanhThuSoSanhPhong2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-down-20.png"))); // NOI18N
+        }else{
+            iconDoanhThuSoSanhPhong2.setIcon(null); // NOI18N
+        }
+        
+        if (tongTienCua1Nam[1] < tongTienCua1Nam[0]){
+            iconDoanhThuSoSanhPhong3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-up-20.png"))); // NOI18N
+        }else if (tongTienCua1Nam[1] > tongTienCua1Nam[0]){
+            iconDoanhThuSoSanhPhong3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-down-20.png"))); // NOI18N
+        }else{
+            iconDoanhThuSoSanhPhong3.setIcon(null); // NOI18N
+        }
+        
+        double[] resultPhanTram = {0,0,0};
+        double tong = tongTienCua1Nam[0] + tongTienCua1Nam[1];
+
+        resultPhanTram[0] = ((tongTienPhongVaDichVuSoSanh[0] - tongTienPhongVaDichVu[0]) / phanTram[0]) * 100;
+        resultPhanTram[1] = ((tongTienPhongVaDichVuSoSanh[1] - tongTienPhongVaDichVu[1]) / phanTram[1]) * 100;
+        resultPhanTram[2] = ((tongTienCua1Nam[1] - tongTienCua1Nam[0]) / tong) * 100;
+        
+        if (Double.isNaN(resultPhanTram[0])){
+            resultPhanTram[0] = 0.0;
+        }
+        
+        if (Double.isNaN(resultPhanTram[1])){
+            resultPhanTram[1] = 0.0;
+        }
+        
+        if (Double.isNaN(resultPhanTram[2])){
+            resultPhanTram[2] = 0.0;
+        }
+        
+        textDoanhThuSoSanhPhong.setText(String.format("%.3f", abs(resultPhanTram[0])) + " %");
+        textDoanhThuSoSanhPhong2.setText(String.format("%.3f", abs(resultPhanTram[1])) + " %");
+        textDoanhThuSoSanhPhong3.setText(String.format("%.3f", abs(resultPhanTram[2])) + " %");
+        
+        
+    }
+    
+    public void load_comboBox_DoanhThuThang(){
+        comboBoxDoanhThu1.removeAllItems();
+        comboBoxSoSanh1.removeAllItems();
+        dao.DAO_HoaDon dao_HoaDon = new dao.DAO_HoaDon();
+        ArrayList<String> doanhThuTheoThang = dao_HoaDon.DoanhThuThang_ComboBox();
+        boolean skip = false;
+        for (String string : doanhThuTheoThang) {
+            comboBoxDoanhThu1.addItem(string);
+            if (skip == true){
+                comboBoxSoSanh1.addItem(string);
+            }
+            skip = true;
+        }
+    }
+    
+    public void load_ThongKeThang(){
+        dao.DAO_HoaDon hoaDon = new dao.DAO_HoaDon();
+        textTongSoHoaDon1.setText(String.valueOf(        hoaDon.doanhThuThang_TongSoHoaDon(String.valueOf(
+                checkMonth(String.valueOf(comboBoxDoanhThu1.getSelectedItem()))), String.valueOf(comboBoxDoanhThu1.getSelectedItem()))));
+        
+        textTongSoDichVu1.setText(String.valueOf(        hoaDon.doanhThuThang_TongSoDichVu(String.valueOf(
+                checkMonth(String.valueOf(comboBoxDoanhThu1.getSelectedItem()))), String.valueOf(comboBoxDoanhThu1.getSelectedItem()))));
+        
+       double[] tongTienPhongVaDichVu = hoaDon.tongDoanhThu_PhongVaDichVu(String.valueOf(
+                checkMonth(String.valueOf(comboBoxDoanhThu1.getSelectedItem()))), String.valueOf(comboBoxDoanhThu1.getSelectedItem()));
+
+       textTongDoanhThuPhong1.setText(formatter.format(tongTienPhongVaDichVu[0]));
+       textTongDoanhThuDichVu1.setText(formatter.format(tongTienPhongVaDichVu[1]));
+       textTongDoanhThuPhong3.setText(formatter.format(tongTienPhongVaDichVu[0]+ tongTienPhongVaDichVu[1]));
+       
+       ArrayList<String[]> phongSuDungNhieuNhat = hoaDon.doanhThuThang_PhongSuDungNhieuNhat(String.valueOf(
+                checkMonth(String.valueOf(comboBoxDoanhThu1.getSelectedItem()))), String.valueOf(comboBoxDoanhThu1.getSelectedItem()));
+       
+       ArrayList<String[]> dichVuSuDungNhieuNhat = hoaDon.doanhThuThang_DichVuSuDungNhieuNhat(String.valueOf(
+                checkMonth(String.valueOf(comboBoxDoanhThu1.getSelectedItem()))), String.valueOf(comboBoxDoanhThu1.getSelectedItem()));
+    
+       DefaultTableModel model = (DefaultTableModel) rSTableMetro3.getModel();
+       model.setRowCount(0);
+       for (String[] strings : phongSuDungNhieuNhat) {
+           model.addRow(new String[] {strings[0], strings[1]});
+       }
+       
+       model = (DefaultTableModel) rSTableMetro4.getModel();
+       model.setRowCount(0);
+       for (String[] strings : dichVuSuDungNhieuNhat) {
+           model.addRow(new String[] {strings[0], strings[1]});
+       }
+       
+        ArrayList<Integer> trungBinhDichVu = hoaDon.doanhThuThang_DichVuTheoNgay(String.valueOf(
+                checkMonth(String.valueOf(comboBoxDoanhThu1.getSelectedItem()))), String.valueOf(comboBoxDoanhThu1.getSelectedItem()));
+        
+        int avg_DichVu = 0;
+        for (Integer integer : trungBinhDichVu) {
+            avg_DichVu += integer;
+        }
+        avg_DichVu = avg_DichVu/trungBinhDichVu.size();
+        jLabel34.setText(String.valueOf(avg_DichVu) + " Lần/Ngày");
+        
+        ArrayList<Integer> trungBinhKhachHang = hoaDon.doanhThuThang_TrungBinhKhachHang(String.valueOf(
+                checkMonth(String.valueOf(comboBoxDoanhThu1.getSelectedItem()))), String.valueOf(comboBoxDoanhThu1.getSelectedItem()));
+        
+        double avg_khachHang = 0;
+        for (Integer integer : trungBinhKhachHang) {
+            avg_khachHang += integer;
+        }
+        
+        avg_khachHang = avg_khachHang/trungBinhKhachHang.size();
+        jLabel26.setText(String.format("%.3f",avg_khachHang) + " Người/Ngày");
+        
+        ArrayList<entity.ChiTietPhongHoaDon> avg_thoiGianSuDung = hoaDon.doanhThuThang_TrungBinhSuDungPhong(String.valueOf(
+                checkMonth(String.valueOf(comboBoxDoanhThu1.getSelectedItem()))), String.valueOf(comboBoxDoanhThu1.getSelectedItem()));
+        
+        double avg_trungBinhKhachHang = 0;
+        for (ChiTietPhongHoaDon chiTietPhongHoaDon : avg_thoiGianSuDung) {
+            Duration timeResult = Duration.between(chiTietPhongHoaDon.getThoiGianTraPhong(), chiTietPhongHoaDon.getThoiGianNhanPhong());
+            long minutes = Math.abs(timeResult.toMinutes());
+            avg_trungBinhKhachHang += minutes;
+        }
+        avg_trungBinhKhachHang = avg_trungBinhKhachHang/trungBinhKhachHang.size();
+        jLabel28.setText(String.format("%.3f",avg_trungBinhKhachHang) + " Giờ/Phòng");
+        
+        String[] xuHuong;
+
+        if (phongSuDungNhieuNhat.isEmpty()){
+            xuHuong = new String[]{"...", "..."};
+        }else{
+            xuHuong = new String[]{phongSuDungNhieuNhat.getFirst()[3], phongSuDungNhieuNhat.getFirst()[2]};
+        }
+        
+        
+        jLabel31.setText("- Xu hướng khách hàng chọn phòng có sức chứa tối đa " + xuHuong[0] + " người là nhiều nhất");
+        jLabel33.setText("- Xu hướng khách hàng hay chọn phòng " + xuHuong[1] +" là nhiều nhất");
+        
+        double tiLePhongVip = 0.0;
+        for (String[] strings : phongSuDungNhieuNhat) {
+            if (strings[4].contains("Vip")){
+                tiLePhongVip++;
+            }
+        }
+        
+        tiLePhongVip = tiLePhongVip/ phongSuDungNhieuNhat.size();
+        jLabel35.setText("- Tỉ lệ khách hàng chọn phòng VIP là " + String.format("%.1f", tiLePhongVip) + " %");
+    }
+    
+    public int checkMonth(String input){
+        if (Integer.valueOf(input) > LocalDateTime.now().getMonthValue()){
+            return LocalDateTime.now().getYear()-1;
+        }
+        return LocalDateTime.now().getYear();
     }
 
     /**
@@ -80,7 +309,7 @@ public class GD_Thongke extends javax.swing.JFrame {
         line2 = new javax.swing.JPanel();
         doanhThuTheoNam = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        comboBoxDoanhThu = new rojerusan.RSComboMetro();
+        comboBoxDoanhThu = new javax.swing.JComboBox<>();
         tongDoanhThuPhong = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         textTongDoanhThuPhong = new javax.swing.JLabel();
@@ -93,12 +322,15 @@ public class GD_Thongke extends javax.swing.JFrame {
         tongSoDichVu = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         textTongSoDichVu = new javax.swing.JLabel();
+        tongDoanhThuPhong2 = new javax.swing.JPanel();
+        jLabel38 = new javax.swing.JLabel();
+        textTongDoanhThuPhong2 = new javax.swing.JLabel();
         chart = new javax.swing.JPanel();
         panel_SoSanh = new javax.swing.JPanel();
         tongDoanhThu1 = new javax.swing.JLabel();
         panel_soSanhDoanhThuTheoNam = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        comboBoxSoSanh = new rojerusan.RSComboMetro();
+        comboBoxSoSanh = new javax.swing.JComboBox<>();
         line3 = new javax.swing.JPanel();
         panel_Chart_SoSanh = new javax.swing.JPanel();
         line4 = new javax.swing.JPanel();
@@ -131,7 +363,7 @@ public class GD_Thongke extends javax.swing.JFrame {
         line6 = new javax.swing.JPanel();
         doanhThuTheoNam1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        comboBoxDoanhThu1 = new rojerusan.RSComboMetro();
+        comboBoxDoanhThu1 = new javax.swing.JComboBox<>();
         tongDoanhThuPhong1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         textTongDoanhThuPhong1 = new javax.swing.JLabel();
@@ -144,12 +376,15 @@ public class GD_Thongke extends javax.swing.JFrame {
         tongSoDichVu1 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         textTongSoDichVu1 = new javax.swing.JLabel();
+        tongDoanhThuPhong3 = new javax.swing.JPanel();
+        jLabel39 = new javax.swing.JLabel();
+        textTongDoanhThuPhong3 = new javax.swing.JLabel();
         chart1 = new javax.swing.JPanel();
         panel_SoSanh1 = new javax.swing.JPanel();
         tongDoanhThu3 = new javax.swing.JLabel();
         panel_soSanhDoanhThuTheoNam1 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
-        comboBoxSoSanh1 = new rojerusan.RSComboMetro();
+        comboBoxSoSanh1 = new javax.swing.JComboBox<>();
         line7 = new javax.swing.JPanel();
         panel_Chart_SoSanh1 = new javax.swing.JPanel();
         line8 = new javax.swing.JPanel();
@@ -177,9 +412,6 @@ public class GD_Thongke extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
@@ -246,7 +478,7 @@ public class GD_Thongke extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.insets = new java.awt.Insets(22, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(11, 0, 0, 0);
         panel_TongDoanhThu.add(line1, gridBagConstraints);
 
         line2.setBackground(new java.awt.Color(102, 102, 102));
@@ -284,19 +516,22 @@ public class GD_Thongke extends javax.swing.JFrame {
         jLabel2.setPreferredSize(new java.awt.Dimension(200, 30));
         doanhThuTheoNam.add(jLabel2);
 
-        comboBoxDoanhThu.setForeground(new java.awt.Color(0, 0, 0));
-        comboBoxDoanhThu.setColorBorde(new java.awt.Color(0, 0, 0));
-        comboBoxDoanhThu.setColorFondo(new java.awt.Color(255, 255, 255));
-        comboBoxDoanhThu.setMaximumSize(new java.awt.Dimension(250, 30));
-        comboBoxDoanhThu.setMinimumSize(new java.awt.Dimension(150, 30));
+        comboBoxDoanhThu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        comboBoxDoanhThu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxDoanhThu.setMaximumSize(new java.awt.Dimension(200, 30));
+        comboBoxDoanhThu.setMinimumSize(new java.awt.Dimension(200, 30));
         comboBoxDoanhThu.setPreferredSize(new java.awt.Dimension(200, 30));
+        comboBoxDoanhThu.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                doanhThuTheoNamChange(evt);
+            }
+        });
         doanhThuTheoNam.add(comboBoxDoanhThu);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.insets = new java.awt.Insets(24, 0, 0, 0);
         panel_TongDoanhThu.add(doanhThuTheoNam, gridBagConstraints);
 
         tongDoanhThuPhong.setBackground(new java.awt.Color(255, 255, 255));
@@ -379,7 +614,6 @@ public class GD_Thongke extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.insets = new java.awt.Insets(24, 0, 0, 0);
         panel_TongDoanhThu.add(tongSoHoaDon, gridBagConstraints);
 
         tongSoDichVu.setBackground(new java.awt.Color(255, 255, 255));
@@ -410,6 +644,33 @@ public class GD_Thongke extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 23, 0);
         panel_TongDoanhThu.add(tongSoDichVu, gridBagConstraints);
 
+        tongDoanhThuPhong2.setBackground(new java.awt.Color(255, 255, 255));
+        tongDoanhThuPhong2.setMaximumSize(new java.awt.Dimension(418, 53));
+        tongDoanhThuPhong2.setMinimumSize(new java.awt.Dimension(418, 53));
+        tongDoanhThuPhong2.setPreferredSize(new java.awt.Dimension(418, 53));
+        tongDoanhThuPhong2.setLayout(new java.awt.BorderLayout());
+
+        jLabel38.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jLabel38.setText("Tổng doanh thu:");
+        jLabel38.setMaximumSize(new java.awt.Dimension(9999, 9999));
+        jLabel38.setMinimumSize(new java.awt.Dimension(1, 1));
+        jLabel38.setPreferredSize(new java.awt.Dimension(250, 30));
+        tongDoanhThuPhong2.add(jLabel38, java.awt.BorderLayout.WEST);
+
+        textTongDoanhThuPhong2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        textTongDoanhThuPhong2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        textTongDoanhThuPhong2.setText("150.000.000.000Đ");
+        textTongDoanhThuPhong2.setMaximumSize(new java.awt.Dimension(9999, 9999));
+        textTongDoanhThuPhong2.setMinimumSize(new java.awt.Dimension(1, 1));
+        textTongDoanhThuPhong2.setPreferredSize(new java.awt.Dimension(190, 30));
+        tongDoanhThuPhong2.add(textTongDoanhThuPhong2, java.awt.BorderLayout.EAST);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        panel_TongDoanhThu.add(tongDoanhThuPhong2, gridBagConstraints);
+
         chart.setBackground(new java.awt.Color(255, 255, 255));
         chart.setMaximumSize(new java.awt.Dimension(1427, 440));
         chart.setMinimumSize(new java.awt.Dimension(0, 0));
@@ -435,15 +696,14 @@ public class GD_Thongke extends javax.swing.JFrame {
         jLabel4.setPreferredSize(new java.awt.Dimension(200, 30));
         panel_soSanhDoanhThuTheoNam.add(jLabel4);
 
-        comboBoxSoSanh.setForeground(new java.awt.Color(0, 0, 0));
-        comboBoxSoSanh.setColorBorde(new java.awt.Color(0, 0, 0));
-        comboBoxSoSanh.setColorFondo(new java.awt.Color(255, 255, 255));
-        comboBoxSoSanh.setMaximumSize(new java.awt.Dimension(250, 30));
-        comboBoxSoSanh.setMinimumSize(new java.awt.Dimension(150, 30));
+        comboBoxSoSanh.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        comboBoxSoSanh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxSoSanh.setMaximumSize(new java.awt.Dimension(200, 30));
+        comboBoxSoSanh.setMinimumSize(new java.awt.Dimension(200, 30));
         comboBoxSoSanh.setPreferredSize(new java.awt.Dimension(200, 30));
-        comboBoxSoSanh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxSoSanhActionPerformed(evt);
+        comboBoxSoSanh.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                soSanhChange(evt);
             }
         });
         panel_soSanhDoanhThuTheoNam.add(comboBoxSoSanh);
@@ -765,7 +1025,7 @@ public class GD_Thongke extends javax.swing.JFrame {
         panel_TongDoanhThu1.setLayout(new java.awt.GridBagLayout());
 
         tongDoanhThu2.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        tongDoanhThu2.setText("Doanh Thu Tháng");
+        tongDoanhThu2.setText("DOANH THU THÁNG");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -830,19 +1090,19 @@ public class GD_Thongke extends javax.swing.JFrame {
         jLabel7.setPreferredSize(new java.awt.Dimension(200, 30));
         doanhThuTheoNam1.add(jLabel7);
 
-        comboBoxDoanhThu1.setForeground(new java.awt.Color(0, 0, 0));
-        comboBoxDoanhThu1.setColorBorde(new java.awt.Color(0, 0, 0));
-        comboBoxDoanhThu1.setColorFondo(new java.awt.Color(255, 255, 255));
-        comboBoxDoanhThu1.setMaximumSize(new java.awt.Dimension(250, 30));
-        comboBoxDoanhThu1.setMinimumSize(new java.awt.Dimension(150, 30));
-        comboBoxDoanhThu1.setPreferredSize(new java.awt.Dimension(200, 30));
+        comboBoxDoanhThu1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        comboBoxDoanhThu1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxDoanhThu1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                thongKeThang_Combo1(evt);
+            }
+        });
         doanhThuTheoNam1.add(comboBoxDoanhThu1);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.insets = new java.awt.Insets(24, 0, 0, 0);
         panel_TongDoanhThu1.add(doanhThuTheoNam1, gridBagConstraints);
 
         tongDoanhThuPhong1.setBackground(new java.awt.Color(255, 255, 255));
@@ -896,7 +1156,6 @@ public class GD_Thongke extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.insets = new java.awt.Insets(17, 0, 0, 0);
         panel_TongDoanhThu1.add(tongDoanhThuDichVu1, gridBagConstraints);
 
         tongSoHoaDon1.setBackground(new java.awt.Color(255, 255, 255));
@@ -924,7 +1183,6 @@ public class GD_Thongke extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.insets = new java.awt.Insets(24, 0, 0, 0);
         panel_TongDoanhThu1.add(tongSoHoaDon1, gridBagConstraints);
 
         tongSoDichVu1.setBackground(new java.awt.Color(255, 255, 255));
@@ -952,8 +1210,34 @@ public class GD_Thongke extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 23, 0);
         panel_TongDoanhThu1.add(tongSoDichVu1, gridBagConstraints);
+
+        tongDoanhThuPhong3.setBackground(new java.awt.Color(255, 255, 255));
+        tongDoanhThuPhong3.setMaximumSize(new java.awt.Dimension(418, 53));
+        tongDoanhThuPhong3.setMinimumSize(new java.awt.Dimension(418, 53));
+        tongDoanhThuPhong3.setPreferredSize(new java.awt.Dimension(418, 53));
+        tongDoanhThuPhong3.setLayout(new java.awt.BorderLayout());
+
+        jLabel39.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jLabel39.setText("Tổng doanh thu:");
+        jLabel39.setMaximumSize(new java.awt.Dimension(9999, 9999));
+        jLabel39.setMinimumSize(new java.awt.Dimension(1, 1));
+        jLabel39.setPreferredSize(new java.awt.Dimension(250, 30));
+        tongDoanhThuPhong3.add(jLabel39, java.awt.BorderLayout.WEST);
+
+        textTongDoanhThuPhong3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        textTongDoanhThuPhong3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        textTongDoanhThuPhong3.setText("150.000.000.000Đ");
+        textTongDoanhThuPhong3.setMaximumSize(new java.awt.Dimension(9999, 9999));
+        textTongDoanhThuPhong3.setMinimumSize(new java.awt.Dimension(1, 1));
+        textTongDoanhThuPhong3.setPreferredSize(new java.awt.Dimension(190, 30));
+        tongDoanhThuPhong3.add(textTongDoanhThuPhong3, java.awt.BorderLayout.EAST);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        panel_TongDoanhThu1.add(tongDoanhThuPhong3, gridBagConstraints);
 
         chart1.setBackground(new java.awt.Color(255, 255, 255));
         chart1.setMaximumSize(new java.awt.Dimension(1427, 440));
@@ -979,15 +1263,11 @@ public class GD_Thongke extends javax.swing.JFrame {
         jLabel18.setPreferredSize(new java.awt.Dimension(200, 30));
         panel_soSanhDoanhThuTheoNam1.add(jLabel18);
 
-        comboBoxSoSanh1.setForeground(new java.awt.Color(0, 0, 0));
-        comboBoxSoSanh1.setColorBorde(new java.awt.Color(0, 0, 0));
-        comboBoxSoSanh1.setColorFondo(new java.awt.Color(255, 255, 255));
-        comboBoxSoSanh1.setMaximumSize(new java.awt.Dimension(250, 30));
-        comboBoxSoSanh1.setMinimumSize(new java.awt.Dimension(150, 30));
-        comboBoxSoSanh1.setPreferredSize(new java.awt.Dimension(200, 30));
-        comboBoxSoSanh1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxSoSanh1ActionPerformed(evt);
+        comboBoxSoSanh1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        comboBoxSoSanh1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxSoSanh1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                thongKeThang_Combo2(evt);
             }
         });
         panel_soSanhDoanhThuTheoNam1.add(comboBoxSoSanh1);
@@ -1261,38 +1541,6 @@ public class GD_Thongke extends javax.swing.JFrame {
 
         jPanel2.add(jPanel8);
 
-        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel29.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        jLabel29.setText("Thời gian cao điểm:");
-
-        jLabel30.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel30.setText("18:00 PM");
-        jLabel30.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel29)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 445, Short.MAX_VALUE)
-                .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel29)
-                    .addComponent(jLabel30))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel2.add(jPanel9);
-
         jPanel1.add(jPanel2);
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
@@ -1451,7 +1699,7 @@ public class GD_Thongke extends javax.swing.JFrame {
         jPanel16.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel32.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        jLabel32.setText("Dịch vụ được khách gọi nhiều nhất:");
+        jLabel32.setText("Trung bình khách gọi dịch vụ:");
 
         jLabel34.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel34.setText("15 Người / Ngày");
@@ -1464,9 +1712,9 @@ public class GD_Thongke extends javax.swing.JFrame {
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel32)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 240, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
                 .addComponent(jLabel34)
-                .addContainerGap())
+                .addGap(26, 26, 26))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1542,7 +1790,7 @@ public class GD_Thongke extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabel24)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1559,13 +1807,12 @@ public class GD_Thongke extends javax.swing.JFrame {
             .addGroup(tab_ThongKeDoanhThuThangLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(tab_ThongKeDoanhThuThangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panel_TongDoanhThu1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panel_SoSanh1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tab_ThongKeDoanhThuThangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chart1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(tab_ThongKeDoanhThuThangLayout.createSequentialGroup()
-                        .addComponent(panel_TongDoanhThu1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(chart1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(tab_ThongKeDoanhThuThangLayout.createSequentialGroup()
-                        .addComponent(panel_SoSanh1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1577,13 +1824,16 @@ public class GD_Thongke extends javax.swing.JFrame {
             .addGroup(tab_ThongKeDoanhThuThangLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(tab_ThongKeDoanhThuThangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel_TongDoanhThu1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chart1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
-                .addGroup(tab_ThongKeDoanhThuThangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel_SoSanh1, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(tab_ThongKeDoanhThuThangLayout.createSequentialGroup()
+                        .addComponent(chart1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addGroup(tab_ThongKeDoanhThuThangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(tab_ThongKeDoanhThuThangLayout.createSequentialGroup()
+                        .addComponent(panel_TongDoanhThu1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panel_SoSanh1, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1592,16 +1842,41 @@ public class GD_Thongke extends javax.swing.JFrame {
         getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
         jTabbedPane1.getAccessibleContext().setAccessibleName("");
 
-        pack();
+        setSize(new java.awt.Dimension(1952, 929));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void comboBoxSoSanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxSoSanhActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxSoSanhActionPerformed
+    private void doanhThuTheoNamChange(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_doanhThuTheoNamChange
+        if (buildComponent == true){
+            if (evt.getStateChange() == ItemEvent.SELECTED) {
+                    load_TongDoanhThu();
+            }
+        }
+    }//GEN-LAST:event_doanhThuTheoNamChange
 
-    private void comboBoxSoSanh1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxSoSanh1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxSoSanh1ActionPerformed
+    private void soSanhChange(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_soSanhChange
+        if (buildComponent == true){
+            if (evt.getStateChange() == ItemEvent.SELECTED) {
+                load_SoSanh();
+            }
+        }
+    }//GEN-LAST:event_soSanhChange
+
+    private void thongKeThang_Combo1(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_thongKeThang_Combo1
+        if (buildComponent == true){
+            if (evt.getStateChange() == ItemEvent.SELECTED) {
+                load_ThongKeThang();
+            }
+        }
+    }//GEN-LAST:event_thongKeThang_Combo1
+
+    private void thongKeThang_Combo2(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_thongKeThang_Combo2
+        if (buildComponent == true){
+            if (evt.getStateChange() == ItemEvent.SELECTED) {
+                
+            }
+        }
+    }//GEN-LAST:event_thongKeThang_Combo2
 
     /**
      * @param args the command line arguments
@@ -1641,20 +1916,11 @@ public class GD_Thongke extends javax.swing.JFrame {
         });
     }
     
-    private void display() {
-        XYSeries series = new XYSeries("Frequency");
-        series.add(0, 1);
-        series.add(1, 1);
-        series.add(2, 3);
-        series.add(3, 7);
-        series.add(4, 11);
-        series.add(5, 21);
-        series.add(6, 150);
-        series.add(7, 16);
-        series.add(8, 22);
-        series.add(9, 7);
-        series.add(10, 1);
-        series.add(11, 2);
+    private void display(ArrayList<Double> input) {
+        XYSeries series = new XYSeries("Tổng doanh thu");
+        for (int i = 0; i < 12; i++) {
+            series.add(i, input.get(i));
+        }
         XYDataset dataset = new XYSeriesCollection(series);
         String[] labels = new String[series.getItemCount()];
         labels[0] = "1";
@@ -1669,9 +1935,9 @@ public class GD_Thongke extends javax.swing.JFrame {
         labels[9] = "10";
         labels[10] = "11";
         labels[11] = "12";
-        NumberAxis domain = new SymbolAxis("X", labels);
-        NumberAxis range = new NumberAxis("Y");
-        XYSplineRenderer r = new XYSplineRenderer(8);
+        NumberAxis domain = new SymbolAxis("Tháng", labels);
+        NumberAxis range = new NumberAxis("Tổng Doanh Thu");
+        XYSplineRenderer r = new XYSplineRenderer(12);
         XYPlot xyplot = new XYPlot(dataset, domain, range, r);
         JFreeChart chart = new JFreeChart(xyplot);
         ChartPanel chartPanel = new ChartPanel(chart) {
@@ -1684,7 +1950,7 @@ public class GD_Thongke extends javax.swing.JFrame {
         this.chart.add(chartPanel, BorderLayout.WEST);
     }
         
-    public CategoryDataset createDataset() {
+    public ChartPanel createDataset(double[] first, double[] last) {
 
         // row keys...
         final String series1 = "Tiền phòng";
@@ -1698,25 +1964,44 @@ public class GD_Thongke extends javax.swing.JFrame {
         // create the dataset...
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-        dataset.addValue(1.0, series1, category1);
-        dataset.addValue(4.0, series1, category2);
+        dataset.addValue(first[0], series1, category1);
+        dataset.addValue(last[0], series1, category2);
 
 
-        dataset.addValue(5.0, series2, category1);
-        dataset.addValue(7.0, series2, category2);
+        dataset.addValue(first[1], series2, category1);
+        dataset.addValue(last[1], series2, category2);
         
-        return dataset;
+        
+        JFreeChart chart = ChartFactory.createBarChart(
+            "",        // chart title
+            "",               // domain axis label
+            "Triệu",                  // range axis label
+            dataset,                 // data
+            PlotOrientation.VERTICAL,
+            true,                     // include legend
+            true,                     // tooltips?
+            false                     // URL generator?  Not required...
+        );
+        ChartPanel chartPanel2 = new ChartPanel(chart) {
 
+            @Override
+            public Dimension getPreferredSize() {
+                return new Dimension(474, 900);
+            }
+        };
+        return chartPanel2;
+        
+        
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel chart;
     private javax.swing.JPanel chart1;
-    private rojerusan.RSComboMetro comboBoxDoanhThu;
-    private rojerusan.RSComboMetro comboBoxDoanhThu1;
-    private rojerusan.RSComboMetro comboBoxSoSanh;
-    private rojerusan.RSComboMetro comboBoxSoSanh1;
+    private javax.swing.JComboBox<String> comboBoxDoanhThu;
+    private javax.swing.JComboBox<String> comboBoxDoanhThu1;
+    private javax.swing.JComboBox<String> comboBoxSoSanh;
+    private javax.swing.JComboBox<String> comboBoxSoSanh1;
     private javax.swing.JPanel doanhThuTheoNam;
     private javax.swing.JPanel doanhThuTheoNam1;
     private javax.swing.JLabel iconDoanhThuSoSanhPhong;
@@ -1746,9 +2031,7 @@ public class GD_Thongke extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
@@ -1756,6 +2039,8 @@ public class GD_Thongke extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1779,7 +2064,6 @@ public class GD_Thongke extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1825,6 +2109,8 @@ public class GD_Thongke extends javax.swing.JFrame {
     private javax.swing.JLabel textTongDoanhThuDichVu1;
     private javax.swing.JLabel textTongDoanhThuPhong;
     private javax.swing.JLabel textTongDoanhThuPhong1;
+    private javax.swing.JLabel textTongDoanhThuPhong2;
+    private javax.swing.JLabel textTongDoanhThuPhong3;
     private javax.swing.JLabel textTongSoDichVu;
     private javax.swing.JLabel textTongSoDichVu1;
     private javax.swing.JLabel textTongSoHoaDon;
@@ -1837,6 +2123,8 @@ public class GD_Thongke extends javax.swing.JFrame {
     private javax.swing.JPanel tongDoanhThuDichVu1;
     private javax.swing.JPanel tongDoanhThuPhong;
     private javax.swing.JPanel tongDoanhThuPhong1;
+    private javax.swing.JPanel tongDoanhThuPhong2;
+    private javax.swing.JPanel tongDoanhThuPhong3;
     private javax.swing.JPanel tongSoDichVu;
     private javax.swing.JPanel tongSoDichVu1;
     private javax.swing.JPanel tongSoHoaDon;

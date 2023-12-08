@@ -767,7 +767,7 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
     ArrayList<entity.ThongTinPhongDangChon> data;
     entity.UuDai uuDai = new UuDai("", null, 0.0, null, null);
     double tongKhongUuDai = 0.0;
-    
+    LocalDateTime thoiGianTraPhongButton;
     
     public GD_XuLy_TraPhong_HoaDon(ArrayList<entity.ThongTinPhongDangChon> data) throws FileNotFoundException {
         initComponents();
@@ -860,7 +860,7 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
                 long minutes = Math.abs(timeResult.toMinutes());              
                 String soLuong = String.valueOf(minutes);
                 double tong2 = minutes * (phongVaDichVu.getChiTietPhongHoaDon().getPhong().getLoaiPhong().getGia()/ 60);
-                model.addRow(new String[] {tenPhong, giaPhong, String.valueOf(minutes), formatter.format(tong2)+" VNĐ",
+                model.addRow(new String[] {tenPhong, giaPhong, String.valueOf(minutes) + " Phút", formatter.format(tong2)+" VNĐ",
                             phongVaDichVu.getChiTietPhongHoaDon().getGhiChu().contains("MP000")?
                             (thongTinPhongDangChon.getMaUuDai()==null?"":"Đã áp mã giảm giá"):
                             ( "Chuyển phòng "+ phongVaDichVu.getChiTietPhongHoaDon().getGhiChu().substring(2,5))});
@@ -875,7 +875,7 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
                             String.valueOf(soLuongDichVu),
                             formatter.format(tongTienDichVu)+" VNĐ", ""
                         });
-                    }
+}
                 
             }
 
@@ -888,10 +888,10 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
                 tienGiamDiemTichLuy = tienGiamDiemTichLuy +( (tongDichVu + tongTienPhong) * chuongTrinhKhuyenMai.get(3)[1]/100.0);
             }
             else if (chuongTrinhKhuyenMai.get(2)[0] < thongTinPhongDangChon.getThoiGianSuDungTichLuy()){
-                tienGiamDiemTichLuy = tienGiamDiemTichLuy +( (tongDichVu + tongTienPhong) * chuongTrinhKhuyenMai.get(3)[2]/100.0);
+                tienGiamDiemTichLuy = tienGiamDiemTichLuy +( (tongDichVu + tongTienPhong) * chuongTrinhKhuyenMai.get(2)[1]/100.0);
             }
             else if (chuongTrinhKhuyenMai.get(1)[0] < thongTinPhongDangChon.getThoiGianSuDungTichLuy()){
-                tienGiamDiemTichLuy = tienGiamDiemTichLuy +( (tongDichVu + tongTienPhong) * chuongTrinhKhuyenMai.get(3)[3]/100.0);
+                tienGiamDiemTichLuy = tienGiamDiemTichLuy +( (tongDichVu + tongTienPhong) * chuongTrinhKhuyenMai.get(1)[1]/100.0);
             }
             else{
                 tienGiamDiemTichLuy = tienGiamDiemTichLuy;
@@ -950,7 +950,7 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
             }else{
                 jLabel22.setText(formatter.format(0)+" VNĐ");
             }
-         
+       thoiGianTraPhongButton = LocalDateTime.now();
     }
 
     /**
@@ -1423,7 +1423,10 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
                         phongVaDichVu.getChiTietPhongHoaDon().getGhiChu().substring(0, 5)+" Đã hoàn thành",
                         phongVaDichVu.getChiTietPhongHoaDon().getHoaDon().getMaHoaDon(), 
                         phongVaDichVu.getChiTietPhongHoaDon().getPhong().getMaPhong(),
-                        thongTinPhongDangChon.getMaUuDai()==null?this.uuDai.getMaUuDai():thongTinPhongDangChon.getMaUuDai(), fileSetting);
+                        thongTinPhongDangChon.getMaUuDai()==null?this.uuDai.getMaUuDai():thongTinPhongDangChon.getMaUuDai(), fileSetting,
+                        thoiGianTraPhongButton,
+                        thongTinPhongDangChon.getThoiGianSuDungTichLuy()
+                );
             
         }
     }
