@@ -25,8 +25,10 @@ import entity.UuDai;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 
 
 
@@ -258,8 +260,8 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
             
             while (rs.next()) {
 //1 tên khách hàng
-                result.setTenKhachHang(rs.getString(8));
-                soDienThoai = rs.getString(7);
+                result.setTenKhachHang(rs.getString("tenKhachHang"));
+                soDienThoai = rs.getString("soDienThoai");
                 result.setMaUuDai(rs.getString("maUuDai"));
 //                System.out.println("TenKhachHang: " + result.getTenKhachHang());
             }
@@ -271,6 +273,7 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
             rs = statement.executeQuery();
             
             while(rs.next()){
+                System.out.println("thoiGIanTichLuy" + rs.getInt(1));
                 if (rs.getString(1) != null){
                     result.setThoiGianSuDungTichLuy(rs.getInt(1));
                 }
@@ -398,6 +401,532 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
         }
         return null;
     }
+    
+    
+    public double[] tongTienPhongVaDichVuHoaDon(String idHoaDon){
+        double[] result = {0.0, 0.0};
+        
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+        ResultSet rs;
+        
+        HoaDon hoaDon = I_CRUD.findById(idHoaDon, new HoaDon());
+        
+        String[] ghiChuHoaDon = hoaDon.getGhiChu().split(", ");
+        
 
+        
+//------Test String
+        try {
+            for (String ghiChuHoaDonSplit : ghiChuHoaDon) {
+                String[] ghiChuSplit2 = ghiChuHoaDonSplit.split(" ");
+                    ArrayList<ChiTietPhongHoaDon> listPhong = new ArrayList<>();
+                    statement = con.prepareStatement("SELECT * FROM ChiTietPhongHoaDon WHERE maHoaDon = ? and maPhong = ? and ghiChu like N'%Đã hoàn thành%'");
+                    statement.setString(1, hoaDon.getMaHoaDon());
+                    statement.setString(2, ghiChuSplit2[0]);
+                    rs = statement.executeQuery();
+                    while (rs.next()){
+                        listPhong.add(new ChiTietPhongHoaDon(
+                                rs.getTimestamp("thoiGianNhanPhong").toLocalDateTime(),
+                                rs.getTimestamp("thoiGianTraPhong").toLocalDateTime(),
+                                rs.getString("ghiChu"),
+                                hoaDon,
+                                I_CRUD.findById(rs.getString("maPhong"), new Phong()))
+                        );
+                        
+                    statement = con.prepareStatement("SELECT * FROM ChiTietDichVuHoaDon  ct\n" +
+                                                             "inner join DichVu dv on ct.maDichVu = dv.maDichVu\n" +
+                                                             "WHERE maHoaDon = ? and maPhong = ?");
+                    statement.setString(1, hoaDon.getMaHoaDon());
+                    statement.setString(2, ghiChuSplit2[0]);
+                    ResultSet rs2 = statement.executeQuery();
+                        while(rs2.next()){
+                            result[1] += rs2.getInt(1) * rs2.getDouble("gia");
+                        }
+                        
+                        String pre = rs.getString("ghiChu").substring(0, 5);
+                        String tempResult = "";
+                        if (!pre.contains("MP000")){
+                            do{
+                                statement = con.prepareStatement("select * from HoaDon hd inner join ChiTietPhongHoaDon ctp on hd.maHoaDon = ctp.maHoaDon inner join Phong p on ctp.maPhong = p.maPhong where hd.maHoaDon = ? and ctp.maPhong = ?");
+                                statement.setString(1, hoaDon.getMaHoaDon());
+                                statement.setString(2, pre);
+
+                                rs2 = statement.executeQuery();
+                                while(rs2.next()){
+                                    listPhong.add(new ChiTietPhongHoaDon(
+                                            rs2.getTimestamp("thoiGianNhanPhong").toLocalDateTime(),
+                                            rs2.getTimestamp("thoiGianTraPhong").toLocalDateTime(),
+                                            rs2.getString(10),
+                                            hoaDon,
+                                            I_CRUD.findById(rs2.getString("maPhong"), new Phong()))
+                                    );
+
+                                    statement = con.prepareStatement("SELECT * FROM ChiTietDichVuHoaDon  ct\n" +
+                                                                             "inner join DichVu dv on ct.maDichVu = dv.maDichVu\n" +
+                                                                             "WHERE maHoaDon = ? and maPhong = ?");
+                                    statement.setString(1, hoaDon.getMaHoaDon());
+                                    statement.setString(2, ghiChuSplit2[0]);
+                                    ResultSet rs3 = statement.executeQuery();
+                                        while(rs3.next()){
+                                            result[1] += rs3.getInt(1) * rs3.getDouble("gia");
+                                        }
+                                    //next Phong Chuyen Phong
+                                    tempResult = rs2.getString(10);
+                                    pre = tempResult.substring(0,5);
+                                }
+                            }
+                            while (tempResult.contains("MP000") == false);
+                        }
+                    }
+
+                for (ChiTietPhongHoaDon chiTietPhongHoaDon : listPhong) {
+                                Duration timeResult = Duration.between(chiTietPhongHoaDon.getThoiGianTraPhong(), chiTietPhongHoaDon.getThoiGianNhanPhong());
+                                long minutes = Math.abs(timeResult.toMinutes());              
+                                result[0] += chiTietPhongHoaDon.getPhong().getLoaiPhong().getGia() * minutes;
+                }
+                if (ghiChuSplit2.length == 2){
+                    result[0] = result[0] + (result[0] * Integer.valueOf(ghiChuSplit2[1])/100.0) ;
+                    result[1] = result[1] + (result[1] * Integer.valueOf(ghiChuSplit2[1])/100.0) ;
+                }else if (ghiChuSplit2.length ==3){
+                    result[0] = result[0] + (result[0] * Integer.valueOf(ghiChuSplit2[1])/100.0) - (result[0] * Integer.valueOf(ghiChuSplit2[2])/100.0);
+                    result[1] = result[1] + (result[1] * Integer.valueOf(ghiChuSplit2[1])/100.0) - (result[1] * Integer.valueOf(ghiChuSplit2[2])/100.0);
+                }
+                
+                
+                if (hoaDon.getUuDai() != null){
+                    result[0] -= (result[0] * hoaDon.getUuDai().getGiamGia());
+                    result[1] -= (result[1] * hoaDon.getUuDai().getGiamGia());
+                }
+            }
+
+        }
+        catch (SQLException ex) {
+                    Logger.getLogger(DAO_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+        return result;    
+       }
+    
+    public ArrayList<String> tongDoanhThu_NamDoanhThu_ComboBox(){
+        ArrayList<String> result = new ArrayList<>();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        
+        try {
+            PreparedStatement pstm = con.prepareStatement("SELECT nam = Year(ngayLapHoaDon) FROM HoaDon ORDER BY nam DESC");
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                result.add(rs.getString("nam"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }    
+    
+    public ArrayList<String> DoanhThuThang_ComboBox(){
+        ArrayList<String> result = new ArrayList<>();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        
+        try {
+            PreparedStatement pstm = con.prepareStatement("DECLARE @StartMonth INT;\n" +
+                                                          "DECLARE @EndMonth INT;\n" +
+                                                          "DECLARE @CurrentMonth INT;\n" +
+                                                          "\n" +
+                                                          "SET @CurrentMonth = MONTH(GETDATE());\n" +
+                                                          "SET @StartMonth = @CurrentMonth;\n" +
+                                                          "SET @EndMonth = @CurrentMonth - 6;\n" +
+                                                          "\n" +
+                                                          "WITH MonthList AS (\n" +
+                                                          "    SELECT @StartMonth AS Thang\n" +
+                                                          "    UNION ALL\n" +
+                                                          "    SELECT Thang - 1\n" +
+                                                          "    FROM MonthList\n" +
+                                                          "    WHERE Thang > @EndMonth\n" +
+                                                          ")\n" +
+                                                          "\n" +
+                                                          "SELECT\n" +
+                                                          "    Thang AS Thang,\n" +
+                                                          "    DATENAME(MONTH, DATEFROMPARTS(YEAR(GETDATE()), Thang, 1)) AS TenThang\n" +
+                                                          "FROM MonthList");
+            ResultSet rs = pstm.executeQuery(); 
+            while (rs.next()) {
+                result.add(rs.getString("Thang"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
+    public int tongDoanhThu_TongSoHoaDon(String input_Year){
+        int result = -1;
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        
+        try {
+            String sql = "SELECT soLuong = Count(maHoaDon) FROM HoaDon\n" +
+                         "WHERE YEAR(ngayLapHoaDon) = ?";
+            PreparedStatement pstm = con.prepareStatement(sql);
+            pstm.setString(1, input_Year);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                if (rs.wasNull()){
+                    result = 0;
+                }else{
+                    result = rs.getInt("soLuong");
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
+        public int tongDoanhThu_TongSoDichVu(String input_Year){
+        int result = -1;
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        
+        try {
+            String sql = "SELECT soLuong = Count(*) FROM HoaDon hd\n" +
+                         "JOIN ChiTietDichVuHoaDon ctdv on hd.maHoaDon = ctdv.maHoaDon\n" +
+                         "WHERE YEAR(ngayLapHoaDon) = ?";
+            PreparedStatement pstm = con.prepareStatement(sql);
+            pstm.setString(1, input_Year);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                result = rs.getInt("soLuong");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+        
+        public ArrayList<String> tongDoanhThu_LayHoaDonTheoNam(String input_Year, String input_Month){
+            ArrayList<String> result = new ArrayList<>();
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+
+            try {
+                PreparedStatement pstm = con.prepareStatement("SELECT * FROM HoaDon WHERE year(ngayLapHoaDon) = ? and month(ngayLapHoaDon) like ?");
+                pstm.setString(1, input_Year);
+                if (input_Month.equals("")){
+                    pstm.setString(2, "%"+input_Month);
+                }
+                else{
+                    pstm.setString(2, input_Month);
+                }
+                ResultSet rs = pstm.executeQuery();
+                while (rs.next()) {
+                    result.add(rs.getString("maHoaDon"));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return result;
+        }
+        
+        public double[] tongDoanhThu_PhongVaDichVu(String input_Year, String input_Month){
+            double[] result = {0.0, 0.0};
+            ArrayList<String> temp_HoaDon = tongDoanhThu_LayHoaDonTheoNam(input_Year, input_Month);
+            for (String string : temp_HoaDon) {
+                double[] temp = tongTienPhongVaDichVuHoaDon(string);
+                result[0] += temp[0];
+                result[1] += temp[1];
+            }
+
+            return result;
+        }
+        
+        public ArrayList<String[]> tongDoanhThu_PhongSuDungNhieuNhat(String input_Year){
+            ArrayList<String[]> result = new ArrayList<>();
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+
+            try {
+                PreparedStatement pstm = con.prepareStatement("SELECT maPhong ,soLan = Count(maPhong) FROM ChiTietPhongHoaDon \n" +
+                                                              "WHERE year(thoiGianNhanPhong) = ? and ghiChu like N'%MP000 Đã hoàn thành' \n" +
+                                                              "group by maPhong\n" +
+                                                              "order by solan desc");
+                pstm.setString(1, input_Year);
+                ResultSet rs = pstm.executeQuery();
+                while (rs.next()) {
+                    result.add(new String[] {rs.getString("maPhong"), rs.getString("soLan")});
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return result;
+        }
+        
+        public ArrayList<String[]> tongDoanhThu_DichVuSuDungNhieuNhat(String input_Year){
+            ArrayList<String[]> result = new ArrayList<>();
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+
+            try {
+                PreparedStatement pstm = con.prepareStatement("SELECT tenDichVu, soLan = sum(ctdv.soLuong) FROM ChiTietDichVuHoaDon ctdv\n" +
+                                                              "join DichVu dv on dv.maDichVu = ctdv.maDichVu\n" +
+                                                              "join HoaDon hd on ctdv.maHoaDon = hd.maHoaDon\n" +
+                                                              "WHERE year(hd.ngayLapHoaDon) = ?\n" +
+                                                              "group by ctdv.maDichVu, dv.tenDichVu\n" +
+                                                              "order by solan desc");
+                pstm.setString(1, input_Year);
+                ResultSet rs = pstm.executeQuery();
+                while (rs.next()) {
+                    result.add(new String[] {rs.getString("tenDichVu"), rs.getString("soLan")});
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return result;
+        }
+        
+        
+        public int doanhThuThang_TongSoHoaDon(String year, String month){
+            int result = 0;
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+
+            try {
+                String sql = "SELECT soLuong = Count(maHoaDon) FROM HoaDon\n" +
+                             "WHERE YEAR(ngayLapHoaDon) = ? and month(ngayLapHoaDon) like ?";
+                PreparedStatement pstm = con.prepareStatement(sql);
+                pstm.setString(1, year);
+                pstm.setString(2, month);
+                ResultSet rs = pstm.executeQuery();
+                while (rs.next()) {
+                    if (rs.wasNull()){
+                        result = 0;
+                    }else{
+                        result = rs.getInt("soLuong");
+                    }
+
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return result;
+        }
+        
+        public int doanhThuThang_TongSoDichVu(String year, String month){
+            int result = 0;
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+
+            try {
+                String sql = "SELECT soLuong = Count(*) FROM HoaDon hd\n" +
+                             "JOIN ChiTietDichVuHoaDon ctdv on hd.maHoaDon = ctdv.maHoaDon\n" +
+                             "WHERE YEAR(ngayLapHoaDon) = ? and month(ngayLapHoaDon) like ?";
+                PreparedStatement pstm = con.prepareStatement(sql);
+                pstm.setString(1, year);
+                pstm.setString(2, month);
+                ResultSet rs = pstm.executeQuery();
+                while (rs.next()) {
+                    if (rs.wasNull()){
+                        result = 0;
+                    }else{
+                        result = rs.getInt("soLuong");
+                    }
+
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return result;
+        }
+        
+        public ArrayList<String[]> doanhThuThang_PhongSuDungNhieuNhat(String year, String month){
+            ArrayList<String[]> result = new ArrayList<>();
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+
+            try {
+                PreparedStatement pstm = con.prepareStatement("SELECT sucChua ,p.maPhong, tenPhong, soLan = Count(p.maPhong), tenLoaiPhong FROM ChiTietPhongHoaDon\n" +
+                                                              "join phong p on ChiTietPhongHoaDon.maPhong = p.maPhong\n" +
+                                                              "join LoaiPhong lp on p.maLoaiPhong = lp.maLoaiPhong \n" +
+                                                              "WHERE year(thoiGianNhanPhong) = ? and month(thoiGianNhanPhong) like ? and ghiChu like N'%MP000 Đã hoàn thành' \n" +
+                                                              "group by p.maPhong, p.tenPhong, sucChua, tenLoaiPhong\n" +
+                                                              "order by solan desc");
+                pstm.setString(1, year);
+                pstm.setString(2, month);
+                ResultSet rs = pstm.executeQuery();
+                while (rs.next()) {
+                    result.add(new String[] {rs.getString("maPhong"), rs.getString("soLan"), rs.getString("tenPhong"), rs.getString("sucChua"), rs.getString("tenLoaiPhong")});
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return result;
+        }
+        
+        public ArrayList<String[]> doanhThuThang_DichVuSuDungNhieuNhat(String year, String month){
+            ArrayList<String[]> result = new ArrayList<>();
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+
+            try {
+                PreparedStatement pstm = con.prepareStatement("SELECT tenDichVu, soLan = sum(ctdv.soLuong) FROM ChiTietDichVuHoaDon ctdv\n" +
+                                                              "join DichVu dv on dv.maDichVu = ctdv.maDichVu\n" +
+                                                              "join HoaDon hd on ctdv.maHoaDon = hd.maHoaDon\n" +
+                                                              "WHERE year(hd.ngayLapHoaDon) = ? and month(hd.ngayLapHoaDon) like ?\n" +
+                                                              "group by ctdv.maDichVu, dv.tenDichVu\n" +
+                                                              "order by solan desc");
+                pstm.setString(1, year);
+                pstm.setString(2, month);
+                ResultSet rs = pstm.executeQuery();
+                while (rs.next()) {
+                    result.add(new String[] {rs.getString("tenDichVu"), rs.getString("soLan")});
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return result;
+        }
+        
+        public ArrayList<Integer> doanhThuThang_DichVuTheoNgay(String year, String month){
+            ArrayList<Integer> result = new ArrayList<>();
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+
+            LocalDate temp = LocalDate.now();
+            YearMonth yearMonthObject = YearMonth.of(Integer.valueOf(year), Integer.valueOf(month));
+            int lengthOfMonth = yearMonthObject.lengthOfMonth();
+
+            if (temp.getMonthValue() == Integer.valueOf(month) && temp.getYear() == Integer.valueOf(year)){
+                lengthOfMonth = temp.getDayOfMonth();
+            }
+            
+            try {
+                for(int i = 0; i < lengthOfMonth; i++){
+                    PreparedStatement pstm = con.prepareStatement("SELECT sum(ctdv.soLuong) FROM ChiTietDichVuHoaDon ctdv\n" +
+                                                                "join DichVu dv on dv.maDichVu = ctdv.maDichVu\n" +
+                                                                "join HoaDon hd on ctdv.maHoaDon = hd.maHoaDon\n" +
+                                                                "WHERE year(hd.ngayLapHoaDon) = ? and month(hd.ngayLapHoaDon) = ? and day(hd.ngayLapHoaDon) = ?");
+                    pstm.setString(1, year);
+                    pstm.setString(2, month);
+                    pstm.setString(3, String.valueOf(i));
+                    ResultSet rs = pstm.executeQuery();
+                    while (rs.next()) {
+                        result.add(rs.getInt(1));
+                    }
+                }
+                
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return result;
+        }
+        
+        public ArrayList<Integer> doanhThuThang_TrungBinhKhachHang(String year, String month){
+            ArrayList<Integer> result = new ArrayList<>();
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+
+            LocalDate temp = LocalDate.now();
+            YearMonth yearMonthObject = YearMonth.of(Integer.valueOf(year), Integer.valueOf(month));
+            int lengthOfMonth = yearMonthObject.lengthOfMonth();
+
+            if (temp.getMonthValue() == Integer.valueOf(month) && temp.getYear() == Integer.valueOf(year)){
+                lengthOfMonth = temp.getDayOfMonth();
+            }
+            
+            try {
+                for(int i = 0; i < lengthOfMonth; i++){
+                    PreparedStatement pstm = con.prepareStatement("SELECT Count(maHoaDon) FROM HoaDon hd \n" +
+                                                                  "WHERE year(hd.ngayLapHoaDon) = ? and month(hd.ngayLapHoaDon) like ? and day(hd.ngayLapHoaDon) = ?");
+                    pstm.setString(1, year);
+                    pstm.setString(2, month);
+                    pstm.setString(3, String.valueOf(i));
+                    ResultSet rs = pstm.executeQuery();
+                    while (rs.next()) {
+                        result.add(rs.getInt(1));
+                    }
+                }
+                
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return result;
+        }
+        
+        public ArrayList<entity.ChiTietPhongHoaDon> doanhThuThang_TrungBinhSuDungPhong(String year, String month){
+            ArrayList<entity.ChiTietPhongHoaDon> result = new ArrayList<>();
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+
+            LocalDate temp = LocalDate.now();
+            YearMonth yearMonthObject = YearMonth.of(Integer.valueOf(year), Integer.valueOf(month));
+            int lengthOfMonth = yearMonthObject.lengthOfMonth();
+
+            if (temp.getMonthValue() == Integer.valueOf(month) && temp.getYear() == Integer.valueOf(year)){
+                lengthOfMonth = temp.getDayOfMonth();
+            }
+            
+            try {
+                for(int i = 0; i < lengthOfMonth; i++){
+                    PreparedStatement pstm = con.prepareStatement("SELECT * FROM HoaDon hd\n" +
+                                                                    "join ChiTietPhongHoaDon ct on hd.maHoaDon = ct.maHoaDon\n" +
+                                                                    "WHERE year(hd.ngayLapHoaDon) = ? and month(hd.ngayLapHoaDon) like ? and day(hd.ngayLapHoaDon) = ?\n" +
+                                                                    "and ct.ghiChu like N'MP000 Đã hoàn thành'");
+                    pstm.setString(1, year);
+                    pstm.setString(2, month);
+                    pstm.setString(3, String.valueOf(i));
+                    ResultSet rs = pstm.executeQuery();
+                    while (rs.next()) {
+                        result.add(new ChiTietPhongHoaDon(rs.getTimestamp("thoiGianNhanPhong").toLocalDateTime()
+                                , rs.getTimestamp("thoiGianTraPhong").toLocalDateTime()
+                                , rs.getString("ghiChu"), null, null));
+                    }
+                }
+                
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return result;
+        }
+        
+        public ArrayList<entity.HoaDon> doanhThuThang_GioCaoDiem(String year, String month){
+            ArrayList<entity.HoaDon> result = new ArrayList<>();
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+
+            LocalDate temp = LocalDate.now();
+            YearMonth yearMonthObject = YearMonth.of(Integer.valueOf(year), Integer.valueOf(month));
+            int lengthOfMonth = yearMonthObject.lengthOfMonth();
+
+            if (temp.getMonthValue() == Integer.valueOf(month) && temp.getYear() == Integer.valueOf(year)){
+                lengthOfMonth = temp.getDayOfMonth();
+            }
+            
+            try {
+                for(int i = 0; i < lengthOfMonth; i++){
+                    PreparedStatement pstm = con.prepareStatement("SELECT * FROM HoaDon hd \n" +
+                                                                  "WHERE year(hd.ngayLapHoaDon) = ? and month(hd.ngayLapHoaDon) like ? and day(hd.ngayLapHoaDon) = ?");
+                    pstm.setString(1, year);
+                    pstm.setString(2, month);
+                    pstm.setString(3, String.valueOf(i));
+                    ResultSet rs = pstm.executeQuery();
+                    while (rs.next()) {
+                        result.add(I_CRUD.findById(rs.getString("maHoaDon"), new HoaDon()));
+                    }
+                }
+                
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return result;
+        }
     
 }

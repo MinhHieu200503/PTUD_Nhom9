@@ -66,7 +66,7 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChiTietPhongHoaDon>{
 		return n > 0;
 	}
     
-    public void updateBill(String ghiChu, String maHD, String maPhong, String maUuDai, ArrayList<int[]> fileSetting){
+    public void updateBill(String ghiChu, String maHD, String maPhong, String maUuDai, ArrayList<int[]> fileSetting, LocalDateTime thoiGianTraPhong, int diemTichLuy){
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         PreparedStatement statement = null;
@@ -75,15 +75,13 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChiTietPhongHoaDon>{
             
                         
             statement = con.prepareStatement("update ChiTietPhongHoaDon set thoiGianTraPhong = ?, ghiChu = ? where maHoaDon = ? and maPhong = ?");
-            statement.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
+            statement.setTimestamp(1, Timestamp.valueOf(thoiGianTraPhong));
             statement.setString(2, ghiChu);
             statement.setString(3, maHD);
             statement.setString(4, maPhong);
             statement.executeUpdate();
             
-            statement = con.prepareStatement("update Phong set trangThai = 0 where maPhong = ?");
-            statement.setString(1, maPhong);
-            statement.executeUpdate();
+
  
             statement = con.prepareStatement("select * from ChiTietPhongHoaDon ctphd inner join HoaDon hd on ctphd.maHoaDon = hd.maHoaDon where ctphd.ghiChu like N'%Đang sử dụng'\n" +
                                              "and hd.maHoaDon = ?");
@@ -104,12 +102,33 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChiTietPhongHoaDon>{
             statement.setString(1, maHD);
             rs = statement.executeQuery();
             
+            String giamGiaTichLuy = " ";
+            
+            if (fileSetting.get(3)[0] < diemTichLuy){
+                giamGiaTichLuy += String.valueOf(fileSetting.get(3)[1]);
+            }
+            else if (fileSetting.get(2)[0] < diemTichLuy){
+                giamGiaTichLuy += String.valueOf(fileSetting.get(2)[1]);
+            }
+            else if (fileSetting.get(1)[0] < diemTichLuy){
+                giamGiaTichLuy += String.valueOf(fileSetting.get(1)[1]);
+            }
+            else{
+                giamGiaTichLuy = "";
+            }
+            
+            
+            
             String ghiChuHoaDon = "";
             while (rs.next()){
                 ghiChuHoaDon = rs.getString("ghiChu");
             }
-
-             ghiChuHoaDon += ", "+ maPhong + " " + fileSetting.get(0)[0];
+            if (ghiChuHoaDon == null||ghiChuHoaDon.trim().equals("")){
+                ghiChuHoaDon = maPhong + " " + fileSetting.get(0)[0] + giamGiaTichLuy;
+            }
+            else{
+                ghiChuHoaDon += ", "+ maPhong + " " + fileSetting.get(0)[0] + giamGiaTichLuy;
+            }
             
             if (flag == false){
                 statement = con.prepareStatement("update HoaDon set trangThai = 1, maUuDai = ?, ghiChu = ? where maHoaDon = ?");
@@ -126,6 +145,11 @@ public class DAO_ChiTietPhong_HoaDon implements I_CRUD<ChiTietPhongHoaDon>{
                 statement.setString(3, maHD);
                 statement.executeUpdate();
             }
+            
+            
+            statement = con.prepareStatement("update Phong set trangThai = 0 where maPhong = ?");
+            statement.setString(1, maPhong);
+            statement.executeUpdate();
 
             
             
