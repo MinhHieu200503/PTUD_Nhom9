@@ -183,7 +183,7 @@ public class GD_QuanLi_DichVu extends javax.swing.JFrame implements I_TraCuu_Qua
         jPanel13.add(jLabel9, java.awt.BorderLayout.NORTH);
 
         cb_trangThai.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        cb_trangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hết hàng", "Còn hàng", " " }));
+        cb_trangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hết hàng", "Còn hàng" }));
         cb_trangThai.setPreferredSize(new java.awt.Dimension(160, 38));
         jPanel13.add(cb_trangThai, java.awt.BorderLayout.CENTER);
 
