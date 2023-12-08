@@ -62,7 +62,6 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
     private void initComponents() {
 
         panelGradient1 = new smallPanel.PanelGradient();
-        txtNhapMatKhauMoi = new javax.swing.JTextField();
         btnXacNhan = new javax.swing.JButton();
         txtOPT = new javax.swing.JTextField();
         txtNhapMail = new javax.swing.JTextField();
@@ -72,6 +71,7 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
         btnNhanOTP = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        txtNhapMatKhauMoi = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,13 +79,6 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
         panelGradient1.setMinimumSize(new java.awt.Dimension(400, 470));
         panelGradient1.setPreferredSize(new java.awt.Dimension(400, 470));
         panelGradient1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtNhapMatKhauMoi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNhapMatKhauMoiActionPerformed(evt);
-            }
-        });
-        panelGradient1.add(txtNhapMatKhauMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 340, 40));
 
         btnXacNhan.setBackground(new java.awt.Color(0, 0, 0));
         btnXacNhan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -164,6 +157,7 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Nhập mã OTP:");
         panelGradient1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 130, -1));
+        panelGradient1.add(txtNhapMatKhauMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 340, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -183,10 +177,6 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtNhapMatKhauMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNhapMatKhauMoiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNhapMatKhauMoiActionPerformed
 
     private void txtOPTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOPTActionPerformed
         // TODO add your handling code here:
@@ -293,7 +283,7 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private smallPanel.PanelGradient panelGradient1;
     private javax.swing.JTextField txtNhapMail;
-    private javax.swing.JTextField txtNhapMatKhauMoi;
+    private javax.swing.JPasswordField txtNhapMatKhauMoi;
     private javax.swing.JTextField txtOPT;
     // End of variables declaration//GEN-END:variables
 }
