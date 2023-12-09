@@ -35,7 +35,7 @@ public class NavBar extends javax.swing.JPanel implements Runnable{
 private GD_TrangChu trangChu = new GD_TrangChu();
     private GD_XuLy xuLy = new GD_XuLy();
     private GD_TraCuu traCuu = new GD_TraCuu();
-//    private GD_Thongke thongKe = new GD_Thongke();
+    private GD_Thongke thongKe = new GD_Thongke();
     private GD_QuanLi quanLi = new GD_QuanLi();
     private GD_ThongTinCaNhan profile = new GD_ThongTinCaNhan();
     private Container container = profile.getContentPane();
@@ -54,7 +54,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         this.add.add(trangChu.getContentPane());
         this.add.add(xuLy.getContentPane());
         this.add.add(traCuu.getContentPane());
-//        this.add.add(thongKe.getContentPane());
+        this.add.add(thongKe.getContentPane());
         this.add.add(quanLi.getContentPane());
         this.add.add(profile.getContentPane());
 //        xuLy.setVisible(false);
@@ -634,13 +634,13 @@ private GD_TrangChu trangChu = new GD_TrangChu();
             clickMenuUnderline((JPanel) a);
             navBarChoice(3);
         }
-//        else if (a.equals(statistical)){
-//            navBarChoice(4);
-//
-//        }
+        else if (a.equals(statistical)){
+            navBarChoice(4);
+
+        }
         else if (a.equals(manage)){
             clickMenuUnderline((JPanel) a);
-            navBarChoice(4);
+            navBarChoice(5);
 
         }
         repaint();
