@@ -176,8 +176,12 @@ public class GD_QuanLi_LoaiPhong extends javax.swing.JFrame implements I_TraCuu_
         jLabel13.setText("Mô tả:");
         jPanel17.add(jLabel13, java.awt.BorderLayout.PAGE_START);
 
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
         ta_moTa.setBackground(new java.awt.Color(153, 255, 204));
         ta_moTa.setColumns(20);
+        ta_moTa.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         ta_moTa.setLineWrap(true);
         ta_moTa.setRows(5);
         jScrollPane1.setViewportView(ta_moTa);

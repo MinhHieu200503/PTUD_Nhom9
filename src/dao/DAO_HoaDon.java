@@ -413,6 +413,10 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
         
         HoaDon hoaDon = I_CRUD.findById(idHoaDon, new HoaDon());
         
+        if (hoaDon.getGhiChu() == null){
+            return result;
+        }
+        
         String[] ghiChuHoaDon = hoaDon.getGhiChu().split(", ");
         
 
