@@ -696,7 +696,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
 
     private void rSButtonMetro5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro5ActionPerformed
         // TODO add your handling code here:
-        navBarChoice(6);
+        navBarChoice(5); // thêm thống kê thì chỉnh lại 6
         jPanel7.setVisible(false);
     }//GEN-LAST:event_rSButtonMetro5ActionPerformed
 
