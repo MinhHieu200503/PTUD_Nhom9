@@ -2,6 +2,7 @@ package gui;
 
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import dao.DAO_HoaDon;
 import entity.ChiTietPhongHoaDon;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -10,7 +11,9 @@ import java.awt.event.ItemEvent;
 import static java.lang.Math.abs;
 import java.text.DecimalFormat;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -44,6 +47,9 @@ import org.jfree.data.xy.XYSeriesCollection;
 public class GD_Thongke extends javax.swing.JFrame {
     DecimalFormat formatter = new DecimalFormat("###,###,### Đ");
     boolean buildComponent = false;
+    double[] tongTienPhongVaDichVu;
+    double[] tongTienPhongVaDichVu2;
+
     /**
      * Creates new form GD
      */
@@ -56,11 +62,15 @@ public class GD_Thongke extends javax.swing.JFrame {
         initComponents();
         this.setBackground(Color.white);
         load_comboBox();
+        System.out.println("gui.GD_Thongke.<init>()");
         load_TongDoanhThu();
+        System.out.println("gui.GD_Thongke.<init>()2");
         load_SoSanh();
+        System.out.println("gui.GD_Thongke.<init>()3");
         load_comboBox_DoanhThuThang();
-        
+        System.out.println("gui.GD_Thongke.<init>()4");
         load_comboBox_DoanhThuThang();
+        System.out.println("gui.GD_Thongke.<init>()5");
         load_ThongKeThang();
         buildComponent = true;
     }
@@ -87,8 +97,9 @@ public class GD_Thongke extends javax.swing.JFrame {
         textTongSoHoaDon.setText(String.valueOf(dao_HoaDon.tongDoanhThu_TongSoHoaDon(String.valueOf(comboBoxDoanhThu.getSelectedItem()))));
         textTongSoDichVu.setText(String.valueOf(dao_HoaDon.tongDoanhThu_TongSoDichVu(String.valueOf(comboBoxDoanhThu.getSelectedItem()))));
         
-        double[] tongTienPhongVaDichVu = dao_HoaDon.tongDoanhThu_PhongVaDichVu(String.valueOf(comboBoxDoanhThu.getSelectedItem()), "");
-        
+        System.out.println("gui.GD_Thongke.load_TongDoanhThu()");
+        tongTienPhongVaDichVu = dao_HoaDon.tongDoanhThu_PhongVaDichVu(String.valueOf(comboBoxDoanhThu.getSelectedItem()), "");
+        System.out.println("gui.GD_Thongke.load_TongDoanhThu()");
         textTongDoanhThuDichVu.setText(formatter.format(tongTienPhongVaDichVu[1]));
         textTongDoanhThuPhong.setText(formatter.format(tongTienPhongVaDichVu[0]));
         textTongDoanhThuPhong2.setText(formatter.format(tongTienPhongVaDichVu[0] + tongTienPhongVaDichVu[1]));
@@ -118,11 +129,23 @@ public class GD_Thongke extends javax.swing.JFrame {
     }
     
     public void load_SoSanh(){
+        System.out.println("gui.GD_Thongke.load_SoSanh()--------------------------------------------" + String.valueOf(comboBoxSoSanh.getSelectedItem()));
+        if (String.valueOf(comboBoxSoSanh.getSelectedItem()).equals("") || String.valueOf(comboBoxSoSanh.getSelectedItem()) == null){
+            double[] a = {0.0, 0.0};
+            double[] b = {0.0, 0.0};
+            panel_Chart_SoSanh.add(createDataset(a, b, "", ""), BorderLayout.CENTER);
+            return;
+        }
         panel_Chart_SoSanh.removeAll();
         dao.DAO_HoaDon dao_HoaDon = new dao.DAO_HoaDon();
-        double[] tongTienPhongVaDichVu = dao_HoaDon.tongDoanhThu_PhongVaDichVu(String.valueOf(comboBoxDoanhThu.getSelectedItem()), "");
-        double[] tongTienPhongVaDichVuSoSanh = dao_HoaDon.tongDoanhThu_PhongVaDichVu(String.valueOf(comboBoxSoSanh.getSelectedItem()), "");
-        panel_Chart_SoSanh.add(createDataset(tongTienPhongVaDichVuSoSanh, tongTienPhongVaDichVu), BorderLayout.CENTER);
+        double[] tongTienPhongVaDichVuSoSanh ={0.0, 0.0};
+        
+        if (String.valueOf(comboBoxSoSanh.getSelectedItem()).equals("") || String.valueOf(comboBoxSoSanh.getSelectedItem()) == null){
+                tongTienPhongVaDichVuSoSanh = dao_HoaDon.tongDoanhThu_PhongVaDichVu(String.valueOf(comboBoxSoSanh.getSelectedItem()), "");
+        }
+
+
+        panel_Chart_SoSanh.add(createDataset(tongTienPhongVaDichVuSoSanh, tongTienPhongVaDichVu, String.valueOf(comboBoxDoanhThu.getSelectedItem()), String.valueOf(comboBoxSoSanh.getSelectedItem())), BorderLayout.CENTER);
         
         jLabel1.setText(String.valueOf(comboBoxSoSanh.getSelectedItem()) + " <-> " + String.valueOf(comboBoxDoanhThu.getSelectedItem()));
         
@@ -203,12 +226,12 @@ public class GD_Thongke extends javax.swing.JFrame {
         textTongSoDichVu1.setText(String.valueOf(        hoaDon.doanhThuThang_TongSoDichVu(String.valueOf(
                 checkMonth(String.valueOf(comboBoxDoanhThu1.getSelectedItem()))), String.valueOf(comboBoxDoanhThu1.getSelectedItem()))));
         
-       double[] tongTienPhongVaDichVu = hoaDon.tongDoanhThu_PhongVaDichVu(String.valueOf(
+        tongTienPhongVaDichVu2 = hoaDon.tongDoanhThu_PhongVaDichVu(String.valueOf(
                 checkMonth(String.valueOf(comboBoxDoanhThu1.getSelectedItem()))), String.valueOf(comboBoxDoanhThu1.getSelectedItem()));
 
-       textTongDoanhThuPhong1.setText(formatter.format(tongTienPhongVaDichVu[0]));
-       textTongDoanhThuDichVu1.setText(formatter.format(tongTienPhongVaDichVu[1]));
-       textTongDoanhThuPhong3.setText(formatter.format(tongTienPhongVaDichVu[0]+ tongTienPhongVaDichVu[1]));
+       textTongDoanhThuPhong1.setText(formatter.format(tongTienPhongVaDichVu2[0]));
+       textTongDoanhThuDichVu1.setText(formatter.format(tongTienPhongVaDichVu2[1]));
+       textTongDoanhThuPhong3.setText(formatter.format(tongTienPhongVaDichVu2[0]+ tongTienPhongVaDichVu2[1]));
        
        ArrayList<String[]> phongSuDungNhieuNhat = hoaDon.doanhThuThang_PhongSuDungNhieuNhat(String.valueOf(
                 checkMonth(String.valueOf(comboBoxDoanhThu1.getSelectedItem()))), String.valueOf(comboBoxDoanhThu1.getSelectedItem()));
@@ -282,6 +305,37 @@ public class GD_Thongke extends javax.swing.JFrame {
         
         tiLePhongVip = tiLePhongVip/ phongSuDungNhieuNhat.size();
         jLabel35.setText("- Tỉ lệ khách hàng chọn phòng VIP là " + String.format("%.1f", tiLePhongVip) + " %");
+        
+        chart1.removeAll();
+        
+        int dayOfMonth= dayOfMonth(String.valueOf(
+                        checkMonth(String.valueOf(comboBoxDoanhThu1.getSelectedItem()))), String.valueOf(comboBoxDoanhThu1.getSelectedItem()));
+        
+        chart1.add(createDataset2(
+                hoaDon.doanhThuThang_doanhThuPhongTheoNgay(
+                        String.valueOf(
+                        checkMonth(String.valueOf(comboBoxDoanhThu1.getSelectedItem()))), String.valueOf(comboBoxDoanhThu1.getSelectedItem())),
+                hoaDon.doanhThuThang_doanhThuDichVuTheoNgay(String.valueOf(
+                checkMonth(String.valueOf(comboBoxDoanhThu1.getSelectedItem()))), String.valueOf(comboBoxDoanhThu1.getSelectedItem())),
+                dayOfMonth
+        ));
+        
+        load_SoSanhThang();
+        
+        
+        
+    }
+    
+    public int dayOfMonth(String year, String month){
+         LocalDate temp = LocalDate.now();
+            YearMonth yearMonthObject = YearMonth.of(Integer.valueOf(year), Integer.valueOf(month));
+            int lengthOfMonth = yearMonthObject.lengthOfMonth();
+
+            if (temp.getMonthValue() == Integer.valueOf(month) && temp.getYear() == Integer.valueOf(year)){
+                lengthOfMonth = temp.getDayOfMonth();
+            }
+            
+            return lengthOfMonth;
     }
     
     public int checkMonth(String input){
@@ -289,6 +343,74 @@ public class GD_Thongke extends javax.swing.JFrame {
             return LocalDateTime.now().getYear()-1;
         }
         return LocalDateTime.now().getYear();
+    }
+    
+    public void load_SoSanhThang(){
+        panel_Chart_SoSanh1.removeAll();
+        dao.DAO_HoaDon hoaDon = new DAO_HoaDon();
+        double[] tongTienPhongVaDichVuSoSanh = hoaDon.tongDoanhThu_PhongVaDichVu(String.valueOf(
+                checkMonth(String.valueOf(comboBoxSoSanh1.getSelectedItem()))), String.valueOf(comboBoxSoSanh1.getSelectedItem()));
+        
+        panel_Chart_SoSanh1.add(
+                createDataset3(tongTienPhongVaDichVu2, tongTienPhongVaDichVuSoSanh, String.valueOf(comboBoxSoSanh1.getSelectedItem()) , 
+                        String.valueOf(comboBoxDoanhThu1.getSelectedItem())));
+
+        
+         jLabel19.setText("Tháng " + comboBoxSoSanh1.getSelectedItem().toString() +" <-> " + "Tháng " + comboBoxDoanhThu1.getSelectedItem().toString() );
+         
+         
+        double[] phanTram = {tongTienPhongVaDichVu2[0] + tongTienPhongVaDichVuSoSanh[0], tongTienPhongVaDichVuSoSanh[1] + tongTienPhongVaDichVuSoSanh[1]};
+        
+        double[] tongTienCua1Thang = {tongTienPhongVaDichVu2[0] + tongTienPhongVaDichVu2[1], tongTienPhongVaDichVuSoSanh[0] + tongTienPhongVaDichVuSoSanh[1]};
+        
+        if (tongTienPhongVaDichVuSoSanh[0] < tongTienPhongVaDichVu2[0]){
+            iconDoanhThuSoSanhPhong1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-up-20.png"))); // NOI18N
+        }else if (tongTienPhongVaDichVuSoSanh[0] > tongTienPhongVaDichVu2[0]){
+            iconDoanhThuSoSanhPhong1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-down-20.png"))); // NOI18N
+        }else{
+            iconDoanhThuSoSanhPhong1.setIcon(null); // NOI18N
+        }
+        
+        if (tongTienPhongVaDichVuSoSanh[1] < tongTienPhongVaDichVu2[1]){
+            iconDoanhThuSoSanhPhong4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-up-20.png"))); // NOI18N
+        }else if (tongTienPhongVaDichVuSoSanh[1] > tongTienPhongVaDichVu2[1]){
+            iconDoanhThuSoSanhPhong4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-down-20.png"))); // NOI18N
+        }else{
+            iconDoanhThuSoSanhPhong4.setIcon(null); // NOI18N
+        }
+        
+        if (tongTienCua1Thang[1] < tongTienCua1Thang[0]){
+            iconDoanhThuSoSanhPhong5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-up-20.png"))); // NOI18N
+        }else if (tongTienCua1Thang[1] > tongTienCua1Thang[0]){
+            iconDoanhThuSoSanhPhong5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-down-20.png"))); // NOI18N
+        }else{
+            iconDoanhThuSoSanhPhong5.setIcon(null); // NOI18N
+        }
+        
+        double[] resultPhanTram = {0,0,0};
+        double tong = tongTienCua1Thang[0] + tongTienCua1Thang[1];
+
+        resultPhanTram[0] = ((tongTienPhongVaDichVuSoSanh[0] - tongTienPhongVaDichVu2[0]) / phanTram[0]) * 100;
+        resultPhanTram[1] = ((tongTienPhongVaDichVuSoSanh[1] - tongTienPhongVaDichVu2[1]) / phanTram[1]) * 100;
+        resultPhanTram[2] = ((tongTienCua1Thang[1] - tongTienCua1Thang[0]) / tong) * 100;
+        
+        if (Double.isNaN(resultPhanTram[0])){
+            resultPhanTram[0] = 0.0;
+        }
+        
+        if (Double.isNaN(resultPhanTram[1])){
+            resultPhanTram[1] = 0.0;
+        }
+        
+        if (Double.isNaN(resultPhanTram[2])){
+            resultPhanTram[2] = 0.0;
+        }
+        
+        textDoanhThuSoSanhPhong1.setText(String.format("%.3f", abs(resultPhanTram[0])) + " %");
+        textDoanhThuSoSanhPhong4.setText(String.format("%.3f", abs(resultPhanTram[1])) + " %");
+        textDoanhThuSoSanhPhong5.setText(String.format("%.3f", abs(resultPhanTram[2])) + " %");
+        
+        
     }
 
     /**
@@ -1402,8 +1524,6 @@ public class GD_Thongke extends javax.swing.JFrame {
         textDoanhThuSoSanhPhong5.setMinimumSize(new java.awt.Dimension(1, 1));
         textDoanhThuSoSanhPhong5.setPreferredSize(new java.awt.Dimension(190, 30));
         panel_doanhThuSoSanhPhong5.add(textDoanhThuSoSanhPhong5, new java.awt.GridBagConstraints());
-
-        iconDoanhThuSoSanhPhong5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-horizontal-line-20.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(0, 6, 0, 0);
         panel_doanhThuSoSanhPhong5.add(iconDoanhThuSoSanhPhong5, gridBagConstraints);
@@ -1873,7 +1993,7 @@ public class GD_Thongke extends javax.swing.JFrame {
     private void thongKeThang_Combo2(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_thongKeThang_Combo2
         if (buildComponent == true){
             if (evt.getStateChange() == ItemEvent.SELECTED) {
-                
+                load_SoSanhThang();
             }
         }
     }//GEN-LAST:event_thongKeThang_Combo2
@@ -1950,7 +2070,7 @@ public class GD_Thongke extends javax.swing.JFrame {
         this.chart.add(chartPanel, BorderLayout.WEST);
     }
         
-    public ChartPanel createDataset(double[] first, double[] last) {
+    public ChartPanel createDataset(double[] first, double[] last, String firstYear, String lastYear) {
 
         // row keys...
         final String series1 = "Tiền phòng";
@@ -1958,8 +2078,13 @@ public class GD_Thongke extends javax.swing.JFrame {
 
 
         // column keys...
-        final String category1 = "Năm 2022";
-        final String category2 = "Năm 2023";
+        
+        if (firstYear == null){
+            firstYear = "Rỗng";
+        }
+        
+        final String category2 = "Năm " + firstYear;
+        final String category1 = "Năm " + lastYear;
 
         // create the dataset...
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -1993,6 +2118,86 @@ public class GD_Thongke extends javax.swing.JFrame {
         
         
     }
+    
+    public ChartPanel createDataset3(double[] first, double[] last, String firstMonth, String lastMonth) {
+
+        // row keys...
+        final String series1 = "Tiền phòng";
+        final String series2 = "Tiền dịch vụ";
+
+
+        // column keys...
+        final String category2 = "Tháng " + firstMonth;
+        final String category1 = "Tháng " + lastMonth;
+
+        // create the dataset...
+        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        
+        dataset.addValue(last[0], series1, category2);
+        dataset.addValue(first[0], series1, category1);
+        
+
+        dataset.addValue(last[1], series2, category2);
+        dataset.addValue(first[1], series2, category1);
+
+        
+        
+        JFreeChart chart = ChartFactory.createBarChart(
+            "",        // chart title
+            "",               // domain axis label
+            "Triệu",                  // range axis label
+            dataset,                 // data
+            PlotOrientation.VERTICAL,
+            true,                     // include legend
+            true,                     // tooltips?
+            false                     // URL generator?  Not required...
+        );
+        ChartPanel chartPanel2 = new ChartPanel(chart) {
+
+            @Override
+            public Dimension getPreferredSize() {
+                return new Dimension(474, 900);
+            }
+        };
+        return chartPanel2;
+        
+        
+    }
+    
+    public ChartPanel createDataset2(double[] phong, double[] dichVu, int dayOfMonth) {  
+
+        String series1 = "Ngày";  
+        String series2 = "Doanh thu";  
+
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();  
+
+        for (int i = 0 ; i<dayOfMonth ; i++){
+            if (i < phong.length){
+                dataset.addValue(phong[i], series1, String.valueOf(i+1));
+            }
+            else{
+                dataset.addValue(0.0, series1, String.valueOf(i+1));
+            }
+            
+            if (i < dichVu.length){
+                dataset.addValue(dichVu[i], series2, String.valueOf(i+1));
+            }
+            else{
+                dataset.addValue(0.0, series2, String.valueOf(i+1));
+            }
+
+        }
+            // Create chart  
+            JFreeChart chart = ChartFactory.createLineChart(  
+                "Thống kê tháng", // Chart title  
+                "Ngày", // X-Axis Label  
+                "Doanh thu", // Y-Axis Label  
+                dataset  
+                );  
+
+            ChartPanel panel = new ChartPanel(chart);  
+        return panel;  
+  }  
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

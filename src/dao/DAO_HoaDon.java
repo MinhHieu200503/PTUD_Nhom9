@@ -17,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import entity.KhachHang;
+import entity.LoaiPhong;
 import entity.NhanVien;
 import entity.Phong;
 import entity.ThongTinPhongDangChon;
@@ -412,6 +413,9 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
         ResultSet rs;
         
         HoaDon hoaDon = I_CRUD.findById(idHoaDon, new HoaDon());
+        if (hoaDon.getGhiChu() == null){
+            return result;
+        }
         
         String[] ghiChuHoaDon = hoaDon.getGhiChu().split(", ");
         
@@ -422,19 +426,30 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
             for (String ghiChuHoaDonSplit : ghiChuHoaDon) {
                 String[] ghiChuSplit2 = ghiChuHoaDonSplit.split(" ");
                     ArrayList<ChiTietPhongHoaDon> listPhong = new ArrayList<>();
-                    statement = con.prepareStatement("SELECT * FROM ChiTietPhongHoaDon WHERE maHoaDon = ? and maPhong = ? and ghiChu like N'%Đã hoàn thành%'");
+                    statement = con.prepareStatement("SELECT * FROM ChiTietPhongHoaDon ct\n" +
+                                                        "join Phong p on ct.maPhong = p.maPhong\n" +
+                                                        "join LoaiPhong lp on lp.maLoaiPhong = p.maLoaiPhong\n" +
+                                                        "WHERE ct.maHoaDon = ? and ct.maPhong = ? and ct.ghiChu like N'%Đã hoàn thành%'");
                     statement.setString(1, hoaDon.getMaHoaDon());
                     statement.setString(2, ghiChuSplit2[0]);
                     rs = statement.executeQuery();
                     while (rs.next()){
+                    System.out.println("Start"); 
                         listPhong.add(new ChiTietPhongHoaDon(
                                 rs.getTimestamp("thoiGianNhanPhong").toLocalDateTime(),
                                 rs.getTimestamp("thoiGianTraPhong").toLocalDateTime(),
                                 rs.getString("ghiChu"),
                                 hoaDon,
-                                I_CRUD.findById(rs.getString("maPhong"), new Phong()))
+                                new Phong(rs.getString("maPhong"), 
+                                        rs.getString("tenPhong"), 
+                                        rs.getInt("trangThai"), 
+                                        new LoaiPhong(rs.getString("maLoaiPhong"), 
+                                                rs.getString("tenLoaiPhong"), 
+                                                rs.getInt("sucChua"), 
+                                                rs.getDouble("gia"), 
+                                                rs.getString("moTa"))))
                         );
-                        
+                    System.out.println("END");    
                     statement = con.prepareStatement("SELECT * FROM ChiTietDichVuHoaDon  ct\n" +
                                                              "inner join DichVu dv on ct.maDichVu = dv.maDichVu\n" +
                                                              "WHERE maHoaDon = ? and maPhong = ?");
@@ -455,6 +470,7 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
 
                                 rs2 = statement.executeQuery();
                                 while(rs2.next()){
+                                    System.out.println("ChiTietPhongHoaDon++");
                                     listPhong.add(new ChiTietPhongHoaDon(
                                             rs2.getTimestamp("thoiGianNhanPhong").toLocalDateTime(),
                                             rs2.getTimestamp("thoiGianTraPhong").toLocalDateTime(),
@@ -482,6 +498,7 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
                     }
 
                 for (ChiTietPhongHoaDon chiTietPhongHoaDon : listPhong) {
+                    System.out.println("Caculator");
                                 Duration timeResult = Duration.between(chiTietPhongHoaDon.getThoiGianTraPhong(), chiTietPhongHoaDon.getThoiGianNhanPhong());
                                 long minutes = Math.abs(timeResult.toMinutes());              
                                 result[0] += chiTietPhongHoaDon.getPhong().getLoaiPhong().getGia() * minutes;
@@ -493,6 +510,7 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
                     result[0] = result[0] + (result[0] * Integer.valueOf(ghiChuSplit2[1])/100.0) - (result[0] * Integer.valueOf(ghiChuSplit2[2])/100.0);
                     result[1] = result[1] + (result[1] * Integer.valueOf(ghiChuSplit2[1])/100.0) - (result[1] * Integer.valueOf(ghiChuSplit2[2])/100.0);
                 }
+                System.out.println("Double");
                 
                 
                 if (hoaDon.getUuDai() != null){
@@ -516,7 +534,7 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
         Connection con = ConnectDB.getConnection();
         
         try {
-            PreparedStatement pstm = con.prepareStatement("SELECT nam = Year(ngayLapHoaDon) FROM HoaDon ORDER BY nam DESC");
+            PreparedStatement pstm = con.prepareStatement("SELECT nam = Year(ngayLapHoaDon) FROM HoaDon group by year(ngayLapHoaDon) ORDER BY nam DESC");
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 result.add(rs.getString("nam"));
@@ -640,6 +658,7 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
                 double[] temp = tongTienPhongVaDichVuHoaDon(string);
                 result[0] += temp[0];
                 result[1] += temp[1];
+                System.out.println("Done: TongDoanhThu");
             }
 
             return result;
@@ -920,6 +939,83 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
                     while (rs.next()) {
                         result.add(I_CRUD.findById(rs.getString("maHoaDon"), new HoaDon()));
                     }
+                }
+                
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return result;
+        }
+        
+    public double[] doanhThuThang_doanhThuPhongTheoNgay(String year, String month){
+            
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+
+            LocalDate temp = LocalDate.now();
+            YearMonth yearMonthObject = YearMonth.of(Integer.valueOf(year), Integer.valueOf(month));
+            int lengthOfMonth = yearMonthObject.lengthOfMonth();
+
+            if (temp.getMonthValue() == Integer.valueOf(month) && temp.getYear() == Integer.valueOf(year)){
+                lengthOfMonth = temp.getDayOfMonth();
+            }
+            double[] result = new double[lengthOfMonth];
+            
+            try {
+                for(int i = 0; i < lengthOfMonth; i++){
+                    PreparedStatement pstm = con.prepareStatement("SELECT * FROM ChiTietPhongHoaDon\n" +
+                                                                    "join phong p on ChiTietPhongHoaDon.maPhong = p.maPhong\n" +
+                                                                    "join LoaiPhong lp on p.maLoaiPhong = lp.maLoaiPhong\n" +
+                                                                    "WHERE year(thoiGianNhanPhong) = ? and month(thoiGianNhanPhong) like ? and day(thoiGianNhanPhong) = ?");
+                    pstm.setString(1, year);
+                    pstm.setString(2, month);
+                    pstm.setString(3, String.valueOf(i));
+                    ResultSet rs = pstm.executeQuery();
+                    double tempDoanhThu = 0;
+                    while (rs.next()) {
+                        Duration timeResult = Duration.between(rs.getTimestamp("thoiGianTraPhong").toLocalDateTime(), rs.getTimestamp("thoiGianNhanPhong").toLocalDateTime());
+                        long minutes = Math.abs(timeResult.toMinutes());
+                        tempDoanhThu += minutes*(rs.getDouble("gia"));
+                    }
+                    result[i] = tempDoanhThu;
+                }
+                
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(DAO_HoaDon.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return result;
+        }
+    
+    public double[] doanhThuThang_doanhThuDichVuTheoNgay(String year, String month){
+            
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+
+            LocalDate temp = LocalDate.now();
+            YearMonth yearMonthObject = YearMonth.of(Integer.valueOf(year), Integer.valueOf(month));
+            int lengthOfMonth = yearMonthObject.lengthOfMonth();
+
+            if (temp.getMonthValue() == Integer.valueOf(month) && temp.getYear() == Integer.valueOf(year)){
+                lengthOfMonth = temp.getDayOfMonth();
+            }
+            double[] result = new double[lengthOfMonth];
+            try {
+                for(int i = 0; i < lengthOfMonth; i++){
+                    PreparedStatement pstm = con.prepareStatement("SELECT * FROM ChiTietDichVuHoaDon\n" +
+                                                                    "join HoaDon on ChiTietDichVuHoaDon.maHoaDon = HoaDon.maHoaDon\n" +
+                                                                    "join DichVu on ChiTietDichVuHoaDon.maDichVu = DichVu.maDichVu\n" +
+                                                                    "WHERE year(ngayLapHoaDon) = ? and month(ngayLapHoaDon) like ? and day(ngayLapHoaDon) = ?");
+                    pstm.setString(1, year);
+                    pstm.setString(2, month);
+                    pstm.setString(3, String.valueOf(i));
+                    ResultSet rs = pstm.executeQuery();
+                    double tempDoanhThu = 0;
+                    while (rs.next()) {
+                        tempDoanhThu += rs.getInt(1) * rs.getDouble("gia"); 
+                   }
+                    result[i] = tempDoanhThu;
                 }
                 
                 
