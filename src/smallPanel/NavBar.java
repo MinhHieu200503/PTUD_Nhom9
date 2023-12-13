@@ -15,12 +15,17 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Desktop;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Panel;
 import java.awt.Window;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -61,7 +66,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
 //        traCuu.setVisible(false);
 //        thongKe.setVisible(false);
 //        quanLi.setVisible(false);
-        loadNameUser();
+//        loadNameUser();
         navBarChoice(0);
 //        name_Account.setText(GD_DangNhap.taiKhoan.getNhanVien().getTenNhanVien());
 
@@ -75,10 +80,9 @@ private GD_TrangChu trangChu = new GD_TrangChu();
             name_Account.setText(GD_DangNhap.taiKhoan.getNhanVien().getTenNhanVien());
         }
         
-        if (GD_DangNhap.taiKhoan.getVaiTro() == false){
+        if (GD_DangNhap.taiKhoan.getVaiTro() == false){ // nhanvien
             rSButtonMetro2.setVisible(false);
             statistical.setVisible(false);
-            manage.setVisible(false);
         }
     }
     
@@ -234,7 +238,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         jPanel1.setMaximumSize(new java.awt.Dimension(1920, 66));
         jPanel1.setMinimumSize(new java.awt.Dimension(1920, 66));
         jPanel1.setPreferredSize(new java.awt.Dimension(1920, 66));
-        jPanel1.setLayout(new java.awt.GridLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         leftPanel.setBackground(new java.awt.Color(0, 153, 153));
         leftPanel.setMaximumSize(new java.awt.Dimension(423, 66));
@@ -681,8 +685,13 @@ private GD_TrangChu trangChu = new GD_TrangChu();
     }//GEN-LAST:event_exitApp
 
     private void rSButtonMetro3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro3ActionPerformed
-        // TODO add your handling code here:
-        
+        try {
+            File file = new File("dist\\huongDanSuDung.pdf");
+            Desktop dt = Desktop.getDesktop();
+            dt.open(file);
+        } catch (IOException ex) {
+            Logger.getLogger(NavBar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_rSButtonMetro3ActionPerformed
 
     private void pressThanhToan(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pressThanhToan
