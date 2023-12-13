@@ -221,8 +221,7 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
         int count = model.getRowCount();
         
         if(isKhDangCoHD(khachHang.getSoDienThoai())){
-            for(int i=0; i<count; i++){ 
-                JOptionPane.showMessageDialog(null, "Là khách hàng đang  có hóa đơn");
+            for(int i=0; i<count; i++){
                 String maPhong = (String) model.getValueAt(i, 0);
                 if(isChuaDat(maPhong)){
                     String maHDcu = daoHD.getHoaDonByPhongDangSuDung((String) model.getValueAt(0, 0));
@@ -234,8 +233,6 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
             
         }
         else{
-            
-            JOptionPane.showMessageDialog(null, "Là khách hàng đang không có hóa đơn");
             HoaDon hd = new HoaDon(I_TraCuu_QuanLi.createIdForHoaDon_PDP(daoHD.getDsIdTheoNgayHienTai(), "HD"), LocalDateTime.now(), 0, "", khachHang , 
                             null, GD_DangNhap.taiKhoan.getNhanVien());
         daoHD.create(hd);
@@ -335,7 +332,6 @@ public class GD_XuLy_DatPhongNgay extends javax.swing.JFrame implements Runnable
             
             for(HoaDon hd: dao_hd.getAll(HoaDon.class)){
                 if(hd.getKhachHang().getSoDienThoai().equals(sdt) && hd.getTrangThai() == 0 && hd.getNhanVien()!=null){
-                    JOptionPane.showMessageDialog(null, hd.getNhanVien() + "vy");
                     return true;
                 }
             }
