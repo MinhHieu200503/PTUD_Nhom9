@@ -22,7 +22,12 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
@@ -531,7 +536,12 @@ public class GD_XuLy_TraPhong extends javax.swing.JFrame {
 
     private void thanhToanHoaDonFrame(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_thanhToanHoaDonFrame
         try {
-            new GD_XuLy_TraPhong_HoaDon(loadThongTinChiTietHoaDon()).setVisible(true);
+            if (model.getRowCount() == 0){
+                JOptionPane.showMessageDialog(null, "Vui lòng chọn phòng để trả");
+            }
+            else{
+                new GD_XuLy_TraPhong_HoaDon(loadThongTinChiTietHoaDon()).setVisible(true);
+            }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GD_XuLy_TraPhong.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -785,7 +795,7 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
         
         
         //
-        jCheckBox1.setVisible(false);
+        jCheckBox1.setVisible(true);
     }
     
      public ArrayList<int[]> loadFileTextField() throws FileNotFoundException{
@@ -1396,12 +1406,52 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
         // TODO add your handling code here:
     }                                                       
 
-    private void click(java.awt.event.MouseEvent evt) {                       
+    private void click(java.awt.event.MouseEvent evt) {      
         int reply = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn thanh toán ?", "Thông báo", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             updateBill();
             fullLoad();
-            JOptionPane.showMessageDialog(null, "Thanh toán thành công");
+            JOptionPane.showMessageDialog(null, "Thanh toán thành công");  
+            if (jCheckBox1.isSelected()){
+                jPanel16.setVisible(false);
+
+                    JPanel frame = (JPanel) this.getContentPane();
+
+                    frame.remove(frame.getComponentCount()-1);
+
+                    frame.setSize(frame.getSize().width, frame.getSize().height-60);
+                    frame.setBackground(Color.white);
+                    PrinterJob job = PrinterJob.getPrinterJob();
+                    job.setJobName("Print Data");
+
+                    job.setPrintable(new Printable(){
+                    public int print(Graphics pg,PageFormat pf, int pageNum){
+                            pf.setOrientation(PageFormat.LANDSCAPE);
+                         if(pageNum>0){
+                            return Printable.NO_SUCH_PAGE;
+                        }
+
+                        Graphics2D g2 = (Graphics2D)pg;
+                        g2.translate(pf.getImageableX(), pf.getImageableY());
+                        g2.scale(0.24,0.24);
+                        g2.setBackground(Color.white);
+
+                        frame.paint(g2);            
+                        return Printable.PAGE_EXISTS;
+
+
+                    }
+            });
+
+                boolean ok = job.printDialog();
+                if(ok){
+                    try{
+                        job.print();
+                    }
+                    catch (PrinterException ex){}
+                    }
+                    jPanel16.setVisible(true);
+            }
             this.dispose();
         } else {
             
@@ -1520,6 +1570,45 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
     private rojeru_san.complementos.RSTableMetro rSTableMetro1;
     private javax.swing.JLabel thue;
     // End of variables declaration                   
+    }
+
+    public class Printer implements Printable {
+        final Component comp;
+
+        public Printer(Component comp){
+            this.comp = comp;
+        }
+
+        @Override
+        public int print(Graphics g, PageFormat format, int page_index) 
+                throws PrinterException {
+            if (page_index > 0) {
+                return Printable.NO_SUCH_PAGE;
+            }
+
+            // get the bounds of the component
+            Dimension dim = comp.getSize();
+            double cHeight = dim.getHeight();
+            double cWidth = dim.getWidth();
+
+            // get the bounds of the printable area
+            double pHeight = format.getImageableHeight();
+            double pWidth = format.getImageableWidth();
+
+            double pXStart = format.getImageableX();
+            double pYStart = format.getImageableY();
+
+            double xRatio = pWidth / cWidth;
+            double yRatio = pHeight / cHeight;
+
+
+            Graphics2D g2 = (Graphics2D) g;
+            g2.translate(pXStart, pYStart);
+            g2.scale(xRatio, yRatio);
+            comp.paint(g2);
+
+            return Printable.PAGE_EXISTS;
+        }
     }
     
 }
