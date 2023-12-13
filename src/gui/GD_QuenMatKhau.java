@@ -72,6 +72,7 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtNhapMatKhauMoi = new javax.swing.JPasswordField();
+        btnXacNhan1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,21 +95,21 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
                 btnXacNhanActionPerformed(evt);
             }
         });
-        panelGradient1.add(btnXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, 160, 40));
+        panelGradient1.add(btnXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, 160, 40));
 
         txtOPT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtOPTActionPerformed(evt);
             }
         });
-        panelGradient1.add(txtOPT, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 340, 40));
+        panelGradient1.add(txtOPT, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 340, 40));
 
         txtNhapMail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNhapMailActionPerformed(evt);
             }
         });
-        panelGradient1.add(txtNhapMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 340, 40));
+        panelGradient1.add(txtNhapMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 340, 40));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Quên mật khẩu");
@@ -128,11 +129,11 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
                 btnXacNhanOTPActionPerformed(evt);
             }
         });
-        panelGradient1.add(btnXacNhanOTP, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 160, 40));
+        panelGradient1.add(btnXacNhanOTP, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, 160, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Nhập mật khẩu mới:");
-        panelGradient1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 180, -1));
+        panelGradient1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 180, -1));
 
         btnNhanOTP.setBackground(new java.awt.Color(0, 0, 0));
         btnNhanOTP.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -148,16 +149,32 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
                 btnNhanOTPActionPerformed(evt);
             }
         });
-        panelGradient1.add(btnNhanOTP, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 160, 40));
+        panelGradient1.add(btnNhanOTP, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 160, 40));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("Nhập mail:");
-        panelGradient1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 90, -1));
+        panelGradient1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 90, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Nhập mã OTP:");
-        panelGradient1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 130, -1));
-        panelGradient1.add(txtNhapMatKhauMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 340, 40));
+        panelGradient1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 130, -1));
+        panelGradient1.add(txtNhapMatKhauMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 340, 40));
+
+        btnXacNhan1.setBackground(new java.awt.Color(0, 0, 0));
+        btnXacNhan1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnXacNhan1.setForeground(new java.awt.Color(255, 255, 255));
+        btnXacNhan1.setText("Xác nhận");
+        btnXacNhan1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnXacNhan1MouseClicked(evt);
+            }
+        });
+        btnXacNhan1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXacNhan1ActionPerformed(evt);
+            }
+        });
+        panelGradient1.add(btnXacNhan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 160, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,12 +203,8 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNhapMailActionPerformed
 
-    private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnXacNhanActionPerformed
-
     private void btnXacNhanOTPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanOTPActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnXacNhanOTPActionPerformed
 
     private void btnNhanOTPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanOTPActionPerformed
@@ -221,6 +234,18 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnXacNhanOTPMouseClicked
 
+    private void btnXacNhan1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXacNhan1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnXacNhan1MouseClicked
+
+    private void btnXacNhan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhan1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnXacNhan1ActionPerformed
+
+    private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnXacNhanActionPerformed
+
     private void btnXacNhanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXacNhanMouseClicked
         // TODO add your handling code here:
         boolean valid = true;
@@ -229,7 +254,7 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
             valid = false;
         }
         if (!txtNhapMatKhauMoi.getText().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#!%*?&])[A-Za-z\\d@$#!%*?&]{6,}$")) {
-           JOptionPane.showMessageDialog(null, "Mật khẩu có ít nhất 6 kí tự, bao gồm chữ Hoa, chữ thường, chữ số và kí tự đặc biệt");
+            JOptionPane.showMessageDialog(null, "Mật khẩu có ít nhất 6 kí tự, bao gồm chữ Hoa, chữ thường, chữ số và kí tự đặc biệt");
             valid = false;
         }
         if(valid == true){
@@ -249,7 +274,7 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
                 txtOPT.setText("");
             }
         }
-        
+
     }//GEN-LAST:event_btnXacNhanMouseClicked
 
     /**
@@ -276,6 +301,7 @@ public class GD_QuenMatKhau extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNhanOTP;
     private javax.swing.JButton btnXacNhan;
+    private javax.swing.JButton btnXacNhan1;
     private javax.swing.JButton btnXacNhanOTP;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
