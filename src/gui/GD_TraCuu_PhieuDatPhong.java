@@ -25,17 +25,8 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
     public GD_TraCuu_PhieuDatPhong() {
         initComponents();
         model = (DefaultTableModel) table_traCuu.getModel();
-        loadTable(dspdp, model);
-        for (int i = 0; i<model.getRowCount(); i++) {
-            ArrayList<String> row = new ArrayList<>();
-            for (int j = 0; j < model.getColumnCount(); j++) {
-                if (model.getValueAt(i, j) == null)
-                    row.add("");
-                else
-                    row.add(model.getValueAt(i, j).toString());
-            }
-            list.add(row);
-        }
+//        loadTable(dspdp, model);
+        
     }
 
     /**
@@ -209,7 +200,8 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
     private void tf_TraCuuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_TraCuuKeyReleased
         // TODO add your handling code here:
         if (tf_TraCuu.getText().trim().equals("")) {
-            loadTable(daopdp.getAll(PhieuDatPhong.class), model);
+//            loadTable(daopdp.getAll(PhieuDatPhong.class), model);
+            load(list, model);
         } else {
             ArrayList<ArrayList<String>> ds = search(tf_TraCuu.getText().trim(), list);
             load(ds, model);
@@ -221,6 +213,17 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
         if (pnlMain.isShowing()) {
             tf_TraCuu.setText("");
             loadTable(daopdp.getAll(PhieuDatPhong.class), model);
+            list.clear();
+            for (int i = 0; i<model.getRowCount(); i++) {
+                ArrayList<String> row = new ArrayList<>();
+                for (int j = 0; j < model.getColumnCount(); j++) {
+                    if (model.getValueAt(i, j) == null)
+                        row.add("");
+                    else
+                        row.add(model.getValueAt(i, j).toString());
+                }
+                list.add(row);
+            }
         }
     }//GEN-LAST:event_pnlMainHierarchyChanged
 
@@ -261,7 +264,6 @@ public class GD_TraCuu_PhieuDatPhong extends javax.swing.JFrame implements I_Tra
     }
        
     private DAO_PhieuDatPhong daopdp = new DAO_PhieuDatPhong();
-    private ArrayList<PhieuDatPhong> dspdp = daopdp.getAll(PhieuDatPhong.class);
     private DefaultTableModel model;
     private ArrayList<ArrayList<String>> list = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
