@@ -685,7 +685,7 @@ public class GD_XuLy_DanhSachPhong extends javax.swing.JFrame {
         txtMaPhong.setText(maPhong);
         txtMaHoaDon.setText(pdp.getHoaDon().getMaHoaDon());
         txtThoiGianNhanPhong.setText(String.format("%02d",pdp.getThoiGianNhanPhong().getHour())+ ":"+String.format("%02d", pdp.getThoiGianNhanPhong().getMinute()));
-        txt_ThoiGianSuDung.setText(I_CRUD.findById(maPhong, new LoaiPhong()).getGia()+"");
+       txt_ThoiGianSuDung.setText(I_CRUD.findById(maPhong, new Phong()).getLoaiPhong().getGia()+"");
 
         txt_SDT.setText(pdp.getKhachHang().getSoDienThoai());
         txt_TenKhachHang.setText(pdp.getKhachHang().getTenKhachHang());
