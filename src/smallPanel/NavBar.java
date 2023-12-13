@@ -61,7 +61,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
 //        traCuu.setVisible(false);
 //        thongKe.setVisible(false);
 //        quanLi.setVisible(false);
-        
+        loadNameUser();
         navBarChoice(0);
 //        name_Account.setText(GD_DangNhap.taiKhoan.getNhanVien().getTenNhanVien());
 
@@ -74,9 +74,12 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         if (GD_DangNhap.taiKhoan.getNhanVien() != null){
             name_Account.setText(GD_DangNhap.taiKhoan.getNhanVien().getTenNhanVien());
         }
+        
         if (GD_DangNhap.taiKhoan.getVaiTro() == false){
-        rSButtonMetro2.setVisible(false);
-    }
+            rSButtonMetro2.setVisible(false);
+            statistical.setVisible(false);
+            manage.setVisible(false);
+        }
     }
     
     public void navBarChoice(int index){
@@ -231,7 +234,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         jPanel1.setMaximumSize(new java.awt.Dimension(1920, 66));
         jPanel1.setMinimumSize(new java.awt.Dimension(1920, 66));
         jPanel1.setPreferredSize(new java.awt.Dimension(1920, 66));
-        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel1.setLayout(new java.awt.GridLayout());
 
         leftPanel.setBackground(new java.awt.Color(0, 153, 153));
         leftPanel.setMaximumSize(new java.awt.Dimension(423, 66));
@@ -279,7 +282,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         rightPanel.setMinimumSize(new java.awt.Dimension(944, 66));
         rightPanel.setPreferredSize(new java.awt.Dimension(944, 66));
         rightPanel.setRequestFocusEnabled(false);
-        rightPanel.setLayout(new java.awt.GridBagLayout());
+        rightPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 0, 0));
 
         home.setBackground(new java.awt.Color(0, 153, 153));
         home.setMaximumSize(new java.awt.Dimension(191, 66));
@@ -338,10 +341,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
         home.add(jPanel2, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        rightPanel.add(home, gridBagConstraints);
+        rightPanel.add(home);
 
         room.setBackground(new java.awt.Color(0, 153, 153));
         room.setMaximumSize(new java.awt.Dimension(191, 66));
@@ -399,9 +399,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         gridBagConstraints.insets = new java.awt.Insets(30, 0, 0, 0);
         room.add(jPanel3, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_END;
-        rightPanel.add(room, gridBagConstraints);
+        rightPanel.add(room);
 
         search.setBackground(new java.awt.Color(0, 153, 153));
         search.setMaximumSize(new java.awt.Dimension(191, 66));
@@ -457,7 +455,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         gridBagConstraints.insets = new java.awt.Insets(30, 0, 0, 0);
         search.add(jPanel4, gridBagConstraints);
 
-        rightPanel.add(search, new java.awt.GridBagConstraints());
+        rightPanel.add(search);
 
         statistical.setBackground(new java.awt.Color(0, 153, 153));
         statistical.setMaximumSize(new java.awt.Dimension(191, 66));
@@ -513,7 +511,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         gridBagConstraints.insets = new java.awt.Insets(30, 0, 0, 0);
         statistical.add(jPanel5, gridBagConstraints);
 
-        rightPanel.add(statistical, new java.awt.GridBagConstraints());
+        rightPanel.add(statistical);
 
         manage.setBackground(new java.awt.Color(0, 153, 153));
         manage.setMaximumSize(new java.awt.Dimension(191, 66));
@@ -569,7 +567,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         gridBagConstraints.insets = new java.awt.Insets(30, 0, 0, 0);
         manage.add(jPanel6, gridBagConstraints);
 
-        rightPanel.add(manage, new java.awt.GridBagConstraints());
+        rightPanel.add(manage);
 
         jPanel1.add(rightPanel);
 
