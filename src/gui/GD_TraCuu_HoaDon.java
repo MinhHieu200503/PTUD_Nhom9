@@ -25,17 +25,8 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame implements I_TraCuu_Qua
     public GD_TraCuu_HoaDon() {
         initComponents();
         model = (DefaultTableModel) table_traCuu.getModel();
-        loadTable(dshd, model);
-        for (int i = 0; i<model.getRowCount(); i++) {
-            ArrayList<String> row = new ArrayList<>();
-            for (int j = 0; j < model.getColumnCount(); j++) {
-                if (model.getValueAt(i, j) == null)
-                    row.add("");
-                else
-                    row.add(model.getValueAt(i, j).toString());
-            }
-            list.add(row);
-        }
+//        loadTable(dshd, model);
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -214,7 +205,7 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame implements I_TraCuu_Qua
     private void tf_TraCuuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_TraCuuKeyReleased
         // TODO add your handling code here:
         if (tf_TraCuu.getText().trim().equals("")) {
-            loadTable(daohd.getAll(HoaDon.class), model);
+            load(list, model);
         } else {
 //            dshd = daohd.search(tf_TraCuu.getText().trim(), HoaDon.class);
 //            loadTable(dshd, model);
@@ -227,7 +218,19 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame implements I_TraCuu_Qua
         // TODO add your handling code here:
         if (pnlMain.isShowing()) {
             tf_TraCuu.setText("");
-            loadTable(daohd.getAll(HoaDon.class), model);
+            dshd = daohd.getAll(HoaDon.class);
+            loadTable(dshd, model);
+            list.clear();
+            for (int i = 0; i<model.getRowCount(); i++) {
+                ArrayList<String> row = new ArrayList<>();
+                for (int j = 0; j < model.getColumnCount(); j++) {
+                    if (model.getValueAt(i, j) == null)
+                        row.add("");
+                    else
+                        row.add(model.getValueAt(i, j).toString());
+                }
+                list.add(row);
+        }
         }
     }//GEN-LAST:event_pnlMainHierarchyChanged
 //    public void load(ArrayList<ArrayList<String>> ds) {
@@ -298,7 +301,7 @@ public class GD_TraCuu_HoaDon extends javax.swing.JFrame implements I_TraCuu_Qua
     }
     
     private DAO_HoaDon daohd = new DAO_HoaDon();
-    private ArrayList<HoaDon> dshd = daohd.getAll(HoaDon.class);
+    private ArrayList<HoaDon> dshd = new ArrayList<>();
     private DefaultTableModel model;
     private ArrayList<ArrayList<String>> list = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
