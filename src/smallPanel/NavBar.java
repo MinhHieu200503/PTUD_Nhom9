@@ -54,6 +54,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         thread.start();
         initComponents();
         clickMenuUnderline(home);
+        this.add.removeAll();
         this.add.add(new GD_TrangChu().getContentPane());
         jPanel7.setVisible(false);
         this.add.add(trangChu.getContentPane());
@@ -686,7 +687,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
 
     private void rSButtonMetro3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro3ActionPerformed
         try {
-            File file = new File("dist\\huongDanSuDung.pdf");
+            File file = new File("huongDanSuDung.pdf");
             Desktop dt = Desktop.getDesktop();
             dt.open(file);
         } catch (IOException ex) {

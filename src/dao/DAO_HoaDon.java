@@ -971,7 +971,7 @@ public class DAO_HoaDon implements I_CRUD<HoaDon>{
                     PreparedStatement pstm = con.prepareStatement("SELECT * FROM ChiTietPhongHoaDon\n" +
                                                                     "join phong p on ChiTietPhongHoaDon.maPhong = p.maPhong\n" +
                                                                     "join LoaiPhong lp on p.maLoaiPhong = lp.maLoaiPhong\n" +
-                                                                    "WHERE year(thoiGianNhanPhong) = ? and month(thoiGianNhanPhong) like ? and day(thoiGianNhanPhong) = ?");
+                                                                    "WHERE year(thoiGianNhanPhong) = ? and month(thoiGianNhanPhong) like ? and day(thoiGianNhanPhong) = ? and ghiChu like N'%Đã hoàn thành'");
                     pstm.setString(1, year);
                     pstm.setString(2, month);
                     pstm.setString(3, String.valueOf(i));

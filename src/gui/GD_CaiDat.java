@@ -35,7 +35,7 @@ public class GD_CaiDat extends javax.swing.JFrame {
     }
     
     public void loadFileTextField() throws FileNotFoundException{
-        File file = new File("src\\SettingVoucher.txt");
+        File file = new File("SettingVoucher.txt");
 
         ArrayList<int[]> diemTichLuy = new ArrayList<>();
         // file tồn tại -> đọc
@@ -75,7 +75,7 @@ public class GD_CaiDat extends javax.swing.JFrame {
     }
     
     public void writeFile(ArrayList<int[]> data) throws FileNotFoundException{
-        File file = new File("src\\SettingVoucher.txt");
+        File file = new File("SettingVoucher.txt");
         Formatter f = new Formatter(file);
         for (int[] is : data) {
             if (is.length == 1 ){

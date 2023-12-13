@@ -50,7 +50,7 @@ public class NewMain {
 //        System.out.println(formatter.format(temp[0]) + "                  " +formatter.format(temp[1]));
 
         try {
-            File file = new File("dist\\TEST.pdf");
+            File file = new File("huongDanSuDung.pdf");
             Desktop dt = Desktop.getDesktop();
             dt.open(file);
         } catch (IOException ex) {

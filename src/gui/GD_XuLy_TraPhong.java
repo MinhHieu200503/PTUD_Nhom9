@@ -799,7 +799,7 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
     }
     
      public ArrayList<int[]> loadFileTextField() throws FileNotFoundException{
-        File file = new File("src\\SettingVoucher.txt");
+        File file = new File("SettingVoucher.txt");
 
         ArrayList<int[]> diemTichLuy = new ArrayList<>();
         if (file.exists()){   
@@ -829,7 +829,7 @@ public class GD_XuLy_TraPhong_HoaDon extends javax.swing.JFrame implements dao.I
      }
      
     public void writeFile(ArrayList<int[]> data) throws FileNotFoundException{
-        File file = new File("src\\SettingVoucher.txt");
+        File file = new File("SettingVoucher.txt");
         Formatter f = new Formatter(file);
         for (int[] is : data) {
             if (is.length == 1 ){
