@@ -27,17 +27,8 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
     public GD_TraCuu_KhachHang() {
         initComponents();
         model = (DefaultTableModel) table_traCuu.getModel();
-        loadTable(dskh, model);
-        for (int i = 0; i<model.getRowCount(); i++) {
-            ArrayList<String> row = new ArrayList<>();
-            for (int j = 0; j < model.getColumnCount(); j++) {
-                if (model.getValueAt(i, j) == null)
-                    row.add("");
-                else
-                    row.add(model.getValueAt(i, j).toString());
-            }
-            list.add(row);
-        }
+//        loadTable(dskh, model);
+        
     }
 
     /**
@@ -242,7 +233,8 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
     private void tf_TraCuuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_TraCuuKeyReleased
         // TODO add your handling code here:
         if (tf_TraCuu.getText().trim().equals("")) {
-            loadTable(daokh.getAll(KhachHang.class), model);
+//            loadTable(daokh.getAll(KhachHang.class), model);
+            load(list, model);
         } else {
             ArrayList<ArrayList<String>> ds = search(tf_TraCuu.getText().trim(), list);
             load(ds, model);
@@ -252,9 +244,19 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
     private void pnlMainHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_pnlMainHierarchyChanged
         // TODO add your handling code here:
         if (pnlMain.isShowing()) {
-                tf_TraCuu.setText("");
-               loadTable(daokh.getAll(KhachHang.class), model);
-            
+           tf_TraCuu.setText("");
+           loadTable(daokh.getAll(KhachHang.class), model);
+           list.clear();
+           for (int i = 0; i<model.getRowCount(); i++) {
+                ArrayList<String> row = new ArrayList<>();
+                for (int j = 0; j < model.getColumnCount(); j++) {
+                    if (model.getValueAt(i, j) == null)
+                        row.add("");
+                    else
+                        row.add(model.getValueAt(i, j).toString());
+                }
+                list.add(row);
+            }
         }
     }//GEN-LAST:event_pnlMainHierarchyChanged
 
@@ -295,7 +297,6 @@ public class GD_TraCuu_KhachHang extends javax.swing.JFrame implements I_TraCuu_
     }
 
     private DAO_KhachHang daokh = new DAO_KhachHang();
-    private ArrayList<KhachHang> dskh = daokh.getAll(KhachHang.class);
     public static DefaultTableModel model;
     private ArrayList<ArrayList<String>> list = new ArrayList<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables

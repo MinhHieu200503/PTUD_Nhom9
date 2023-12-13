@@ -22,17 +22,8 @@ public class GD_TraCuu_UuDai extends javax.swing.JFrame implements I_TraCuu_Quan
     public GD_TraCuu_UuDai() {
         initComponents();
         model = (DefaultTableModel) table_traCuu.getModel();
-        loadTable(daoud.getAll(UuDai.class), model);
-        for (int i = 0; i<model.getRowCount(); i++) {
-            ArrayList<String> row = new ArrayList<>();
-            for (int j = 0; j < model.getColumnCount(); j++) {
-                if (model.getValueAt(i, j) == null)
-                    row.add("");
-                else
-                    row.add(model.getValueAt(i, j).toString());
-            }
-            list.add(row);
-        }
+//        loadTable(daoud.getAll(UuDai.class), model);
+        
     }
 
     /**
@@ -225,7 +216,8 @@ public class GD_TraCuu_UuDai extends javax.swing.JFrame implements I_TraCuu_Quan
     private void tf_TraCuuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_TraCuuKeyReleased
         // TODO add your handling code here:
         if (tf_TraCuu.getText().trim().equals("")) {
-            loadTable(daoud.getAll(UuDai.class), model);
+//            loadTable(daoud.getAll(UuDai.class), model);
+            load(list, model);
         } else {
             ArrayList<ArrayList<String>> ds = search(tf_TraCuu.getText().trim(), list);
             load(ds, model);
@@ -251,6 +243,17 @@ public class GD_TraCuu_UuDai extends javax.swing.JFrame implements I_TraCuu_Quan
             }
             tf_TraCuu.setText("");
             loadTable(daoud.getAll(UuDai.class), model);
+            list.clear();
+            for (int i = 0; i<model.getRowCount(); i++) {
+                ArrayList<String> row = new ArrayList<>();
+                for (int j = 0; j < model.getColumnCount(); j++) {
+                    if (model.getValueAt(i, j) == null)
+                        row.add("");
+                    else
+                        row.add(model.getValueAt(i, j).toString());
+                }
+                list.add(row);
+            }
         }
     }//GEN-LAST:event_pnlMainHierarchyChanged
 
