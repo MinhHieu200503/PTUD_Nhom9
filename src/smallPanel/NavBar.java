@@ -54,6 +54,7 @@ private GD_TrangChu trangChu = new GD_TrangChu();
         thread.start();
         initComponents();
         clickMenuUnderline(home);
+        this.add.removeAll();
         this.add.add(new GD_TrangChu().getContentPane());
         jPanel7.setVisible(false);
         this.add.add(trangChu.getContentPane());
